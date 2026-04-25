@@ -23,6 +23,8 @@ List<RouteBase> get $appRoutes => [
   $coachRoute,
   $familyRoute,
   $profileRoute,
+  $referralsRoute,
+  $feloPlusRoute,
   $remittanceRoute,
   $helpRoute,
   $kycRoute,
@@ -569,6 +571,72 @@ extension $ProfileRouteExtension on ProfileRoute {
   static ProfileRoute _fromState(GoRouterState state) => const ProfileRoute();
 
   String get location => GoRouteData.$location('/profile');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $referralsRoute => GoRouteData.$route(
+  path: '/referrals',
+
+  factory: $ReferralsRouteExtension._fromState,
+  routes: [
+    GoRouteData.$route(
+      path: 'redeem',
+
+      factory: $ReferralRedeemRouteExtension._fromState,
+    ),
+  ],
+);
+
+extension $ReferralsRouteExtension on ReferralsRoute {
+  static ReferralsRoute _fromState(GoRouterState state) =>
+      const ReferralsRoute();
+
+  String get location => GoRouteData.$location('/referrals');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ReferralRedeemRouteExtension on ReferralRedeemRoute {
+  static ReferralRedeemRoute _fromState(GoRouterState state) =>
+      const ReferralRedeemRoute();
+
+  String get location => GoRouteData.$location('/referrals/redeem');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $feloPlusRoute => GoRouteData.$route(
+  path: '/profile/felo-plus',
+
+  factory: $FeloPlusRouteExtension._fromState,
+);
+
+extension $FeloPlusRouteExtension on FeloPlusRoute {
+  static FeloPlusRoute _fromState(GoRouterState state) => const FeloPlusRoute();
+
+  String get location => GoRouteData.$location('/profile/felo-plus');
 
   void go(BuildContext context) => context.go(location);
 

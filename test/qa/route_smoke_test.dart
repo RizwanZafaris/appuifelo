@@ -29,6 +29,11 @@ import 'package:felo/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:felo/features/onboarding/presentation/splash_screen.dart';
 import 'package:felo/features/profile/presentation/profile_screen.dart';
 import 'package:felo/features/profile/presentation/settings_screens.dart';
+import 'package:felo/features/referrals/data/referrals_repository.dart';
+import 'package:felo/features/referrals/domain/referral_models.dart';
+import 'package:felo/features/referrals/presentation/felo_plus_screen.dart';
+import 'package:felo/features/referrals/presentation/referral_redeem_screen.dart';
+import 'package:felo/features/referrals/presentation/referrals_screen.dart';
 import 'package:felo/features/remittance_stub/presentation/remittance_stub_screen.dart';
 import 'package:felo/features/send_money/presentation/send_money_screens.dart';
 import 'package:felo/features/sms_parser/presentation/sms_parser_screen.dart';
@@ -41,6 +46,12 @@ Widget wrap(Widget child) {
     routes: [GoRoute(path: '/', builder: (_, _) => child)],
   );
   return ProviderScope(
+    overrides: [
+      referralsSnapshotProvider.overrideWith((ref) async => _referralsFixture),
+      feloPlusProfileProvider.overrideWith(
+        (ref) async => const FeloPlusProfile(subscriptionTier: 'plus'),
+      ),
+    ],
     child: MaterialApp.router(
       locale: const Locale('en'),
       localizationsDelegates: const [
@@ -55,6 +66,26 @@ Widget wrap(Widget child) {
     ),
   );
 }
+
+const _referralsFixture = ReferralsSnapshot(
+  code: ReferralCode(code: 'RIZWAN5', shareUrl: 'https://felo.app/r/RIZWAN5'),
+  stats: ReferralStats(
+    invitedCount: 3,
+    completedCount: 1,
+    pendingRewardMinor: 500,
+    earnedRewardMinor: 500,
+    currency: 'CAD',
+  ),
+  invites: [
+    ReferralInvite(
+      id: 'referral_1',
+      displayName: 'Amina',
+      status: 'completed',
+      rewardMinor: 500,
+      currency: 'CAD',
+    ),
+  ],
+);
 
 void main() {
   final screens = <String, Widget>{
@@ -81,6 +112,9 @@ void main() {
     'coach': const CoachScreen(),
     'family': const FamilyScreen(),
     'profile': const ProfileScreen(),
+    'referrals': const ReferralsScreen(),
+    'referral_redeem': const ReferralRedeemScreen(),
+    'felo_plus': const FeloPlusScreen(),
     'remittance': const RemittanceStubScreen(),
     'help': const HelpScreen(),
     'kyc': const KycScreen(),

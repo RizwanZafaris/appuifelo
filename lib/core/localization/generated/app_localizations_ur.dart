@@ -66,6 +66,12 @@ class AppLocalizationsUr extends AppLocalizations {
   String get commonCancel => 'منسوخ';
 
   @override
+  String get commonRetry => 'دوبارہ کوشش';
+
+  @override
+  String get commonLoading => 'لوڈ ہو رہا ہے…';
+
+  @override
   String get commonSearch => 'تلاش';
 
   @override
@@ -1200,4 +1206,143 @@ class AppLocalizationsUr extends AppLocalizations {
   String familyInviteTokenHint(String token) {
     return 'Invite token: $token';
   }
+
+  @override
+  String get referralsTitle => 'Referrals';
+
+  @override
+  String get referralsHeroTitle => 'CAD \$5 دیں، CAD \$5 پائیں';
+
+  @override
+  String get referralsHeroBody =>
+      'اپنا code دوستوں کے ساتھ share کریں۔ جب ان کا referral qualify کرے گا، آپ دونوں کو CAD \$5 credit ملے گا۔';
+
+  @override
+  String get referralsShareCta => 'Invite share کریں';
+
+  @override
+  String referralsShareMessage(String url) {
+    return 'Felo پر میرے ساتھ join کریں اور یہ referral link استعمال کریں: $url';
+  }
+
+  @override
+  String get referralsCopyCode => 'Referral code copy کریں';
+
+  @override
+  String get referralsCodeCopied => 'Referral code copy ہو گیا';
+
+  @override
+  String get referralsRedeemCta => 'Code redeem کریں';
+
+  @override
+  String get referralsInvited => 'Invited';
+
+  @override
+  String get referralsCompleted => 'Completed';
+
+  @override
+  String get referralsPending => 'Pending';
+
+  @override
+  String get referralsEarned => 'Earned';
+
+  @override
+  String get referralsInvitesTitle => 'آپ کے referrals';
+
+  @override
+  String get referralsNoInvitesTitle => 'ابھی کوئی referral نہیں';
+
+  @override
+  String get referralsNoInvitesBody =>
+      'Referrals یہاں track کرنے کے لیے اپنا invite share کریں۔';
+
+  @override
+  String get referralsInviteFallbackName => 'دوست';
+
+  @override
+  String get referralsErrorTitle => 'Referrals load نہیں ہو سکے';
+
+  @override
+  String get referralsErrorBody => 'Connection چیک کریں اور دوبارہ کوشش کریں۔';
+
+  @override
+  String get referralsRedeemTitle => 'Referral redeem کریں';
+
+  @override
+  String get referralsRedeemHeading => 'Invite code ہے؟';
+
+  @override
+  String get referralsRedeemBody =>
+      'Referral code بالکل ویسے enter کریں جیسے آپ کے دوست نے share کیا۔';
+
+  @override
+  String get referralsRedeemCodeLabel => 'Referral code';
+
+  @override
+  String get referralsRedeemCodeHint => 'مثال: FELO5';
+
+  @override
+  String get referralsRedeemSubmit => 'Code redeem کریں';
+
+  @override
+  String get referralsRedeemRequired => 'Referral code enter کریں۔';
+
+  @override
+  String get referralsRedeemSuccess => 'Referral code redeem ہو گیا۔';
+
+  @override
+  String get referralsRedeemNotFound => 'یہ referral code نہیں ملا۔';
+
+  @override
+  String get referralsRedeemConflict => 'یہ referral پہلے ہی redeem ہو چکا ہے۔';
+
+  @override
+  String get referralsRedeemUnknown =>
+      'یہ code redeem نہیں ہو سکا۔ دوبارہ کوشش کریں۔';
+
+  @override
+  String get feloPlusTitle => 'FELO Plus';
+
+  @override
+  String get feloPlusStatusPlus => 'Plus';
+
+  @override
+  String get feloPlusStatusFree => 'Free';
+
+  @override
+  String get feloPlusActiveTitle => 'FELO Plus active ہے';
+
+  @override
+  String get feloPlusActiveBody =>
+      'آپ کے account پر Plus benefits خود بخود apply ہو رہے ہیں جہاں available ہوں۔';
+
+  @override
+  String get feloPlusFreeTitle => 'آپ Free plan پر ہیں';
+
+  @override
+  String get feloPlusFreeBody =>
+      'FELO Plus lower FX margin، priority support، free physical card، اور higher limits کے لیے premium plan ہے۔';
+
+  @override
+  String feloPlusTierLabel(String tier) {
+    return 'Current tier: $tier';
+  }
+
+  @override
+  String get feloPlusBenefitFx => 'Eligible sends پر lower FX margin';
+
+  @override
+  String get feloPlusBenefitSupport => 'Priority support';
+
+  @override
+  String get feloPlusBenefitCard => 'Free physical card';
+
+  @override
+  String get feloPlusBenefitLimits => 'Higher account limits';
+
+  @override
+  String get feloPlusErrorTitle => 'FELO Plus load نہیں ہو سکا';
+
+  @override
+  String get feloPlusErrorBody => 'Connection چیک کریں اور دوبارہ کوشش کریں۔';
 }
