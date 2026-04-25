@@ -1198,4 +1198,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String familyInviteTokenHint(String token) {
     return 'Invite token: $token';
   }
+
+  @override
+  String get notificationsTestTitle => 'Send test notification';
+
+  @override
+  String get notificationsTestBlurb =>
+      'Fires a test notification through the live backend. Debug builds only — production blocks the endpoint.';
+
+  @override
+  String get notificationsTestTitleLabel => 'Title';
+
+  @override
+  String get notificationsTestBodyLabel => 'Body';
+
+  @override
+  String get notificationsTestDefaultTitle => 'Hello from Felo';
+
+  @override
+  String get notificationsTestDefaultBody =>
+      'This is a test notification fired from the debug screen.';
+
+  @override
+  String get notificationsTestSend => 'Send';
+
+  @override
+  String get notificationsTestSent => 'Sent — pull to refresh inbox.';
+
+  @override
+  String get notificationsTestProdDisabled =>
+      'Test notifications are disabled in production builds.';
 }

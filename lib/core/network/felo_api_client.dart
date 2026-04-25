@@ -105,4 +105,32 @@ abstract class FeloApiClient {
 
   @POST('/recurring-bills')
   Future<Map<String, dynamic>> createRecurringBill(@Body() Map<String, dynamic> body);
+
+  // -------- Notifications -----------------------------------------
+  @GET('/notifications')
+  Future<List<Map<String, dynamic>>> listNotifications({
+    @Query('unreadOnly') bool? unreadOnly,
+  });
+
+  @GET('/notifications/unread-count')
+  Future<Map<String, dynamic>> notificationsUnreadCount();
+
+  @POST('/notifications/{id}/read')
+  Future<Map<String, dynamic>> markNotificationRead(@Path('id') String id);
+
+  @POST('/notifications/read-all')
+  Future<Map<String, dynamic>> markAllNotificationsRead();
+
+  @DELETE('/notifications/{id}')
+  Future<Map<String, dynamic>> deleteNotification(@Path('id') String id);
+
+  // -------- Devices -----------------------------------------------
+  @GET('/devices')
+  Future<List<Map<String, dynamic>>> listDevices();
+
+  @POST('/devices')
+  Future<Map<String, dynamic>> registerDevice(@Body() Map<String, dynamic> body);
+
+  @DELETE('/devices/{id}')
+  Future<Map<String, dynamic>> unregisterDevice(@Path('id') String id);
 }

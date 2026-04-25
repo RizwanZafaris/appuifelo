@@ -19,6 +19,7 @@ import 'package:felo/features/help/presentation/help_screen.dart';
 import 'package:felo/features/home_dashboard/presentation/home_screen.dart';
 import 'package:felo/features/kyc/presentation/kyc_screen.dart';
 import 'package:felo/features/notifications/presentation/notifications_screen.dart';
+import 'package:felo/features/notifications/presentation/notifications_test_screen.dart';
 import 'package:felo/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:felo/features/onboarding/presentation/splash_screen.dart';
 import 'package:felo/features/profile/presentation/profile_screen.dart';
@@ -94,13 +95,25 @@ class DoHubRoute extends GoRouteData {
       const DoHubScreen();
 }
 
-@TypedGoRoute<NotificationsRoute>(path: '/notifications')
+@TypedGoRoute<NotificationsRoute>(
+  path: '/notifications',
+  routes: [TypedGoRoute<NotificationsTestRoute>(path: 'test')],
+)
 class NotificationsRoute extends GoRouteData {
   const NotificationsRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const NotificationsScreen();
+  }
+}
+
+class NotificationsTestRoute extends GoRouteData {
+  const NotificationsTestRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const NotificationsTestScreen();
   }
 }
 

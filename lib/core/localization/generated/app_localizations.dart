@@ -2311,6 +2311,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invite token: {token}'**
   String familyInviteTokenHint(String token);
+
+  /// No description provided for @notificationsTestTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Send test notification'**
+  String get notificationsTestTitle;
+
+  /// No description provided for @notificationsTestBlurb.
+  ///
+  /// In en, this message translates to:
+  /// **'Fires a test notification through the live backend. Debug builds only — production blocks the endpoint.'**
+  String get notificationsTestBlurb;
+
+  /// No description provided for @notificationsTestTitleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get notificationsTestTitleLabel;
+
+  /// No description provided for @notificationsTestBodyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Body'**
+  String get notificationsTestBodyLabel;
+
+  /// No description provided for @notificationsTestDefaultTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Hello from Felo'**
+  String get notificationsTestDefaultTitle;
+
+  /// No description provided for @notificationsTestDefaultBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a test notification fired from the debug screen.'**
+  String get notificationsTestDefaultBody;
+
+  /// No description provided for @notificationsTestSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get notificationsTestSend;
+
+  /// No description provided for @notificationsTestSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Sent — pull to refresh inbox.'**
+  String get notificationsTestSent;
+
+  /// No description provided for @notificationsTestProdDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Test notifications are disabled in production builds.'**
+  String get notificationsTestProdDisabled;
 }
 
 class _AppLocalizationsDelegate
