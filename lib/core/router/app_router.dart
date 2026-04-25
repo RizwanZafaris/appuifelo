@@ -24,6 +24,9 @@ import 'package:felo/features/onboarding/presentation/splash_screen.dart';
 import 'package:felo/features/profile/presentation/profile_screen.dart';
 import 'package:felo/features/profile/presentation/settings_screens.dart';
 import 'package:felo/features/receipt_capture/presentation/receipt_capture_screen.dart';
+import 'package:felo/features/referrals/presentation/felo_plus_screen.dart';
+import 'package:felo/features/referrals/presentation/referral_redeem_screen.dart';
+import 'package:felo/features/referrals/presentation/referrals_screen.dart';
 import 'package:felo/features/remittance_stub/presentation/remittance_stub_screen.dart';
 import 'package:felo/features/send_money/presentation/send_money_screens.dart';
 import 'package:felo/features/sms_parser/presentation/sms_parser_screen.dart';
@@ -311,6 +314,35 @@ class ProfileRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const ProfileScreen();
+}
+
+@TypedGoRoute<ReferralsRoute>(
+  path: '/referrals',
+  routes: [TypedGoRoute<ReferralRedeemRoute>(path: 'redeem')],
+)
+class ReferralsRoute extends GoRouteData {
+  const ReferralsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const ReferralsScreen();
+}
+
+class ReferralRedeemRoute extends GoRouteData {
+  const ReferralRedeemRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const ReferralRedeemScreen();
+}
+
+@TypedGoRoute<FeloPlusRoute>(path: '/profile/felo-plus')
+class FeloPlusRoute extends GoRouteData {
+  const FeloPlusRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const FeloPlusScreen();
 }
 
 @TypedGoRoute<RemittanceRoute>(path: '/remittance')

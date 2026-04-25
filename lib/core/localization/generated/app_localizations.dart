@@ -212,6 +212,18 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get commonCancel;
 
+  /// No description provided for @commonRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get commonRetry;
+
+  /// No description provided for @commonLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading…'**
+  String get commonLoading;
+
   /// No description provided for @commonSearch.
   ///
   /// In en, this message translates to:
@@ -2425,6 +2437,264 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invite token: {token}'**
   String familyInviteTokenHint(String token);
+
+  /// No description provided for @referralsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Referrals'**
+  String get referralsTitle;
+
+  /// No description provided for @referralsHeroTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Give CAD \$5, get CAD \$5'**
+  String get referralsHeroTitle;
+
+  /// No description provided for @referralsHeroBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your code with friends. When their referral qualifies, both of you get a CAD \$5 credit.'**
+  String get referralsHeroBody;
+
+  /// No description provided for @referralsShareCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Share invite'**
+  String get referralsShareCta;
+
+  /// No description provided for @referralsShareMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Join me on Felo and use my referral link: {url}'**
+  String referralsShareMessage(String url);
+
+  /// No description provided for @referralsCopyCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy referral code'**
+  String get referralsCopyCode;
+
+  /// No description provided for @referralsCodeCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Referral code copied'**
+  String get referralsCodeCopied;
+
+  /// No description provided for @referralsRedeemCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Redeem a code'**
+  String get referralsRedeemCta;
+
+  /// No description provided for @referralsInvited.
+  ///
+  /// In en, this message translates to:
+  /// **'Invited'**
+  String get referralsInvited;
+
+  /// No description provided for @referralsCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get referralsCompleted;
+
+  /// No description provided for @referralsPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get referralsPending;
+
+  /// No description provided for @referralsEarned.
+  ///
+  /// In en, this message translates to:
+  /// **'Earned'**
+  String get referralsEarned;
+
+  /// No description provided for @referralsInvitesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your referrals'**
+  String get referralsInvitesTitle;
+
+  /// No description provided for @referralsNoInvitesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No referrals yet'**
+  String get referralsNoInvitesTitle;
+
+  /// No description provided for @referralsNoInvitesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your invite to start tracking referrals here.'**
+  String get referralsNoInvitesBody;
+
+  /// No description provided for @referralsInviteFallbackName.
+  ///
+  /// In en, this message translates to:
+  /// **'Friend'**
+  String get referralsInviteFallbackName;
+
+  /// No description provided for @referralsErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load referrals'**
+  String get referralsErrorTitle;
+
+  /// No description provided for @referralsErrorBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your connection and try again.'**
+  String get referralsErrorBody;
+
+  /// No description provided for @referralsRedeemTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Redeem referral'**
+  String get referralsRedeemTitle;
+
+  /// No description provided for @referralsRedeemHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Have an invite code?'**
+  String get referralsRedeemHeading;
+
+  /// No description provided for @referralsRedeemBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the referral code exactly as your friend shared it.'**
+  String get referralsRedeemBody;
+
+  /// No description provided for @referralsRedeemCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Referral code'**
+  String get referralsRedeemCodeLabel;
+
+  /// No description provided for @referralsRedeemCodeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Example: FELO5'**
+  String get referralsRedeemCodeHint;
+
+  /// No description provided for @referralsRedeemSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Redeem code'**
+  String get referralsRedeemSubmit;
+
+  /// No description provided for @referralsRedeemRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a referral code.'**
+  String get referralsRedeemRequired;
+
+  /// No description provided for @referralsRedeemSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Referral code redeemed.'**
+  String get referralsRedeemSuccess;
+
+  /// No description provided for @referralsRedeemNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'That referral code was not found.'**
+  String get referralsRedeemNotFound;
+
+  /// No description provided for @referralsRedeemConflict.
+  ///
+  /// In en, this message translates to:
+  /// **'This referral has already been redeemed.'**
+  String get referralsRedeemConflict;
+
+  /// No description provided for @referralsRedeemUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'We could not redeem this code. Try again.'**
+  String get referralsRedeemUnknown;
+
+  /// No description provided for @feloPlusTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'FELO Plus'**
+  String get feloPlusTitle;
+
+  /// No description provided for @feloPlusStatusPlus.
+  ///
+  /// In en, this message translates to:
+  /// **'Plus'**
+  String get feloPlusStatusPlus;
+
+  /// No description provided for @feloPlusStatusFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Free'**
+  String get feloPlusStatusFree;
+
+  /// No description provided for @feloPlusActiveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'FELO Plus is active'**
+  String get feloPlusActiveTitle;
+
+  /// No description provided for @feloPlusActiveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account is receiving Plus benefits automatically where available.'**
+  String get feloPlusActiveBody;
+
+  /// No description provided for @feloPlusFreeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'You are on Free'**
+  String get feloPlusFreeTitle;
+
+  /// No description provided for @feloPlusFreeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'FELO Plus is the premium plan for lower FX margin, priority support, a free physical card, and higher limits.'**
+  String get feloPlusFreeBody;
+
+  /// No description provided for @feloPlusTierLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Current tier: {tier}'**
+  String feloPlusTierLabel(String tier);
+
+  /// No description provided for @feloPlusBenefitFx.
+  ///
+  /// In en, this message translates to:
+  /// **'Lower FX margin on eligible sends'**
+  String get feloPlusBenefitFx;
+
+  /// No description provided for @feloPlusBenefitSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Priority support'**
+  String get feloPlusBenefitSupport;
+
+  /// No description provided for @feloPlusBenefitCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Free physical card'**
+  String get feloPlusBenefitCard;
+
+  /// No description provided for @feloPlusBenefitLimits.
+  ///
+  /// In en, this message translates to:
+  /// **'Higher account limits'**
+  String get feloPlusBenefitLimits;
+
+  /// No description provided for @feloPlusErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load FELO Plus'**
+  String get feloPlusErrorTitle;
+
+  /// No description provided for @feloPlusErrorBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your connection and try again.'**
+  String get feloPlusErrorBody;
 }
 
 class _AppLocalizationsDelegate

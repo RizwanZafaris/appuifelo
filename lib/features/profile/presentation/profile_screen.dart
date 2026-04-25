@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:felo/core/di/fake_repositories.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
+import 'package:felo/features/referrals/data/referrals_repository.dart';
 import 'package:felo/shared/widgets/felo_card.dart';
 import 'package:felo/shared/widgets/felo_feature_placeholder.dart';
 
@@ -14,6 +15,12 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final settings = ref.watch(profileSettingsProvider);
+    final plusProfile = ref.watch(feloPlusProfileProvider);
+    final plusValue = plusProfile.maybeWhen(
+      data: (profile) =>
+          profile.isPlus ? l10n.feloPlusStatusPlus : l10n.feloPlusStatusFree,
+      orElse: () => l10n.commonView,
+    );
     return FeloFeaturePlaceholder(
       title: l10n.profileTitle,
       body: l10n.authBody,
@@ -82,6 +89,16 @@ class ProfileScreen extends ConsumerWidget {
           onTap: () => context.go('/kyc'),
         ),
         _ProfileRow(
+          label: l10n.feloPlusTitle,
+          value: plusValue,
+          onTap: () => context.go('/profile/felo-plus'),
+        ),
+        _ProfileRow(
+          label: l10n.referralsTitle,
+          value: l10n.commonView,
+          onTap: () => context.go('/referrals'),
+        ),
+        _ProfileRow(
           label: l10n.helpTitle,
           value: l10n.commonView,
           onTap: () => context.go('/help'),
@@ -92,11 +109,7 @@ class ProfileScreen extends ConsumerWidget {
 }
 
 class _ProfileRow extends StatelessWidget {
-  const _ProfileRow({
-    required this.label,
-    required this.value,
-    this.onTap,
-  });
+  const _ProfileRow({required this.label, required this.value, this.onTap});
 
   final String label;
   final String value;

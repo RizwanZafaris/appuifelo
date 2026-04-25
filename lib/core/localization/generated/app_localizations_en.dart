@@ -67,6 +67,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commonCancel => 'Cancel';
 
   @override
+  String get commonRetry => 'Retry';
+
+  @override
+  String get commonLoading => 'Loading…';
+
+  @override
   String get commonSearch => 'Search';
 
   @override
@@ -1265,4 +1271,144 @@ class AppLocalizationsEn extends AppLocalizations {
   String familyInviteTokenHint(String token) {
     return 'Invite token: $token';
   }
+
+  @override
+  String get referralsTitle => 'Referrals';
+
+  @override
+  String get referralsHeroTitle => 'Give CAD \$5, get CAD \$5';
+
+  @override
+  String get referralsHeroBody =>
+      'Share your code with friends. When their referral qualifies, both of you get a CAD \$5 credit.';
+
+  @override
+  String get referralsShareCta => 'Share invite';
+
+  @override
+  String referralsShareMessage(String url) {
+    return 'Join me on Felo and use my referral link: $url';
+  }
+
+  @override
+  String get referralsCopyCode => 'Copy referral code';
+
+  @override
+  String get referralsCodeCopied => 'Referral code copied';
+
+  @override
+  String get referralsRedeemCta => 'Redeem a code';
+
+  @override
+  String get referralsInvited => 'Invited';
+
+  @override
+  String get referralsCompleted => 'Completed';
+
+  @override
+  String get referralsPending => 'Pending';
+
+  @override
+  String get referralsEarned => 'Earned';
+
+  @override
+  String get referralsInvitesTitle => 'Your referrals';
+
+  @override
+  String get referralsNoInvitesTitle => 'No referrals yet';
+
+  @override
+  String get referralsNoInvitesBody =>
+      'Share your invite to start tracking referrals here.';
+
+  @override
+  String get referralsInviteFallbackName => 'Friend';
+
+  @override
+  String get referralsErrorTitle => 'Could not load referrals';
+
+  @override
+  String get referralsErrorBody => 'Check your connection and try again.';
+
+  @override
+  String get referralsRedeemTitle => 'Redeem referral';
+
+  @override
+  String get referralsRedeemHeading => 'Have an invite code?';
+
+  @override
+  String get referralsRedeemBody =>
+      'Enter the referral code exactly as your friend shared it.';
+
+  @override
+  String get referralsRedeemCodeLabel => 'Referral code';
+
+  @override
+  String get referralsRedeemCodeHint => 'Example: FELO5';
+
+  @override
+  String get referralsRedeemSubmit => 'Redeem code';
+
+  @override
+  String get referralsRedeemRequired => 'Enter a referral code.';
+
+  @override
+  String get referralsRedeemSuccess => 'Referral code redeemed.';
+
+  @override
+  String get referralsRedeemNotFound => 'That referral code was not found.';
+
+  @override
+  String get referralsRedeemConflict =>
+      'This referral has already been redeemed.';
+
+  @override
+  String get referralsRedeemUnknown =>
+      'We could not redeem this code. Try again.';
+
+  @override
+  String get feloPlusTitle => 'FELO Plus';
+
+  @override
+  String get feloPlusStatusPlus => 'Plus';
+
+  @override
+  String get feloPlusStatusFree => 'Free';
+
+  @override
+  String get feloPlusActiveTitle => 'FELO Plus is active';
+
+  @override
+  String get feloPlusActiveBody =>
+      'Your account is receiving Plus benefits automatically where available.';
+
+  @override
+  String get feloPlusFreeTitle => 'You are on Free';
+
+  @override
+  String get feloPlusFreeBody =>
+      'FELO Plus is the premium plan for lower FX margin, priority support, a free physical card, and higher limits.';
+
+  @override
+  String feloPlusTierLabel(String tier) {
+    return 'Current tier: $tier';
+  }
+
+  @override
+  String get feloPlusBenefitFx => 'Lower FX margin on eligible sends';
+
+  @override
+  String get feloPlusBenefitSupport => 'Priority support';
+
+  @override
+  String get feloPlusBenefitCard => 'Free physical card';
+
+  @override
+  String get feloPlusBenefitLimits => 'Higher account limits';
+
+  @override
+  String get feloPlusErrorTitle => 'Could not load FELO Plus';
+
+  @override
+  String get feloPlusErrorBody => 'Check your connection and try again.';
 }
