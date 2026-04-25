@@ -572,6 +572,90 @@ abstract class AppLocalizations {
   /// **'Goal detail'**
   String get goalDetailTitle;
 
+  /// No description provided for @goalStreakBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'{weeks}-week streak'**
+  String goalStreakBadge(int weeks);
+
+  /// No description provided for @goalProgressSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{saved} saved of {target}'**
+  String goalProgressSummary(String saved, String target);
+
+  /// No description provided for @goalContributorsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Contributors'**
+  String get goalContributorsTitle;
+
+  /// No description provided for @goalContributeButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Contribute'**
+  String get goalContributeButton;
+
+  /// No description provided for @goalContributionSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to goal'**
+  String get goalContributionSheetTitle;
+
+  /// No description provided for @goalContributionAmountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get goalContributionAmountLabel;
+
+  /// No description provided for @goalContributionBefore.
+  ///
+  /// In en, this message translates to:
+  /// **'Before'**
+  String get goalContributionBefore;
+
+  /// No description provided for @goalContributionAfter.
+  ///
+  /// In en, this message translates to:
+  /// **'After'**
+  String get goalContributionAfter;
+
+  /// No description provided for @goalContributionSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Contribution added.'**
+  String get goalContributionSaved;
+
+  /// No description provided for @goalContributionFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Contribution could not be added. Try again.'**
+  String get goalContributionFailed;
+
+  /// No description provided for @goalMilestoneDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Milestone reached'**
+  String get goalMilestoneDialogTitle;
+
+  /// No description provided for @goalMilestoneDialogBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{goalName} reached {percent}%.'**
+  String goalMilestoneDialogBody(String goalName, int percent);
+
+  /// No description provided for @goalCardTeaserTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Card round-ups can boost this goal'**
+  String get goalCardTeaserTitle;
+
+  /// No description provided for @goalCardTeaserBody.
+  ///
+  /// In en, this message translates to:
+  /// **'When Felo Card launches, spare change from purchases can flow into {goalName}.'**
+  String goalCardTeaserBody(String goalName);
+
   /// No description provided for @transactionsTitle.
   ///
   /// In en, this message translates to:

@@ -79,6 +79,54 @@
   "goalsTitle": "اہداف",
   "goalsBody": "Mental-accounting goals۔ پیسہ صارف کے اپنے account میں رہتا ہے۔",
   "goalDetailTitle": "Goal detail",
+  "goalStreakBadge": "{weeks} ہفتوں کا streak",
+  "@goalStreakBadge": {
+    "placeholders": {
+      "weeks": {
+        "type": "int"
+      }
+    }
+  },
+  "goalProgressSummary": "{target} میں سے {saved} محفوظ",
+  "@goalProgressSummary": {
+    "placeholders": {
+      "saved": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "goalContributorsTitle": "Contributors",
+  "goalContributeButton": "Contribute",
+  "goalContributionSheetTitle": "Goal میں شامل کریں",
+  "goalContributionAmountLabel": "Amount",
+  "goalContributionBefore": "Before",
+  "goalContributionAfter": "After",
+  "goalContributionSaved": "Contribution شامل ہو گئی۔",
+  "goalContributionFailed": "Contribution شامل نہیں ہو سکی۔ دوبارہ کوشش کریں۔",
+  "goalMilestoneDialogTitle": "Milestone reached",
+  "goalMilestoneDialogBody": "{goalName} {percent}% تک پہنچ گیا۔",
+  "@goalMilestoneDialogBody": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "goalCardTeaserTitle": "Card round-ups اس goal کو تیز کر سکتے ہیں",
+  "goalCardTeaserBody": "Felo Card launch ہونے پر purchases کی spare change {goalName} میں جا سکے گی۔",
+  "@goalCardTeaserBody": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      }
+    }
+  },
   "transactionsTitle": "Transactions",
   "transactionsBody": "Date، category، account، یا source سے filter کریں۔",
   "transactionDetailTitle": "Transaction detail",

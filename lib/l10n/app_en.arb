@@ -79,6 +79,54 @@
   "goalsTitle": "Goals",
   "goalsBody": "Mental-accounting goals. Money stays in the user's own account.",
   "goalDetailTitle": "Goal detail",
+  "goalStreakBadge": "{weeks}-week streak",
+  "@goalStreakBadge": {
+    "placeholders": {
+      "weeks": {
+        "type": "int"
+      }
+    }
+  },
+  "goalProgressSummary": "{saved} saved of {target}",
+  "@goalProgressSummary": {
+    "placeholders": {
+      "saved": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "goalContributorsTitle": "Contributors",
+  "goalContributeButton": "Contribute",
+  "goalContributionSheetTitle": "Add to goal",
+  "goalContributionAmountLabel": "Amount",
+  "goalContributionBefore": "Before",
+  "goalContributionAfter": "After",
+  "goalContributionSaved": "Contribution added.",
+  "goalContributionFailed": "Contribution could not be added. Try again.",
+  "goalMilestoneDialogTitle": "Milestone reached",
+  "goalMilestoneDialogBody": "{goalName} reached {percent}%.",
+  "@goalMilestoneDialogBody": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "goalCardTeaserTitle": "Card round-ups can boost this goal",
+  "goalCardTeaserBody": "When Felo Card launches, spare change from purchases can flow into {goalName}.",
+  "@goalCardTeaserBody": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      }
+    }
+  },
   "transactionsTitle": "Transactions",
   "transactionsBody": "Filter by date, category, account, or source.",
   "transactionDetailTitle": "Transaction detail",

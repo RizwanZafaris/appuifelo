@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:felo/core/config/felo_env.dart';
+import 'package:felo/core/network/felo_api_client.dart';
 import 'package:felo/core/network/retry_interceptor.dart';
 import 'package:felo/core/network/supabase_auth_interceptor.dart';
 import 'package:felo/core/supabase/supabase_provider.dart';
@@ -23,4 +24,9 @@ Dio dio(DioRef ref) {
   dio.interceptors.add(SupabaseAuthInterceptor(supabase));
   dio.interceptors.add(RetryInterceptor(dio));
   return dio;
+}
+
+@riverpod
+FeloApiClient feloApiClient(FeloApiClientRef ref) {
+  return FeloApiClient(ref.watch(dioProvider));
 }
