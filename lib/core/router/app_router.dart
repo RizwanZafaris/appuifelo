@@ -27,7 +27,24 @@ import 'package:felo/features/onboarding/presentation/splash_screen.dart';
 import 'package:felo/features/onboarding_v2/presentation/phase1_identity/otp_screen.dart';
 import 'package:felo/features/onboarding_v2/presentation/phase1_identity/signup_method_screen.dart';
 import 'package:felo/features/onboarding_v2/presentation/phase1_identity/welcome_screen.dart';
+import 'package:felo/features/onboarding_v2/presentation/phase2_context/confirm_region_screen.dart';
+import 'package:felo/features/onboarding_v2/presentation/phase2_context/name_screen.dart';
 import 'package:felo/features/onboarding_v2/presentation/phase2_context/region_screen_stub.dart';
+import 'package:felo/features/onboarding_v2/presentation/phase3_permissions/permissions_screen.dart';
+import 'package:felo/features/onboarding_v2/presentation/phase4_financial/accounts_screen.dart'
+    as v2_accounts;
+import 'package:felo/features/onboarding_v2/presentation/phase4_financial/earning_type_screen.dart';
+import 'package:felo/features/onboarding_v2/presentation/phase4_financial/invest_gate_screen.dart';
+import 'package:felo/features/onboarding_v2/presentation/phase4_financial/investment_types_screen.dart';
+import 'package:felo/features/onboarding_v2/presentation/phase5_intent/budget_screen.dart';
+import 'package:felo/features/onboarding_v2/presentation/phase5_intent/goal_detail_screen.dart'
+    as v2_goal_detail;
+import 'package:felo/features/onboarding_v2/presentation/phase5_intent/goals_screen.dart'
+    as v2_goals;
+import 'package:felo/features/onboarding_v2/presentation/phase6_remittance/corridor_screen.dart';
+import 'package:felo/features/onboarding_v2/presentation/phase6_remittance/family_remittance_screen.dart';
+import 'package:felo/features/onboarding_v2/presentation/phase7_personalize/personalize_screen.dart';
+import 'package:felo/features/onboarding_v2/presentation/phase8_dashboard/dashboard_handoff_screen.dart';
 import 'package:felo/features/profile/presentation/profile_screen.dart';
 import 'package:felo/features/profile/presentation/settings_screens.dart';
 import 'package:felo/features/receipt_capture/presentation/receipt_capture_screen.dart';
@@ -121,13 +138,168 @@ class OnboardingV2OtpRoute extends GoRouteData {
   }
 }
 
+// Phase 2.1 — confirm region (replaces legacy stub at /region)
 @TypedGoRoute<OnboardingV2RegionRoute>(path: '/onboarding-v2/region')
 class OnboardingV2RegionRoute extends GoRouteData {
   const OnboardingV2RegionRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
+      const ConfirmRegionScreen();
+}
+
+// Legacy stub — kept reachable at /region-stub for QA / fallback only.
+@TypedGoRoute<OnboardingV2RegionStubRoute>(path: '/onboarding-v2/region-stub')
+class OnboardingV2RegionStubRoute extends GoRouteData {
+  const OnboardingV2RegionStubRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
       const OnboardingV2RegionScreenStub();
+}
+
+// Phase 2.2 — name
+@TypedGoRoute<OnboardingV2NameRoute>(path: '/onboarding-v2/name')
+class OnboardingV2NameRoute extends GoRouteData {
+  const OnboardingV2NameRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const NameScreen();
+}
+
+// Phase 3 — permissions
+@TypedGoRoute<OnboardingV2PermissionsRoute>(path: '/onboarding-v2/permissions')
+class OnboardingV2PermissionsRoute extends GoRouteData {
+  const OnboardingV2PermissionsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const PermissionsScreen();
+}
+
+// Phase 4.1 — earning type
+@TypedGoRoute<OnboardingV2EarningTypeRoute>(
+  path: '/onboarding-v2/earning-type',
+)
+class OnboardingV2EarningTypeRoute extends GoRouteData {
+  const OnboardingV2EarningTypeRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const EarningTypeScreen();
+}
+
+// Phase 4.2 — accounts (v2)
+@TypedGoRoute<OnboardingV2AccountsRoute>(path: '/onboarding-v2/accounts')
+class OnboardingV2AccountsRoute extends GoRouteData {
+  const OnboardingV2AccountsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const v2_accounts.AccountsScreen();
+}
+
+// Phase 4.3 — invest gate
+@TypedGoRoute<OnboardingV2InvestGateRoute>(path: '/onboarding-v2/invest-gate')
+class OnboardingV2InvestGateRoute extends GoRouteData {
+  const OnboardingV2InvestGateRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const InvestGateScreen();
+}
+
+// Phase 4.4 — investment types
+@TypedGoRoute<OnboardingV2InvestTypesRoute>(
+  path: '/onboarding-v2/invest-types',
+)
+class OnboardingV2InvestTypesRoute extends GoRouteData {
+  const OnboardingV2InvestTypesRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const InvestmentTypesScreen();
+}
+
+// Phase 5.1 — budget
+@TypedGoRoute<OnboardingV2BudgetRoute>(path: '/onboarding-v2/budget')
+class OnboardingV2BudgetRoute extends GoRouteData {
+  const OnboardingV2BudgetRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const BudgetScreen();
+}
+
+// Phase 5.2 — goals (v2)
+@TypedGoRoute<OnboardingV2GoalsRoute>(path: '/onboarding-v2/goals')
+class OnboardingV2GoalsRoute extends GoRouteData {
+  const OnboardingV2GoalsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const v2_goals.GoalsScreen();
+}
+
+// Phase 5.3 — goal detail (slot 1 / 2)
+@TypedGoRoute<OnboardingV2GoalDetailRoute>(
+  path: '/onboarding-v2/goal-detail/:slot',
+)
+class OnboardingV2GoalDetailRoute extends GoRouteData {
+  const OnboardingV2GoalDetailRoute(this.slot);
+
+  final String slot;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      v2_goal_detail.GoalDetailScreen(slot: int.tryParse(slot) ?? 1);
+}
+
+// Phase 6.1 — family & remittance
+@TypedGoRoute<OnboardingV2FamilyRemittanceRoute>(
+  path: '/onboarding-v2/family-remittance',
+)
+class OnboardingV2FamilyRemittanceRoute extends GoRouteData {
+  const OnboardingV2FamilyRemittanceRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const FamilyRemittanceScreen();
+}
+
+// Phase 6.2 — corridor
+@TypedGoRoute<OnboardingV2CorridorRoute>(path: '/onboarding-v2/corridor')
+class OnboardingV2CorridorRoute extends GoRouteData {
+  const OnboardingV2CorridorRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const CorridorScreen();
+}
+
+// Phase 7 — personalize (loading / orchestrator)
+@TypedGoRoute<OnboardingV2PersonalizeRoute>(
+  path: '/onboarding-v2/personalize',
+)
+class OnboardingV2PersonalizeRoute extends GoRouteData {
+  const OnboardingV2PersonalizeRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const PersonalizeScreen();
+}
+
+// Phase 8 — dashboard handoff
+@TypedGoRoute<OnboardingV2DashboardHandoffRoute>(
+  path: '/onboarding-v2/dashboard-handoff',
+)
+class OnboardingV2DashboardHandoffRoute extends GoRouteData {
+  const OnboardingV2DashboardHandoffRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const DashboardHandoffScreen();
 }
 
 // Aliases — onboarding_v2 screens prefixed to disambiguate from legacy
