@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:felo/core/supabase/supabase_provider.dart';
 import 'package:felo/felo_app.dart';
 
 /// Entry point with hardened error handling.
@@ -34,6 +35,9 @@ void main() {
       }
       return true;
     };
+
+    // Bootstrap Supabase before any provider reads SupabaseClient.
+    await initSupabase();
 
     runApp(const ProviderScope(child: FeloApp()));
   }, (Object error, StackTrace stack) {
