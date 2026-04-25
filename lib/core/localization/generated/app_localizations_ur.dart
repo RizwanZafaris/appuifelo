@@ -943,6 +943,32 @@ class AppLocalizationsUr extends AppLocalizations {
   String get mfaVerified => 'Two-factor enable ہو گیا';
 
   @override
+  String mfaEnabledStatus(int count) {
+    return 'Enabled · $count recovery codes باقی';
+  }
+
+  @override
+  String get mfaDisabledStatus => 'Enabled نہیں';
+
+  @override
+  String get mfaRecoveryCodesTitle => 'Recovery codes';
+
+  @override
+  String get mfaRecoveryCodesWarning =>
+      'یہ recovery codes کسی محفوظ جگہ save کریں۔ Felo انہیں صرف ایک بار دکھائے گا۔';
+
+  @override
+  String get mfaCopyAllCodes => 'تمام codes copy کریں';
+
+  @override
+  String get mfaScanQrPrompt =>
+      'یہ QR code Google Authenticator یا کسی authenticator app میں scan کریں۔';
+
+  @override
+  String get mfaWrongCode =>
+      'یہ code کام نہیں کر سکا۔ اپنی authenticator app چیک کریں اور دوبارہ کوشش کریں۔';
+
+  @override
   String get biometricTitle => 'App lock';
 
   @override

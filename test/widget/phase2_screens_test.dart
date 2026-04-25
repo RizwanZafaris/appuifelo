@@ -5,30 +5,33 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:felo/core/localization/generated/app_localizations.dart';
 import 'package:felo/core/theme/felo_theme.dart';
+import 'package:felo/features/auth/data/mfa_repository.dart';
 import 'package:felo/features/auth/presentation/auth_recovery_screens.dart';
 import 'package:felo/features/profile/presentation/settings_screens.dart';
 import 'package:felo/features/system/presentation/system_screens.dart';
 import 'package:felo/features/transactions/presentation/money_extension_screens.dart';
 
 Widget wrap(Widget child) => ProviderScope(
-      child: MaterialApp(
-        locale: const Locale('en'),
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        supportedLocales: AppLocalizations.supportedLocales,
-        theme: FeloTheme.dark(),
-        home: child,
-      ),
-    );
+  overrides: [mfaRepositoryProvider.overrideWithValue(_FakeMfaRepository())],
+  child: MaterialApp(
+    locale: const Locale('en'),
+    localizationsDelegates: const [
+      AppLocalizations.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+    ],
+    supportedLocales: AppLocalizations.supportedLocales,
+    theme: FeloTheme.dark(),
+    home: child,
+  ),
+);
 
 void main() {
   group('Phase-2 polish screens', () {
-    testWidgets('forgot password shows confirmation after submit',
-        (tester) async {
+    testWidgets('forgot password shows confirmation after submit', (
+      tester,
+    ) async {
       await tester.pumpWidget(wrap(const ForgotPasswordScreen()));
       await tester.pumpAndSettle();
 
@@ -46,7 +49,7 @@ void main() {
 
       expect(find.text('Two-factor authentication'), findsOneWidget);
       expect(find.byType(TextField), findsOneWidget);
-      expect(find.byIcon(Icons.qr_code_2_rounded), findsOneWidget);
+      expect(find.byType(Image), findsOneWidget);
       expect(find.text('Copy secret key'), findsOneWidget);
     });
 
@@ -61,8 +64,9 @@ void main() {
       expect(tester.takeException(), isNull);
     });
 
-    testWidgets('delete account screen shows warning + DELETE confirm field',
-        (tester) async {
+    testWidgets('delete account screen shows warning + DELETE confirm field', (
+      tester,
+    ) async {
       await tester.pumpWidget(wrap(const DeleteAccountScreen()));
       await tester.pumpAndSettle();
 
@@ -91,8 +95,9 @@ void main() {
       );
     });
 
-    testWidgets('app lock shows error on wrong PIN, succeeds on 1234',
-        (tester) async {
+    testWidgets('app lock shows error on wrong PIN, succeeds on 1234', (
+      tester,
+    ) async {
       await tester.pumpWidget(wrap(const AppLockScreen()));
       await tester.pumpAndSettle();
 
@@ -118,4 +123,31 @@ void main() {
       expect(find.textContaining('part of the family'), findsOneWidget);
     });
   });
+}
+
+class _FakeMfaRepository implements MfaRepository {
+  static const _qrPngDataUrl =
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/p9sAAAAASUVORK5CYII=';
+
+  @override
+  Future<void> disable() async {}
+
+  @override
+  Future<MfaEnrollment> enroll() async {
+    return const MfaEnrollment(
+      secret: 'JBSWY3DPEHPK3PXP',
+      otpauth: 'otpauth://totp/Felo:test@example.com',
+      qrPngDataUrl: _qrPngDataUrl,
+    );
+  }
+
+  @override
+  Future<MfaStatus> status() async {
+    return const MfaStatus(enabled: true, recoveryCodesRemaining: 8);
+  }
+
+  @override
+  Future<List<String>> verifyEnrollment(String code) async {
+    return const ['AAAA-BBBB', 'CCCC-DDDD'];
+  }
 }

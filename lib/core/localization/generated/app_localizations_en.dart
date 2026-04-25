@@ -943,6 +943,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mfaVerified => 'Two-factor enabled';
 
   @override
+  String mfaEnabledStatus(int count) {
+    return 'Enabled · $count recovery codes remaining';
+  }
+
+  @override
+  String get mfaDisabledStatus => 'Not enabled';
+
+  @override
+  String get mfaRecoveryCodesTitle => 'Recovery codes';
+
+  @override
+  String get mfaRecoveryCodesWarning =>
+      'Save these recovery codes somewhere safe. Felo will show them only once.';
+
+  @override
+  String get mfaCopyAllCodes => 'Copy all codes';
+
+  @override
+  String get mfaScanQrPrompt =>
+      'Scan this QR code in Google Authenticator or another authenticator app.';
+
+  @override
+  String get mfaWrongCode =>
+      'That code did not work. Check your authenticator app and try again.';
+
+  @override
   String get biometricTitle => 'App lock';
 
   @override

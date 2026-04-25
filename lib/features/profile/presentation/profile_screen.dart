@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:felo/core/di/fake_repositories.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
+import 'package:felo/features/auth/data/mfa_repository.dart';
 import 'package:felo/shared/widgets/felo_card.dart';
 import 'package:felo/shared/widgets/felo_feature_placeholder.dart';
 
@@ -14,6 +15,7 @@ class ProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final settings = ref.watch(profileSettingsProvider);
+    final mfaStatus = ref.watch(mfaStatusProvider);
     return FeloFeaturePlaceholder(
       title: l10n.profileTitle,
       body: l10n.authBody,
@@ -58,7 +60,13 @@ class ProfileScreen extends ConsumerWidget {
         ),
         _ProfileRow(
           label: l10n.mfaTitle,
-          value: l10n.commonView,
+          value: mfaStatus.when(
+            data: (status) => status.enabled
+                ? l10n.mfaEnabledStatus(status.recoveryCodesRemaining)
+                : l10n.mfaDisabledStatus,
+            error: (_, _) => l10n.mfaDisabledStatus,
+            loading: () => l10n.commonView,
+          ),
           onTap: () => context.go('/auth/mfa'),
         ),
         _ProfileRow(
@@ -92,11 +100,7 @@ class ProfileScreen extends ConsumerWidget {
 }
 
 class _ProfileRow extends StatelessWidget {
-  const _ProfileRow({
-    required this.label,
-    required this.value,
-    this.onTap,
-  });
+  const _ProfileRow({required this.label, required this.value, this.onTap});
 
   final String label;
   final String value;

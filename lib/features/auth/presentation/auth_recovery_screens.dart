@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:felo/core/localization/generated/app_localizations.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
 import 'package:felo/core/theme/felo_colors.dart';
+import 'package:felo/features/auth/data/mfa_repository.dart';
 import 'package:felo/shared/widgets/felo_button.dart';
 import 'package:felo/shared/widgets/felo_card.dart';
 import 'package:felo/shared/widgets/felo_input.dart';
@@ -49,8 +52,8 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
                       Text(
                         l10n.forgotPasswordSentTitle,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w800,
-                            ),
+                          fontWeight: FontWeight.w800,
+                        ),
                       ),
                       const SizedBox(height: 8),
                       Text(l10n.forgotPasswordSentBody),
@@ -122,9 +125,9 @@ class _EmailVerificationScreenState
                 const SizedBox(height: 12),
                 Text(
                   l10n.emailVerifyHeading,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w800,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
                 ),
                 const SizedBox(height: 8),
                 Text(l10n.emailVerifyBody),
@@ -150,7 +153,7 @@ class _EmailVerificationScreenState
   }
 }
 
-/// MFA / TOTP setup — QR code placeholder + 6-digit input + recovery codes.
+/// MFA / TOTP setup — enrolls with the backend, then verifies a TOTP code.
 class MfaSetupScreen extends ConsumerStatefulWidget {
   const MfaSetupScreen({super.key});
 
@@ -160,7 +163,8 @@ class MfaSetupScreen extends ConsumerStatefulWidget {
 
 class _MfaSetupScreenState extends ConsumerState<MfaSetupScreen> {
   final _codeController = TextEditingController();
-  bool _verified = false;
+  bool _verifying = false;
+  String? _errorText;
 
   @override
   void dispose() {
@@ -171,85 +175,255 @@ class _MfaSetupScreenState extends ConsumerState<MfaSetupScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final enrollment = ref.watch(mfaEnrollmentProvider);
     return FeloScaffold(
       title: l10n.mfaTitle,
+      selectedTab: FeloRootTab.home,
+      child: enrollment.when(
+        data: (data) => _MfaEnrollmentBody(
+          enrollment: data,
+          codeController: _codeController,
+          errorText: _errorText,
+          verifying: _verifying,
+          onVerify: _verify,
+        ),
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stackTrace) => ListView(
+          padding: const EdgeInsets.all(20),
+          children: [
+            FeloCard(
+              child: Row(
+                children: [
+                  const Icon(Icons.error_outline_rounded),
+                  const SizedBox(width: 12),
+                  Expanded(child: Text(l10n.mfaWrongCode)),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            FeloButton(
+              label: l10n.commonContinue,
+              variant: FeloButtonVariant.secondary,
+              onPressed: () => ref.invalidate(mfaEnrollmentProvider),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _verify() async {
+    final l10n = context.l10n;
+    final code = _codeController.text.trim();
+    if (code.length != 6) {
+      setState(() => _errorText = l10n.mfaWrongCode);
+      return;
+    }
+
+    setState(() {
+      _verifying = true;
+      _errorText = null;
+    });
+
+    try {
+      final codes = await ref
+          .read(mfaRepositoryProvider)
+          .verifyEnrollment(code);
+      ref.invalidate(mfaStatusProvider);
+      if (!mounted) return;
+      context.go('/auth/mfa/recovery-codes', extra: codes);
+    } catch (_) {
+      if (!mounted) return;
+      setState(() => _errorText = l10n.mfaWrongCode);
+    } finally {
+      if (mounted) {
+        setState(() => _verifying = false);
+      }
+    }
+  }
+}
+
+class _MfaEnrollmentBody extends StatelessWidget {
+  const _MfaEnrollmentBody({
+    required this.enrollment,
+    required this.codeController,
+    required this.errorText,
+    required this.verifying,
+    required this.onVerify,
+  });
+
+  final MfaEnrollment enrollment;
+  final TextEditingController codeController;
+  final String? errorText;
+  final bool verifying;
+  final VoidCallback onVerify;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return ListView(
+      padding: const EdgeInsets.all(20),
+      children: [
+        Text(l10n.mfaBody),
+        const SizedBox(height: 16),
+        FeloCard(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 196,
+                child: Center(
+                  child: _QrCodeImage(dataUrl: enrollment.qrPngDataUrl),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                l10n.mfaScanQrPrompt,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 8),
+        FeloCard(
+          onTap: () async {
+            final messenger = ScaffoldMessenger.of(context);
+            final copiedLabel = l10n.mfaSecretCopied;
+            await Clipboard.setData(ClipboardData(text: enrollment.secret));
+            messenger.showSnackBar(SnackBar(content: Text(copiedLabel)));
+          },
+          child: Row(
+            children: [
+              const Icon(Icons.key_outlined),
+              const SizedBox(width: 12),
+              Expanded(child: Text(l10n.mfaCopySecret)),
+              const Icon(Icons.copy_rounded, size: 18),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+        FeloInput(
+          label: l10n.mfaCodeLabel,
+          controller: codeController,
+          keyboardType: TextInputType.number,
+        ),
+        if (errorText != null) ...[
+          const SizedBox(height: 8),
+          Text(
+            errorText!,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Theme.of(context).colorScheme.error,
+            ),
+          ),
+        ],
+        const SizedBox(height: 20),
+        FeloButton(
+          label: verifying ? l10n.mfaVerifyCta : l10n.mfaVerifyCta,
+          onPressed: verifying ? null : onVerify,
+        ),
+      ],
+    );
+  }
+}
+
+class _QrCodeImage extends StatelessWidget {
+  const _QrCodeImage({required this.dataUrl});
+
+  final String dataUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    final bytes = _pngBytes(dataUrl);
+    return Container(
+      width: 172,
+      height: 172,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: bytes == null
+          ? const Icon(Icons.qr_code_2_rounded, size: 140, color: Colors.black)
+          : Image.memory(bytes, fit: BoxFit.contain),
+    );
+  }
+
+  Uint8List? _pngBytes(String dataUrl) {
+    final comma = dataUrl.indexOf(',');
+    if (comma == -1) return null;
+    try {
+      return base64Decode(dataUrl.substring(comma + 1));
+    } on FormatException {
+      return null;
+    }
+  }
+}
+
+class MfaRecoveryCodesScreen extends StatelessWidget {
+  const MfaRecoveryCodesScreen({required this.recoveryCodes, super.key});
+
+  final List<String> recoveryCodes;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return FeloScaffold(
+      title: l10n.mfaRecoveryCodesTitle,
       selectedTab: FeloRootTab.home,
       child: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          Text(l10n.mfaBody),
-          const SizedBox(height: 16),
           FeloCard(
-            child: SizedBox(
-              height: 180,
-              child: Center(
-                child: Container(
-                  width: 160,
-                  height: 160,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const Icon(
-                    Icons.qr_code_2_rounded,
-                    size: 140,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          FeloCard(
-            onTap: () async {
-              final messenger = ScaffoldMessenger.of(context);
-              final copiedLabel = l10n.mfaSecretCopied;
-              await Clipboard.setData(
-                const ClipboardData(text: 'JBSWY3DPEHPK3PXP'),
-              );
-              if (!mounted) return;
-              messenger.showSnackBar(SnackBar(content: Text(copiedLabel)));
-            },
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(Icons.key_outlined),
+                const Icon(Icons.warning_amber_rounded),
                 const SizedBox(width: 12),
-                Expanded(child: Text(l10n.mfaCopySecret)),
-                const Icon(Icons.copy_rounded, size: 18),
+                Expanded(child: Text(l10n.mfaRecoveryCodesWarning)),
               ],
             ),
           ),
           const SizedBox(height: 16),
-          FeloInput(
-            label: l10n.mfaCodeLabel,
-            controller: _codeController,
-            keyboardType: TextInputType.number,
-          ),
-          if (_verified) ...[
-            const SizedBox(height: 12),
-            FeloCard(
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.check_circle_rounded,
-                    color: FeloColors.feloiTeal,
+          FeloCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                for (final code in recoveryCodes)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 6),
+                    child: Text(
+                      code,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontFeatures: const [FontFeature.tabularFigures()],
+                        fontFamily: 'monospace',
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(child: Text(l10n.mfaVerified)),
-                ],
-              ),
+              ],
             ),
-          ],
-          const SizedBox(height: 20),
+          ),
+          const SizedBox(height: 16),
           FeloButton(
-            label: _verified ? l10n.commonDone : l10n.mfaVerifyCta,
-            onPressed: () {
-              if (_verified) {
-                context.go('/profile');
-              } else if (_codeController.text.trim().length == 6) {
-                setState(() => _verified = true);
-              }
-            },
+            label: l10n.mfaCopyAllCodes,
+            icon: Icons.copy_rounded,
+            onPressed: recoveryCodes.isEmpty
+                ? null
+                : () async {
+                    final messenger = ScaffoldMessenger.of(context);
+                    await Clipboard.setData(
+                      ClipboardData(text: recoveryCodes.join('\n')),
+                    );
+                    messenger.showSnackBar(
+                      SnackBar(content: Text(l10n.mfaCopyAllCodes)),
+                    );
+                  },
+          ),
+          const SizedBox(height: 8),
+          FeloButton(
+            label: l10n.commonDone,
+            variant: FeloButtonVariant.secondary,
+            onPressed: () => context.go('/profile'),
           ),
         ],
       ),
@@ -308,9 +482,7 @@ class _BiometricLockScreenState extends ConsumerState<BiometricLockScreen> {
                   onTap: () => setState(() => _autoLock = option.$1),
                   child: Row(
                     children: [
-                      Expanded(
-                        child: Text(_optionLabel(l10n, option.$2)),
-                      ),
+                      Expanded(child: Text(_optionLabel(l10n, option.$2))),
                       if (_autoLock == option.$1)
                         const Icon(
                           Icons.check_circle_rounded,
