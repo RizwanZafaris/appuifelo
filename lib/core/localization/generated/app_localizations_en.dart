@@ -24,7 +24,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navCoach => 'Coach';
 
   @override
+  String get navDo => 'Do';
+
+  @override
   String get navGoals => 'Goals';
+
+  @override
+  String get complianceFooter =>
+      'Registration pending · MSB application in progress.';
 
   @override
   String get commonContinue => 'Continue';
@@ -186,6 +193,44 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hubTitle => 'Explore Felo';
+
+  @override
+  String get doHubTitle => 'Do';
+
+  @override
+  String get doHubSubtitle =>
+      'Everything you can act on, grouped into simple aisles.';
+
+  @override
+  String get doHubSendPay => 'Send & Pay';
+
+  @override
+  String get doHubSendPayBody => 'Remittance, bills, and split payments.';
+
+  @override
+  String get doHubSaveTrack => 'Save & Track';
+
+  @override
+  String get doHubSaveTrackBody => 'Goals, round-ups, and investment tracking.';
+
+  @override
+  String get doHubSpendSmart => 'Spend Smart';
+
+  @override
+  String get doHubSpendSmartBody => 'Budgets, subscriptions, and insights.';
+
+  @override
+  String get doHubCardsAccounts => 'Cards & Accounts';
+
+  @override
+  String get doHubCardsAccountsBody =>
+      'Linked banks, cards, and account controls.';
+
+  @override
+  String get doHubMoreHelp => 'More & Help';
+
+  @override
+  String get doHubMoreHelpBody => 'Support, referrals, and Felo Plus.';
 
   @override
   String get budgetsTitle => 'Budgets';

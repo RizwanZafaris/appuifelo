@@ -34,11 +34,8 @@ class FeloChip extends StatelessWidget {
           color: selected ? colors.onPrimaryContainer : colors.onSurface,
           fontWeight: FontWeight.w700,
         ),
-        shape: StadiumBorder(
-          side: BorderSide(
-            color: selected ? colors.primary : colors.outlineVariant,
-          ),
-        ),
+        side: BorderSide.none,
+        shape: const StadiumBorder(),
       ),
     );
   }

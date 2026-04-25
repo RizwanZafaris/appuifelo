@@ -4,12 +4,33 @@ import 'package:felo/core/theme/felo_colors.dart';
 
 abstract final class FeloTheme {
   static ThemeData light() {
-    final colorScheme = ColorScheme.fromSeed(
-      seedColor: FeloColors.feloiTeal,
-      brightness: Brightness.light,
+    const colorScheme = ColorScheme.light(
+      primary: FeloColors.lavenderPrimary,
+      onPrimary: Colors.white,
+      primaryContainer: FeloColors.lavenderSoft,
+      onPrimaryContainer: FeloColors.ink900,
+      secondary: FeloColors.mintText,
+      onSecondary: Colors.white,
+      secondaryContainer: FeloColors.mintBase,
+      onSecondaryContainer: FeloColors.ink900,
+      tertiary: FeloColors.peachText,
+      onTertiary: Colors.white,
+      tertiaryContainer: FeloColors.peachBase,
+      onTertiaryContainer: FeloColors.ink900,
+      error: FeloColors.signalCrimson,
+      surface: FeloColors.surface,
+      onSurface: FeloColors.ink900,
+      onSurfaceVariant: FeloColors.ink500,
+      outline: FeloColors.outlineVariant,
+      outlineVariant: FeloColors.outlineVariant,
+      surfaceContainerLowest: FeloColors.paper0,
+      surfaceContainerLow: FeloColors.surfaceContainerLow,
+      surfaceContainer: FeloColors.surfaceContainer,
+      surfaceContainerHigh: FeloColors.surfaceContainerHigh,
+      surfaceContainerHighest: FeloColors.surfaceContainerHighest,
     );
     return _base(colorScheme).copyWith(
-      scaffoldBackgroundColor: FeloColors.paper50,
+      scaffoldBackgroundColor: FeloColors.surface,
       cardColor: FeloColors.paper0,
     );
   }
@@ -26,7 +47,10 @@ abstract final class FeloTheme {
   }
 
   static ThemeData _base(ColorScheme colorScheme) {
-    final textTheme = Typography.material2021().white.apply(
+    final baseTextTheme = colorScheme.brightness == Brightness.dark
+        ? Typography.material2021().white
+        : Typography.material2021().black;
+    final textTheme = baseTextTheme.apply(
       fontFamily: 'Inter',
       bodyColor: colorScheme.onSurface,
       displayColor: colorScheme.onSurface,
@@ -45,7 +69,7 @@ abstract final class FeloTheme {
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: colorScheme.surface,
-        selectedItemColor: FeloColors.feloiTeal,
+        selectedItemColor: FeloColors.lavenderPrimary,
         unselectedItemColor: colorScheme.onSurfaceVariant,
         type: BottomNavigationBarType.fixed,
       ),
@@ -60,17 +84,18 @@ abstract final class FeloTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
+        fillColor: colorScheme.surfaceContainerHighest,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide(color: colorScheme.outlineVariant),
+          borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide(color: colorScheme.outlineVariant),
+          borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(color: FeloColors.feloiTeal, width: 2),
+          borderSide: BorderSide.none,
         ),
       ),
     );

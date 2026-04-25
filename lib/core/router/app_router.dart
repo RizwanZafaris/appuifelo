@@ -10,6 +10,8 @@ import 'package:felo/features/budgets/presentation/budget_detail_screen.dart';
 import 'package:felo/features/budgets/presentation/budget_form_screen.dart';
 import 'package:felo/features/budgets/presentation/budgets_screen.dart';
 import 'package:felo/features/coach/presentation/coach_screen.dart';
+import 'package:felo/features/design_coverage/presentation/design_coverage_screen.dart';
+import 'package:felo/features/do_hub/presentation/do_hub_screen.dart';
 import 'package:felo/features/family/presentation/family_screen.dart';
 import 'package:felo/features/goals/presentation/goal_detail_screen.dart';
 import 'package:felo/features/goals/presentation/goals_screen.dart';
@@ -32,7 +34,22 @@ import 'package:felo/features/transactions/presentation/transactions_screen.dart
 
 part 'app_router.g.dart';
 
-final GoRouter appRouter = GoRouter(initialLocation: '/', routes: $appRoutes);
+final GoRouter appRouter = GoRouter(
+  initialLocation: '/',
+  routes: [
+    ...$appRoutes,
+    GoRoute(
+      path: '/design-screens',
+      builder: (context, state) => const DesignCoverageScreen(),
+    ),
+    GoRoute(
+      path: '/design-screens/:screenId',
+      builder: (context, state) => DesignScreenAvailabilityScreen(
+        screenId: state.pathParameters['screenId']!,
+      ),
+    ),
+  ],
+);
 
 @TypedGoRoute<SplashRoute>(path: '/')
 class SplashRoute extends GoRouteData {
@@ -66,6 +83,15 @@ class HomeRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) => const HomeScreen();
+}
+
+@TypedGoRoute<DoHubRoute>(path: '/do')
+class DoHubRoute extends GoRouteData {
+  const DoHubRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const DoHubScreen();
 }
 
 @TypedGoRoute<NotificationsRoute>(path: '/notifications')

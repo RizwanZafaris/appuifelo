@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:felo/core/theme/felo_colors.dart';
+
 enum FeloButtonVariant { primary, secondary, ghost }
 
 class FeloButton extends StatelessWidget {
@@ -18,6 +20,14 @@ class FeloButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    final enabled = onPressed != null;
+    final radius = BorderRadius.circular(20);
+    final foregroundColor = switch (variant) {
+      FeloButtonVariant.primary => Colors.white,
+      FeloButtonVariant.secondary => colors.onPrimaryContainer,
+      FeloButtonVariant.ghost => colors.primary,
+    };
     final child = Row(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -27,31 +37,69 @@ class FeloButton extends StatelessWidget {
       ],
     );
 
-    return switch (variant) {
-      FeloButtonVariant.primary => FilledButton(
-        onPressed: onPressed,
-        child: child,
-      ),
-      FeloButtonVariant.secondary => OutlinedButton(
-        onPressed: onPressed,
-        style: OutlinedButton.styleFrom(
-          minimumSize: const Size.fromHeight(52),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
+    final content = IconTheme.merge(
+      data: IconThemeData(color: foregroundColor),
+      child: DefaultTextStyle.merge(
+        style: TextStyle(
+          color: foregroundColor,
+          fontSize: 15,
+          fontWeight: FontWeight.w800,
         ),
         child: child,
       ),
-      FeloButtonVariant.ghost => TextButton(
-        onPressed: onPressed,
-        style: TextButton.styleFrom(
-          minimumSize: const Size.fromHeight(48),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
+    );
+
+    final decoration = switch (variant) {
+      FeloButtonVariant.primary => BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [FeloColors.lavenderPrimary, FeloColors.lavenderStrong],
         ),
-        child: child,
+        borderRadius: radius,
+        boxShadow: enabled
+            ? [
+                BoxShadow(
+                  color: FeloColors.lavenderMascot.withValues(alpha: 0.16),
+                  blurRadius: 24,
+                  offset: const Offset(0, 8),
+                ),
+              ]
+            : null,
       ),
+      FeloButtonVariant.secondary => BoxDecoration(
+        color: colors.primaryContainer,
+        borderRadius: radius,
+      ),
+      FeloButtonVariant.ghost => BoxDecoration(borderRadius: radius),
     };
+
+    return Semantics(
+      button: true,
+      enabled: enabled,
+      child: Opacity(
+        opacity: enabled ? 1 : 0.54,
+        child: Material(
+          color: Colors.transparent,
+          borderRadius: radius,
+          child: InkWell(
+            borderRadius: radius,
+            onTap: onPressed,
+            child: Ink(
+              decoration: decoration,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: variant == FeloButtonVariant.ghost ? 48 : 52,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Center(child: content),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

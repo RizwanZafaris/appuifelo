@@ -8,5 +8,5 @@ abstract class FeloApiClient {
   factory FeloApiClient(Dio dio, {String? baseUrl}) = _FeloApiClient;
 
   @GET('/health')
-  Future<Map<String, Object?>> health();
+  Future<Map<String, dynamic>> health();
 }

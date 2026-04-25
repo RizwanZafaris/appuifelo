@@ -6,6 +6,7 @@ analyzer:
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
+    - "**/* 2.dart"
   errors:
     missing_required_param: error
     missing_return: error

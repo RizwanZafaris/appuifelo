@@ -161,7 +161,7 @@ class InsightsScreen extends ConsumerWidget {
 
     return FeloScaffold(
       title: l10n.insightsTitle,
-      selectedTab: FeloRootTab.budgets,
+      selectedTab: FeloRootTab.doHub,
       child: ListView(
         padding: const EdgeInsets.all(20),
         children: [

@@ -24,7 +24,13 @@ class AppLocalizationsUr extends AppLocalizations {
   String get navCoach => 'کوچ';
 
   @override
+  String get navDo => 'کریں';
+
+  @override
   String get navGoals => 'اہداف';
+
+  @override
+  String get complianceFooter => 'رجسٹریشن زیر التوا · MSB درخواست جاری ہے۔';
 
   @override
   String get commonContinue => 'جاری رکھیں';
@@ -188,6 +194,43 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get hubTitle => 'فیلو دیکھیں';
+
+  @override
+  String get doHubTitle => 'کریں';
+
+  @override
+  String get doHubSubtitle => 'تمام کام آسان حصوں میں ایک جگہ۔';
+
+  @override
+  String get doHubSendPay => 'Send & Pay';
+
+  @override
+  String get doHubSendPayBody => 'Remittance، bills، اور split payments۔';
+
+  @override
+  String get doHubSaveTrack => 'Save & Track';
+
+  @override
+  String get doHubSaveTrackBody => 'Goals، round-ups، اور investment tracking۔';
+
+  @override
+  String get doHubSpendSmart => 'Spend Smart';
+
+  @override
+  String get doHubSpendSmartBody => 'Budgets، subscriptions، اور insights۔';
+
+  @override
+  String get doHubCardsAccounts => 'Cards & Accounts';
+
+  @override
+  String get doHubCardsAccountsBody =>
+      'Linked banks، cards، اور account controls۔';
+
+  @override
+  String get doHubMoreHelp => 'More & Help';
+
+  @override
+  String get doHubMoreHelpBody => 'Support، referrals، اور Felo Plus۔';
 
   @override
   String get budgetsTitle => 'بجٹ';

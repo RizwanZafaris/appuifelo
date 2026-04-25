@@ -41,7 +41,7 @@ class _GoldenHost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = FeloTheme.dark();
+    final theme = FeloTheme.light();
     return Localizations(
       locale: const Locale('en'),
       delegates: const [

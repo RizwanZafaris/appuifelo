@@ -17,7 +17,7 @@ class BudgetsScreen extends ConsumerWidget {
     final l10n = context.l10n;
     return FeloScaffold(
       title: l10n.budgetsTitle,
-      selectedTab: FeloRootTab.budgets,
+      selectedTab: FeloRootTab.doHub,
       actions: [
         IconButton(
           tooltip: l10n.budgetFormTitle,

@@ -15,7 +15,7 @@ class FeloApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: FeloTheme.light(),
       darkTheme: FeloTheme.dark(),
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       routerConfig: appRouter,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:felo/core/theme/felo_colors.dart';
 import 'package:felo/core/theme/felo_spacing.dart';
 
 class FeloCard extends StatelessWidget {
@@ -19,11 +20,18 @@ class FeloCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+    final radius = BorderRadius.circular(20);
     final card = DecoratedBox(
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
-        border: Border.all(color: colors.outlineVariant.withValues(alpha: 0.5)),
-        borderRadius: BorderRadius.circular(16),
+        color: Theme.of(context).cardColor.withValues(alpha: 0.92),
+        borderRadius: radius,
+        boxShadow: [
+          BoxShadow(
+            color: FeloColors.lavenderMascot.withValues(alpha: 0.08),
+            blurRadius: 24,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
       child: Padding(padding: padding, child: child),
     );
@@ -35,10 +43,10 @@ class FeloCard extends StatelessWidget {
     return Semantics(
       button: true,
       label: semanticLabel,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: onTap,
-        child: card,
+      child: Material(
+        color: colors.surface,
+        borderRadius: radius,
+        child: InkWell(borderRadius: radius, onTap: onTap, child: card),
       ),
     );
   }

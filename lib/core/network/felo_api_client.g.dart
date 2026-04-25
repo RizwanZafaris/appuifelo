@@ -18,12 +18,12 @@ class _FeloApiClient implements FeloApiClient {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<Map<String, Object?>> health() async {
+  Future<Map<String, dynamic>> health() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<Map<String, Object?>>(
+    final _options = _setStreamType<Map<String, dynamic>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -34,12 +34,9 @@ class _FeloApiClient implements FeloApiClient {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late Map<String, Object?> _value;
+    late Map<String, dynamic> _value;
     try {
-      _value = _result.data!.map(
-        (k, dynamic v) =>
-            MapEntry(k, Object.fromJson(v as Map<String, dynamic>)),
-      );
+      _value = _result.data!;
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

@@ -128,11 +128,23 @@ abstract class AppLocalizations {
   /// **'Coach'**
   String get navCoach;
 
+  /// No description provided for @navDo.
+  ///
+  /// In en, this message translates to:
+  /// **'Do'**
+  String get navDo;
+
   /// No description provided for @navGoals.
   ///
   /// In en, this message translates to:
   /// **'Goals'**
   String get navGoals;
+
+  /// No description provided for @complianceFooter.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration pending · MSB application in progress.'**
+  String get complianceFooter;
 
   /// No description provided for @commonContinue.
   ///
@@ -439,6 +451,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Explore Felo'**
   String get hubTitle;
+
+  /// No description provided for @doHubTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Do'**
+  String get doHubTitle;
+
+  /// No description provided for @doHubSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything you can act on, grouped into simple aisles.'**
+  String get doHubSubtitle;
+
+  /// No description provided for @doHubSendPay.
+  ///
+  /// In en, this message translates to:
+  /// **'Send & Pay'**
+  String get doHubSendPay;
+
+  /// No description provided for @doHubSendPayBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Remittance, bills, and split payments.'**
+  String get doHubSendPayBody;
+
+  /// No description provided for @doHubSaveTrack.
+  ///
+  /// In en, this message translates to:
+  /// **'Save & Track'**
+  String get doHubSaveTrack;
+
+  /// No description provided for @doHubSaveTrackBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Goals, round-ups, and investment tracking.'**
+  String get doHubSaveTrackBody;
+
+  /// No description provided for @doHubSpendSmart.
+  ///
+  /// In en, this message translates to:
+  /// **'Spend Smart'**
+  String get doHubSpendSmart;
+
+  /// No description provided for @doHubSpendSmartBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Budgets, subscriptions, and insights.'**
+  String get doHubSpendSmartBody;
+
+  /// No description provided for @doHubCardsAccounts.
+  ///
+  /// In en, this message translates to:
+  /// **'Cards & Accounts'**
+  String get doHubCardsAccounts;
+
+  /// No description provided for @doHubCardsAccountsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Linked banks, cards, and account controls.'**
+  String get doHubCardsAccountsBody;
+
+  /// No description provided for @doHubMoreHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'More & Help'**
+  String get doHubMoreHelp;
+
+  /// No description provided for @doHubMoreHelpBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Support, referrals, and Felo Plus.'**
+  String get doHubMoreHelpBody;
 
   /// No description provided for @budgetsTitle.
   ///

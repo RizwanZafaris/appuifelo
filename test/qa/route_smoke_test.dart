@@ -17,6 +17,8 @@ import 'package:felo/features/auth/presentation/auth_screen.dart';
 import 'package:felo/features/bills/presentation/bills_screen.dart';
 import 'package:felo/features/budgets/presentation/budgets_screen.dart';
 import 'package:felo/features/coach/presentation/coach_screen.dart';
+import 'package:felo/features/design_coverage/presentation/design_coverage_screen.dart';
+import 'package:felo/features/do_hub/presentation/do_hub_screen.dart';
 import 'package:felo/features/family/presentation/family_screen.dart';
 import 'package:felo/features/goals/presentation/goals_screen.dart';
 import 'package:felo/features/help/presentation/help_screen.dart';
@@ -48,7 +50,7 @@ Widget wrap(Widget child) {
         GlobalWidgetsLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      theme: FeloTheme.dark(),
+      theme: FeloTheme.light(),
       routerConfig: router,
     ),
   );
@@ -60,6 +62,11 @@ void main() {
     'onboarding': const OnboardingScreen(),
     'auth': const AuthScreen(),
     'home': const HomeScreen(),
+    'do_hub': const DoHubScreen(),
+    'design_coverage': const DesignCoverageScreen(),
+    'design_screen': const DesignScreenAvailabilityScreen(
+      screenId: 'home_dashboard_1',
+    ),
     'notifications': const NotificationsScreen(),
     'accounts': const AccountsScreen(),
     'bills': const BillsScreen(),
@@ -121,7 +128,7 @@ void main() {
             GlobalWidgetsLocalizations.delegate,
           ],
           supportedLocales: AppLocalizations.supportedLocales,
-          theme: FeloTheme.dark(),
+          theme: FeloTheme.light(),
           home: const HomeScreen(),
         ),
       ),

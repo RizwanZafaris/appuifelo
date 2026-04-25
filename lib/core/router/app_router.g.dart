@@ -11,6 +11,7 @@ List<RouteBase> get $appRoutes => [
   $onboardingRoute,
   $authRoute,
   $homeRoute,
+  $doHubRoute,
   $notificationsRoute,
   $accountsRoute,
   $billsRoute,
@@ -109,6 +110,24 @@ extension $HomeRouteExtension on HomeRoute {
   static HomeRoute _fromState(GoRouterState state) => const HomeRoute();
 
   String get location => GoRouteData.$location('/home');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $doHubRoute =>
+    GoRouteData.$route(path: '/do', factory: $DoHubRouteExtension._fromState);
+
+extension $DoHubRouteExtension on DoHubRoute {
+  static DoHubRoute _fromState(GoRouterState state) => const DoHubRoute();
+
+  String get location => GoRouteData.$location('/do');
 
   void go(BuildContext context) => context.go(location);
 
