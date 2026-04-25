@@ -6,13 +6,22 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:felo/core/localization/generated/app_localizations.dart';
 import 'package:felo/core/theme/felo_theme.dart';
 import 'package:felo/features/receipt_capture/presentation/receipt_capture_screen.dart';
+import 'package:felo/features/transactions/data/transactions_repository.dart';
 
 void main() {
   testWidgets('receipt capture processes and confirms mock OCR', (
     tester,
   ) async {
     await tester.pumpWidget(
-      const ProviderScope(child: _ReceiptCaptureTestApp()),
+      ProviderScope(
+        overrides: [
+          // Wave-1: receipt screen now reads transactionsProvider (async).
+          transactionsRepositoryProvider.overrideWithValue(
+            FakeTransactionsRepository(),
+          ),
+        ],
+        child: const _ReceiptCaptureTestApp(),
+      ),
     );
     await tester.pumpAndSettle();
 

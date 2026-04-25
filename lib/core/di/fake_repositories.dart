@@ -8,9 +8,11 @@ import 'package:felo/features/accounts/domain/felo_account.dart';
 import 'package:felo/features/auth/domain/app_user.dart';
 import 'package:felo/features/bills/data/bills_repository.dart';
 import 'package:felo/features/bills/domain/bill.dart';
+import 'package:felo/features/budgets/data/budgets_repository.dart';
 import 'package:felo/features/budgets/domain/budget.dart';
 import 'package:felo/features/coach/domain/coach_message.dart';
 import 'package:felo/features/family/domain/family_member.dart';
+import 'package:felo/features/goals/data/goals_repository.dart';
 import 'package:felo/features/goals/domain/goal.dart';
 import 'package:felo/features/notifications/data/notifications_repository.dart';
 import 'package:felo/features/notifications/domain/felo_notification.dart';
@@ -23,6 +25,7 @@ import 'package:felo/features/send_money/domain/send_money.dart';
 import 'package:felo/features/sms_parser/domain/parsed_sms.dart';
 import 'package:felo/features/splits/data/splits_repository.dart';
 import 'package:felo/features/splits/domain/split.dart';
+import 'package:felo/features/transactions/data/transactions_repository.dart';
 import 'package:felo/features/transactions/domain/felo_transaction.dart';
 
 part 'fake_repositories.g.dart';
@@ -40,115 +43,13 @@ class AuthRepository {
   }
 }
 
-class BudgetRepository {
-  List<Budget> listBudgets() {
-    return const [
-      Budget(
-        id: 'budget_groceries',
-        category: 'Groceries',
-        currency: 'CAD',
-        limitMinor: 90000,
-        spentMinor: 62400,
-        period: BudgetPeriod.monthly,
-        rolloverEnabled: true,
-        alertThresholdPercent: 80,
-      ),
-      Budget(
-        id: 'budget_family',
-        category: 'Family support',
-        currency: 'CAD',
-        limitMinor: 120000,
-        spentMinor: 83000,
-        period: BudgetPeriod.monthly,
-        rolloverEnabled: false,
-        alertThresholdPercent: 85,
-      ),
-      Budget(
-        id: 'budget_transport',
-        category: 'Transport',
-        currency: 'CAD',
-        limitMinor: 45000,
-        spentMinor: 31800,
-        period: BudgetPeriod.monthly,
-        rolloverEnabled: true,
-        alertThresholdPercent: 75,
-      ),
-    ];
-  }
-}
-
-class GoalRepository {
-  List<Goal> listGoals() {
-    return [
-      Goal(
-        id: 'goal_trip',
-        name: 'Trip to Pakistan',
-        currency: 'CAD',
-        targetMinor: 520000,
-        savedMinor: 318000,
-        targetDate: DateTime(2026, 12, 15),
-        shared: true,
-        cadence: GoalCadence.weekly,
-        contributorNames: const ['Rizwan', 'Amina'],
-        contributionStreakWeeks: 4,
-      ),
-      Goal(
-        id: 'goal_emergency',
-        name: 'Emergency buffer',
-        currency: 'CAD',
-        targetMinor: 300000,
-        savedMinor: 122000,
-        targetDate: DateTime(2026, 9, 30),
-        shared: false,
-        cadence: GoalCadence.manual,
-        contributorNames: const ['Rizwan'],
-      ),
-    ];
-  }
-}
-
-class TransactionRepository {
-  List<FeloTransaction> listTransactions() {
-    return [
-      FeloTransaction(
-        id: 'txn_001',
-        accountId: 'acct_td_chequing',
-        merchant: 'Imtiaz Super Market',
-        category: 'Groceries',
-        currency: 'PKR',
-        amountMinor: 485000,
-        direction: TransactionDirection.debit,
-        source: TransactionSource.sms,
-        parserConfidence: 0.88,
-        bookedAt: DateTime(2026, 4, 22, 12, 20),
-      ),
-      FeloTransaction(
-        id: 'txn_002',
-        accountId: 'acct_rbc_mastercard',
-        merchant: 'No Frills',
-        category: 'Groceries',
-        currency: 'CAD',
-        amountMinor: 8422,
-        direction: TransactionDirection.debit,
-        source: TransactionSource.manual,
-        parserConfidence: 1,
-        bookedAt: DateTime(2026, 4, 21, 18, 4),
-      ),
-      FeloTransaction(
-        id: 'txn_003',
-        accountId: 'acct_td_chequing',
-        merchant: 'Payroll deposit',
-        category: 'Income',
-        currency: 'CAD',
-        amountMinor: 420000,
-        direction: TransactionDirection.credit,
-        source: TransactionSource.bankAlert,
-        parserConfidence: 0.96,
-        bookedAt: DateTime(2026, 4, 19, 9, 0),
-      ),
-    ];
-  }
-}
+// Phase-1 BudgetRepository / GoalRepository / TransactionRepository moved
+// into per-feature data layers:
+//   • lib/features/budgets/data/budgets_repository.dart
+//   • lib/features/goals/data/goals_repository.dart
+//   • lib/features/transactions/data/transactions_repository.dart
+// Each now exposes both an Api-backed and a Fake-backed implementation,
+// switched by `FeloEnv.useFakeData`.
 
 class FakeReceiptCaptureRepository implements ReceiptCaptureRepository {
   @override
@@ -553,19 +454,8 @@ AuthRepository authRepository(AuthRepositoryRef ref) => AuthRepository();
 AppUser currentUser(CurrentUserRef ref) =>
     ref.watch(authRepositoryProvider).currentUser();
 
-@riverpod
-BudgetRepository budgetRepository(BudgetRepositoryRef ref) =>
-    BudgetRepository();
-
-@riverpod
-List<Budget> budgets(BudgetsRef ref) =>
-    ref.watch(budgetRepositoryProvider).listBudgets();
-
-@riverpod
-GoalRepository goalRepository(GoalRepositoryRef ref) => GoalRepository();
-
-@riverpod
-List<Goal> goals(GoalsRef ref) => ref.watch(goalRepositoryProvider).listGoals();
+// Budget / Goal / Transaction providers moved to feature-data layers.
+// See: lib/features/{budgets,goals,transactions}/data/*_repository.dart
 
 @riverpod
 SplitsRepository splitsRepository(SplitsRepositoryRef ref) =>
@@ -662,31 +552,7 @@ class Splits extends _$Splits {
   }
 }
 
-@riverpod
-TransactionRepository transactionRepository(TransactionRepositoryRef ref) {
-  return TransactionRepository();
-}
-
-@riverpod
-class Transactions extends _$Transactions {
-  @override
-  List<FeloTransaction> build() {
-    return ref.watch(transactionRepositoryProvider).listTransactions();
-  }
-
-  void attachReceipt({
-    required String transactionId,
-    required String receiptId,
-  }) {
-    state = [
-      for (final transaction in state)
-        if (transaction.id == transactionId)
-          transaction.copyWith(receiptId: receiptId)
-        else
-          transaction,
-    ];
-  }
-}
+// Transactions provider moved to lib/features/transactions/data/transactions_repository.dart.
 
 @riverpod
 SmsParserRepository smsParserRepository(SmsParserRepositoryRef ref) {
@@ -745,11 +611,17 @@ NotificationsRepository notificationsRepository(
 class NotificationInbox extends _$NotificationInbox {
   @override
   List<FeloNotification> build() {
+    // Budgets / goals are async post-wire-through. Notification synthesis is
+    // a fake-data convenience; while live data is loading we just emit no
+    // synthesized alerts (the real `/v1/notifications` feed will replace this
+    // synthesis entirely once the notifications screen is wired in Wave 2).
+    final budgetsAsync = ref.watch(budgetsProvider);
+    final goalsAsync = ref.watch(goalsProvider);
     return ref
         .watch(notificationsRepositoryProvider)
         .seedNotifications(
-          budgets: ref.watch(budgetsProvider),
-          goals: ref.watch(goalsProvider),
+          budgets: budgetsAsync.valueOrNull ?? const <Budget>[],
+          goals: goalsAsync.valueOrNull ?? const <Goal>[],
           parsedSmsMessages: ref.watch(parsedSmsMessagesProvider),
           familyMembers: ref.watch(familyMembersProvider),
         );
@@ -842,9 +714,10 @@ class ReceiptCaptureSession extends _$ReceiptCaptureSession {
     );
 
     await Future<void>.delayed(const Duration(milliseconds: 450));
-    final transaction = ref
-        .read(transactionsProvider)
-        .firstWhere((item) => item.id == transactionId);
+    final transactions = await ref.read(transactionsProvider.future);
+    final transaction = transactions.firstWhere(
+      (item) => item.id == transactionId,
+    );
     final result = ref
         .read(receiptCaptureRepositoryProvider)
         .mockResultFor(transaction);
@@ -877,13 +750,13 @@ class ReceiptCaptureSession extends _$ReceiptCaptureSession {
     state = const ReceiptCaptureState.idle();
   }
 
-  void confirm() {
+  Future<void> confirm() async {
     final current = state;
     if (current is! ReceiptCaptureReady) {
       return;
     }
 
-    ref
+    await ref
         .read(transactionsProvider.notifier)
         .attachReceipt(
           transactionId: current.result.transactionId,

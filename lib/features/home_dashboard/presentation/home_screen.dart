@@ -5,6 +5,9 @@ import 'package:go_router/go_router.dart';
 import 'package:felo/core/di/fake_repositories.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
 import 'package:felo/core/theme/felo_colors.dart';
+import 'package:felo/features/budgets/data/budgets_repository.dart';
+import 'package:felo/features/goals/data/goals_repository.dart';
+import 'package:felo/features/transactions/data/transactions_repository.dart';
 import 'package:felo/features/transactions/domain/felo_transaction.dart';
 import 'package:felo/shared/utils/money_format.dart';
 import 'package:felo/shared/widgets/felo_card.dart';
@@ -16,9 +19,21 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final budgets = ref.watch(budgetsProvider);
-    final transactions = ref.watch(transactionsProvider);
-    final goals = ref.watch(goalsProvider);
+    // Wave-1 wire-through: each domain is now async. We render the dashboard
+    // using `valueOrNull ?? const []` so the sections collapse gracefully
+    // while data loads, instead of blocking the entire screen behind a single
+    // spinner. A top-level loading indicator surfaces when *all* domains are
+    // still pending.
+    final budgetsAsync = ref.watch(budgetsProvider);
+    final transactionsAsync = ref.watch(transactionsProvider);
+    final goalsAsync = ref.watch(goalsProvider);
+    final budgets = budgetsAsync.valueOrNull ?? const [];
+    final transactions = transactionsAsync.valueOrNull ?? const [];
+    final goals = goalsAsync.valueOrNull ?? const [];
+    final allLoading =
+        budgetsAsync.isLoading &&
+        transactionsAsync.isLoading &&
+        goalsAsync.isLoading;
     final unreadNotifications = ref.watch(unreadNotificationCountProvider);
 
     // Aggregate totals from real data instead of hardcoded strings.
@@ -49,9 +64,22 @@ class HomeScreen extends ConsumerWidget {
           icon: const Icon(Icons.person_outline_rounded),
         ),
       ],
-      child: ListView(
+      child: RefreshIndicator(
+        onRefresh: () async {
+          await Future.wait<void>([
+            ref.refresh(budgetsProvider.future),
+            ref.read(transactionsProvider.notifier).refresh(),
+            ref.refresh(goalsProvider.future),
+          ]);
+        },
+        child: ListView(
         padding: const EdgeInsets.all(20),
         children: [
+          if (allLoading)
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              child: Center(child: CircularProgressIndicator()),
+            ),
           Text(
             l10n.homeGreeting,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -286,6 +314,7 @@ class HomeScreen extends ConsumerWidget {
             ],
           ],
         ],
+        ),
       ),
     );
   }

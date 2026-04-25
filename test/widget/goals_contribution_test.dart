@@ -7,6 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:felo/core/localization/generated/app_localizations.dart';
 import 'package:felo/core/network/dio_provider.dart';
 import 'package:felo/core/theme/felo_theme.dart';
+import 'package:felo/features/goals/data/goals_repository.dart';
 import 'package:felo/features/goals/presentation/goal_detail_screen.dart';
 
 void main() {
@@ -28,7 +29,12 @@ void main() {
 
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [dioProvider.overrideWithValue(dio)],
+        overrides: [
+          dioProvider.overrideWithValue(dio),
+          // Wave-1: GoalDetailScreen now reads goalsProvider (async).
+          // Override the repository so the test runs without a backend.
+          goalsRepositoryProvider.overrideWithValue(FakeGoalsRepository()),
+        ],
         child: const _GoalsContributionTestApp(),
       ),
     );

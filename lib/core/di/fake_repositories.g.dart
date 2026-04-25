@@ -40,74 +40,6 @@ final currentUserProvider = AutoDisposeProvider<AppUser>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef CurrentUserRef = AutoDisposeProviderRef<AppUser>;
-String _$budgetRepositoryHash() => r'78089919640e3c43120ba35ff5364ba05390cdc9';
-
-/// See also [budgetRepository].
-@ProviderFor(budgetRepository)
-final budgetRepositoryProvider = AutoDisposeProvider<BudgetRepository>.internal(
-  budgetRepository,
-  name: r'budgetRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$budgetRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef BudgetRepositoryRef = AutoDisposeProviderRef<BudgetRepository>;
-String _$budgetsHash() => r'9ff138acffecc4ce1fc9eaea2661f40b88f45575';
-
-/// See also [budgets].
-@ProviderFor(budgets)
-final budgetsProvider = AutoDisposeProvider<List<Budget>>.internal(
-  budgets,
-  name: r'budgetsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$budgetsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef BudgetsRef = AutoDisposeProviderRef<List<Budget>>;
-String _$goalRepositoryHash() => r'5ac9bc6b9404561334c9863bb76c481f3f002e49';
-
-/// See also [goalRepository].
-@ProviderFor(goalRepository)
-final goalRepositoryProvider = AutoDisposeProvider<GoalRepository>.internal(
-  goalRepository,
-  name: r'goalRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$goalRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef GoalRepositoryRef = AutoDisposeProviderRef<GoalRepository>;
-String _$goalsHash() => r'3ba9363e82d86d362a38e280cc79f5d393fc0517';
-
-/// See also [goals].
-@ProviderFor(goals)
-final goalsProvider = AutoDisposeProvider<List<Goal>>.internal(
-  goals,
-  name: r'goalsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$goalsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef GoalsRef = AutoDisposeProviderRef<List<Goal>>;
 String _$splitsRepositoryHash() => r'9a12945a7625845b8d22737bea7936dae75876ab';
 
 /// See also [splitsRepository].
@@ -125,26 +57,6 @@ final splitsRepositoryProvider = AutoDisposeProvider<SplitsRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SplitsRepositoryRef = AutoDisposeProviderRef<SplitsRepository>;
-String _$transactionRepositoryHash() =>
-    r'c2847b825170bbc3b692461530c126430d879de0';
-
-/// See also [transactionRepository].
-@ProviderFor(transactionRepository)
-final transactionRepositoryProvider =
-    AutoDisposeProvider<TransactionRepository>.internal(
-      transactionRepository,
-      name: r'transactionRepositoryProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$transactionRepositoryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef TransactionRepositoryRef =
-    AutoDisposeProviderRef<TransactionRepository>;
 String _$smsParserRepositoryHash() =>
     r'c5d588692689e4f23aa30b8dbd484d2c204accb4';
 
@@ -506,23 +418,7 @@ final splitsProvider =
     );
 
 typedef _$Splits = AutoDisposeNotifier<List<Split>>;
-String _$transactionsHash() => r'08489c1e1b43e0fd4af3aea4fdced425d2f82315';
-
-/// See also [Transactions].
-@ProviderFor(Transactions)
-final transactionsProvider =
-    AutoDisposeNotifierProvider<Transactions, List<FeloTransaction>>.internal(
-      Transactions.new,
-      name: r'transactionsProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$transactionsHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-typedef _$Transactions = AutoDisposeNotifier<List<FeloTransaction>>;
-String _$notificationInboxHash() => r'0267613682d65cd8b6180df5a18a7a8e1066bb37';
+String _$notificationInboxHash() => r'7d8f0ce376077c4186ebc30307f0d3f48efd95e8';
 
 /// See also [NotificationInbox].
 @ProviderFor(NotificationInbox)
@@ -562,7 +458,7 @@ final notificationFilterProvider =
 
 typedef _$NotificationFilter = AutoDisposeNotifier<FeloNotificationFilter>;
 String _$receiptCaptureSessionHash() =>
-    r'5d96ea0c3bf7d8705f68693652193cb64dc3b1c5';
+    r'b75edf77e926dad31fcb3117e29f2d3825893879';
 
 /// Copied from Dart SDK
 class _SystemHash {

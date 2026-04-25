@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:felo/core/di/fake_repositories.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
+import 'package:felo/features/budgets/data/budgets_repository.dart';
+import 'package:felo/features/goals/data/goals_repository.dart';
 import 'package:felo/features/notifications/domain/felo_notification.dart';
 import 'package:felo/features/notifications/presentation/widgets/notification_card.dart';
 import 'package:felo/shared/widgets/felo_chip.dart';
@@ -139,10 +141,11 @@ class NotificationsScreen extends ConsumerWidget {
         _NotificationDetails(
           title: l10n.notificationBudgetTitle,
           body: l10n.notificationBudgetBody(
-            ref
-                .watch(budgetsProvider)
-                .firstWhere((item) => item.id == budgetId)
-                .category,
+            (ref.watch(budgetsProvider).valueOrNull ?? const [])
+                .where((item) => item.id == budgetId)
+                .map((b) => b.category)
+                .firstOrNull ??
+                '—',
             thresholdPercent,
           ),
           timestamp: timestamp,
@@ -153,10 +156,11 @@ class NotificationsScreen extends ConsumerWidget {
         _NotificationDetails(
           title: l10n.notificationGoalTitle,
           body: l10n.notificationGoalBody(
-            ref
-                .watch(goalsProvider)
-                .firstWhere((item) => item.id == goalId)
-                .name,
+            (ref.watch(goalsProvider).valueOrNull ?? const [])
+                .where((item) => item.id == goalId)
+                .map((g) => g.name)
+                .firstOrNull ??
+                '—',
             progressPercent,
           ),
           timestamp: timestamp,
