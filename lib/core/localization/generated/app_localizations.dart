@@ -2407,6 +2407,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invite token: {token}'**
   String familyInviteTokenHint(String token);
+
+  /// No description provided for @categoryGroceries.
+  ///
+  /// In en, this message translates to:
+  /// **'Groceries'**
+  String get categoryGroceries;
+
+  /// No description provided for @categoryFamilySupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Family support'**
+  String get categoryFamilySupport;
+
+  /// No description provided for @categoryTransport.
+  ///
+  /// In en, this message translates to:
+  /// **'Transport'**
+  String get categoryTransport;
+
+  /// No description provided for @categoryBills.
+  ///
+  /// In en, this message translates to:
+  /// **'Bills'**
+  String get categoryBills;
+
+  /// No description provided for @categoryEatingOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Eating out'**
+  String get categoryEatingOut;
+
+  /// No description provided for @categoryIncome.
+  ///
+  /// In en, this message translates to:
+  /// **'Income'**
+  String get categoryIncome;
+
+  /// No description provided for @categoryNewLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New category {n}'**
+  String categoryNewLabel(int n);
+
+  /// No description provided for @recurringFreqWeekly.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly'**
+  String get recurringFreqWeekly;
+
+  /// No description provided for @recurringFreqMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get recurringFreqMonthly;
+
+  /// No description provided for @recurringFreqQuarterly.
+  ///
+  /// In en, this message translates to:
+  /// **'Quarterly'**
+  String get recurringFreqQuarterly;
+
+  /// No description provided for @recurringFreqYearly.
+  ///
+  /// In en, this message translates to:
+  /// **'Yearly'**
+  String get recurringFreqYearly;
 }
 
 class _AppLocalizationsDelegate

@@ -1250,4 +1250,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String familyInviteTokenHint(String token) {
     return 'Invite token: $token';
   }
+
+  @override
+  String get categoryGroceries => 'Groceries';
+
+  @override
+  String get categoryFamilySupport => 'Family support';
+
+  @override
+  String get categoryTransport => 'Transport';
+
+  @override
+  String get categoryBills => 'Bills';
+
+  @override
+  String get categoryEatingOut => 'Eating out';
+
+  @override
+  String get categoryIncome => 'Income';
+
+  @override
+  String categoryNewLabel(int n) {
+    return 'New category $n';
+  }
+
+  @override
+  String get recurringFreqWeekly => 'Weekly';
+
+  @override
+  String get recurringFreqMonthly => 'Monthly';
+
+  @override
+  String get recurringFreqQuarterly => 'Quarterly';
+
+  @override
+  String get recurringFreqYearly => 'Yearly';
 }

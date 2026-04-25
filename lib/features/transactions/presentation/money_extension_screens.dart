@@ -29,15 +29,28 @@ class CategoriesScreen extends ConsumerStatefulWidget {
   ConsumerState<CategoriesScreen> createState() => _CategoriesScreenState();
 }
 
+/// Default category seed list. Stored as a stable key + icon; the
+/// localized label is resolved at render time. Real user-defined
+/// categories will replace this when /v1/categories ships.
+const _seedCategoryKeys = <_SeedCategory>[
+  _SeedCategory(key: 'groceries', icon: Icons.shopping_cart_outlined),
+  _SeedCategory(key: 'family_support', icon: Icons.favorite_outline),
+  _SeedCategory(key: 'transport', icon: Icons.directions_car_outlined),
+  _SeedCategory(key: 'bills', icon: Icons.receipt_outlined),
+  _SeedCategory(key: 'eating_out', icon: Icons.restaurant_outlined),
+  _SeedCategory(key: 'income', icon: Icons.savings_outlined),
+];
+
+class _SeedCategory {
+  const _SeedCategory({required this.key, required this.icon});
+  final String key;
+  final IconData icon;
+}
+
 class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
-  final List<_CategoryItem> _categories = [
-    _CategoryItem(name: 'Groceries', icon: Icons.shopping_cart_outlined),
-    _CategoryItem(name: 'Family support', icon: Icons.favorite_outline),
-    _CategoryItem(name: 'Transport', icon: Icons.directions_car_outlined),
-    _CategoryItem(name: 'Bills', icon: Icons.receipt_outlined),
-    _CategoryItem(name: 'Eating out', icon: Icons.restaurant_outlined),
-    _CategoryItem(name: 'Income', icon: Icons.savings_outlined),
-  ];
+  final List<_CategoryItem> _categories = _seedCategoryKeys
+      .map((s) => _CategoryItem(seedKey: s.key, icon: s.icon))
+      .toList();
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +77,7 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
                 children: [
                   Icon(cat.icon),
                   const SizedBox(width: 12),
-                  Expanded(child: Text(cat.name)),
+                  Expanded(child: Text(cat.displayName(l10n))),
                   IconButton(
                     icon: const Icon(Icons.edit_outlined, size: 18),
                     onPressed: () {},
@@ -80,10 +93,11 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
   }
 
   void _addCategory() {
+    final n = _categories.length + 1;
     setState(() {
       _categories.add(
         _CategoryItem(
-          name: 'New category ${_categories.length + 1}',
+          customLabel: '__new_category_$n', // resolved via l10n at render
           icon: Icons.label_outline_rounded,
         ),
       );
@@ -92,9 +106,39 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
 }
 
 class _CategoryItem {
-  _CategoryItem({required this.name, required this.icon});
-  final String name;
+  _CategoryItem({this.seedKey, this.customLabel, required this.icon})
+      : assert(seedKey != null || customLabel != null);
+
+  /// Stable key for built-in categories — display label looked up via l10n.
+  final String? seedKey;
+
+  /// User-added category sentinel; in this Phase-1 stub we render an
+  /// l10n-templated "New category N" string. Real user-typed names will
+  /// replace this when /v1/categories ships.
+  final String? customLabel;
   final IconData icon;
+
+  String displayName(AppLocalizations l10n) {
+    if (seedKey != null) {
+      switch (seedKey!) {
+        case 'groceries':
+          return l10n.categoryGroceries;
+        case 'family_support':
+          return l10n.categoryFamilySupport;
+        case 'transport':
+          return l10n.categoryTransport;
+        case 'bills':
+          return l10n.categoryBills;
+        case 'eating_out':
+          return l10n.categoryEatingOut;
+        case 'income':
+          return l10n.categoryIncome;
+      }
+    }
+    // Custom: derive index from sentinel and render localized template.
+    final n = int.tryParse(customLabel!.split('_').last) ?? 1;
+    return l10n.categoryNewLabel(n);
+  }
 }
 
 /// Recurring transactions / subscriptions tracker.
@@ -104,11 +148,15 @@ class RecurringScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    // Seed examples for empty-state preview only. Real data will come
+    // from FeloApiClient.listRecurringBills() when the wiring lands.
+    // Merchant names are deliberately literal (proper nouns are not
+    // translated). Frequency labels go through l10n via _frequencyLabel.
     final recurring = const [
-      ('Spotify Premium', 'Monthly', 'CAD', 1099, Icons.music_note_outlined),
-      ('Netflix', 'Monthly', 'CAD', 1899, Icons.movie_outlined),
-      ('Mobile postpaid', 'Monthly', 'CAD', 5500, Icons.smartphone_outlined),
-      ('Internet', 'Monthly', 'CAD', 7999, Icons.router_outlined),
+      ('Spotify Premium', 'monthly', 'CAD', 1099, Icons.music_note_outlined),
+      ('Netflix', 'monthly', 'CAD', 1899, Icons.movie_outlined),
+      ('Mobile postpaid', 'monthly', 'CAD', 5500, Icons.smartphone_outlined),
+      ('Internet', 'monthly', 'CAD', 7999, Icons.router_outlined),
     ];
 
     return FeloScaffold(
@@ -131,7 +179,7 @@ class RecurringScreen extends ConsumerWidget {
                       children: [
                         Text(r.$1),
                         Text(
-                          r.$2,
+                          _frequencyLabel(l10n, r.$2),
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                       ],
@@ -707,5 +755,20 @@ class _SectionLabel extends StatelessWidget {
         ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w800),
       ),
     );
+  }
+}
+
+String _frequencyLabel(AppLocalizations l10n, String key) {
+  switch (key) {
+    case 'weekly':
+      return l10n.recurringFreqWeekly;
+    case 'monthly':
+      return l10n.recurringFreqMonthly;
+    case 'quarterly':
+      return l10n.recurringFreqQuarterly;
+    case 'yearly':
+      return l10n.recurringFreqYearly;
+    default:
+      return key;
   }
 }

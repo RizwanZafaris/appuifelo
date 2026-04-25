@@ -1252,4 +1252,39 @@ class AppLocalizationsUr extends AppLocalizations {
   String familyInviteTokenHint(String token) {
     return 'Invite token: $token';
   }
+
+  @override
+  String get categoryGroceries => 'گروسری';
+
+  @override
+  String get categoryFamilySupport => 'گھر والوں کی مدد';
+
+  @override
+  String get categoryTransport => 'آمد و رفت';
+
+  @override
+  String get categoryBills => 'بل';
+
+  @override
+  String get categoryEatingOut => 'باہر کھانا';
+
+  @override
+  String get categoryIncome => 'آمدنی';
+
+  @override
+  String categoryNewLabel(int n) {
+    return 'نئی category $n';
+  }
+
+  @override
+  String get recurringFreqWeekly => 'ہفتہ وار';
+
+  @override
+  String get recurringFreqMonthly => 'ماہانہ';
+
+  @override
+  String get recurringFreqQuarterly => 'سہ ماہی';
+
+  @override
+  String get recurringFreqYearly => 'سالانہ';
 }

@@ -513,5 +513,17 @@
   "familyInviteDeclineCta": "Decline",
   "familyInviteAccepted": "آپ اب family group کا حصہ ہیں۔",
   "familyInviteTokenHint": "Invite token: {token}",
-  "@familyInviteTokenHint": {"placeholders": {"token": {"type": "String"}}}
+  "@familyInviteTokenHint": {"placeholders": {"token": {"type": "String"}}},
+  "categoryGroceries": "گروسری",
+  "categoryFamilySupport": "گھر والوں کی مدد",
+  "categoryTransport": "آمد و رفت",
+  "categoryBills": "بل",
+  "categoryEatingOut": "باہر کھانا",
+  "categoryIncome": "آمدنی",
+  "categoryNewLabel": "نئی category {n}",
+  "@categoryNewLabel": {"placeholders": {"n": {"type": "int"}}},
+  "recurringFreqWeekly": "ہفتہ وار",
+  "recurringFreqMonthly": "ماہانہ",
+  "recurringFreqQuarterly": "سہ ماہی",
+  "recurringFreqYearly": "سالانہ"
 }
