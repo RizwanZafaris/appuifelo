@@ -506,6 +506,22 @@ class AppLocalizationsUr extends AppLocalizations {
   String get coachInputHint => 'Spending، budgets، یا goals کے بارے میں پوچھیں';
 
   @override
+  String get coachEmptyState =>
+      'شروع کرنے کے لیے prompt منتخب کریں یا سوال پوچھیں۔';
+
+  @override
+  String get coachTypingIndicator => 'Felo Coach سوچ رہا ہے...';
+
+  @override
+  String get coachErrorMessage => 'Coach اس وقت دستیاب نہیں۔ دوبارہ کوشش کریں۔';
+
+  @override
+  String get coachSendLabel => 'بھیجیں';
+
+  @override
+  String get coachRetryLabel => 'دوبارہ کوشش';
+
+  @override
   String get familyTitle => 'Family mode';
 
   @override

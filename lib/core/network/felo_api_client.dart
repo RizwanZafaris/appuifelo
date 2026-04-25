@@ -22,7 +22,9 @@ abstract class FeloApiClient {
   Future<Map<String, dynamic>> getMyProfile();
 
   @PATCH('/profiles/me')
-  Future<Map<String, dynamic>> updateMyProfile(@Body() Map<String, dynamic> body);
+  Future<Map<String, dynamic>> updateMyProfile(
+    @Body() Map<String, dynamic> body,
+  );
 
   // -------- Accounts -----------------------------------------------
   @GET('/accounts')
@@ -90,10 +92,21 @@ abstract class FeloApiClient {
   });
 
   @GET('/transactions/sync')
-  Future<List<Map<String, dynamic>>> syncTransactions(@Query('since') String since);
+  Future<List<Map<String, dynamic>>> syncTransactions(
+    @Query('since') String since,
+  );
 
   @POST('/transactions')
-  Future<Map<String, dynamic>> createTransaction(@Body() Map<String, dynamic> body);
+  Future<Map<String, dynamic>> createTransaction(
+    @Body() Map<String, dynamic> body,
+  );
+
+  // -------- Coach --------------------------------------------------
+  @GET('/coach/conversations')
+  Future<List<Map<String, dynamic>>> listCoachConversations();
+
+  @POST('/coach/ask')
+  Future<Map<String, dynamic>> askCoach(@Body() Map<String, dynamic> body);
 
   // -------- Felo scores --------------------------------------------
   @GET('/felo-scores/latest')
@@ -104,5 +117,7 @@ abstract class FeloApiClient {
   Future<List<Map<String, dynamic>>> listRecurringBills();
 
   @POST('/recurring-bills')
-  Future<Map<String, dynamic>> createRecurringBill(@Body() Map<String, dynamic> body);
+  Future<Map<String, dynamic>> createRecurringBill(
+    @Body() Map<String, dynamic> body,
+  );
 }

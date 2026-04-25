@@ -1028,6 +1028,36 @@ abstract class AppLocalizations {
   /// **'Ask about spending, budgets, or goals'**
   String get coachInputHint;
 
+  /// No description provided for @coachEmptyState.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a prompt or ask a question to start.'**
+  String get coachEmptyState;
+
+  /// No description provided for @coachTypingIndicator.
+  ///
+  /// In en, this message translates to:
+  /// **'Felo Coach is thinking...'**
+  String get coachTypingIndicator;
+
+  /// No description provided for @coachErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Coach is unavailable right now. Please try again.'**
+  String get coachErrorMessage;
+
+  /// No description provided for @coachSendLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get coachSendLabel;
+
+  /// No description provided for @coachRetryLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get coachRetryLabel;
+
   /// No description provided for @familyTitle.
   ///
   /// In en, this message translates to:
