@@ -125,4 +125,17 @@ abstract class FeloApiClient {
 
   @POST('/coach/ask')
   Future<dynamic> askCoach(@Body() Map<String, dynamic> body);
+
+  // -------- Security / MFA -----------------------------------------
+  @GET('/security/mfa/status')
+  Future<dynamic> mfaStatus();
+
+  @POST('/security/mfa/enroll')
+  Future<dynamic> mfaEnroll();
+
+  @POST('/security/mfa/verify-enrollment')
+  Future<dynamic> mfaVerifyEnrollment(@Body() Map<String, dynamic> body);
+
+  @DELETE('/security/mfa')
+  Future<dynamic> mfaDisable();
 }

@@ -31,6 +31,7 @@ List<RouteBase> get $appRoutes => [
   $forgotPasswordRoute,
   $emailVerifyRoute,
   $mfaSetupRoute,
+  $mfaRecoveryCodesRoute,
   $biometricRoute,
   $languageRoute,
   $themeRoute,
@@ -760,6 +761,28 @@ extension $MfaSetupRouteExtension on MfaSetupRoute {
   static MfaSetupRoute _fromState(GoRouterState state) => const MfaSetupRoute();
 
   String get location => GoRouteData.$location('/auth/mfa');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $mfaRecoveryCodesRoute => GoRouteData.$route(
+  path: '/auth/mfa/recovery-codes',
+
+  factory: $MfaRecoveryCodesRouteExtension._fromState,
+);
+
+extension $MfaRecoveryCodesRouteExtension on MfaRecoveryCodesRoute {
+  static MfaRecoveryCodesRoute _fromState(GoRouterState state) =>
+      const MfaRecoveryCodesRoute();
+
+  String get location => GoRouteData.$location('/auth/mfa/recovery-codes');
 
   void go(BuildContext context) => context.go(location);
 

@@ -11,6 +11,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:felo/core/localization/generated/app_localizations.dart';
 import 'package:felo/core/theme/felo_theme.dart';
+import 'package:felo/features/auth/data/mfa_repository.dart';
 import 'package:felo/features/accounts/presentation/accounts_screen.dart';
 import 'package:felo/features/auth/presentation/auth_recovery_screens.dart';
 import 'package:felo/features/auth/presentation/auth_screen.dart';
@@ -51,6 +52,7 @@ Widget wrap(Widget child) {
       feloPlusProfileProvider.overrideWith(
         (ref) async => const FeloPlusProfile(subscriptionTier: 'plus'),
       ),
+      mfaRepositoryProvider.overrideWithValue(_FakeMfaRepository()),
     ],
     child: MaterialApp.router(
       locale: const Locale('en'),
@@ -122,6 +124,9 @@ void main() {
     'forgot_password': const ForgotPasswordScreen(),
     'email_verify': const EmailVerificationScreen(),
     'mfa_setup': const MfaSetupScreen(),
+    'mfa_recovery_codes': const MfaRecoveryCodesScreen(
+      recoveryCodes: ['AAAA-BBBB', 'CCCC-DDDD'],
+    ),
     'biometric_lock': const BiometricLockScreen(),
     'language_picker': const LanguagePickerScreen(),
     'theme_picker': const ThemePickerScreen(),
@@ -170,4 +175,31 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 1));
     expect(tester.takeException(), isNull);
   });
+}
+
+class _FakeMfaRepository implements MfaRepository {
+  static const _qrPngDataUrl =
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/p9sAAAAASUVORK5CYII=';
+
+  @override
+  Future<void> disable() async {}
+
+  @override
+  Future<MfaEnrollment> enroll() async {
+    return const MfaEnrollment(
+      secret: 'JBSWY3DPEHPK3PXP',
+      otpauth: 'otpauth://totp/Felo:test@example.com',
+      qrPngDataUrl: _qrPngDataUrl,
+    );
+  }
+
+  @override
+  Future<MfaStatus> status() async {
+    return const MfaStatus(enabled: true, recoveryCodesRemaining: 8);
+  }
+
+  @override
+  Future<List<String>> verifyEnrollment(String code) async {
+    return const ['AAAA-BBBB', 'CCCC-DDDD'];
+  }
 }

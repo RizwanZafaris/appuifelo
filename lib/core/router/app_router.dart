@@ -400,6 +400,19 @@ class MfaSetupRoute extends GoRouteData {
       const MfaSetupScreen();
 }
 
+@TypedGoRoute<MfaRecoveryCodesRoute>(path: '/auth/mfa/recovery-codes')
+class MfaRecoveryCodesRoute extends GoRouteData {
+  const MfaRecoveryCodesRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    final codes = state.extra is List<String>
+        ? state.extra! as List<String>
+        : const <String>[];
+    return MfaRecoveryCodesScreen(recoveryCodes: codes);
+  }
+}
+
 @TypedGoRoute<BiometricRoute>(path: '/auth/biometric')
 class BiometricRoute extends GoRouteData {
   const BiometricRoute();

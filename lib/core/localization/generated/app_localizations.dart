@@ -1946,6 +1946,48 @@ abstract class AppLocalizations {
   /// **'Two-factor enabled'**
   String get mfaVerified;
 
+  /// No description provided for @mfaEnabledStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Enabled · {count} recovery codes remaining'**
+  String mfaEnabledStatus(int count);
+
+  /// No description provided for @mfaDisabledStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Not enabled'**
+  String get mfaDisabledStatus;
+
+  /// No description provided for @mfaRecoveryCodesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery codes'**
+  String get mfaRecoveryCodesTitle;
+
+  /// No description provided for @mfaRecoveryCodesWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Save these recovery codes somewhere safe. Felo will show them only once.'**
+  String get mfaRecoveryCodesWarning;
+
+  /// No description provided for @mfaCopyAllCodes.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy all codes'**
+  String get mfaCopyAllCodes;
+
+  /// No description provided for @mfaScanQrPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan this QR code in Google Authenticator or another authenticator app.'**
+  String get mfaScanQrPrompt;
+
+  /// No description provided for @mfaWrongCode.
+  ///
+  /// In en, this message translates to:
+  /// **'That code did not work. Check your authenticator app and try again.'**
+  String get mfaWrongCode;
+
   /// No description provided for @biometricTitle.
   ///
   /// In en, this message translates to:
