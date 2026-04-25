@@ -17,7 +17,9 @@ Dio dio(DioRef ref) {
     ),
   );
 
-  dio.interceptors.add(AuthInterceptor(ref.watch(secureStorageServiceProvider)));
+  dio.interceptors.add(
+    AuthInterceptor(ref.watch(secureStorageServiceProvider)),
+  );
   dio.interceptors.add(RetryInterceptor(dio));
   return dio;
 }

@@ -19,7 +19,11 @@ class SmsParserScreen extends ConsumerWidget {
       body: l10n.smsParserBody,
       icon: Icons.sms_rounded,
       children: [
-        FeloProgressRing(progress: 0.91, label: l10n.smsParserAccuracy, size: 120),
+        FeloProgressRing(
+          progress: 0.91,
+          label: l10n.smsParserAccuracy,
+          size: 120,
+        ),
         const SizedBox(height: 16),
         for (final message in messages) ...[
           FeloCard(

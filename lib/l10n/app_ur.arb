@@ -70,6 +70,109 @@
   "transactionDetailTitle": "Transaction detail",
   "transactionSplit": "Split",
   "transactionRecategorize": "Recategorize",
+  "receiptCaptureTitle": "Receipt capture",
+  "receiptCaptureBody": "Transaction history بہتر بنانے کے لئے receipt image attach کریں۔ یہ OCR flow local mock data سے stub ہے۔",
+  "receiptUseCamera": "Camera استعمال کریں",
+  "receiptUseGallery": "Gallery سے چنیں",
+  "receiptProcessing": "Receipt process ہو رہی ہے...",
+  "receiptOcrResultTitle": "Mock OCR result",
+  "receiptMerchantLabel": "Merchant",
+  "receiptDateLabel": "Date",
+  "receiptTotalLabel": "Total",
+  "receiptLineItemsTitle": "Line items",
+  "receiptConfirm": "Receipt confirm کریں",
+  "receiptDiscard": "Receipt discard کریں",
+  "receiptEditTitle": "OCR result edit کریں",
+  "receiptAttached": "Receipt attached",
+  "receiptConfirmedTitle": "Receipt confirmed",
+  "receiptConfirmedBody": "اس transaction کے ساتھ receipt reference {referenceId} attach ہو گیا۔",
+  "@receiptConfirmedBody": {
+    "placeholders": {
+      "referenceId": {
+        "type": "String"
+      }
+    }
+  },
+  "billsTitle": "Bills",
+  "billsAddBill": "Bill شامل کریں",
+  "billsEmptyTitle": "ابھی کوئی bill نہیں",
+  "billsEmptyBody": "Manual اور SMS-detected bills due dates سے پہلے یہاں نظر آئیں گے۔",
+  "billsCalendarTitle": "اس ماہ due dates",
+  "billsNameLabel": "Bill name",
+  "billsAmountLabel": "Amount",
+  "billsDueDayLabel": "Due day",
+  "billsManualNameFallback": "Manual bill",
+  "billsDueDate": "{date} کو due",
+  "@billsDueDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "billsAutoPayOn": "Auto-pay on",
+  "billsAutoPayOff": "Auto-pay off",
+  "billsStatusPaid": "Paid",
+  "billsStatusUpcoming": "Upcoming",
+  "billsSourceManual": "Manual",
+  "billsSourceSms": "SMS",
+  "billsCategoryUtility": "Utility",
+  "billsCategoryTelecom": "Telecom",
+  "billsCategoryRent": "Rent",
+  "billsCategorySubscription": "Subscription",
+  "billsPayPreview": "Pay preview",
+  "billsPayPreviewBody": "یہ صرف bill-management preview ہے۔ کوئی payment initiate نہیں ہوتی اور کوئی money move نہیں ہوتی۔",
+  "billsMarkPaid": "Paid mark کریں",
+  "sendTitle": "Send money",
+  "sendPickRecipientTitle": "Recipient چنیں",
+  "sendAddRecipient": "نیا recipient شامل کریں",
+  "sendRecipientNameLabel": "Recipient name",
+  "sendRecipientPhoneLabel": "Phone",
+  "sendRecipientFallback": "New recipient",
+  "sendRecipientPhoneFallback": "+92 *** *** ****",
+  "sendAmountTitle": "Amount درج کریں",
+  "sendNoRecipientTitle": "پہلے recipient چنیں",
+  "sendNoRecipientBody": "Amount entry سے پہلے preview کو saved یا new recipient چاہیے۔",
+  "sendAmountLabel": "Amount in CAD",
+  "sendFxPreviewEmpty": "PKR preview کے لئے amount درج کریں",
+  "sendFxPreview": "Recipient کو تقریباً {amount} ملیں گے",
+  "@sendFxPreview": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "sendFxRate": "Mock rate: 1 {sourceCurrency} = {rate} {targetCurrency}",
+  "@sendFxRate": {
+    "placeholders": {
+      "sourceCurrency": {
+        "type": "String"
+      },
+      "rate": {
+        "type": "String"
+      },
+      "targetCurrency": {
+        "type": "String"
+      }
+    }
+  },
+  "sendReviewTitle": "Preview review کریں",
+  "sendReviewMissingTitle": "Preview ready نہیں",
+  "sendReviewMissingBody": "Review سے پہلے recipient اور amount چنیں۔",
+  "sendRecipientLabel": "Recipient",
+  "sendRecipientGetsLabel": "Recipient gets",
+  "sendPreviewDisclaimer": "یہ preview ہے۔ کوئی money move نہیں ہوتی۔ Phase 3 میں transfer flow سے پہلے licensed partners required ہوں گے۔",
+  "sendConfirmPreview": "Preview confirm کریں",
+  "sendSuccessTitle": "Preview created",
+  "sendSuccessBody": "Reference {referenceId} صرف اس preview کے لئے ہے۔ کوئی money move نہیں ہوئی۔",
+  "@sendSuccessBody": {
+    "placeholders": {
+      "referenceId": {
+        "type": "String"
+      }
+    }
+  },
   "smsParserTitle": "SMS parser",
   "smsParserBody": "Phase 1 میں Android-only parser local fixture سے stub ہے۔",
   "smsParserAccuracy": "Parser accuracy",
@@ -85,6 +188,142 @@
   "familyAdmin": "Admin",
   "familyMember": "Member",
   "familyViewer": "Viewer",
+  "notificationsTitle": "اطلاعات",
+  "notificationsBellTooltip": "اطلاعات کھولیں",
+  "notificationsMarkAllRead": "سب پڑھا ہوا کریں",
+  "notificationsMarkRead": "پڑھا ہوا کریں",
+  "notificationsArchive": "آرکائیو",
+  "notificationsUnreadCount": "{count} غیر پڑھی ہوئی",
+  "@notificationsUnreadCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsEmptyTitle": "کوئی اطلاع نہیں",
+  "notificationsEmptyBody": "بجٹ alerts، goal milestones، SMS parser events، اور family activity یہاں نظر آئیں گے۔",
+  "notificationsFilterAll": "سب",
+  "notificationsFilterBudgets": "بجٹ",
+  "notificationsFilterGoals": "اہداف",
+  "notificationsFilterFamily": "فیملی",
+  "notificationsFilterSystem": "سسٹم",
+  "notificationsTimestamp": "{date}، {time}",
+  "@notificationsTimestamp": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationBudgetTitle": "بجٹ الرٹ",
+  "notificationBudgetBody": "{category} اپنے envelope کے {percent}% تک پہنچ گیا۔",
+  "@notificationBudgetBody": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationGoalTitle": "ہدف milestone",
+  "notificationGoalBody": "{goalName} کی funding {percent}% سے آگے گئی۔",
+  "@notificationGoalBody": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationSmsParserTitle": "SMS parser event",
+  "notificationSmsParserBody": "{source} نے {confidence}% confidence کے ساتھ transaction parse کیا۔",
+  "@notificationSmsParserBody": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      },
+      "confidence": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationFamilyTitle": "Family activity",
+  "notificationFamilyBody": "{memberName} نے shared family permissions تبدیل کیں۔",
+  "@notificationFamilyBody": {
+    "placeholders": {
+      "memberName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationSystemTitle": "System message",
+  "notificationSystemBody": "Phase 1 میں payments، custody، اور money movement بند رہتے ہیں۔",
+  "accountsTitle": "Accounts",
+  "accountsConnect": "Account connect کریں",
+  "accountsConnectTitle": "Account connect کریں",
+  "accountsEmptyTitle": "کوئی connected account نہیں",
+  "accountsEmptyBody": "Dashboard کو بہتر بنانے کے لئے read-only accounts connect کریں یا manual account شامل کریں۔",
+  "accountsLastSynced": "{date} کو {time} پر synced",
+  "@accountsLastSynced": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsTypeBank": "Bank",
+  "accountsTypeCard": "Card",
+  "accountsTypeWallet": "Wallet",
+  "accountsStatusSynced": "Synced",
+  "accountsStatusSyncing": "Syncing",
+  "accountsStatusNeedsReview": "Review",
+  "accountsDisconnect": "Disconnect",
+  "accountsDisconnectTitle": "Account disconnect کریں",
+  "accountsDisconnectBody": "{accountName} کو اس mock read-only view سے remove کریں؟",
+  "@accountsDisconnectBody": {
+    "placeholders": {
+      "accountName": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsProviderPickerTitle": "Provider چنیں",
+  "accountsProviderTd": "TD",
+  "accountsProviderRbc": "RBC",
+  "accountsProviderEasypaisa": "Easypaisa",
+  "accountsProviderJazzcash": "JazzCash",
+  "accountsProviderManual": "Manual",
+  "accountsMockOAuthTitle": "{providerName} secure preview",
+  "@accountsMockOAuthTitle": {
+    "placeholders": {
+      "providerName": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsMockOAuthBody": "یہ screen read-only provider connection simulate کرتی ہے۔ اس build میں credentials collect نہیں ہوتے۔",
+  "accountsConnectContinue": "Preview جاری رکھیں",
+  "accountsConnectSuccessTitle": "Account connected",
+  "accountsConnectSuccessBody": "{accountName} اب mock account list میں available ہے۔",
+  "@accountsConnectSuccessBody": {
+    "placeholders": {
+      "accountName": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsViewAccounts": "Accounts دیکھیں",
   "profileTitle": "Profile",
   "profileLanguage": "Language",
   "profileTheme": "Theme",

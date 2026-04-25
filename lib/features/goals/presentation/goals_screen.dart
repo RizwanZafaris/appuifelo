@@ -31,8 +31,8 @@ class GoalsScreen extends ConsumerWidget {
                 Text(
                   goal.name,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w800,
-                      ),
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
                 const SizedBox(height: 10),
                 LinearProgressIndicator(

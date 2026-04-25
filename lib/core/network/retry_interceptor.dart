@@ -10,7 +10,8 @@ class RetryInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     final statusCode = err.response?.statusCode ?? 0;
-    final shouldRetry = statusCode == 408 || statusCode == 429 || statusCode >= 500;
+    final shouldRetry =
+        statusCode == 408 || statusCode == 429 || statusCode >= 500;
     final retryCount = (err.requestOptions.extra['retryCount'] as int?) ?? 0;
 
     if (!shouldRetry || retryCount >= 2) {

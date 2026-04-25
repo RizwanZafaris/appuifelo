@@ -26,7 +26,10 @@ class ProfileScreen extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 10),
-        _ProfileRow(label: l10n.profileLanguage, value: settings.languageCode.toUpperCase()),
+        _ProfileRow(
+          label: l10n.profileLanguage,
+          value: settings.languageCode.toUpperCase(),
+        ),
         _ProfileRow(label: l10n.profileTheme, value: settings.themeMode.name),
         _ProfileRow(label: l10n.profileNotifications, value: l10n.commonView),
         _ProfileRow(label: l10n.profileLogout, value: l10n.commonView),

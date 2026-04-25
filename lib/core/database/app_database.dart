@@ -59,8 +59,10 @@ class Budgets extends Table {
   IntColumn get limitMinor => integer()();
   IntColumn get spentMinor => integer().withDefault(const Constant(0))();
   TextColumn get period => text()();
-  BoolColumn get rolloverEnabled => boolean().withDefault(const Constant(false))();
-  IntColumn get alertThresholdPercent => integer().withDefault(const Constant(80))();
+  BoolColumn get rolloverEnabled =>
+      boolean().withDefault(const Constant(false))();
+  IntColumn get alertThresholdPercent =>
+      integer().withDefault(const Constant(80))();
 
   @override
   Set<Column<Object>> get primaryKey => {id};
@@ -86,8 +88,10 @@ class FamilyMembers extends Table {
   TextColumn get displayName => text()();
   TextColumn get phoneMasked => text()();
   TextColumn get role => text()();
-  BoolColumn get canViewSharedTransactions => boolean().withDefault(const Constant(true))();
-  BoolColumn get canEditSharedBudgets => boolean().withDefault(const Constant(false))();
+  BoolColumn get canViewSharedTransactions =>
+      boolean().withDefault(const Constant(true))();
+  BoolColumn get canEditSharedBudgets =>
+      boolean().withDefault(const Constant(false))();
 
   @override
   Set<Column<Object>> get primaryKey => {id};

@@ -23,29 +23,32 @@ class SplashScreen extends StatelessWidget {
               const Spacer(),
               Text(
                 l10n.appName,
-                style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                      fontWeight: FontWeight.w900,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w900),
               ),
               const SizedBox(height: 16),
               Text(
                 l10n.splashTitle,
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
+                  fontWeight: FontWeight.w800,
+                ),
               ),
               const SizedBox(height: 16),
               Text(
                 l10n.splashBody,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
               const SizedBox(height: 24),
               FeloCard(
                 child: Row(
                   children: [
-                    const Icon(Icons.verified_user_rounded, color: FeloColors.feloiTeal),
+                    const Icon(
+                      Icons.verified_user_rounded,
+                      color: FeloColors.feloiTeal,
+                    ),
                     const SizedBox(width: 12),
                     Expanded(child: Text(l10n.splashTrust)),
                   ],
@@ -83,7 +86,11 @@ class _FeloMark extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [FeloColors.feloiBlue, FeloColors.skyBlue, FeloColors.feloiTeal],
+          colors: [
+            FeloColors.feloiBlue,
+            FeloColors.skyBlue,
+            FeloColors.feloiTeal,
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -93,9 +100,9 @@ class _FeloMark extends StatelessWidget {
         child: Text(
           'F',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.w900,
-              ),
+            color: Colors.white,
+            fontWeight: FontWeight.w900,
+          ),
         ),
       ),
     );

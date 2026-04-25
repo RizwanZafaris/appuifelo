@@ -128,24 +128,6 @@ final transactionRepositoryProvider =
 // ignore: unused_element
 typedef TransactionRepositoryRef =
     AutoDisposeProviderRef<TransactionRepository>;
-String _$transactionsHash() => r'f68016073b1ecfdfae5700f078144062de9ebe52';
-
-/// See also [transactions].
-@ProviderFor(transactions)
-final transactionsProvider =
-    AutoDisposeProvider<List<FeloTransaction>>.internal(
-      transactions,
-      name: r'transactionsProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$transactionsHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef TransactionsRef = AutoDisposeProviderRef<List<FeloTransaction>>;
 String _$smsParserRepositoryHash() =>
     r'c5d588692689e4f23aa30b8dbd484d2c204accb4';
 
@@ -323,5 +305,409 @@ final remittanceWaitlistProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef RemittanceWaitlistRef = AutoDisposeProviderRef<RemittanceWaitlist>;
+String _$notificationsRepositoryHash() =>
+    r'ae79289c6b69edcfa3f56270f8cce0423a5ff4a1';
+
+/// See also [notificationsRepository].
+@ProviderFor(notificationsRepository)
+final notificationsRepositoryProvider =
+    AutoDisposeProvider<NotificationsRepository>.internal(
+      notificationsRepository,
+      name: r'notificationsRepositoryProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$notificationsRepositoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef NotificationsRepositoryRef =
+    AutoDisposeProviderRef<NotificationsRepository>;
+String _$filteredNotificationsHash() =>
+    r'2de35a33424a34f08ca8ae69b210c352e7da602c';
+
+/// See also [filteredNotifications].
+@ProviderFor(filteredNotifications)
+final filteredNotificationsProvider =
+    AutoDisposeProvider<List<FeloNotification>>.internal(
+      filteredNotifications,
+      name: r'filteredNotificationsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$filteredNotificationsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef FilteredNotificationsRef =
+    AutoDisposeProviderRef<List<FeloNotification>>;
+String _$unreadNotificationCountHash() =>
+    r'7076ffc9783ce65f987d9d6fc3d574318591ea9f';
+
+/// See also [unreadNotificationCount].
+@ProviderFor(unreadNotificationCount)
+final unreadNotificationCountProvider = AutoDisposeProvider<int>.internal(
+  unreadNotificationCount,
+  name: r'unreadNotificationCountProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$unreadNotificationCountHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef UnreadNotificationCountRef = AutoDisposeProviderRef<int>;
+String _$receiptCaptureRepositoryHash() =>
+    r'86c404c99c4863ad7ed71a19fd816df5f6624265';
+
+/// See also [receiptCaptureRepository].
+@ProviderFor(receiptCaptureRepository)
+final receiptCaptureRepositoryProvider =
+    AutoDisposeProvider<ReceiptCaptureRepository>.internal(
+      receiptCaptureRepository,
+      name: r'receiptCaptureRepositoryProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$receiptCaptureRepositoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef ReceiptCaptureRepositoryRef =
+    AutoDisposeProviderRef<ReceiptCaptureRepository>;
+String _$imagePickerHash() => r'320373cd7a3964d1cabeb291795bcfcd6e7d4267';
+
+/// See also [imagePicker].
+@ProviderFor(imagePicker)
+final imagePickerProvider = AutoDisposeProvider<ImagePicker>.internal(
+  imagePicker,
+  name: r'imagePickerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$imagePickerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef ImagePickerRef = AutoDisposeProviderRef<ImagePicker>;
+String _$accountsRepositoryHash() =>
+    r'a5ddbf9815172f1c8243972ae64e887ead4e89f9';
+
+/// See also [accountsRepository].
+@ProviderFor(accountsRepository)
+final accountsRepositoryProvider =
+    AutoDisposeProvider<AccountsRepository>.internal(
+      accountsRepository,
+      name: r'accountsRepositoryProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$accountsRepositoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AccountsRepositoryRef = AutoDisposeProviderRef<AccountsRepository>;
+String _$billsRepositoryHash() => r'b15651978cf3fe77fb9f6fd00c4beb8d0230bb40';
+
+/// See also [billsRepository].
+@ProviderFor(billsRepository)
+final billsRepositoryProvider = AutoDisposeProvider<BillsRepository>.internal(
+  billsRepository,
+  name: r'billsRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$billsRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef BillsRepositoryRef = AutoDisposeProviderRef<BillsRepository>;
+String _$transactionsHash() => r'08489c1e1b43e0fd4af3aea4fdced425d2f82315';
+
+/// See also [Transactions].
+@ProviderFor(Transactions)
+final transactionsProvider =
+    AutoDisposeNotifierProvider<Transactions, List<FeloTransaction>>.internal(
+      Transactions.new,
+      name: r'transactionsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$transactionsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$Transactions = AutoDisposeNotifier<List<FeloTransaction>>;
+String _$notificationInboxHash() => r'0267613682d65cd8b6180df5a18a7a8e1066bb37';
+
+/// See also [NotificationInbox].
+@ProviderFor(NotificationInbox)
+final notificationInboxProvider =
+    AutoDisposeNotifierProvider<
+      NotificationInbox,
+      List<FeloNotification>
+    >.internal(
+      NotificationInbox.new,
+      name: r'notificationInboxProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$notificationInboxHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$NotificationInbox = AutoDisposeNotifier<List<FeloNotification>>;
+String _$notificationFilterHash() =>
+    r'183f1a544333ef05f9b07dd0fafbaa9da31ed393';
+
+/// See also [NotificationFilter].
+@ProviderFor(NotificationFilter)
+final notificationFilterProvider =
+    AutoDisposeNotifierProvider<
+      NotificationFilter,
+      FeloNotificationFilter
+    >.internal(
+      NotificationFilter.new,
+      name: r'notificationFilterProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$notificationFilterHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$NotificationFilter = AutoDisposeNotifier<FeloNotificationFilter>;
+String _$receiptCaptureSessionHash() =>
+    r'5d96ea0c3bf7d8705f68693652193cb64dc3b1c5';
+
+/// Copied from Dart SDK
+class _SystemHash {
+  _SystemHash._();
+
+  static int combine(int hash, int value) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + value);
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
+    return hash ^ (hash >> 6);
+  }
+
+  static int finish(int hash) {
+    // ignore: parameter_assignments
+    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
+    // ignore: parameter_assignments
+    hash = hash ^ (hash >> 11);
+    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+  }
+}
+
+abstract class _$ReceiptCaptureSession
+    extends BuildlessAutoDisposeNotifier<ReceiptCaptureState> {
+  late final String transactionId;
+
+  ReceiptCaptureState build(String transactionId);
+}
+
+/// See also [ReceiptCaptureSession].
+@ProviderFor(ReceiptCaptureSession)
+const receiptCaptureSessionProvider = ReceiptCaptureSessionFamily();
+
+/// See also [ReceiptCaptureSession].
+class ReceiptCaptureSessionFamily extends Family<ReceiptCaptureState> {
+  /// See also [ReceiptCaptureSession].
+  const ReceiptCaptureSessionFamily();
+
+  /// See also [ReceiptCaptureSession].
+  ReceiptCaptureSessionProvider call(String transactionId) {
+    return ReceiptCaptureSessionProvider(transactionId);
+  }
+
+  @override
+  ReceiptCaptureSessionProvider getProviderOverride(
+    covariant ReceiptCaptureSessionProvider provider,
+  ) {
+    return call(provider.transactionId);
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'receiptCaptureSessionProvider';
+}
+
+/// See also [ReceiptCaptureSession].
+class ReceiptCaptureSessionProvider
+    extends
+        AutoDisposeNotifierProviderImpl<
+          ReceiptCaptureSession,
+          ReceiptCaptureState
+        > {
+  /// See also [ReceiptCaptureSession].
+  ReceiptCaptureSessionProvider(String transactionId)
+    : this._internal(
+        () => ReceiptCaptureSession()..transactionId = transactionId,
+        from: receiptCaptureSessionProvider,
+        name: r'receiptCaptureSessionProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$receiptCaptureSessionHash,
+        dependencies: ReceiptCaptureSessionFamily._dependencies,
+        allTransitiveDependencies:
+            ReceiptCaptureSessionFamily._allTransitiveDependencies,
+        transactionId: transactionId,
+      );
+
+  ReceiptCaptureSessionProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.transactionId,
+  }) : super.internal();
+
+  final String transactionId;
+
+  @override
+  ReceiptCaptureState runNotifierBuild(
+    covariant ReceiptCaptureSession notifier,
+  ) {
+    return notifier.build(transactionId);
+  }
+
+  @override
+  Override overrideWith(ReceiptCaptureSession Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: ReceiptCaptureSessionProvider._internal(
+        () => create()..transactionId = transactionId,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        transactionId: transactionId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeNotifierProviderElement<ReceiptCaptureSession, ReceiptCaptureState>
+  createElement() {
+    return _ReceiptCaptureSessionProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ReceiptCaptureSessionProvider &&
+        other.transactionId == transactionId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, transactionId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin ReceiptCaptureSessionRef
+    on AutoDisposeNotifierProviderRef<ReceiptCaptureState> {
+  /// The parameter `transactionId` of this provider.
+  String get transactionId;
+}
+
+class _ReceiptCaptureSessionProviderElement
+    extends
+        AutoDisposeNotifierProviderElement<
+          ReceiptCaptureSession,
+          ReceiptCaptureState
+        >
+    with ReceiptCaptureSessionRef {
+  _ReceiptCaptureSessionProviderElement(super.provider);
+
+  @override
+  String get transactionId =>
+      (origin as ReceiptCaptureSessionProvider).transactionId;
+}
+
+String _$accountsHash() => r'd1d29dc1ccf6979e89d44a719af960ecf20e57ac';
+
+/// See also [Accounts].
+@ProviderFor(Accounts)
+final accountsProvider =
+    AutoDisposeNotifierProvider<Accounts, List<FeloAccount>>.internal(
+      Accounts.new,
+      name: r'accountsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$accountsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$Accounts = AutoDisposeNotifier<List<FeloAccount>>;
+String _$accountConnectFlowHash() =>
+    r'0d9da8da446b00252e06198593fd38fddba172f4';
+
+/// See also [AccountConnectFlow].
+@ProviderFor(AccountConnectFlow)
+final accountConnectFlowProvider =
+    AutoDisposeNotifierProvider<
+      AccountConnectFlow,
+      AccountConnectState
+    >.internal(
+      AccountConnectFlow.new,
+      name: r'accountConnectFlowProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$accountConnectFlowHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$AccountConnectFlow = AutoDisposeNotifier<AccountConnectState>;
+String _$billsHash() => r'c63ab49baaca3da5d51fd2efb26a228aa5a10353';
+
+/// See also [Bills].
+@ProviderFor(Bills)
+final billsProvider = AutoDisposeNotifierProvider<Bills, List<Bill>>.internal(
+  Bills.new,
+  name: r'billsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$billsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Bills = AutoDisposeNotifier<List<Bill>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

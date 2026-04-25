@@ -18,17 +18,13 @@ void main() {
   });
 
   testGoldens('Felo shared component suite', (tester) async {
-    final builder = GoldenBuilder.column(
-      wrap: (child) => _GoldenHost(child: child),
-    )
-      ..addScenario(
-        'Cards, chips, buttons, inputs',
-        const _ComponentGallery(),
-      )
-      ..addScenario(
-        'Empty state and progress ring',
-        const _StateGallery(),
-      );
+    final builder =
+        GoldenBuilder.column(wrap: (child) => _GoldenHost(child: child))
+          ..addScenario(
+            'Cards, chips, buttons, inputs',
+            const _ComponentGallery(),
+          )
+          ..addScenario('Empty state and progress ring', const _StateGallery());
 
     await tester.pumpWidgetBuilder(
       builder.build(),
@@ -64,10 +60,7 @@ class _GoldenHost extends StatelessWidget {
               color: theme.scaffoldBackgroundColor,
               child: SizedBox(
                 width: 390,
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: child,
-                ),
+                child: Padding(padding: const EdgeInsets.all(20), child: child),
               ),
             ),
           ),
@@ -97,8 +90,8 @@ class _ComponentGallery extends StatelessWidget {
               Text(
                 'CAD 4,280',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontWeight: FontWeight.w900,
-                    ),
+                  fontWeight: FontWeight.w900,
+                ),
               ),
             ],
           ),
@@ -108,13 +101,21 @@ class _ComponentGallery extends StatelessWidget {
           spacing: 8,
           runSpacing: 8,
           children: [
-            FeloChip(label: 'Groceries', icon: Icons.shopping_basket_outlined, selected: true),
+            FeloChip(
+              label: 'Groceries',
+              icon: Icons.shopping_basket_outlined,
+              selected: true,
+            ),
             FeloChip(label: 'Family', icon: Icons.groups_2_outlined),
             FeloChip(label: 'SMS', icon: Icons.sms_outlined),
           ],
         ),
         const SizedBox(height: 12),
-        FeloButton(label: 'Create budget', icon: Icons.add_rounded, onPressed: () {}),
+        FeloButton(
+          label: 'Create budget',
+          icon: Icons.add_rounded,
+          onPressed: () {},
+        ),
         const SizedBox(height: 8),
         FeloButton(
           label: 'View details',

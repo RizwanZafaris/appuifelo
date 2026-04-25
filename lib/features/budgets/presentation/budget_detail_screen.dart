@@ -15,7 +15,9 @@ class BudgetDetailScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final budget = ref.watch(budgetsProvider).firstWhere((item) => item.id == budgetId);
+    final budget = ref
+        .watch(budgetsProvider)
+        .firstWhere((item) => item.id == budgetId);
     return FeloFeaturePlaceholder(
       title: l10n.budgetDetailTitle,
       body: l10n.budgetsBody,

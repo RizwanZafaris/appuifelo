@@ -18,15 +18,15 @@ class AuthScreen extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(24),
           children: [
-            Text(
-              l10n.authBody,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
+            Text(l10n.authBody, style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 24),
             FeloCard(
               child: Column(
                 children: [
-                  FeloInput(label: l10n.authEmail, keyboardType: TextInputType.emailAddress),
+                  FeloInput(
+                    label: l10n.authEmail,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
                   const SizedBox(height: 14),
                   FeloInput(label: l10n.authPassword, obscureText: true),
                   const SizedBox(height: 12),

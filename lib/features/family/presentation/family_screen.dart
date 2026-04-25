@@ -19,13 +19,19 @@ class FamilyScreen extends ConsumerWidget {
       body: l10n.familyBody,
       icon: Icons.groups_2_rounded,
       children: [
-        FeloButton(label: l10n.familyInvite, icon: Icons.link_rounded, onPressed: () {}),
+        FeloButton(
+          label: l10n.familyInvite,
+          icon: Icons.link_rounded,
+          onPressed: () {},
+        ),
         const SizedBox(height: 16),
         for (final member in members) ...[
           FeloCard(
             child: ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const CircleAvatar(child: Icon(Icons.person_outline_rounded)),
+              leading: const CircleAvatar(
+                child: Icon(Icons.person_outline_rounded),
+              ),
               title: Text(member.displayName),
               subtitle: Text(member.phoneMasked),
               trailing: Text(_roleLabel(context, member.role.name)),

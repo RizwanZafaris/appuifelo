@@ -518,6 +518,240 @@ abstract class AppLocalizations {
   /// **'Recategorize'**
   String get transactionRecategorize;
 
+  /// No description provided for @receiptCaptureTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt capture'**
+  String get receiptCaptureTitle;
+
+  /// No description provided for @receiptCaptureBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Attach a receipt image to improve transaction history. This OCR flow is stubbed with local mock data.'**
+  String get receiptCaptureBody;
+
+  /// No description provided for @receiptUseCamera.
+  ///
+  /// In en, this message translates to:
+  /// **'Use camera'**
+  String get receiptUseCamera;
+
+  /// No description provided for @receiptUseGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from gallery'**
+  String get receiptUseGallery;
+
+  /// No description provided for @receiptProcessing.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing receipt...'**
+  String get receiptProcessing;
+
+  /// No description provided for @receiptOcrResultTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock OCR result'**
+  String get receiptOcrResultTitle;
+
+  /// No description provided for @receiptMerchantLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Merchant'**
+  String get receiptMerchantLabel;
+
+  /// No description provided for @receiptDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get receiptDateLabel;
+
+  /// No description provided for @receiptTotalLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get receiptTotalLabel;
+
+  /// No description provided for @receiptLineItemsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Line items'**
+  String get receiptLineItemsTitle;
+
+  /// No description provided for @receiptConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm receipt'**
+  String get receiptConfirm;
+
+  /// No description provided for @receiptDiscard.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard receipt'**
+  String get receiptDiscard;
+
+  /// No description provided for @receiptEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit OCR result'**
+  String get receiptEditTitle;
+
+  /// No description provided for @receiptAttached.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt attached'**
+  String get receiptAttached;
+
+  /// No description provided for @receiptConfirmedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt confirmed'**
+  String get receiptConfirmedTitle;
+
+  /// No description provided for @receiptConfirmedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Attached receipt reference {referenceId} to this transaction.'**
+  String receiptConfirmedBody(String referenceId);
+
+  /// No description provided for @billsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bills'**
+  String get billsTitle;
+
+  /// No description provided for @billsAddBill.
+  ///
+  /// In en, this message translates to:
+  /// **'Add bill'**
+  String get billsAddBill;
+
+  /// No description provided for @billsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No bills yet'**
+  String get billsEmptyTitle;
+
+  /// No description provided for @billsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual and SMS-detected bills will appear here before their due dates.'**
+  String get billsEmptyBody;
+
+  /// No description provided for @billsCalendarTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Due dates this month'**
+  String get billsCalendarTitle;
+
+  /// No description provided for @billsNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Bill name'**
+  String get billsNameLabel;
+
+  /// No description provided for @billsAmountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get billsAmountLabel;
+
+  /// No description provided for @billsDueDayLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Due day'**
+  String get billsDueDayLabel;
+
+  /// No description provided for @billsManualNameFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual bill'**
+  String get billsManualNameFallback;
+
+  /// No description provided for @billsDueDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Due {date}'**
+  String billsDueDate(String date);
+
+  /// No description provided for @billsAutoPayOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-pay on'**
+  String get billsAutoPayOn;
+
+  /// No description provided for @billsAutoPayOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-pay off'**
+  String get billsAutoPayOff;
+
+  /// No description provided for @billsStatusPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get billsStatusPaid;
+
+  /// No description provided for @billsStatusUpcoming.
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming'**
+  String get billsStatusUpcoming;
+
+  /// No description provided for @billsSourceManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual'**
+  String get billsSourceManual;
+
+  /// No description provided for @billsSourceSms.
+  ///
+  /// In en, this message translates to:
+  /// **'SMS'**
+  String get billsSourceSms;
+
+  /// No description provided for @billsCategoryUtility.
+  ///
+  /// In en, this message translates to:
+  /// **'Utility'**
+  String get billsCategoryUtility;
+
+  /// No description provided for @billsCategoryTelecom.
+  ///
+  /// In en, this message translates to:
+  /// **'Telecom'**
+  String get billsCategoryTelecom;
+
+  /// No description provided for @billsCategoryRent.
+  ///
+  /// In en, this message translates to:
+  /// **'Rent'**
+  String get billsCategoryRent;
+
+  /// No description provided for @billsCategorySubscription.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription'**
+  String get billsCategorySubscription;
+
+  /// No description provided for @billsPayPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay preview'**
+  String get billsPayPreview;
+
+  /// No description provided for @billsPayPreviewBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a bill-management preview only. No payment is initiated and no money is moved.'**
+  String get billsPayPreviewBody;
+
+  /// No description provided for @billsMarkPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark paid'**
+  String get billsMarkPaid;
+
   /// No description provided for @smsParserTitle.
   ///
   /// In en, this message translates to:
@@ -607,6 +841,312 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Viewer'**
   String get familyViewer;
+
+  /// No description provided for @notificationsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationsTitle;
+
+  /// No description provided for @notificationsBellTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Open notifications'**
+  String get notificationsBellTooltip;
+
+  /// No description provided for @notificationsMarkAllRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all read'**
+  String get notificationsMarkAllRead;
+
+  /// No description provided for @notificationsMarkRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark read'**
+  String get notificationsMarkRead;
+
+  /// No description provided for @notificationsArchive.
+  ///
+  /// In en, this message translates to:
+  /// **'Archive'**
+  String get notificationsArchive;
+
+  /// No description provided for @notificationsUnreadCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} unread'**
+  String notificationsUnreadCount(int count);
+
+  /// No description provided for @notificationsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications'**
+  String get notificationsEmptyTitle;
+
+  /// No description provided for @notificationsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget alerts, goal milestones, SMS parser events, and family activity will appear here.'**
+  String get notificationsEmptyBody;
+
+  /// No description provided for @notificationsFilterAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get notificationsFilterAll;
+
+  /// No description provided for @notificationsFilterBudgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Budgets'**
+  String get notificationsFilterBudgets;
+
+  /// No description provided for @notificationsFilterGoals.
+  ///
+  /// In en, this message translates to:
+  /// **'Goals'**
+  String get notificationsFilterGoals;
+
+  /// No description provided for @notificationsFilterFamily.
+  ///
+  /// In en, this message translates to:
+  /// **'Family'**
+  String get notificationsFilterFamily;
+
+  /// No description provided for @notificationsFilterSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get notificationsFilterSystem;
+
+  /// No description provided for @notificationsTimestamp.
+  ///
+  /// In en, this message translates to:
+  /// **'{date} · {time}'**
+  String notificationsTimestamp(String date, String time);
+
+  /// No description provided for @notificationBudgetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget alert'**
+  String get notificationBudgetTitle;
+
+  /// No description provided for @notificationBudgetBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{category} reached {percent}% of its envelope.'**
+  String notificationBudgetBody(String category, int percent);
+
+  /// No description provided for @notificationGoalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Goal milestone'**
+  String get notificationGoalTitle;
+
+  /// No description provided for @notificationGoalBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{goalName} crossed {percent}% funded.'**
+  String notificationGoalBody(String goalName, int percent);
+
+  /// No description provided for @notificationSmsParserTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'SMS parser event'**
+  String get notificationSmsParserTitle;
+
+  /// No description provided for @notificationSmsParserBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{source} parsed a transaction with {confidence}% confidence.'**
+  String notificationSmsParserBody(String source, int confidence);
+
+  /// No description provided for @notificationFamilyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Family activity'**
+  String get notificationFamilyTitle;
+
+  /// No description provided for @notificationFamilyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{memberName} changed shared family permissions.'**
+  String notificationFamilyBody(String memberName);
+
+  /// No description provided for @notificationSystemTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'System message'**
+  String get notificationSystemTitle;
+
+  /// No description provided for @notificationSystemBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Phase 1 keeps payments, custody, and money movement turned off.'**
+  String get notificationSystemBody;
+
+  /// No description provided for @accountsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Accounts'**
+  String get accountsTitle;
+
+  /// No description provided for @accountsConnect.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect account'**
+  String get accountsConnect;
+
+  /// No description provided for @accountsConnectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect account'**
+  String get accountsConnectTitle;
+
+  /// No description provided for @accountsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No connected accounts'**
+  String get accountsEmptyTitle;
+
+  /// No description provided for @accountsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect read-only accounts or add a manual account to make the dashboard more useful.'**
+  String get accountsEmptyBody;
+
+  /// No description provided for @accountsLastSynced.
+  ///
+  /// In en, this message translates to:
+  /// **'Synced {date} at {time}'**
+  String accountsLastSynced(String date, String time);
+
+  /// No description provided for @accountsTypeBank.
+  ///
+  /// In en, this message translates to:
+  /// **'Bank'**
+  String get accountsTypeBank;
+
+  /// No description provided for @accountsTypeCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Card'**
+  String get accountsTypeCard;
+
+  /// No description provided for @accountsTypeWallet.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet'**
+  String get accountsTypeWallet;
+
+  /// No description provided for @accountsStatusSynced.
+  ///
+  /// In en, this message translates to:
+  /// **'Synced'**
+  String get accountsStatusSynced;
+
+  /// No description provided for @accountsStatusSyncing.
+  ///
+  /// In en, this message translates to:
+  /// **'Syncing'**
+  String get accountsStatusSyncing;
+
+  /// No description provided for @accountsStatusNeedsReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get accountsStatusNeedsReview;
+
+  /// No description provided for @accountsDisconnect.
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnect'**
+  String get accountsDisconnect;
+
+  /// No description provided for @accountsDisconnectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnect account'**
+  String get accountsDisconnectTitle;
+
+  /// No description provided for @accountsDisconnectBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {accountName} from this mock read-only view?'**
+  String accountsDisconnectBody(String accountName);
+
+  /// No description provided for @accountsProviderPickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a provider'**
+  String get accountsProviderPickerTitle;
+
+  /// No description provided for @accountsProviderTd.
+  ///
+  /// In en, this message translates to:
+  /// **'TD'**
+  String get accountsProviderTd;
+
+  /// No description provided for @accountsProviderRbc.
+  ///
+  /// In en, this message translates to:
+  /// **'RBC'**
+  String get accountsProviderRbc;
+
+  /// No description provided for @accountsProviderEasypaisa.
+  ///
+  /// In en, this message translates to:
+  /// **'Easypaisa'**
+  String get accountsProviderEasypaisa;
+
+  /// No description provided for @accountsProviderJazzcash.
+  ///
+  /// In en, this message translates to:
+  /// **'JazzCash'**
+  String get accountsProviderJazzcash;
+
+  /// No description provided for @accountsProviderManual.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual'**
+  String get accountsProviderManual;
+
+  /// No description provided for @accountsMockOAuthTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{providerName} secure preview'**
+  String accountsMockOAuthTitle(String providerName);
+
+  /// No description provided for @accountsMockOAuthBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This screen simulates a read-only provider connection. No credentials are collected in this build.'**
+  String get accountsMockOAuthBody;
+
+  /// No description provided for @accountsConnectContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue preview'**
+  String get accountsConnectContinue;
+
+  /// No description provided for @accountsConnectSuccessTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Account connected'**
+  String get accountsConnectSuccessTitle;
+
+  /// No description provided for @accountsConnectSuccessBody.
+  ///
+  /// In en, this message translates to:
+  /// **'{accountName} is now available in the mock account list.'**
+  String accountsConnectSuccessBody(String accountName);
+
+  /// No description provided for @accountsViewAccounts.
+  ///
+  /// In en, this message translates to:
+  /// **'View accounts'**
+  String get accountsViewAccounts;
 
   /// No description provided for @profileTitle.
   ///

@@ -18,6 +18,7 @@ _FeloTransaction _$FeloTransactionFromJson(Map<String, dynamic> json) =>
       source: $enumDecode(_$TransactionSourceEnumMap, json['source']),
       parserConfidence: (json['parserConfidence'] as num).toDouble(),
       bookedAt: DateTime.parse(json['bookedAt'] as String),
+      receiptId: json['receiptId'] as String?,
       note: json['note'] as String?,
     );
 
@@ -33,6 +34,7 @@ Map<String, dynamic> _$FeloTransactionToJson(_FeloTransaction instance) =>
       'source': _$TransactionSourceEnumMap[instance.source]!,
       'parserConfidence': instance.parserConfidence,
       'bookedAt': instance.bookedAt.toIso8601String(),
+      'receiptId': instance.receiptId,
       'note': instance.note,
     };
 

@@ -33,7 +33,11 @@ class FeloFeaturePlaceholder extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(icon, size: 32, color: Theme.of(context).colorScheme.primary),
+                Icon(
+                  icon,
+                  size: 32,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
                 const SizedBox(width: 16),
                 Expanded(
                   child: Column(
@@ -42,8 +46,8 @@ class FeloFeaturePlaceholder extends StatelessWidget {
                       Text(
                         title,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w800,
-                            ),
+                          fontWeight: FontWeight.w800,
+                        ),
                       ),
                       const SizedBox(height: 8),
                       Text(body),

@@ -22,16 +22,14 @@ class FeloScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        actions: actions,
-      ),
+      appBar: AppBar(title: Text(title), actions: actions),
       body: SafeArea(child: child),
       bottomNavigationBar: selectedTab == null
           ? null
           : NavigationBar(
               selectedIndex: selectedTab!.index,
-              onDestinationSelected: (index) => _goToTab(context, FeloRootTab.values[index]),
+              onDestinationSelected: (index) =>
+                  _goToTab(context, FeloRootTab.values[index]),
               destinations: [
                 NavigationDestination(
                   icon: const Icon(Icons.home_outlined),

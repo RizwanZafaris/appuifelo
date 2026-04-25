@@ -27,10 +27,10 @@ abstract final class FeloTheme {
 
   static ThemeData _base(ColorScheme colorScheme) {
     final textTheme = Typography.material2021().white.apply(
-          fontFamily: 'Inter',
-          bodyColor: colorScheme.onSurface,
-          displayColor: colorScheme.onSurface,
-        );
+      fontFamily: 'Inter',
+      bodyColor: colorScheme.onSurface,
+      displayColor: colorScheme.onSurface,
+    );
 
     return ThemeData(
       useMaterial3: true,
@@ -55,10 +55,7 @@ abstract final class FeloTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
-          textStyle: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w700,
-          ),
+          textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(

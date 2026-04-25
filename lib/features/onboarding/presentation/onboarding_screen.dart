@@ -79,8 +79,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Text(
                 l10n.onboardingSubtitle,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
             ),
             const SizedBox(height: 16),
@@ -173,21 +173,18 @@ class _OnboardingSlide extends StatelessWidget {
         const SizedBox(height: 18),
         Text(
           title,
-          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.w900,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
         ),
         const SizedBox(height: 12),
         Text(
           body,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
         ),
-        if (extra != null) ...[
-          const SizedBox(height: 20),
-          extra!,
-        ],
+        if (extra != null) ...[const SizedBox(height: 20), extra!],
       ],
     );
   }
@@ -225,7 +222,11 @@ class _SamplePhone extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                const Icon(Icons.shield_outlined, color: Colors.white70, size: 20),
+                const Icon(
+                  Icons.shield_outlined,
+                  color: Colors.white70,
+                  size: 20,
+                ),
               ],
             ),
             const Spacer(),
@@ -293,12 +294,18 @@ class _MiniMetric extends StatelessWidget {
         children: [
           Icon(Icons.circle, color: color, size: 10),
           const SizedBox(height: 10),
-          Text(label, style: const TextStyle(color: Colors.white54, fontSize: 11)),
+          Text(
+            label,
+            style: const TextStyle(color: Colors.white54, fontSize: 11),
+          ),
           const SizedBox(height: 2),
           Text(
             value,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800),
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w800,
+            ),
           ),
         ],
       ),
@@ -318,9 +325,9 @@ class _SmsTrustPanel extends StatelessWidget {
         children: [
           Text(
             l10n.smsTrustTitle,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w800,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 8),
           Text(l10n.smsTrustBody),
@@ -335,10 +342,7 @@ class _SmsTrustPanel extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          Text(
-            l10n.smsRevoke,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
+          Text(l10n.smsRevoke, style: Theme.of(context).textTheme.bodySmall),
         ],
       ),
     );

@@ -17,5 +17,6 @@ abstract class ParsedSms with _$ParsedSms {
     required DateTime parsedAt,
   }) = _ParsedSms;
 
-  factory ParsedSms.fromJson(Map<String, Object?> json) => _$ParsedSmsFromJson(json);
+  factory ParsedSms.fromJson(Map<String, Object?> json) =>
+      _$ParsedSmsFromJson(json);
 }

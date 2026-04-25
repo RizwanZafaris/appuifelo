@@ -20,6 +20,7 @@ abstract class FeloTransaction with _$FeloTransaction {
     required TransactionSource source,
     required double parserConfidence,
     required DateTime bookedAt,
+    String? receiptId,
     String? note,
   }) = _FeloTransaction;
 

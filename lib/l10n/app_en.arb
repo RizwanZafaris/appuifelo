@@ -70,6 +70,109 @@
   "transactionDetailTitle": "Transaction detail",
   "transactionSplit": "Split",
   "transactionRecategorize": "Recategorize",
+  "receiptCaptureTitle": "Receipt capture",
+  "receiptCaptureBody": "Attach a receipt image to improve transaction history. This OCR flow is stubbed with local mock data.",
+  "receiptUseCamera": "Use camera",
+  "receiptUseGallery": "Choose from gallery",
+  "receiptProcessing": "Processing receipt...",
+  "receiptOcrResultTitle": "Mock OCR result",
+  "receiptMerchantLabel": "Merchant",
+  "receiptDateLabel": "Date",
+  "receiptTotalLabel": "Total",
+  "receiptLineItemsTitle": "Line items",
+  "receiptConfirm": "Confirm receipt",
+  "receiptDiscard": "Discard receipt",
+  "receiptEditTitle": "Edit OCR result",
+  "receiptAttached": "Receipt attached",
+  "receiptConfirmedTitle": "Receipt confirmed",
+  "receiptConfirmedBody": "Attached receipt reference {referenceId} to this transaction.",
+  "@receiptConfirmedBody": {
+    "placeholders": {
+      "referenceId": {
+        "type": "String"
+      }
+    }
+  },
+  "billsTitle": "Bills",
+  "billsAddBill": "Add bill",
+  "billsEmptyTitle": "No bills yet",
+  "billsEmptyBody": "Manual and SMS-detected bills will appear here before their due dates.",
+  "billsCalendarTitle": "Due dates this month",
+  "billsNameLabel": "Bill name",
+  "billsAmountLabel": "Amount",
+  "billsDueDayLabel": "Due day",
+  "billsManualNameFallback": "Manual bill",
+  "billsDueDate": "Due {date}",
+  "@billsDueDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "billsAutoPayOn": "Auto-pay on",
+  "billsAutoPayOff": "Auto-pay off",
+  "billsStatusPaid": "Paid",
+  "billsStatusUpcoming": "Upcoming",
+  "billsSourceManual": "Manual",
+  "billsSourceSms": "SMS",
+  "billsCategoryUtility": "Utility",
+  "billsCategoryTelecom": "Telecom",
+  "billsCategoryRent": "Rent",
+  "billsCategorySubscription": "Subscription",
+  "billsPayPreview": "Pay preview",
+  "billsPayPreviewBody": "This is a bill-management preview only. No payment is initiated and no money is moved.",
+  "billsMarkPaid": "Mark paid",
+  "sendTitle": "Send money",
+  "sendPickRecipientTitle": "Pick recipient",
+  "sendAddRecipient": "Add new recipient",
+  "sendRecipientNameLabel": "Recipient name",
+  "sendRecipientPhoneLabel": "Phone",
+  "sendRecipientFallback": "New recipient",
+  "sendRecipientPhoneFallback": "+92 *** *** ****",
+  "sendAmountTitle": "Enter amount",
+  "sendNoRecipientTitle": "Choose a recipient first",
+  "sendNoRecipientBody": "The preview needs a saved or newly added recipient before amount entry.",
+  "sendAmountLabel": "Amount in CAD",
+  "sendFxPreviewEmpty": "Enter an amount to preview PKR",
+  "sendFxPreview": "Recipient gets about {amount}",
+  "@sendFxPreview": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "sendFxRate": "Mock rate: 1 {sourceCurrency} = {rate} {targetCurrency}",
+  "@sendFxRate": {
+    "placeholders": {
+      "sourceCurrency": {
+        "type": "String"
+      },
+      "rate": {
+        "type": "String"
+      },
+      "targetCurrency": {
+        "type": "String"
+      }
+    }
+  },
+  "sendReviewTitle": "Review preview",
+  "sendReviewMissingTitle": "Preview not ready",
+  "sendReviewMissingBody": "Choose a recipient and amount before reviewing.",
+  "sendRecipientLabel": "Recipient",
+  "sendRecipientGetsLabel": "Recipient gets",
+  "sendPreviewDisclaimer": "This is a preview. No money is moved. Phase 3 will require licensed partners before any transfer flow exists.",
+  "sendConfirmPreview": "Confirm preview",
+  "sendSuccessTitle": "Preview created",
+  "sendSuccessBody": "Reference {referenceId} is for this preview only. No money was moved.",
+  "@sendSuccessBody": {
+    "placeholders": {
+      "referenceId": {
+        "type": "String"
+      }
+    }
+  },
   "smsParserTitle": "SMS parser",
   "smsParserBody": "Android-only parser is stubbed from a local fixture for Phase 1.",
   "smsParserAccuracy": "Parser accuracy",
@@ -85,6 +188,142 @@
   "familyAdmin": "Admin",
   "familyMember": "Member",
   "familyViewer": "Viewer",
+  "notificationsTitle": "Notifications",
+  "notificationsBellTooltip": "Open notifications",
+  "notificationsMarkAllRead": "Mark all read",
+  "notificationsMarkRead": "Mark read",
+  "notificationsArchive": "Archive",
+  "notificationsUnreadCount": "{count} unread",
+  "@notificationsUnreadCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsEmptyTitle": "No notifications",
+  "notificationsEmptyBody": "Budget alerts, goal milestones, SMS parser events, and family activity will appear here.",
+  "notificationsFilterAll": "All",
+  "notificationsFilterBudgets": "Budgets",
+  "notificationsFilterGoals": "Goals",
+  "notificationsFilterFamily": "Family",
+  "notificationsFilterSystem": "System",
+  "notificationsTimestamp": "{date} · {time}",
+  "@notificationsTimestamp": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationBudgetTitle": "Budget alert",
+  "notificationBudgetBody": "{category} reached {percent}% of its envelope.",
+  "@notificationBudgetBody": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationGoalTitle": "Goal milestone",
+  "notificationGoalBody": "{goalName} crossed {percent}% funded.",
+  "@notificationGoalBody": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationSmsParserTitle": "SMS parser event",
+  "notificationSmsParserBody": "{source} parsed a transaction with {confidence}% confidence.",
+  "@notificationSmsParserBody": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      },
+      "confidence": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationFamilyTitle": "Family activity",
+  "notificationFamilyBody": "{memberName} changed shared family permissions.",
+  "@notificationFamilyBody": {
+    "placeholders": {
+      "memberName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationSystemTitle": "System message",
+  "notificationSystemBody": "Phase 1 keeps payments, custody, and money movement turned off.",
+  "accountsTitle": "Accounts",
+  "accountsConnect": "Connect account",
+  "accountsConnectTitle": "Connect account",
+  "accountsEmptyTitle": "No connected accounts",
+  "accountsEmptyBody": "Connect read-only accounts or add a manual account to make the dashboard more useful.",
+  "accountsLastSynced": "Synced {date} at {time}",
+  "@accountsLastSynced": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsTypeBank": "Bank",
+  "accountsTypeCard": "Card",
+  "accountsTypeWallet": "Wallet",
+  "accountsStatusSynced": "Synced",
+  "accountsStatusSyncing": "Syncing",
+  "accountsStatusNeedsReview": "Review",
+  "accountsDisconnect": "Disconnect",
+  "accountsDisconnectTitle": "Disconnect account",
+  "accountsDisconnectBody": "Remove {accountName} from this mock read-only view?",
+  "@accountsDisconnectBody": {
+    "placeholders": {
+      "accountName": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsProviderPickerTitle": "Choose a provider",
+  "accountsProviderTd": "TD",
+  "accountsProviderRbc": "RBC",
+  "accountsProviderEasypaisa": "Easypaisa",
+  "accountsProviderJazzcash": "JazzCash",
+  "accountsProviderManual": "Manual",
+  "accountsMockOAuthTitle": "{providerName} secure preview",
+  "@accountsMockOAuthTitle": {
+    "placeholders": {
+      "providerName": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsMockOAuthBody": "This screen simulates a read-only provider connection. No credentials are collected in this build.",
+  "accountsConnectContinue": "Continue preview",
+  "accountsConnectSuccessTitle": "Account connected",
+  "accountsConnectSuccessBody": "{accountName} is now available in the mock account list.",
+  "@accountsConnectSuccessBody": {
+    "placeholders": {
+      "accountName": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsViewAccounts": "View accounts",
   "profileTitle": "Profile",
   "profileLanguage": "Language",
   "profileTheme": "Theme",

@@ -15,7 +15,9 @@ class GoalDetailScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final goal = ref.watch(goalsProvider).firstWhere((item) => item.id == goalId);
+    final goal = ref
+        .watch(goalsProvider)
+        .firstWhere((item) => item.id == goalId);
     return FeloFeaturePlaceholder(
       title: l10n.goalDetailTitle,
       body: l10n.goalsBody,

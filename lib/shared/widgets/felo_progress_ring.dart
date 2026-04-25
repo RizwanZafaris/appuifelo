@@ -33,9 +33,9 @@ class FeloProgressRing extends StatelessWidget {
           child: Center(
             child: Text(
               '${(progress.clamp(0, 1) * 100).round()}%',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
             ),
           ),
         ),
@@ -71,7 +71,13 @@ class _FeloProgressRingPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..strokeWidth = strokeWidth;
 
-    canvas.drawArc(rect.deflate(strokeWidth / 2), 0, math.pi * 2, false, trackPaint);
+    canvas.drawArc(
+      rect.deflate(strokeWidth / 2),
+      0,
+      math.pi * 2,
+      false,
+      trackPaint,
+    );
     canvas.drawArc(
       rect.deflate(strokeWidth / 2),
       -math.pi / 2,

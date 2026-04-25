@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:felo/core/di/fake_repositories.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
@@ -26,9 +27,9 @@ class TransactionDetailScreen extends ConsumerWidget {
         Text(
           transaction.merchant,
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.w900,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
         ),
         const SizedBox(height: 8),
         Text(
@@ -45,6 +46,16 @@ class TransactionDetailScreen extends ConsumerWidget {
           label: l10n.transactionSplit,
           variant: FeloButtonVariant.secondary,
           onPressed: () {},
+        ),
+        const SizedBox(height: 10),
+        if (transaction.receiptId != null) Text(l10n.receiptAttached),
+        if (transaction.receiptId != null) const SizedBox(height: 10),
+        FeloButton(
+          label: l10n.receiptCaptureTitle,
+          icon: Icons.photo_camera_outlined,
+          variant: FeloButtonVariant.secondary,
+          onPressed: () =>
+              context.go('/transactions/${transaction.id}/receipt'),
         ),
       ],
     );

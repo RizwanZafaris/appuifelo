@@ -230,6 +230,130 @@ class AppLocalizationsEn extends AppLocalizations {
   String get transactionRecategorize => 'Recategorize';
 
   @override
+  String get receiptCaptureTitle => 'Receipt capture';
+
+  @override
+  String get receiptCaptureBody =>
+      'Attach a receipt image to improve transaction history. This OCR flow is stubbed with local mock data.';
+
+  @override
+  String get receiptUseCamera => 'Use camera';
+
+  @override
+  String get receiptUseGallery => 'Choose from gallery';
+
+  @override
+  String get receiptProcessing => 'Processing receipt...';
+
+  @override
+  String get receiptOcrResultTitle => 'Mock OCR result';
+
+  @override
+  String get receiptMerchantLabel => 'Merchant';
+
+  @override
+  String get receiptDateLabel => 'Date';
+
+  @override
+  String get receiptTotalLabel => 'Total';
+
+  @override
+  String get receiptLineItemsTitle => 'Line items';
+
+  @override
+  String get receiptConfirm => 'Confirm receipt';
+
+  @override
+  String get receiptDiscard => 'Discard receipt';
+
+  @override
+  String get receiptEditTitle => 'Edit OCR result';
+
+  @override
+  String get receiptAttached => 'Receipt attached';
+
+  @override
+  String get receiptConfirmedTitle => 'Receipt confirmed';
+
+  @override
+  String receiptConfirmedBody(String referenceId) {
+    return 'Attached receipt reference $referenceId to this transaction.';
+  }
+
+  @override
+  String get billsTitle => 'Bills';
+
+  @override
+  String get billsAddBill => 'Add bill';
+
+  @override
+  String get billsEmptyTitle => 'No bills yet';
+
+  @override
+  String get billsEmptyBody =>
+      'Manual and SMS-detected bills will appear here before their due dates.';
+
+  @override
+  String get billsCalendarTitle => 'Due dates this month';
+
+  @override
+  String get billsNameLabel => 'Bill name';
+
+  @override
+  String get billsAmountLabel => 'Amount';
+
+  @override
+  String get billsDueDayLabel => 'Due day';
+
+  @override
+  String get billsManualNameFallback => 'Manual bill';
+
+  @override
+  String billsDueDate(String date) {
+    return 'Due $date';
+  }
+
+  @override
+  String get billsAutoPayOn => 'Auto-pay on';
+
+  @override
+  String get billsAutoPayOff => 'Auto-pay off';
+
+  @override
+  String get billsStatusPaid => 'Paid';
+
+  @override
+  String get billsStatusUpcoming => 'Upcoming';
+
+  @override
+  String get billsSourceManual => 'Manual';
+
+  @override
+  String get billsSourceSms => 'SMS';
+
+  @override
+  String get billsCategoryUtility => 'Utility';
+
+  @override
+  String get billsCategoryTelecom => 'Telecom';
+
+  @override
+  String get billsCategoryRent => 'Rent';
+
+  @override
+  String get billsCategorySubscription => 'Subscription';
+
+  @override
+  String get billsPayPreview => 'Pay preview';
+
+  @override
+  String get billsPayPreviewBody =>
+      'This is a bill-management preview only. No payment is initiated and no money is moved.';
+
+  @override
+  String get billsMarkPaid => 'Mark paid';
+
+  @override
   String get smsParserTitle => 'SMS parser';
 
   @override
@@ -276,6 +400,183 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get familyViewer => 'Viewer';
+
+  @override
+  String get notificationsTitle => 'Notifications';
+
+  @override
+  String get notificationsBellTooltip => 'Open notifications';
+
+  @override
+  String get notificationsMarkAllRead => 'Mark all read';
+
+  @override
+  String get notificationsMarkRead => 'Mark read';
+
+  @override
+  String get notificationsArchive => 'Archive';
+
+  @override
+  String notificationsUnreadCount(int count) {
+    return '$count unread';
+  }
+
+  @override
+  String get notificationsEmptyTitle => 'No notifications';
+
+  @override
+  String get notificationsEmptyBody =>
+      'Budget alerts, goal milestones, SMS parser events, and family activity will appear here.';
+
+  @override
+  String get notificationsFilterAll => 'All';
+
+  @override
+  String get notificationsFilterBudgets => 'Budgets';
+
+  @override
+  String get notificationsFilterGoals => 'Goals';
+
+  @override
+  String get notificationsFilterFamily => 'Family';
+
+  @override
+  String get notificationsFilterSystem => 'System';
+
+  @override
+  String notificationsTimestamp(String date, String time) {
+    return '$date · $time';
+  }
+
+  @override
+  String get notificationBudgetTitle => 'Budget alert';
+
+  @override
+  String notificationBudgetBody(String category, int percent) {
+    return '$category reached $percent% of its envelope.';
+  }
+
+  @override
+  String get notificationGoalTitle => 'Goal milestone';
+
+  @override
+  String notificationGoalBody(String goalName, int percent) {
+    return '$goalName crossed $percent% funded.';
+  }
+
+  @override
+  String get notificationSmsParserTitle => 'SMS parser event';
+
+  @override
+  String notificationSmsParserBody(String source, int confidence) {
+    return '$source parsed a transaction with $confidence% confidence.';
+  }
+
+  @override
+  String get notificationFamilyTitle => 'Family activity';
+
+  @override
+  String notificationFamilyBody(String memberName) {
+    return '$memberName changed shared family permissions.';
+  }
+
+  @override
+  String get notificationSystemTitle => 'System message';
+
+  @override
+  String get notificationSystemBody =>
+      'Phase 1 keeps payments, custody, and money movement turned off.';
+
+  @override
+  String get accountsTitle => 'Accounts';
+
+  @override
+  String get accountsConnect => 'Connect account';
+
+  @override
+  String get accountsConnectTitle => 'Connect account';
+
+  @override
+  String get accountsEmptyTitle => 'No connected accounts';
+
+  @override
+  String get accountsEmptyBody =>
+      'Connect read-only accounts or add a manual account to make the dashboard more useful.';
+
+  @override
+  String accountsLastSynced(String date, String time) {
+    return 'Synced $date at $time';
+  }
+
+  @override
+  String get accountsTypeBank => 'Bank';
+
+  @override
+  String get accountsTypeCard => 'Card';
+
+  @override
+  String get accountsTypeWallet => 'Wallet';
+
+  @override
+  String get accountsStatusSynced => 'Synced';
+
+  @override
+  String get accountsStatusSyncing => 'Syncing';
+
+  @override
+  String get accountsStatusNeedsReview => 'Review';
+
+  @override
+  String get accountsDisconnect => 'Disconnect';
+
+  @override
+  String get accountsDisconnectTitle => 'Disconnect account';
+
+  @override
+  String accountsDisconnectBody(String accountName) {
+    return 'Remove $accountName from this mock read-only view?';
+  }
+
+  @override
+  String get accountsProviderPickerTitle => 'Choose a provider';
+
+  @override
+  String get accountsProviderTd => 'TD';
+
+  @override
+  String get accountsProviderRbc => 'RBC';
+
+  @override
+  String get accountsProviderEasypaisa => 'Easypaisa';
+
+  @override
+  String get accountsProviderJazzcash => 'JazzCash';
+
+  @override
+  String get accountsProviderManual => 'Manual';
+
+  @override
+  String accountsMockOAuthTitle(String providerName) {
+    return '$providerName secure preview';
+  }
+
+  @override
+  String get accountsMockOAuthBody =>
+      'This screen simulates a read-only provider connection. No credentials are collected in this build.';
+
+  @override
+  String get accountsConnectContinue => 'Continue preview';
+
+  @override
+  String get accountsConnectSuccessTitle => 'Account connected';
+
+  @override
+  String accountsConnectSuccessBody(String accountName) {
+    return '$accountName is now available in the mock account list.';
+  }
+
+  @override
+  String get accountsViewAccounts => 'View accounts';
 
   @override
   String get profileTitle => 'Profile';

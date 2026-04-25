@@ -16,5 +16,6 @@ abstract class AppUser with _$AppUser {
     required DateTime createdAt,
   }) = _AppUser;
 
-  factory AppUser.fromJson(Map<String, Object?> json) => _$AppUserFromJson(json);
+  factory AppUser.fromJson(Map<String, Object?> json) =>
+      _$AppUserFromJson(json);
 }

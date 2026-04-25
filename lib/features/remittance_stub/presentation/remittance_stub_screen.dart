@@ -14,9 +14,7 @@ class RemittanceStubScreen extends StatelessWidget {
       title: l10n.remittanceTitle,
       body: l10n.remittanceBody,
       icon: Icons.public_rounded,
-      children: [
-        FeloButton(label: l10n.remittanceCta, onPressed: () {}),
-      ],
+      children: [FeloButton(label: l10n.remittanceCta, onPressed: () {})],
     );
   }
 }

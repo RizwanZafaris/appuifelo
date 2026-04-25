@@ -40,13 +40,15 @@ class BudgetsScreen extends ConsumerWidget {
                     Expanded(
                       child: Text(
                         budget.category,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w800,
-                            ),
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w800),
                       ),
                     ),
                     Text(
-                      formatMinorMoney(minor: budget.spentMinor, currency: budget.currency),
+                      formatMinorMoney(
+                        minor: budget.spentMinor,
+                        currency: budget.currency,
+                      ),
                     ),
                   ],
                 ),

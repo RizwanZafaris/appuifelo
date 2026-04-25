@@ -22,39 +22,36 @@ class FeloButton extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (icon != null) ...[
-          Icon(icon, size: 18),
-          const SizedBox(width: 8),
-        ],
+        if (icon != null) ...[Icon(icon, size: 18), const SizedBox(width: 8)],
         Flexible(child: Text(label, overflow: TextOverflow.ellipsis)),
       ],
     );
 
     return switch (variant) {
       FeloButtonVariant.primary => FilledButton(
-          onPressed: onPressed,
-          child: child,
-        ),
+        onPressed: onPressed,
+        child: child,
+      ),
       FeloButtonVariant.secondary => OutlinedButton(
-          onPressed: onPressed,
-          style: OutlinedButton.styleFrom(
-            minimumSize: const Size.fromHeight(52),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
+        onPressed: onPressed,
+        style: OutlinedButton.styleFrom(
+          minimumSize: const Size.fromHeight(52),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
           ),
-          child: child,
         ),
+        child: child,
+      ),
       FeloButtonVariant.ghost => TextButton(
-          onPressed: onPressed,
-          style: TextButton.styleFrom(
-            minimumSize: const Size.fromHeight(48),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
+        onPressed: onPressed,
+        style: TextButton.styleFrom(
+          minimumSize: const Size.fromHeight(48),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
           ),
-          child: child,
         ),
+        child: child,
+      ),
     };
   }
 }

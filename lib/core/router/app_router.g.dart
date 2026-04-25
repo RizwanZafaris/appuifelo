@@ -11,6 +11,9 @@ List<RouteBase> get $appRoutes => [
   $onboardingRoute,
   $authRoute,
   $homeRoute,
+  $notificationsRoute,
+  $accountsRoute,
+  $billsRoute,
   $budgetsRoute,
   $goalsRoute,
   $transactionsRoute,
@@ -86,6 +89,93 @@ extension $HomeRouteExtension on HomeRoute {
   static HomeRoute _fromState(GoRouterState state) => const HomeRoute();
 
   String get location => GoRouteData.$location('/home');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $notificationsRoute => GoRouteData.$route(
+  path: '/notifications',
+
+  factory: $NotificationsRouteExtension._fromState,
+);
+
+extension $NotificationsRouteExtension on NotificationsRoute {
+  static NotificationsRoute _fromState(GoRouterState state) =>
+      const NotificationsRoute();
+
+  String get location => GoRouteData.$location('/notifications');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $accountsRoute => GoRouteData.$route(
+  path: '/accounts',
+
+  factory: $AccountsRouteExtension._fromState,
+  routes: [
+    GoRouteData.$route(
+      path: 'connect',
+
+      factory: $AccountConnectRouteExtension._fromState,
+    ),
+  ],
+);
+
+extension $AccountsRouteExtension on AccountsRoute {
+  static AccountsRoute _fromState(GoRouterState state) => const AccountsRoute();
+
+  String get location => GoRouteData.$location('/accounts');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $AccountConnectRouteExtension on AccountConnectRoute {
+  static AccountConnectRoute _fromState(GoRouterState state) =>
+      const AccountConnectRoute();
+
+  String get location => GoRouteData.$location('/accounts/connect');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $billsRoute => GoRouteData.$route(
+  path: '/bills',
+
+  factory: $BillsRouteExtension._fromState,
+);
+
+extension $BillsRouteExtension on BillsRoute {
+  static BillsRoute _fromState(GoRouterState state) => const BillsRoute();
+
+  String get location => GoRouteData.$location('/bills');
 
   void go(BuildContext context) => context.go(location);
 
@@ -217,6 +307,13 @@ RouteBase get $transactionsRoute => GoRouteData.$route(
       path: ':transactionId',
 
       factory: $TransactionDetailRouteExtension._fromState,
+      routes: [
+        GoRouteData.$route(
+          path: 'receipt',
+
+          factory: $ReceiptCaptureRouteExtension._fromState,
+        ),
+      ],
     ),
   ],
 );
@@ -243,6 +340,24 @@ extension $TransactionDetailRouteExtension on TransactionDetailRoute {
 
   String get location => GoRouteData.$location(
     '/transactions/${Uri.encodeComponent(transactionId)}',
+  );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ReceiptCaptureRouteExtension on ReceiptCaptureRoute {
+  static ReceiptCaptureRoute _fromState(GoRouterState state) =>
+      ReceiptCaptureRoute(state.pathParameters['transactionId']!);
+
+  String get location => GoRouteData.$location(
+    '/transactions/${Uri.encodeComponent(transactionId)}/receipt',
   );
 
   void go(BuildContext context) => context.go(location);

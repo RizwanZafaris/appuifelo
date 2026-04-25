@@ -232,6 +232,130 @@ class AppLocalizationsUr extends AppLocalizations {
   String get transactionRecategorize => 'Recategorize';
 
   @override
+  String get receiptCaptureTitle => 'Receipt capture';
+
+  @override
+  String get receiptCaptureBody =>
+      'Transaction history بہتر بنانے کے لئے receipt image attach کریں۔ یہ OCR flow local mock data سے stub ہے۔';
+
+  @override
+  String get receiptUseCamera => 'Camera استعمال کریں';
+
+  @override
+  String get receiptUseGallery => 'Gallery سے چنیں';
+
+  @override
+  String get receiptProcessing => 'Receipt process ہو رہی ہے...';
+
+  @override
+  String get receiptOcrResultTitle => 'Mock OCR result';
+
+  @override
+  String get receiptMerchantLabel => 'Merchant';
+
+  @override
+  String get receiptDateLabel => 'Date';
+
+  @override
+  String get receiptTotalLabel => 'Total';
+
+  @override
+  String get receiptLineItemsTitle => 'Line items';
+
+  @override
+  String get receiptConfirm => 'Receipt confirm کریں';
+
+  @override
+  String get receiptDiscard => 'Receipt discard کریں';
+
+  @override
+  String get receiptEditTitle => 'OCR result edit کریں';
+
+  @override
+  String get receiptAttached => 'Receipt attached';
+
+  @override
+  String get receiptConfirmedTitle => 'Receipt confirmed';
+
+  @override
+  String receiptConfirmedBody(String referenceId) {
+    return 'اس transaction کے ساتھ receipt reference $referenceId attach ہو گیا۔';
+  }
+
+  @override
+  String get billsTitle => 'Bills';
+
+  @override
+  String get billsAddBill => 'Bill شامل کریں';
+
+  @override
+  String get billsEmptyTitle => 'ابھی کوئی bill نہیں';
+
+  @override
+  String get billsEmptyBody =>
+      'Manual اور SMS-detected bills due dates سے پہلے یہاں نظر آئیں گے۔';
+
+  @override
+  String get billsCalendarTitle => 'اس ماہ due dates';
+
+  @override
+  String get billsNameLabel => 'Bill name';
+
+  @override
+  String get billsAmountLabel => 'Amount';
+
+  @override
+  String get billsDueDayLabel => 'Due day';
+
+  @override
+  String get billsManualNameFallback => 'Manual bill';
+
+  @override
+  String billsDueDate(String date) {
+    return '$date کو due';
+  }
+
+  @override
+  String get billsAutoPayOn => 'Auto-pay on';
+
+  @override
+  String get billsAutoPayOff => 'Auto-pay off';
+
+  @override
+  String get billsStatusPaid => 'Paid';
+
+  @override
+  String get billsStatusUpcoming => 'Upcoming';
+
+  @override
+  String get billsSourceManual => 'Manual';
+
+  @override
+  String get billsSourceSms => 'SMS';
+
+  @override
+  String get billsCategoryUtility => 'Utility';
+
+  @override
+  String get billsCategoryTelecom => 'Telecom';
+
+  @override
+  String get billsCategoryRent => 'Rent';
+
+  @override
+  String get billsCategorySubscription => 'Subscription';
+
+  @override
+  String get billsPayPreview => 'Pay preview';
+
+  @override
+  String get billsPayPreviewBody =>
+      'یہ صرف bill-management preview ہے۔ کوئی payment initiate نہیں ہوتی اور کوئی money move نہیں ہوتی۔';
+
+  @override
+  String get billsMarkPaid => 'Paid mark کریں';
+
+  @override
   String get smsParserTitle => 'SMS parser';
 
   @override
@@ -278,6 +402,183 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get familyViewer => 'Viewer';
+
+  @override
+  String get notificationsTitle => 'اطلاعات';
+
+  @override
+  String get notificationsBellTooltip => 'اطلاعات کھولیں';
+
+  @override
+  String get notificationsMarkAllRead => 'سب پڑھا ہوا کریں';
+
+  @override
+  String get notificationsMarkRead => 'پڑھا ہوا کریں';
+
+  @override
+  String get notificationsArchive => 'آرکائیو';
+
+  @override
+  String notificationsUnreadCount(int count) {
+    return '$count غیر پڑھی ہوئی';
+  }
+
+  @override
+  String get notificationsEmptyTitle => 'کوئی اطلاع نہیں';
+
+  @override
+  String get notificationsEmptyBody =>
+      'بجٹ alerts، goal milestones، SMS parser events، اور family activity یہاں نظر آئیں گے۔';
+
+  @override
+  String get notificationsFilterAll => 'سب';
+
+  @override
+  String get notificationsFilterBudgets => 'بجٹ';
+
+  @override
+  String get notificationsFilterGoals => 'اہداف';
+
+  @override
+  String get notificationsFilterFamily => 'فیملی';
+
+  @override
+  String get notificationsFilterSystem => 'سسٹم';
+
+  @override
+  String notificationsTimestamp(String date, String time) {
+    return '$date، $time';
+  }
+
+  @override
+  String get notificationBudgetTitle => 'بجٹ الرٹ';
+
+  @override
+  String notificationBudgetBody(String category, int percent) {
+    return '$category اپنے envelope کے $percent% تک پہنچ گیا۔';
+  }
+
+  @override
+  String get notificationGoalTitle => 'ہدف milestone';
+
+  @override
+  String notificationGoalBody(String goalName, int percent) {
+    return '$goalName کی funding $percent% سے آگے گئی۔';
+  }
+
+  @override
+  String get notificationSmsParserTitle => 'SMS parser event';
+
+  @override
+  String notificationSmsParserBody(String source, int confidence) {
+    return '$source نے $confidence% confidence کے ساتھ transaction parse کیا۔';
+  }
+
+  @override
+  String get notificationFamilyTitle => 'Family activity';
+
+  @override
+  String notificationFamilyBody(String memberName) {
+    return '$memberName نے shared family permissions تبدیل کیں۔';
+  }
+
+  @override
+  String get notificationSystemTitle => 'System message';
+
+  @override
+  String get notificationSystemBody =>
+      'Phase 1 میں payments، custody، اور money movement بند رہتے ہیں۔';
+
+  @override
+  String get accountsTitle => 'Accounts';
+
+  @override
+  String get accountsConnect => 'Account connect کریں';
+
+  @override
+  String get accountsConnectTitle => 'Account connect کریں';
+
+  @override
+  String get accountsEmptyTitle => 'کوئی connected account نہیں';
+
+  @override
+  String get accountsEmptyBody =>
+      'Dashboard کو بہتر بنانے کے لئے read-only accounts connect کریں یا manual account شامل کریں۔';
+
+  @override
+  String accountsLastSynced(String date, String time) {
+    return '$date کو $time پر synced';
+  }
+
+  @override
+  String get accountsTypeBank => 'Bank';
+
+  @override
+  String get accountsTypeCard => 'Card';
+
+  @override
+  String get accountsTypeWallet => 'Wallet';
+
+  @override
+  String get accountsStatusSynced => 'Synced';
+
+  @override
+  String get accountsStatusSyncing => 'Syncing';
+
+  @override
+  String get accountsStatusNeedsReview => 'Review';
+
+  @override
+  String get accountsDisconnect => 'Disconnect';
+
+  @override
+  String get accountsDisconnectTitle => 'Account disconnect کریں';
+
+  @override
+  String accountsDisconnectBody(String accountName) {
+    return '$accountName کو اس mock read-only view سے remove کریں؟';
+  }
+
+  @override
+  String get accountsProviderPickerTitle => 'Provider چنیں';
+
+  @override
+  String get accountsProviderTd => 'TD';
+
+  @override
+  String get accountsProviderRbc => 'RBC';
+
+  @override
+  String get accountsProviderEasypaisa => 'Easypaisa';
+
+  @override
+  String get accountsProviderJazzcash => 'JazzCash';
+
+  @override
+  String get accountsProviderManual => 'Manual';
+
+  @override
+  String accountsMockOAuthTitle(String providerName) {
+    return '$providerName secure preview';
+  }
+
+  @override
+  String get accountsMockOAuthBody =>
+      'یہ screen read-only provider connection simulate کرتی ہے۔ اس build میں credentials collect نہیں ہوتے۔';
+
+  @override
+  String get accountsConnectContinue => 'Preview جاری رکھیں';
+
+  @override
+  String get accountsConnectSuccessTitle => 'Account connected';
+
+  @override
+  String accountsConnectSuccessBody(String accountName) {
+    return '$accountName اب mock account list میں available ہے۔';
+  }
+
+  @override
+  String get accountsViewAccounts => 'Accounts دیکھیں';
 
   @override
   String get profileTitle => 'Profile';
