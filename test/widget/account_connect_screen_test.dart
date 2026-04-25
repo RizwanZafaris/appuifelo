@@ -5,12 +5,20 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:felo/core/localization/generated/app_localizations.dart';
 import 'package:felo/core/theme/felo_theme.dart';
+import 'package:felo/features/accounts/data/accounts_repository.dart';
 import 'package:felo/features/accounts/presentation/account_connect_screen.dart';
 
 void main() {
   testWidgets('account connect moves from picker to success', (tester) async {
     await tester.pumpWidget(
-      const ProviderScope(child: _AccountConnectTestApp()),
+      ProviderScope(
+        overrides: [
+          accountsRepositoryProvider.overrideWithValue(
+            FakeAccountsRepository(),
+          ),
+        ],
+        child: const _AccountConnectTestApp(),
+      ),
     );
     await tester.pumpAndSettle();
 

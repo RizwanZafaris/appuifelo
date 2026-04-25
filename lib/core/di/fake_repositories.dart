@@ -6,8 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:felo/features/accounts/data/accounts_repository.dart';
 import 'package:felo/features/accounts/domain/felo_account.dart';
 import 'package:felo/features/auth/domain/app_user.dart';
-import 'package:felo/features/bills/data/bills_repository.dart';
-import 'package:felo/features/bills/domain/bill.dart';
+// Bills moved to lib/features/bills/data/bills_repository.dart
 import 'package:felo/features/budgets/data/budgets_repository.dart';
 import 'package:felo/features/budgets/domain/budget.dart';
 import 'package:felo/features/coach/domain/coach_message.dart';
@@ -80,174 +79,6 @@ class FakeReceiptCaptureRepository implements ReceiptCaptureRepository {
   }
 }
 
-class FakeAccountsRepository implements AccountsRepository {
-  @override
-  List<FeloAccount> seedAccounts() {
-    return [
-      FeloAccount(
-        id: 'acct_td_chequing',
-        provider: FeloAccountProvider.td,
-        type: FeloAccountType.bank,
-        displayName: 'TD Chequing',
-        currency: 'CAD',
-        balanceMinor: 428000,
-        lastSyncedAt: DateTime(2026, 4, 25, 8, 45),
-        syncStatus: FeloAccountSyncStatus.synced,
-      ),
-      FeloAccount(
-        id: 'acct_rbc_mastercard',
-        provider: FeloAccountProvider.rbc,
-        type: FeloAccountType.card,
-        displayName: 'RBC Mastercard',
-        currency: 'CAD',
-        balanceMinor: -8422,
-        lastSyncedAt: DateTime(2026, 4, 24, 21, 10),
-        syncStatus: FeloAccountSyncStatus.needsReview,
-      ),
-      FeloAccount(
-        id: 'acct_easypaisa',
-        provider: FeloAccountProvider.easypaisa,
-        type: FeloAccountType.wallet,
-        displayName: 'Easypaisa wallet',
-        currency: 'PKR',
-        balanceMinor: 1865000,
-        lastSyncedAt: DateTime(2026, 4, 24, 15, 45),
-        syncStatus: FeloAccountSyncStatus.syncing,
-      ),
-    ];
-  }
-
-  @override
-  FeloAccount connectedAccountFor({
-    required FeloAccountProvider provider,
-    required int sequence,
-  }) {
-    final now = DateTime(2026, 4, 25, 10, 30);
-    return switch (provider) {
-      FeloAccountProvider.td => FeloAccount(
-        id: 'acct_td_connected_$sequence',
-        provider: provider,
-        type: FeloAccountType.bank,
-        displayName: 'TD Canada Trust',
-        currency: 'CAD',
-        balanceMinor: 215000,
-        lastSyncedAt: now,
-        syncStatus: FeloAccountSyncStatus.synced,
-      ),
-      FeloAccountProvider.rbc => FeloAccount(
-        id: 'acct_rbc_connected_$sequence',
-        provider: provider,
-        type: FeloAccountType.card,
-        displayName: 'RBC card',
-        currency: 'CAD',
-        balanceMinor: -32450,
-        lastSyncedAt: now,
-        syncStatus: FeloAccountSyncStatus.synced,
-      ),
-      FeloAccountProvider.easypaisa => FeloAccount(
-        id: 'acct_easypaisa_connected_$sequence',
-        provider: provider,
-        type: FeloAccountType.wallet,
-        displayName: 'Easypaisa wallet',
-        currency: 'PKR',
-        balanceMinor: 920000,
-        lastSyncedAt: now,
-        syncStatus: FeloAccountSyncStatus.synced,
-      ),
-      FeloAccountProvider.jazzcash => FeloAccount(
-        id: 'acct_jazzcash_connected_$sequence',
-        provider: provider,
-        type: FeloAccountType.wallet,
-        displayName: 'JazzCash wallet',
-        currency: 'PKR',
-        balanceMinor: 610000,
-        lastSyncedAt: now,
-        syncStatus: FeloAccountSyncStatus.synced,
-      ),
-      FeloAccountProvider.manual => FeloAccount(
-        id: 'acct_manual_connected_$sequence',
-        provider: provider,
-        type: FeloAccountType.bank,
-        displayName: 'Manual account',
-        currency: 'CAD',
-        balanceMinor: 0,
-        lastSyncedAt: now,
-        syncStatus: FeloAccountSyncStatus.synced,
-      ),
-    };
-  }
-}
-
-class FakeBillsRepository implements BillsRepository {
-  @override
-  List<Bill> seedBills() {
-    return [
-      Bill(
-        id: 'bill_k_electric',
-        name: 'K-Electric',
-        category: BillCategory.utility,
-        dueDate: DateTime(2026, 4, 28),
-        currency: 'PKR',
-        amountMinor: 124000,
-        autoPayEnabled: false,
-        source: BillSource.sms,
-        status: BillStatus.upcoming,
-      ),
-      Bill(
-        id: 'bill_mobile',
-        name: 'Mobile plan',
-        category: BillCategory.telecom,
-        dueDate: DateTime(2026, 5, 2),
-        currency: 'CAD',
-        amountMinor: 5800,
-        autoPayEnabled: true,
-        source: BillSource.manual,
-        status: BillStatus.upcoming,
-      ),
-      Bill(
-        id: 'bill_rent',
-        name: 'Rent',
-        category: BillCategory.rent,
-        dueDate: DateTime(2026, 5, 1),
-        currency: 'CAD',
-        amountMinor: 210000,
-        autoPayEnabled: false,
-        source: BillSource.manual,
-        status: BillStatus.upcoming,
-      ),
-      Bill(
-        id: 'bill_streaming',
-        name: 'Streaming',
-        category: BillCategory.subscription,
-        dueDate: DateTime(2026, 4, 24),
-        currency: 'CAD',
-        amountMinor: 1699,
-        autoPayEnabled: true,
-        source: BillSource.manual,
-        status: BillStatus.paid,
-      ),
-    ];
-  }
-
-  @override
-  Bill createManualBill({
-    required String name,
-    required int amountMinor,
-    required DateTime dueDate,
-  }) {
-    return Bill(
-      id: 'bill_manual_${name.hashCode.abs()}',
-      name: name,
-      category: BillCategory.subscription,
-      dueDate: dueDate,
-      currency: 'CAD',
-      amountMinor: amountMinor,
-      autoPayEnabled: false,
-      source: BillSource.manual,
-      status: BillStatus.upcoming,
-    );
-  }
-}
 
 class FakeSendMoneyRepository implements SendMoneyRepository {
   static const double _mockCadToPkrRate = 205.5;
@@ -766,33 +597,8 @@ class ReceiptCaptureSession extends _$ReceiptCaptureSession {
   }
 }
 
-@riverpod
-AccountsRepository accountsRepository(AccountsRepositoryRef ref) {
-  return FakeAccountsRepository();
-}
-
-@riverpod
-class Accounts extends _$Accounts {
-  @override
-  List<FeloAccount> build() {
-    return ref.watch(accountsRepositoryProvider).seedAccounts();
-  }
-
-  FeloAccount connect(FeloAccountProvider provider) {
-    final account = ref
-        .read(accountsRepositoryProvider)
-        .connectedAccountFor(provider: provider, sequence: state.length + 1);
-    state = [account, ...state];
-    return account;
-  }
-
-  void disconnect(String accountId) {
-    state = [
-      for (final account in state)
-        if (account.id != accountId) account,
-    ];
-  }
-}
+// Accounts / Bills providers moved to per-feature data layers.
+// See: lib/features/{accounts,bills}/data/*_repository.dart
 
 @riverpod
 class AccountConnectFlow extends _$AccountConnectFlow {
@@ -807,49 +613,16 @@ class AccountConnectFlow extends _$AccountConnectFlow {
     state = const AccountConnectState.picker();
   }
 
-  void complete() {
+  Future<void> complete() async {
     final current = state;
     if (current is! AccountConnectOAuth) {
       return;
     }
 
-    final account = ref
+    final account = await ref
         .read(accountsProvider.notifier)
         .connect(current.provider);
     state = AccountConnectState.success(account: account);
-  }
-}
-
-@riverpod
-BillsRepository billsRepository(BillsRepositoryRef ref) {
-  return FakeBillsRepository();
-}
-
-@riverpod
-class Bills extends _$Bills {
-  @override
-  List<Bill> build() => ref.watch(billsRepositoryProvider).seedBills();
-
-  void addManualBill({
-    required String name,
-    required int amountMinor,
-    required DateTime dueDate,
-  }) {
-    final bill = ref
-        .read(billsRepositoryProvider)
-        .createManualBill(
-          name: name,
-          amountMinor: amountMinor,
-          dueDate: dueDate,
-        );
-    state = [bill, ...state];
-  }
-
-  void markPaid(String billId) {
-    state = [
-      for (final bill in state)
-        if (bill.id == billId) bill.copyWith(status: BillStatus.paid) else bill,
-    ];
   }
 }
 

@@ -329,42 +329,6 @@ final imagePickerProvider = AutoDisposeProvider<ImagePicker>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ImagePickerRef = AutoDisposeProviderRef<ImagePicker>;
-String _$accountsRepositoryHash() =>
-    r'a5ddbf9815172f1c8243972ae64e887ead4e89f9';
-
-/// See also [accountsRepository].
-@ProviderFor(accountsRepository)
-final accountsRepositoryProvider =
-    AutoDisposeProvider<AccountsRepository>.internal(
-      accountsRepository,
-      name: r'accountsRepositoryProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$accountsRepositoryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef AccountsRepositoryRef = AutoDisposeProviderRef<AccountsRepository>;
-String _$billsRepositoryHash() => r'b15651978cf3fe77fb9f6fd00c4beb8d0230bb40';
-
-/// See also [billsRepository].
-@ProviderFor(billsRepository)
-final billsRepositoryProvider = AutoDisposeProvider<BillsRepository>.internal(
-  billsRepository,
-  name: r'billsRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$billsRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef BillsRepositoryRef = AutoDisposeProviderRef<BillsRepository>;
 String _$sendMoneyRepositoryHash() =>
     r'4c04eacb0cc38c24c8d5a434d45787a2d1ca4517';
 
@@ -624,24 +588,8 @@ class _ReceiptCaptureSessionProviderElement
       (origin as ReceiptCaptureSessionProvider).transactionId;
 }
 
-String _$accountsHash() => r'd1d29dc1ccf6979e89d44a719af960ecf20e57ac';
-
-/// See also [Accounts].
-@ProviderFor(Accounts)
-final accountsProvider =
-    AutoDisposeNotifierProvider<Accounts, List<FeloAccount>>.internal(
-      Accounts.new,
-      name: r'accountsProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$accountsHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-typedef _$Accounts = AutoDisposeNotifier<List<FeloAccount>>;
 String _$accountConnectFlowHash() =>
-    r'0d9da8da446b00252e06198593fd38fddba172f4';
+    r'4040dcf4cba3241fc3721eeecccb3d909ba9d063';
 
 /// See also [AccountConnectFlow].
 @ProviderFor(AccountConnectFlow)
@@ -660,21 +608,6 @@ final accountConnectFlowProvider =
     );
 
 typedef _$AccountConnectFlow = AutoDisposeNotifier<AccountConnectState>;
-String _$billsHash() => r'c63ab49baaca3da5d51fd2efb26a228aa5a10353';
-
-/// See also [Bills].
-@ProviderFor(Bills)
-final billsProvider = AutoDisposeNotifierProvider<Bills, List<Bill>>.internal(
-  Bills.new,
-  name: r'billsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$billsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$Bills = AutoDisposeNotifier<List<Bill>>;
 String _$sendMoneyFlowHash() => r'6eebc931e69d563833b2e2dfebdc27861838da5c';
 
 /// See also [SendMoneyFlow].

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:felo/core/di/fake_repositories.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
+import 'package:felo/features/bills/data/bills_repository.dart';
 import 'package:felo/features/bills/domain/bill.dart';
 import 'package:felo/shared/utils/money_format.dart';
 import 'package:felo/shared/widgets/felo_bottom_sheet.dart';
@@ -19,9 +19,7 @@ class BillsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final bills = ref.watch(billsProvider);
-    final sortedBills = [...bills]
-      ..sort((a, b) => a.dueDate.compareTo(b.dueDate));
+    final billsAsync = ref.watch(billsProvider);
 
     return FeloScaffold(
       title: l10n.billsTitle,
@@ -35,16 +33,31 @@ class BillsScreen extends ConsumerWidget {
           icon: const Icon(Icons.add_rounded),
         ),
       ],
-      child: bills.isEmpty
-          ? FeloEmptyState(
+      child: billsAsync.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, _) => Padding(
+          padding: const EdgeInsets.all(20),
+          child: FeloEmptyState(
+            title: 'Could not load bills',
+            body: error.toString(),
+          ),
+        ),
+        data: (bills) {
+          final sortedBills = [...bills]
+            ..sort((a, b) => a.dueDate.compareTo(b.dueDate));
+          if (bills.isEmpty) {
+            return FeloEmptyState(
               title: l10n.billsEmptyTitle,
               body: l10n.billsEmptyBody,
               actionLabel: l10n.billsAddBill,
               onAction: () async {
                 await _showAddBillSheet(context, ref);
               },
-            )
-          : ListView(
+            );
+          }
+          return RefreshIndicator(
+            onRefresh: () => ref.read(billsProvider.notifier).refresh(),
+            child: ListView(
               padding: const EdgeInsets.all(20),
               children: [
                 _CalendarStrip(bills: sortedBills),
@@ -55,6 +68,9 @@ class BillsScreen extends ConsumerWidget {
                 ],
               ],
             ),
+          );
+        },
+      ),
     );
   }
 
@@ -100,7 +116,7 @@ class BillsScreen extends ConsumerWidget {
               const SizedBox(height: 20),
               FeloButton(
                 label: l10n.commonSave,
-                onPressed: () {
+                onPressed: () async {
                   final parsedAmount = double.tryParse(
                     amountController.text.replaceAll(RegExp('[^0-9.]'), ''),
                   );
@@ -112,7 +128,7 @@ class BillsScreen extends ConsumerWidget {
                       : (parsedAmount * 100).round();
                   final dueDay = (parsedDay ?? DateTime.now().day).clamp(1, 28);
                   final today = DateTime.now();
-                  ref
+                  await ref
                       .read(billsProvider.notifier)
                       .addManualBill(
                         name: nameController.text.trim().isEmpty
@@ -121,7 +137,9 @@ class BillsScreen extends ConsumerWidget {
                         amountMinor: amountMinor,
                         dueDate: DateTime(today.year, today.month + 1, dueDay),
                       );
-                  Navigator.of(sheetContext).pop();
+                  if (sheetContext.mounted) {
+                    Navigator.of(sheetContext).pop();
+                  }
                 },
               ),
             ],

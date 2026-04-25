@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:felo/core/di/fake_repositories.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
+import 'package:felo/features/accounts/data/accounts_repository.dart';
 import 'package:felo/features/accounts/domain/felo_account.dart';
 import 'package:felo/shared/utils/money_format.dart';
 import 'package:felo/shared/widgets/felo_bottom_sheet.dart';
@@ -19,7 +20,7 @@ class AccountsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final accounts = ref.watch(accountsProvider);
+    final accountsAsync = ref.watch(accountsProvider);
 
     return FeloScaffold(
       title: l10n.accountsTitle,
@@ -34,30 +35,45 @@ class AccountsScreen extends ConsumerWidget {
           icon: const Icon(Icons.add_link_rounded),
         ),
       ],
-      child: accounts.isEmpty
-          ? FeloEmptyState(
-              title: l10n.accountsEmptyTitle,
-              body: l10n.accountsEmptyBody,
-              actionLabel: l10n.accountsConnect,
-              onAction: () {
-                ref.read(accountConnectFlowProvider.notifier).reset();
-                context.go('/accounts/connect');
-              },
-            )
-          : ListView.separated(
-              padding: const EdgeInsets.all(20),
-              itemBuilder: (context, index) {
-                final account = accounts[index];
-                return _AccountCard(
-                  account: account,
-                  onDisconnect: () {
-                    _showDisconnectSheet(context, ref, account);
+      child: accountsAsync.when(
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, _) => Padding(
+          padding: const EdgeInsets.all(20),
+          child: FeloEmptyState(
+            title: 'Could not load accounts',
+            body: error.toString(),
+          ),
+        ),
+        data: (accounts) => accounts.isEmpty
+            ? FeloEmptyState(
+                title: l10n.accountsEmptyTitle,
+                body: l10n.accountsEmptyBody,
+                actionLabel: l10n.accountsConnect,
+                onAction: () {
+                  ref.read(accountConnectFlowProvider.notifier).reset();
+                  context.go('/accounts/connect');
+                },
+              )
+            : RefreshIndicator(
+                onRefresh: () =>
+                    ref.read(accountsProvider.notifier).refresh(),
+                child: ListView.separated(
+                  padding: const EdgeInsets.all(20),
+                  itemBuilder: (context, index) {
+                    final account = accounts[index];
+                    return _AccountCard(
+                      account: account,
+                      onDisconnect: () {
+                        _showDisconnectSheet(context, ref, account);
+                      },
+                    );
                   },
-                );
-              },
-              separatorBuilder: (context, index) => const SizedBox(height: 12),
-              itemCount: accounts.length,
-            ),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 12),
+                  itemCount: accounts.length,
+                ),
+              ),
+      ),
     );
   }
 
@@ -88,9 +104,13 @@ class AccountsScreen extends ConsumerWidget {
               FeloButton(
                 label: l10n.accountsDisconnect,
                 icon: Icons.link_off_rounded,
-                onPressed: () {
-                  ref.read(accountsProvider.notifier).disconnect(account.id);
-                  Navigator.of(sheetContext).pop();
+                onPressed: () async {
+                  await ref
+                      .read(accountsProvider.notifier)
+                      .disconnect(account.id);
+                  if (sheetContext.mounted) {
+                    Navigator.of(sheetContext).pop();
+                  }
                 },
               ),
               const SizedBox(height: 10),
