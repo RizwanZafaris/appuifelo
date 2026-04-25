@@ -76,40 +76,6 @@ final parsedSmsMessagesProvider = AutoDisposeProvider<List<ParsedSms>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef ParsedSmsMessagesRef = AutoDisposeProviderRef<List<ParsedSms>>;
-String _$coachRepositoryHash() => r'75e51c1a1c7f3f6464d7e7a6964e54e9abd28068';
-
-/// See also [coachRepository].
-@ProviderFor(coachRepository)
-final coachRepositoryProvider = AutoDisposeProvider<CoachRepository>.internal(
-  coachRepository,
-  name: r'coachRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$coachRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef CoachRepositoryRef = AutoDisposeProviderRef<CoachRepository>;
-String _$coachMessagesHash() => r'0f1b34b5692d99c7b48a67ab60a9cc246d048265';
-
-/// See also [coachMessages].
-@ProviderFor(coachMessages)
-final coachMessagesProvider = AutoDisposeProvider<List<CoachMessage>>.internal(
-  coachMessages,
-  name: r'coachMessagesProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$coachMessagesHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef CoachMessagesRef = AutoDisposeProviderRef<List<CoachMessage>>;
 String _$familyRepositoryHash() => r'18a6e6435d1540e026211bc025ea542654c9a6af';
 
 /// See also [familyRepository].
@@ -144,41 +110,6 @@ final familyMembersProvider = AutoDisposeProvider<List<FamilyMember>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef FamilyMembersRef = AutoDisposeProviderRef<List<FamilyMember>>;
-String _$profileRepositoryHash() => r'b02c51d2b72d7ec71dc97ab2de348f992092df5d';
-
-/// See also [profileRepository].
-@ProviderFor(profileRepository)
-final profileRepositoryProvider =
-    AutoDisposeProvider<ProfileRepository>.internal(
-      profileRepository,
-      name: r'profileRepositoryProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$profileRepositoryHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef ProfileRepositoryRef = AutoDisposeProviderRef<ProfileRepository>;
-String _$profileSettingsHash() => r'3f6f97948725f8aa5d5f5d72bb689d237ede93f0';
-
-/// See also [profileSettings].
-@ProviderFor(profileSettings)
-final profileSettingsProvider = AutoDisposeProvider<ProfileSettings>.internal(
-  profileSettings,
-  name: r'profileSettingsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$profileSettingsHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef ProfileSettingsRef = AutoDisposeProviderRef<ProfileSettings>;
 String _$remittanceRepositoryHash() =>
     r'12dcfe0cc5f7d29ff7b32f84b6085f68c7cc80a0';
 

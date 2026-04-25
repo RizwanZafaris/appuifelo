@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:felo/core/di/fake_repositories.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
 import 'package:felo/features/auth/data/mfa_repository.dart';
+import 'package:felo/features/profile/data/profile_repository.dart';
+import 'package:felo/features/profile/domain/profile_settings.dart';
 import 'package:felo/features/referrals/data/referrals_repository.dart';
 import 'package:felo/shared/widgets/felo_card.dart';
 import 'package:felo/shared/widgets/felo_feature_placeholder.dart';
@@ -15,7 +16,19 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final settings = ref.watch(profileSettingsProvider);
+    final settingsAsync = ref.watch(profileSettingsNotifierProvider);
+    // Render with sane defaults while live data loads. Profile is mostly
+    // navigational rows; only the SMS parser toggle and language/theme
+    // row need real values, and those are tolerant of the brief default.
+    final settings =
+        settingsAsync.valueOrNull ??
+        const ProfileSettings(
+          languageCode: 'en',
+          themeMode: FeloThemeMode.system,
+          operationalNotifications: true,
+          marketingConsent: false,
+          smsParserEnabled: false,
+        );
     final plusProfile = ref.watch(feloPlusProfileProvider);
     final plusValue = plusProfile.maybeWhen(
       data: (profile) =>
@@ -31,7 +44,11 @@ class ProfileScreen extends ConsumerWidget {
         FeloCard(
           child: SwitchListTile.adaptive(
             value: settings.smsParserEnabled,
-            onChanged: (_) {},
+            onChanged: (value) {
+              ref
+                  .read(profileSettingsNotifierProvider.notifier)
+                  .updateSmsParserEnabled(value);
+            },
             title: Text(l10n.smsParserTitle),
           ),
         ),

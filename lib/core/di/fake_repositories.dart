@@ -9,7 +9,7 @@ import 'package:felo/features/auth/domain/app_user.dart';
 // Bills moved to lib/features/bills/data/bills_repository.dart
 import 'package:felo/features/budgets/data/budgets_repository.dart';
 import 'package:felo/features/budgets/domain/budget.dart';
-import 'package:felo/features/coach/domain/coach_message.dart';
+// Coach domain moved out of fake_repositories — see coach_conversation_controller.dart
 import 'package:felo/features/family/domain/family_member.dart';
 import 'package:felo/features/goals/data/goals_repository.dart';
 import 'package:felo/features/goals/domain/goal.dart';
@@ -17,7 +17,7 @@ import 'package:felo/core/config/felo_env.dart';
 import 'package:felo/features/notifications/data/live_notifications_service.dart';
 import 'package:felo/features/notifications/data/notifications_repository.dart';
 import 'package:felo/features/notifications/domain/felo_notification.dart';
-import 'package:felo/features/profile/domain/profile_settings.dart';
+// Profile moved to lib/features/profile/data/profile_repository.dart
 import 'package:felo/features/receipt_capture/data/receipt_capture_repository.dart';
 import 'package:felo/features/receipt_capture/domain/receipt_capture.dart';
 import 'package:felo/features/remittance_stub/domain/remittance_waitlist.dart';
@@ -151,27 +151,8 @@ class SmsParserRepository {
   }
 }
 
-class CoachRepository {
-  List<CoachMessage> seedMessages() {
-    return [
-      CoachMessage(
-        id: 'coach_system',
-        author: CoachMessageAuthor.system,
-        text: 'Education only. I can explain patterns, not give advice.',
-        createdAt: DateTime(2026, 4, 24, 8),
-        adviceBoundaryVisible: true,
-      ),
-      CoachMessage(
-        id: 'coach_001',
-        author: CoachMessageAuthor.coach,
-        text:
-            'Groceries are 8% lower than last month. Your family support budget is still on pace.',
-        createdAt: DateTime(2026, 4, 24, 8, 1),
-        adviceBoundaryVisible: true,
-      ),
-    ];
-  }
-}
+// CoachRepository removed — Coach screen now uses
+// `coachConversationProvider` from lib/features/coach/application/.
 
 class FamilyRepository {
   List<FamilyMember> members() {
@@ -196,17 +177,7 @@ class FamilyRepository {
   }
 }
 
-class ProfileRepository {
-  ProfileSettings settings() {
-    return const ProfileSettings(
-      languageCode: 'en',
-      themeMode: FeloThemeMode.dark,
-      operationalNotifications: true,
-      marketingConsent: false,
-      smsParserEnabled: true,
-    );
-  }
-}
+// ProfileRepository moved to lib/features/profile/data/profile_repository.dart
 
 class RemittanceRepository {
   RemittanceWaitlist waitlist() {
@@ -303,13 +274,10 @@ List<ParsedSms> parsedSmsMessages(ParsedSmsMessagesRef ref) {
   return ref.watch(smsParserRepositoryProvider).recentParses();
 }
 
-@riverpod
-CoachRepository coachRepository(CoachRepositoryRef ref) => CoachRepository();
-
-@riverpod
-List<CoachMessage> coachMessages(CoachMessagesRef ref) {
-  return ref.watch(coachRepositoryProvider).seedMessages();
-}
+// Coach: live conversation logic lives in
+// lib/features/coach/application/coach_conversation_controller.dart
+// (the screen reads `coachConversationProvider` directly). The legacy
+// fake `coachMessagesProvider` was unused in screens — removed.
 
 @riverpod
 FamilyRepository familyRepository(FamilyRepositoryRef ref) =>
@@ -320,14 +288,7 @@ List<FamilyMember> familyMembers(FamilyMembersRef ref) {
   return ref.watch(familyRepositoryProvider).members();
 }
 
-@riverpod
-ProfileRepository profileRepository(ProfileRepositoryRef ref) =>
-    ProfileRepository();
-
-@riverpod
-ProfileSettings profileSettings(ProfileSettingsRef ref) {
-  return ref.watch(profileRepositoryProvider).settings();
-}
+// Profile moved to lib/features/profile/data/profile_repository.dart
 
 @riverpod
 RemittanceRepository remittanceRepository(RemittanceRepositoryRef ref) {
