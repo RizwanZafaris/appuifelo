@@ -30,6 +30,7 @@ import 'package:felo/features/referrals/presentation/referrals_screen.dart';
 import 'package:felo/features/remittance_stub/presentation/remittance_stub_screen.dart';
 import 'package:felo/features/send_money/presentation/send_money_screens.dart';
 import 'package:felo/features/sms_parser/presentation/sms_parser_screen.dart';
+import 'package:felo/features/splits/presentation/splits_screens.dart';
 import 'package:felo/features/system/presentation/system_screens.dart';
 import 'package:felo/features/transactions/presentation/money_extension_screens.dart';
 import 'package:felo/features/transactions/presentation/transaction_detail_screen.dart';
@@ -136,6 +137,42 @@ class BillsRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const BillsScreen();
+  }
+}
+
+@TypedGoRoute<SplitsRoute>(
+  path: '/splits',
+  routes: [
+    TypedGoRoute<NewSplitRoute>(path: 'new'),
+    TypedGoRoute<SplitDetailRoute>(path: ':splitId'),
+  ],
+)
+class SplitsRoute extends GoRouteData {
+  const SplitsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const SplitsScreen();
+  }
+}
+
+class NewSplitRoute extends GoRouteData {
+  const NewSplitRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const NewSplitScreen();
+  }
+}
+
+class SplitDetailRoute extends GoRouteData {
+  const SplitDetailRoute(this.splitId);
+
+  final String splitId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return SplitDetailScreen(splitId: splitId);
   }
 }
 

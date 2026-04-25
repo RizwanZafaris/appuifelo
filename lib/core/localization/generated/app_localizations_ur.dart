@@ -456,6 +456,122 @@ class AppLocalizationsUr extends AppLocalizations {
   String get billsMarkPaid => 'Paid mark کریں';
 
   @override
+  String get splitsTitle => 'Splits';
+
+  @override
+  String get splitsDetailTitle => 'Split detail';
+
+  @override
+  String get splitsNewSplit => 'New split';
+
+  @override
+  String get splitsActiveTab => 'Active';
+
+  @override
+  String get splitsSettledTab => 'Settled';
+
+  @override
+  String get splitsEmptyActiveTitle => 'کوئی active split نہیں';
+
+  @override
+  String get splitsEmptyActiveBody =>
+      'Chat میں chase کئے بغیر payments track کرنے کے لئے split بنائیں۔';
+
+  @override
+  String get splitsEmptySettledTitle => 'کوئی settled split نہیں';
+
+  @override
+  String get splitsEmptySettledBody =>
+      'Completed splits reference کے لئے یہاں نظر آئیں گے۔';
+
+  @override
+  String splitsPaidProgress(int paid, int total) {
+    return '$paid of $total paid';
+  }
+
+  @override
+  String get splitsWizardBasics => 'Name اور currency';
+
+  @override
+  String get splitsWizardAmount => 'Total amount';
+
+  @override
+  String get splitsWizardParticipants => 'Participants';
+
+  @override
+  String get splitsWizardReview => 'Review';
+
+  @override
+  String get splitsNameLabel => 'Split name';
+
+  @override
+  String get splitsNameHint => 'Rent، dinner، family gift';
+
+  @override
+  String get splitsCurrencyLabel => 'Currency';
+
+  @override
+  String get splitsAmountLabel => 'Total amount';
+
+  @override
+  String get splitsEqualShares => 'Equal';
+
+  @override
+  String get splitsCustomShares => 'Custom';
+
+  @override
+  String get splitsAddParticipant => 'Participant شامل کریں';
+
+  @override
+  String get splitsRemoveParticipant => 'Participant remove کریں';
+
+  @override
+  String splitsParticipantNumber(int number) {
+    return 'Participant $number';
+  }
+
+  @override
+  String splitsParticipantFallback(int number) {
+    return 'Participant $number';
+  }
+
+  @override
+  String get splitsParticipantName => 'Name';
+
+  @override
+  String get splitsParticipantContact => 'Phone یا email';
+
+  @override
+  String get splitsParticipantShare => 'Share';
+
+  @override
+  String get splitsShareValidationOk => 'Shares total سے match کرتے ہیں۔';
+
+  @override
+  String splitsShareValidationError(String current, String expected) {
+    return 'Shares $current بنتے ہیں، expected $expected ہے۔';
+  }
+
+  @override
+  String get splitsCreateSplit => 'Split create کریں';
+
+  @override
+  String get splitsParticipantsTitle => 'Participants';
+
+  @override
+  String get splitsSettleAll => 'سب settle کریں';
+
+  @override
+  String get splitsNotFoundTitle => 'Split نہیں ملا';
+
+  @override
+  String get splitsNotFoundBody =>
+      'یہ split close یا remove ہو چکا ہو سکتا ہے۔';
+
+  @override
+  String get splitsContactMissing => 'Contact شامل نہیں';
+
+  @override
   String get sendTitle => 'Send money';
 
   @override

@@ -456,6 +456,122 @@ class AppLocalizationsEn extends AppLocalizations {
   String get billsMarkPaid => 'Mark paid';
 
   @override
+  String get splitsTitle => 'Splits';
+
+  @override
+  String get splitsDetailTitle => 'Split detail';
+
+  @override
+  String get splitsNewSplit => 'New split';
+
+  @override
+  String get splitsActiveTab => 'Active';
+
+  @override
+  String get splitsSettledTab => 'Settled';
+
+  @override
+  String get splitsEmptyActiveTitle => 'No active splits';
+
+  @override
+  String get splitsEmptyActiveBody =>
+      'Create a split to track who has paid without chasing in chat.';
+
+  @override
+  String get splitsEmptySettledTitle => 'No settled splits';
+
+  @override
+  String get splitsEmptySettledBody =>
+      'Completed splits will appear here for reference.';
+
+  @override
+  String splitsPaidProgress(int paid, int total) {
+    return '$paid of $total paid';
+  }
+
+  @override
+  String get splitsWizardBasics => 'Name and currency';
+
+  @override
+  String get splitsWizardAmount => 'Total amount';
+
+  @override
+  String get splitsWizardParticipants => 'Participants';
+
+  @override
+  String get splitsWizardReview => 'Review';
+
+  @override
+  String get splitsNameLabel => 'Split name';
+
+  @override
+  String get splitsNameHint => 'Rent, dinner, family gift';
+
+  @override
+  String get splitsCurrencyLabel => 'Currency';
+
+  @override
+  String get splitsAmountLabel => 'Total amount';
+
+  @override
+  String get splitsEqualShares => 'Equal';
+
+  @override
+  String get splitsCustomShares => 'Custom';
+
+  @override
+  String get splitsAddParticipant => 'Add participant';
+
+  @override
+  String get splitsRemoveParticipant => 'Remove participant';
+
+  @override
+  String splitsParticipantNumber(int number) {
+    return 'Participant $number';
+  }
+
+  @override
+  String splitsParticipantFallback(int number) {
+    return 'Participant $number';
+  }
+
+  @override
+  String get splitsParticipantName => 'Name';
+
+  @override
+  String get splitsParticipantContact => 'Phone or email';
+
+  @override
+  String get splitsParticipantShare => 'Share';
+
+  @override
+  String get splitsShareValidationOk => 'Shares match the total.';
+
+  @override
+  String splitsShareValidationError(String current, String expected) {
+    return 'Shares add up to $current, expected $expected.';
+  }
+
+  @override
+  String get splitsCreateSplit => 'Create split';
+
+  @override
+  String get splitsParticipantsTitle => 'Participants';
+
+  @override
+  String get splitsSettleAll => 'Settle all';
+
+  @override
+  String get splitsNotFoundTitle => 'Split not found';
+
+  @override
+  String get splitsNotFoundBody =>
+      'This split may have been closed or removed.';
+
+  @override
+  String get splitsContactMissing => 'No contact added';
+
+  @override
   String get sendTitle => 'Send money';
 
   @override

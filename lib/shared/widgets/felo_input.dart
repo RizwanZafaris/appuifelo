@@ -8,6 +8,8 @@ class FeloInput extends StatelessWidget {
     this.controller,
     this.keyboardType,
     this.obscureText = false,
+    this.enabled,
+    this.textCapitalization = TextCapitalization.none,
   });
 
   final String label;
@@ -15,6 +17,8 @@ class FeloInput extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final bool obscureText;
+  final bool? enabled;
+  final TextCapitalization textCapitalization;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +26,8 @@ class FeloInput extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       obscureText: obscureText,
+      enabled: enabled,
+      textCapitalization: textCapitalization,
       minLines: 1,
       decoration: InputDecoration(labelText: label, hintText: hint),
     );

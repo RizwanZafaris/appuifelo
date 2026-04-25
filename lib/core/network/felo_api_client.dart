@@ -142,4 +142,45 @@ abstract class FeloApiClient {
   // -------- Insights -----------------------------------------------
   @GET('/insights/spending')
   Future<dynamic> getSpendingInsights(@Query('period') String period);
+
+  // -------- Splits -------------------------------------------------
+  @GET('/splits')
+  Future<dynamic> listSplits({@Query('status') String? status});
+
+  @GET('/splits/{id}')
+  Future<dynamic> getSplit(@Path('id') String id);
+
+  @POST('/splits')
+  Future<dynamic> createSplit(@Body() Map<String, dynamic> body);
+
+  @PATCH('/splits/{id}')
+  Future<dynamic> updateSplit(
+    @Path('id') String id,
+    @Body() Map<String, dynamic> body,
+  );
+
+  @DELETE('/splits/{id}')
+  Future<dynamic> deleteSplit(@Path('id') String id);
+
+  @POST('/splits/{id}/participants')
+  Future<dynamic> addSplitParticipant(
+    @Path('id') String id,
+    @Body() Map<String, dynamic> body,
+  );
+
+  @PATCH('/splits/{id}/participants/{participantId}')
+  Future<dynamic> updateSplitParticipant(
+    @Path('id') String id,
+    @Path('participantId') String participantId,
+    @Body() Map<String, dynamic> body,
+  );
+
+  @DELETE('/splits/{id}/participants/{participantId}')
+  Future<dynamic> deleteSplitParticipant(
+    @Path('id') String id,
+    @Path('participantId') String participantId,
+  );
+
+  @POST('/splits/{id}/settle')
+  Future<dynamic> settleSplit(@Path('id') String id);
 }

@@ -15,6 +15,7 @@ List<RouteBase> get $appRoutes => [
   $notificationsRoute,
   $accountsRoute,
   $billsRoute,
+  $splitsRoute,
   $sendRoute,
   $budgetsRoute,
   $goalsRoute,
@@ -218,6 +219,71 @@ extension $BillsRouteExtension on BillsRoute {
   static BillsRoute _fromState(GoRouterState state) => const BillsRoute();
 
   String get location => GoRouteData.$location('/bills');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $splitsRoute => GoRouteData.$route(
+  path: '/splits',
+
+  factory: $SplitsRouteExtension._fromState,
+  routes: [
+    GoRouteData.$route(
+      path: 'new',
+
+      factory: $NewSplitRouteExtension._fromState,
+    ),
+    GoRouteData.$route(
+      path: ':splitId',
+
+      factory: $SplitDetailRouteExtension._fromState,
+    ),
+  ],
+);
+
+extension $SplitsRouteExtension on SplitsRoute {
+  static SplitsRoute _fromState(GoRouterState state) => const SplitsRoute();
+
+  String get location => GoRouteData.$location('/splits');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $NewSplitRouteExtension on NewSplitRoute {
+  static NewSplitRoute _fromState(GoRouterState state) => const NewSplitRoute();
+
+  String get location => GoRouteData.$location('/splits/new');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $SplitDetailRouteExtension on SplitDetailRoute {
+  static SplitDetailRoute _fromState(GoRouterState state) =>
+      SplitDetailRoute(state.pathParameters['splitId']!);
+
+  String get location =>
+      GoRouteData.$location('/splits/${Uri.encodeComponent(splitId)}');
 
   void go(BuildContext context) => context.go(location);
 

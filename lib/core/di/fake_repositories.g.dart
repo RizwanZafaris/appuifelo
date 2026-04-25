@@ -108,6 +108,23 @@ final goalsProvider = AutoDisposeProvider<List<Goal>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GoalsRef = AutoDisposeProviderRef<List<Goal>>;
+String _$splitsRepositoryHash() => r'9a12945a7625845b8d22737bea7936dae75876ab';
+
+/// See also [splitsRepository].
+@ProviderFor(splitsRepository)
+final splitsRepositoryProvider = AutoDisposeProvider<SplitsRepository>.internal(
+  splitsRepository,
+  name: r'splitsRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$splitsRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef SplitsRepositoryRef = AutoDisposeProviderRef<SplitsRepository>;
 String _$transactionRepositoryHash() =>
     r'c2847b825170bbc3b692461530c126430d879de0';
 
@@ -473,6 +490,22 @@ final sendRecipientsProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SendRecipientsRef = AutoDisposeProviderRef<List<SendRecipient>>;
+String _$splitsHash() => r'4ac0e244a1c38b39e0c3f85a93345b8eeaa81d1e';
+
+/// See also [Splits].
+@ProviderFor(Splits)
+final splitsProvider =
+    AutoDisposeNotifierProvider<Splits, List<Split>>.internal(
+      Splits.new,
+      name: r'splitsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$splitsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$Splits = AutoDisposeNotifier<List<Split>>;
 String _$transactionsHash() => r'08489c1e1b43e0fd4af3aea4fdced425d2f82315';
 
 /// See also [Transactions].

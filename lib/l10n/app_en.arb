@@ -187,6 +187,75 @@
   "billsPayPreview": "Pay preview",
   "billsPayPreviewBody": "This is a bill-management preview only. No payment is initiated and no money is moved.",
   "billsMarkPaid": "Mark paid",
+  "splitsTitle": "Splits",
+  "splitsDetailTitle": "Split detail",
+  "splitsNewSplit": "New split",
+  "splitsActiveTab": "Active",
+  "splitsSettledTab": "Settled",
+  "splitsEmptyActiveTitle": "No active splits",
+  "splitsEmptyActiveBody": "Create a split to track who has paid without chasing in chat.",
+  "splitsEmptySettledTitle": "No settled splits",
+  "splitsEmptySettledBody": "Completed splits will appear here for reference.",
+  "splitsPaidProgress": "{paid} of {total} paid",
+  "@splitsPaidProgress": {
+    "placeholders": {
+      "paid": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "splitsWizardBasics": "Name and currency",
+  "splitsWizardAmount": "Total amount",
+  "splitsWizardParticipants": "Participants",
+  "splitsWizardReview": "Review",
+  "splitsNameLabel": "Split name",
+  "splitsNameHint": "Rent, dinner, family gift",
+  "splitsCurrencyLabel": "Currency",
+  "splitsAmountLabel": "Total amount",
+  "splitsEqualShares": "Equal",
+  "splitsCustomShares": "Custom",
+  "splitsAddParticipant": "Add participant",
+  "splitsRemoveParticipant": "Remove participant",
+  "splitsParticipantNumber": "Participant {number}",
+  "@splitsParticipantNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "splitsParticipantFallback": "Participant {number}",
+  "@splitsParticipantFallback": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "splitsParticipantName": "Name",
+  "splitsParticipantContact": "Phone or email",
+  "splitsParticipantShare": "Share",
+  "splitsShareValidationOk": "Shares match the total.",
+  "splitsShareValidationError": "Shares add up to {current}, expected {expected}.",
+  "@splitsShareValidationError": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "expected": {
+        "type": "String"
+      }
+    }
+  },
+  "splitsCreateSplit": "Create split",
+  "splitsParticipantsTitle": "Participants",
+  "splitsSettleAll": "Settle all",
+  "splitsNotFoundTitle": "Split not found",
+  "splitsNotFoundBody": "This split may have been closed or removed.",
+  "splitsContactMissing": "No contact added",
   "sendTitle": "Send money",
   "sendPickRecipientTitle": "Pick recipient",
   "sendAddRecipient": "Add new recipient",
