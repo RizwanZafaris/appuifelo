@@ -17,6 +17,7 @@ import 'package:felo/features/goals/presentation/goal_detail_screen.dart';
 import 'package:felo/features/goals/presentation/goals_screen.dart';
 import 'package:felo/features/help/presentation/help_screen.dart';
 import 'package:felo/features/home_dashboard/presentation/home_screen.dart';
+import 'package:felo/features/investments/presentation/investments_screens.dart';
 import 'package:felo/features/kyc/presentation/kyc_screen.dart';
 import 'package:felo/features/notifications/presentation/notifications_screen.dart';
 import 'package:felo/features/onboarding/presentation/onboarding_screen.dart';
@@ -274,6 +275,42 @@ class GoalDetailRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return GoalDetailScreen(goalId: goalId);
+  }
+}
+
+@TypedGoRoute<InvestmentsRoute>(
+  path: '/investments',
+  routes: [
+    TypedGoRoute<InvestmentAddRoute>(path: 'new'),
+    TypedGoRoute<InvestmentDetailRoute>(path: ':investmentId'),
+  ],
+)
+class InvestmentsRoute extends GoRouteData {
+  const InvestmentsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const InvestmentsScreen();
+  }
+}
+
+class InvestmentAddRoute extends GoRouteData {
+  const InvestmentAddRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const InvestmentAddScreen();
+  }
+}
+
+class InvestmentDetailRoute extends GoRouteData {
+  const InvestmentDetailRoute(this.investmentId);
+
+  final String investmentId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return InvestmentDetailScreen(investmentId: investmentId);
   }
 }
 

@@ -183,4 +183,26 @@ abstract class FeloApiClient {
 
   @POST('/splits/{id}/settle')
   Future<dynamic> settleSplit(@Path('id') String id);
+
+  // -------- Investments --------------------------------------------
+  @GET('/investments')
+  Future<dynamic> listInvestments();
+
+  @GET('/investments/portfolio')
+  Future<dynamic> getInvestmentPortfolio();
+
+  @GET('/investments/{id}')
+  Future<dynamic> getInvestment(@Path('id') String id);
+
+  @POST('/investments')
+  Future<dynamic> createInvestment(@Body() Map<String, dynamic> body);
+
+  @PATCH('/investments/{id}')
+  Future<dynamic> updateInvestment(
+    @Path('id') String id,
+    @Body() Map<String, dynamic> body,
+  );
+
+  @DELETE('/investments/{id}')
+  Future<dynamic> archiveInvestment(@Path('id') String id);
 }
