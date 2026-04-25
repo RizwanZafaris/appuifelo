@@ -82,13 +82,12 @@ class ApiBudgetsRepository implements BudgetsRepository {
     int? alertThresholdPercent,
   }) async {
     final body = <String, dynamic>{
-      if (category != null) 'category': category,
-      if (currency != null) 'currency': currency,
-      if (limitMinor != null) 'limitMinor': limitMinor,
-      if (period != null) 'period': period.name,
-      if (rolloverEnabled != null) 'rolloverEnabled': rolloverEnabled,
-      if (alertThresholdPercent != null)
-        'alertThresholdPercent': alertThresholdPercent,
+      'category': ?category,
+      'currency': ?currency,
+      'limitMinor': ?limitMinor,
+      'period': ?period?.name,
+      'rolloverEnabled': ?rolloverEnabled,
+      'alertThresholdPercent': ?alertThresholdPercent,
     };
     final raw = await _api.updateBudget(id, body);
     return _budgetFromApi((raw as Map).cast<String, dynamic>());

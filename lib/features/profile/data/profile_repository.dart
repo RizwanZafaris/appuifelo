@@ -56,12 +56,11 @@ class ApiProfileRepository implements ProfileRepository {
     bool? smsParserEnabled,
   }) async {
     final body = <String, dynamic>{
-      if (languageCode != null) 'languageCode': languageCode,
-      if (themeMode != null) 'themeMode': themeMode.name,
-      if (operationalNotifications != null)
-        'operationalNotifications': operationalNotifications,
-      if (marketingConsent != null) 'marketingConsent': marketingConsent,
-      if (smsParserEnabled != null) 'smsParserEnabled': smsParserEnabled,
+      'languageCode': ?languageCode,
+      'themeMode': ?themeMode?.name,
+      'operationalNotifications': ?operationalNotifications,
+      'marketingConsent': ?marketingConsent,
+      'smsParserEnabled': ?smsParserEnabled,
     };
     final raw = await _api.updateMyProfile(body);
     return _settingsFromApi((raw as Map).cast<String, dynamic>());

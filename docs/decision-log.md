@@ -5,6 +5,73 @@ rationale. New entries on top.
 
 ---
 
+## 2026-04-26 · D-007 · SMS-vendor list is illustrative, not procured
+
+**Context** — User has active vendor discussions but no signed contracts yet.
+
+**Decision** — The vendor list in D-005 (Veevotech / MSG91 / Karix / Msegat /
+AlphaNet / Sparrow / Mobitel / Twilio) is treated as **placeholder**, not
+locked. The Strategy pattern + corridor-keyed registry are the real architectural
+commitments; specific provider names get plugged in when procurement closes.
+
+**Implementation impact** — Stage 7 ships:
+- The `SmsProvider` interface
+- The `SmsProviderRegistry` with env-driven provider activation
+- A `ConsoleLogger` provider for dev (always works, prints OTP to logs)
+- A `Twilio` adapter as the universal fallback (requires only one signed
+  contract to unblock all corridors at production launch)
+
+Concrete corridor adapters get added one-by-one as contracts close. **No
+hard-coded vendor names in the code path** — providers self-register via
+DI tokens, so adding a new vendor is a new file + module manifest entry.
+
+---
+
+## 2026-04-26 · D-006 · SMS routing key: IP-detected location, not E.164 prefix
+
+**Context** — User pointed out that the IP-to-region resolver (D-003) already
+runs at signup, so we know where the user *physically is* before they enter
+their phone number. This avoids the diaspora edge case raised at Review Gate 0.
+
+**Decision** — SMS provider selection uses **two-key routing** with priority:
+
+1. **Primary key — IP-detected country** at signup time
+   (resolved via `POST /v1/onboarding/region/resolve` in Phase 2 of the journey,
+   cached in the onboarding session)
+2. **Secondary key — E.164 destination prefix** (used when IP is unavailable
+   or the IP-detected country has no provider registered)
+3. **Final fallback** — universal Twilio (or `ConsoleLogger` in dev)
+
+**Rationale** — IP-based routing handles the actual common cases better:
+
+- **Resident user** (IP=PK, phone=PK) → Veevotech (local cheap)
+- **Diaspora signing up at home** (IP=CA, phone=CA) → Twilio (local cheap)
+- **Diaspora using PK SIM in CA** (IP=CA, phone=PK) → **Twilio CA route**
+  delivers internationally to PK number; this matches diaspora user
+  expectations (the SMS arrives wherever the SIM is, not via a "weird local
+  PK provider sending to a Canadian-resident user")
+- **VPN user pretending to be in PK** (IP=PK via VPN, phone=CA) → Veevotech
+  attempts international delivery; failure mode is acceptable (signup fails
+  loudly, user retries without VPN)
+
+Cost trade-off — the diaspora-with-foreign-SIM case is now slightly more
+expensive than pure E.164 routing would be. But:
+
+- Volume is low (most users sign up with a SIM that matches where they live)
+- UX consistency wins over per-corridor cost optimization for v1
+- The cheap routing kicks in for ≥85% of users (residents)
+
+**IP detection failure handling** — if the resolver returns no country (rare;
+e.g., corporate proxy, satellite ISP), fall through to E.164. If both fail,
+use Twilio.
+
+**Privacy note** — IP→country lookup uses a server-side resolver in NestJS
+(not client-side, which would leak the IP to a third-party API). Implementation
+options for Stage 4: ip-api.com, ipinfo.io, MaxMind GeoLite2 (self-hosted).
+Final pick deferred to Stage 4 with cost + privacy review.
+
+---
+
 ## 2026-04-26 · D-005 · SMS verification: pluggable corridor-keyed adapter
 
 **Options considered**

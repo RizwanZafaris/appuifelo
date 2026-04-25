@@ -70,16 +70,16 @@ class ApiTransactionsRepository implements TransactionsRepository {
     String? note,
   }) async {
     final raw = await _api.createTransaction(<String, dynamic>{
-      if (accountId != null) 'accountId': accountId,
-      if (merchant != null) 'merchant': merchant,
-      if (category != null) 'category': category,
+      'accountId': ?accountId,
+      'merchant': ?merchant,
+      'category': ?category,
       'currency': currency,
       'amountMinor': amountMinor,
       'direction': direction.name,
       'source': source.name,
-      if (parserConfidence != null) 'parserConfidence': parserConfidence,
-      if (bookedAt != null) 'bookedAt': bookedAt.toIso8601String(),
-      if (note != null) 'note': note,
+      'parserConfidence': ?parserConfidence,
+      'bookedAt': ?bookedAt?.toIso8601String(),
+      'note': ?note,
     });
     return _txnFromApi((raw as Map).cast<String, dynamic>());
   }
