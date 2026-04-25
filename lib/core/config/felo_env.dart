@@ -42,4 +42,16 @@ class FeloEnv {
     'FELO_USE_FAKE_DATA',
     defaultValue: false,
   );
+
+  /// Feature flag: route signup through the new 8-phase onboarding journey
+  /// (`lib/features/onboarding_v2/`) instead of the legacy single-screen
+  /// flow at `lib/features/onboarding/`.
+  ///
+  /// Default `false` until the new journey ships behind Stage 7. Both
+  /// flows coexist during cutover; legacy is the safe fallback.
+  /// `--dart-define=FELO_USE_ONBOARDING_V2=true`
+  static const bool useOnboardingV2 = bool.fromEnvironment(
+    'FELO_USE_ONBOARDING_V2',
+    defaultValue: false,
+  );
 }
