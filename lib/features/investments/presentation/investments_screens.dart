@@ -165,8 +165,10 @@ class InvestmentAddScreen extends ConsumerStatefulWidget {
 class _InvestmentAddScreenState extends ConsumerState<InvestmentAddScreen> {
   final _symbolController = TextEditingController();
   final _nameController = TextEditingController();
-  final _currencyController = TextEditingController(text: 'CAD');
-  final _unitsController = TextEditingController(text: '1');
+  // Form fields start empty; user must enter values explicitly.
+  // Hardcoded defaults ('CAD', '1') were removed per senior review.
+  final _currencyController = TextEditingController();
+  final _unitsController = TextEditingController();
   final _costBasisController = TextEditingController();
   final _notesController = TextEditingController();
   var _assetClass = InvestmentAssetClass.stockEtf;
@@ -738,13 +740,14 @@ IconData _assetClassIcon(InvestmentAssetClass assetClass) {
 }
 
 Color _chartColor(int index) {
-  const colors = [
+  // Pulled from FeloColors design tokens — no inline hex values.
+  const colors = <Color>[
     FeloColors.lavenderPrimary,
-    Color(0xFF2E7D32),
-    Color(0xFF0277BD),
-    Color(0xFFAD6A00),
-    Color(0xFFC2185B),
-    Color(0xFF546E7A),
+    FeloColors.mintText,
+    FeloColors.skyText,
+    FeloColors.butterText,
+    FeloColors.roseText,
+    FeloColors.sageText,
   ];
   return colors[index % colors.length];
 }
