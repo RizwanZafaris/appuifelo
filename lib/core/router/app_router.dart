@@ -21,8 +21,13 @@ import 'package:felo/features/investments/presentation/investments_screens.dart'
 import 'package:felo/features/kyc/presentation/kyc_screen.dart';
 import 'package:felo/features/notifications/presentation/notifications_screen.dart';
 import 'package:felo/features/notifications/presentation/notifications_test_screen.dart';
+import 'package:felo/core/config/felo_env.dart';
 import 'package:felo/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:felo/features/onboarding/presentation/splash_screen.dart';
+import 'package:felo/features/onboarding_v2/presentation/phase1_identity/otp_screen.dart';
+import 'package:felo/features/onboarding_v2/presentation/phase1_identity/signup_method_screen.dart';
+import 'package:felo/features/onboarding_v2/presentation/phase1_identity/welcome_screen.dart';
+import 'package:felo/features/onboarding_v2/presentation/phase2_context/region_screen_stub.dart';
 import 'package:felo/features/profile/presentation/profile_screen.dart';
 import 'package:felo/features/profile/presentation/settings_screens.dart';
 import 'package:felo/features/receipt_capture/presentation/receipt_capture_screen.dart';
@@ -71,9 +76,66 @@ class OnboardingRoute extends GoRouteData {
   const OnboardingRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const OnboardingScreen();
+  Widget build(BuildContext context, GoRouterState state) {
+    // Feature flag (D-002): when v2 is enabled, redirect /onboarding
+    // to /onboarding-v2 so legacy entry points jump to the new flow.
+    if (FeloEnv.useOnboardingV2) {
+      return const OnboardingV2WelcomeScreen();
+    }
+    return const OnboardingScreen();
+  }
 }
+
+@TypedGoRoute<OnboardingV2WelcomeRoute>(path: '/onboarding-v2')
+class OnboardingV2WelcomeRoute extends GoRouteData {
+  const OnboardingV2WelcomeRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const OnboardingV2WelcomeScreen();
+}
+
+@TypedGoRoute<OnboardingV2SignupMethodRoute>(
+  path: '/onboarding-v2/signup-method',
+)
+class OnboardingV2SignupMethodRoute extends GoRouteData {
+  const OnboardingV2SignupMethodRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const OnboardingV2SignupMethodScreen();
+}
+
+@TypedGoRoute<OnboardingV2OtpRoute>(path: '/onboarding-v2/otp')
+class OnboardingV2OtpRoute extends GoRouteData {
+  const OnboardingV2OtpRoute({this.method = 'mobile'});
+
+  final String method;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    final method = state.extra is String
+        ? state.extra! as String
+        : (state.uri.queryParameters['method'] ?? 'mobile');
+    return OnboardingV2OtpScreen(method: method);
+  }
+}
+
+@TypedGoRoute<OnboardingV2RegionRoute>(path: '/onboarding-v2/region')
+class OnboardingV2RegionRoute extends GoRouteData {
+  const OnboardingV2RegionRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const OnboardingV2RegionScreenStub();
+}
+
+// Aliases — onboarding_v2 screens prefixed to disambiguate from legacy
+// `OnboardingScreen` import. Kept as type aliases for cleanliness.
+typedef OnboardingV2WelcomeScreen = WelcomeScreen;
+typedef OnboardingV2SignupMethodScreen = SignupMethodScreen;
+typedef OnboardingV2OtpScreen = OtpScreen;
+typedef OnboardingV2RegionScreenStub = RegionScreenStub;
 
 @TypedGoRoute<AuthRoute>(path: '/auth')
 class AuthRoute extends GoRouteData {

@@ -9,6 +9,10 @@ part of 'app_router.dart';
 List<RouteBase> get $appRoutes => [
   $splashRoute,
   $onboardingRoute,
+  $onboardingV2WelcomeRoute,
+  $onboardingV2SignupMethodRoute,
+  $onboardingV2OtpRoute,
+  $onboardingV2RegionRoute,
   $authRoute,
   $homeRoute,
   $doHubRoute,
@@ -79,6 +83,100 @@ extension $OnboardingRouteExtension on OnboardingRoute {
       const OnboardingRoute();
 
   String get location => GoRouteData.$location('/onboarding');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $onboardingV2WelcomeRoute => GoRouteData.$route(
+  path: '/onboarding-v2',
+
+  factory: $OnboardingV2WelcomeRouteExtension._fromState,
+);
+
+extension $OnboardingV2WelcomeRouteExtension on OnboardingV2WelcomeRoute {
+  static OnboardingV2WelcomeRoute _fromState(GoRouterState state) =>
+      const OnboardingV2WelcomeRoute();
+
+  String get location => GoRouteData.$location('/onboarding-v2');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $onboardingV2SignupMethodRoute => GoRouteData.$route(
+  path: '/onboarding-v2/signup-method',
+
+  factory: $OnboardingV2SignupMethodRouteExtension._fromState,
+);
+
+extension $OnboardingV2SignupMethodRouteExtension
+    on OnboardingV2SignupMethodRoute {
+  static OnboardingV2SignupMethodRoute _fromState(GoRouterState state) =>
+      const OnboardingV2SignupMethodRoute();
+
+  String get location => GoRouteData.$location('/onboarding-v2/signup-method');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $onboardingV2OtpRoute => GoRouteData.$route(
+  path: '/onboarding-v2/otp',
+
+  factory: $OnboardingV2OtpRouteExtension._fromState,
+);
+
+extension $OnboardingV2OtpRouteExtension on OnboardingV2OtpRoute {
+  static OnboardingV2OtpRoute _fromState(GoRouterState state) =>
+      OnboardingV2OtpRoute(
+        method: state.uri.queryParameters['method'] ?? 'mobile',
+      );
+
+  String get location => GoRouteData.$location(
+    '/onboarding-v2/otp',
+    queryParams: {if (method != 'mobile') 'method': method},
+  );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $onboardingV2RegionRoute => GoRouteData.$route(
+  path: '/onboarding-v2/region',
+
+  factory: $OnboardingV2RegionRouteExtension._fromState,
+);
+
+extension $OnboardingV2RegionRouteExtension on OnboardingV2RegionRoute {
+  static OnboardingV2RegionRoute _fromState(GoRouterState state) =>
+      const OnboardingV2RegionRoute();
+
+  String get location => GoRouteData.$location('/onboarding-v2/region');
 
   void go(BuildContext context) => context.go(location);
 
