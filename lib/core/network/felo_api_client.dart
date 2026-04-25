@@ -119,6 +119,9 @@ abstract class FeloApiClient {
   @POST('/recurring-bills')
   Future<dynamic> createRecurringBill(@Body() Map<String, dynamic> body);
 
+  @POST('/recurring-bills/{id}/mark-paid')
+  Future<dynamic> markRecurringBillPaid(@Path('id') String id);
+
   // -------- Coach --------------------------------------------------
   @GET('/coach/conversations')
   Future<dynamic> listCoachConversations();

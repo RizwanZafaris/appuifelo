@@ -23,7 +23,7 @@ final billsRepositoryProvider = AutoDisposeProvider<BillsRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef BillsRepositoryRef = AutoDisposeProviderRef<BillsRepository>;
-String _$billsHash() => r'5afccad23d2477d5221002f7f1b13f11e1b893a6';
+String _$billsHash() => r'92851339d2e1706228be6239476ccb07480af8c8';
 
 /// Async bills notifier — replaces sync `Bills` notifier in fake_repositories.
 ///

@@ -84,15 +84,80 @@ FeloNotification _notificationFromApi(Map<String, dynamic> json) {
       json['isRead'] == true;
   final archived =
       json['archivedAt'] != null || json['archived_at'] != null;
-  // Wave 2B-1: every backend notification renders as SystemMessage.
-  // Backend `type` and `body` aren't yet rich enough to reconstruct the
-  // typed unions; the screen's SystemMessage branch uses i18n copy.
-  return FeloNotification.systemMessage(
-    id: id,
-    createdAt: createdAt,
-    isRead: isRead,
-    archived: archived,
-  );
+
+  // Backend gap-closure PR1 added a `payload` JSONB field with a typed
+  // contract: { kind: '...', ...ids/percents }. We reconstruct the
+  // Flutter union types from `payload.kind` when present, falling back
+  // to SystemMessage for legacy rows or unknown kinds.
+  final payload = (json['payload'] is Map)
+      ? (json['payload'] as Map).cast<String, dynamic>()
+      : const <String, dynamic>{};
+  final kind = (payload['kind'] ?? '').toString();
+
+  switch (kind) {
+    case 'budget_alert':
+      return FeloNotification.budgetAlert(
+        id: id,
+        createdAt: createdAt,
+        budgetId: (payload['budgetId'] ?? payload['budget_id'] ?? '').toString(),
+        thresholdPercent:
+            _intFrom(
+              payload['thresholdPercent'] ?? payload['threshold_percent'],
+            ) ??
+            0,
+        isRead: isRead,
+        archived: archived,
+      );
+    case 'goal_milestone':
+      return FeloNotification.goalMilestone(
+        id: id,
+        createdAt: createdAt,
+        goalId: (payload['goalId'] ?? payload['goal_id'] ?? '').toString(),
+        progressPercent:
+            _intFrom(payload['progressPercent'] ?? payload['progress_percent']) ??
+            0,
+        isRead: isRead,
+        archived: archived,
+      );
+    case 'sms_parser_event':
+      return FeloNotification.smsParserEvent(
+        id: id,
+        createdAt: createdAt,
+        parsedSmsId:
+            (payload['parsedSmsId'] ?? payload['parsed_sms_id'] ?? '')
+                .toString(),
+        confidencePercent:
+            _intFrom(
+              payload['confidencePercent'] ?? payload['confidence_percent'],
+            ) ??
+            0,
+        isRead: isRead,
+        archived: archived,
+      );
+    case 'family_activity':
+      return FeloNotification.familyActivity(
+        id: id,
+        createdAt: createdAt,
+        memberId: (payload['memberId'] ?? payload['member_id'] ?? '').toString(),
+        isRead: isRead,
+        archived: archived,
+      );
+    default:
+      // Unknown kind, missing payload, or legacy row: render as system
+      // message. The notification screen's i18n copy handles the rest.
+      return FeloNotification.systemMessage(
+        id: id,
+        createdAt: createdAt,
+        isRead: isRead,
+        archived: archived,
+      );
+  }
+}
+
+int? _intFrom(Object? value) {
+  if (value is int) return value;
+  if (value is num) return value.round();
+  return int.tryParse(value?.toString() ?? '');
 }
 
 /// Registers the current device so the backend can target push later.
