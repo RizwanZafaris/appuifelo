@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Goal {
 
- String get id; String get name; String get currency; int get targetMinor; int get savedMinor; DateTime get targetDate; bool get shared; GoalCadence get cadence; List<String> get contributorNames;
+ String get id; String get name; String get currency; int get targetMinor; int get savedMinor; DateTime get targetDate; bool get shared; GoalCadence get cadence; List<String> get contributorNames; int get contributionStreakWeeks;
 /// Create a copy of Goal
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $GoalCopyWith<Goal> get copyWith => _$GoalCopyWithImpl<Goal>(this as Goal, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Goal&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.targetMinor, targetMinor) || other.targetMinor == targetMinor)&&(identical(other.savedMinor, savedMinor) || other.savedMinor == savedMinor)&&(identical(other.targetDate, targetDate) || other.targetDate == targetDate)&&(identical(other.shared, shared) || other.shared == shared)&&(identical(other.cadence, cadence) || other.cadence == cadence)&&const DeepCollectionEquality().equals(other.contributorNames, contributorNames));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Goal&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.targetMinor, targetMinor) || other.targetMinor == targetMinor)&&(identical(other.savedMinor, savedMinor) || other.savedMinor == savedMinor)&&(identical(other.targetDate, targetDate) || other.targetDate == targetDate)&&(identical(other.shared, shared) || other.shared == shared)&&(identical(other.cadence, cadence) || other.cadence == cadence)&&const DeepCollectionEquality().equals(other.contributorNames, contributorNames)&&(identical(other.contributionStreakWeeks, contributionStreakWeeks) || other.contributionStreakWeeks == contributionStreakWeeks));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,currency,targetMinor,savedMinor,targetDate,shared,cadence,const DeepCollectionEquality().hash(contributorNames));
+int get hashCode => Object.hash(runtimeType,id,name,currency,targetMinor,savedMinor,targetDate,shared,cadence,const DeepCollectionEquality().hash(contributorNames),contributionStreakWeeks);
 
 @override
 String toString() {
-  return 'Goal(id: $id, name: $name, currency: $currency, targetMinor: $targetMinor, savedMinor: $savedMinor, targetDate: $targetDate, shared: $shared, cadence: $cadence, contributorNames: $contributorNames)';
+  return 'Goal(id: $id, name: $name, currency: $currency, targetMinor: $targetMinor, savedMinor: $savedMinor, targetDate: $targetDate, shared: $shared, cadence: $cadence, contributorNames: $contributorNames, contributionStreakWeeks: $contributionStreakWeeks)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $GoalCopyWith<$Res>  {
   factory $GoalCopyWith(Goal value, $Res Function(Goal) _then) = _$GoalCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, String currency, int targetMinor, int savedMinor, DateTime targetDate, bool shared, GoalCadence cadence, List<String> contributorNames
+ String id, String name, String currency, int targetMinor, int savedMinor, DateTime targetDate, bool shared, GoalCadence cadence, List<String> contributorNames, int contributionStreakWeeks
 });
 
 
@@ -65,7 +65,7 @@ class _$GoalCopyWithImpl<$Res>
 
 /// Create a copy of Goal
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? currency = null,Object? targetMinor = null,Object? savedMinor = null,Object? targetDate = null,Object? shared = null,Object? cadence = null,Object? contributorNames = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? currency = null,Object? targetMinor = null,Object? savedMinor = null,Object? targetDate = null,Object? shared = null,Object? cadence = null,Object? contributorNames = null,Object? contributionStreakWeeks = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -76,7 +76,8 @@ as int,targetDate: null == targetDate ? _self.targetDate : targetDate // ignore:
 as DateTime,shared: null == shared ? _self.shared : shared // ignore: cast_nullable_to_non_nullable
 as bool,cadence: null == cadence ? _self.cadence : cadence // ignore: cast_nullable_to_non_nullable
 as GoalCadence,contributorNames: null == contributorNames ? _self.contributorNames : contributorNames // ignore: cast_nullable_to_non_nullable
-as List<String>,
+as List<String>,contributionStreakWeeks: null == contributionStreakWeeks ? _self.contributionStreakWeeks : contributionStreakWeeks // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -161,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String currency,  int targetMinor,  int savedMinor,  DateTime targetDate,  bool shared,  GoalCadence cadence,  List<String> contributorNames)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String currency,  int targetMinor,  int savedMinor,  DateTime targetDate,  bool shared,  GoalCadence cadence,  List<String> contributorNames,  int contributionStreakWeeks)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Goal() when $default != null:
-return $default(_that.id,_that.name,_that.currency,_that.targetMinor,_that.savedMinor,_that.targetDate,_that.shared,_that.cadence,_that.contributorNames);case _:
+return $default(_that.id,_that.name,_that.currency,_that.targetMinor,_that.savedMinor,_that.targetDate,_that.shared,_that.cadence,_that.contributorNames,_that.contributionStreakWeeks);case _:
   return orElse();
 
 }
@@ -182,10 +183,10 @@ return $default(_that.id,_that.name,_that.currency,_that.targetMinor,_that.saved
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String currency,  int targetMinor,  int savedMinor,  DateTime targetDate,  bool shared,  GoalCadence cadence,  List<String> contributorNames)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String currency,  int targetMinor,  int savedMinor,  DateTime targetDate,  bool shared,  GoalCadence cadence,  List<String> contributorNames,  int contributionStreakWeeks)  $default,) {final _that = this;
 switch (_that) {
 case _Goal():
-return $default(_that.id,_that.name,_that.currency,_that.targetMinor,_that.savedMinor,_that.targetDate,_that.shared,_that.cadence,_that.contributorNames);case _:
+return $default(_that.id,_that.name,_that.currency,_that.targetMinor,_that.savedMinor,_that.targetDate,_that.shared,_that.cadence,_that.contributorNames,_that.contributionStreakWeeks);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +203,10 @@ return $default(_that.id,_that.name,_that.currency,_that.targetMinor,_that.saved
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String currency,  int targetMinor,  int savedMinor,  DateTime targetDate,  bool shared,  GoalCadence cadence,  List<String> contributorNames)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String currency,  int targetMinor,  int savedMinor,  DateTime targetDate,  bool shared,  GoalCadence cadence,  List<String> contributorNames,  int contributionStreakWeeks)?  $default,) {final _that = this;
 switch (_that) {
 case _Goal() when $default != null:
-return $default(_that.id,_that.name,_that.currency,_that.targetMinor,_that.savedMinor,_that.targetDate,_that.shared,_that.cadence,_that.contributorNames);case _:
+return $default(_that.id,_that.name,_that.currency,_that.targetMinor,_that.savedMinor,_that.targetDate,_that.shared,_that.cadence,_that.contributorNames,_that.contributionStreakWeeks);case _:
   return null;
 
 }
@@ -217,7 +218,7 @@ return $default(_that.id,_that.name,_that.currency,_that.targetMinor,_that.saved
 @JsonSerializable()
 
 class _Goal implements Goal {
-  const _Goal({required this.id, required this.name, required this.currency, required this.targetMinor, required this.savedMinor, required this.targetDate, required this.shared, required this.cadence, required final  List<String> contributorNames}): _contributorNames = contributorNames;
+  const _Goal({required this.id, required this.name, required this.currency, required this.targetMinor, required this.savedMinor, required this.targetDate, required this.shared, required this.cadence, required final  List<String> contributorNames, this.contributionStreakWeeks = 0}): _contributorNames = contributorNames;
   factory _Goal.fromJson(Map<String, dynamic> json) => _$GoalFromJson(json);
 
 @override final  String id;
@@ -235,6 +236,7 @@ class _Goal implements Goal {
   return EqualUnmodifiableListView(_contributorNames);
 }
 
+@override@JsonKey() final  int contributionStreakWeeks;
 
 /// Create a copy of Goal
 /// with the given fields replaced by the non-null parameter values.
@@ -249,16 +251,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Goal&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.targetMinor, targetMinor) || other.targetMinor == targetMinor)&&(identical(other.savedMinor, savedMinor) || other.savedMinor == savedMinor)&&(identical(other.targetDate, targetDate) || other.targetDate == targetDate)&&(identical(other.shared, shared) || other.shared == shared)&&(identical(other.cadence, cadence) || other.cadence == cadence)&&const DeepCollectionEquality().equals(other._contributorNames, _contributorNames));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Goal&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.targetMinor, targetMinor) || other.targetMinor == targetMinor)&&(identical(other.savedMinor, savedMinor) || other.savedMinor == savedMinor)&&(identical(other.targetDate, targetDate) || other.targetDate == targetDate)&&(identical(other.shared, shared) || other.shared == shared)&&(identical(other.cadence, cadence) || other.cadence == cadence)&&const DeepCollectionEquality().equals(other._contributorNames, _contributorNames)&&(identical(other.contributionStreakWeeks, contributionStreakWeeks) || other.contributionStreakWeeks == contributionStreakWeeks));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,currency,targetMinor,savedMinor,targetDate,shared,cadence,const DeepCollectionEquality().hash(_contributorNames));
+int get hashCode => Object.hash(runtimeType,id,name,currency,targetMinor,savedMinor,targetDate,shared,cadence,const DeepCollectionEquality().hash(_contributorNames),contributionStreakWeeks);
 
 @override
 String toString() {
-  return 'Goal(id: $id, name: $name, currency: $currency, targetMinor: $targetMinor, savedMinor: $savedMinor, targetDate: $targetDate, shared: $shared, cadence: $cadence, contributorNames: $contributorNames)';
+  return 'Goal(id: $id, name: $name, currency: $currency, targetMinor: $targetMinor, savedMinor: $savedMinor, targetDate: $targetDate, shared: $shared, cadence: $cadence, contributorNames: $contributorNames, contributionStreakWeeks: $contributionStreakWeeks)';
 }
 
 
@@ -269,7 +271,7 @@ abstract mixin class _$GoalCopyWith<$Res> implements $GoalCopyWith<$Res> {
   factory _$GoalCopyWith(_Goal value, $Res Function(_Goal) _then) = __$GoalCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, String currency, int targetMinor, int savedMinor, DateTime targetDate, bool shared, GoalCadence cadence, List<String> contributorNames
+ String id, String name, String currency, int targetMinor, int savedMinor, DateTime targetDate, bool shared, GoalCadence cadence, List<String> contributorNames, int contributionStreakWeeks
 });
 
 
@@ -286,7 +288,7 @@ class __$GoalCopyWithImpl<$Res>
 
 /// Create a copy of Goal
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? currency = null,Object? targetMinor = null,Object? savedMinor = null,Object? targetDate = null,Object? shared = null,Object? cadence = null,Object? contributorNames = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? currency = null,Object? targetMinor = null,Object? savedMinor = null,Object? targetDate = null,Object? shared = null,Object? cadence = null,Object? contributorNames = null,Object? contributionStreakWeeks = null,}) {
   return _then(_Goal(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -297,7 +299,8 @@ as int,targetDate: null == targetDate ? _self.targetDate : targetDate // ignore:
 as DateTime,shared: null == shared ? _self.shared : shared // ignore: cast_nullable_to_non_nullable
 as bool,cadence: null == cadence ? _self.cadence : cadence // ignore: cast_nullable_to_non_nullable
 as GoalCadence,contributorNames: null == contributorNames ? _self._contributorNames : contributorNames // ignore: cast_nullable_to_non_nullable
-as List<String>,
+as List<String>,contributionStreakWeeks: null == contributionStreakWeeks ? _self.contributionStreakWeeks : contributionStreakWeeks // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 

@@ -18,6 +18,8 @@ _Goal _$GoalFromJson(Map<String, dynamic> json) => _Goal(
   contributorNames: (json['contributorNames'] as List<dynamic>)
       .map((e) => e as String)
       .toList(),
+  contributionStreakWeeks:
+      (json['contributionStreakWeeks'] as num?)?.toInt() ?? 0,
 );
 
 Map<String, dynamic> _$GoalToJson(_Goal instance) => <String, dynamic>{
@@ -30,6 +32,7 @@ Map<String, dynamic> _$GoalToJson(_Goal instance) => <String, dynamic>{
   'shared': instance.shared,
   'cadence': _$GoalCadenceEnumMap[instance.cadence]!,
   'contributorNames': instance.contributorNames,
+  'contributionStreakWeeks': instance.contributionStreakWeeks,
 };
 
 const _$GoalCadenceEnumMap = {

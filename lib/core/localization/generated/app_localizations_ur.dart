@@ -259,6 +259,57 @@ class AppLocalizationsUr extends AppLocalizations {
   String get goalDetailTitle => 'Goal detail';
 
   @override
+  String goalStreakBadge(int weeks) {
+    return '$weeks ہفتوں کا streak';
+  }
+
+  @override
+  String goalProgressSummary(String saved, String target) {
+    return '$target میں سے $saved محفوظ';
+  }
+
+  @override
+  String get goalContributorsTitle => 'Contributors';
+
+  @override
+  String get goalContributeButton => 'Contribute';
+
+  @override
+  String get goalContributionSheetTitle => 'Goal میں شامل کریں';
+
+  @override
+  String get goalContributionAmountLabel => 'Amount';
+
+  @override
+  String get goalContributionBefore => 'Before';
+
+  @override
+  String get goalContributionAfter => 'After';
+
+  @override
+  String get goalContributionSaved => 'Contribution شامل ہو گئی۔';
+
+  @override
+  String get goalContributionFailed =>
+      'Contribution شامل نہیں ہو سکی۔ دوبارہ کوشش کریں۔';
+
+  @override
+  String get goalMilestoneDialogTitle => 'Milestone reached';
+
+  @override
+  String goalMilestoneDialogBody(String goalName, int percent) {
+    return '$goalName $percent% تک پہنچ گیا۔';
+  }
+
+  @override
+  String get goalCardTeaserTitle => 'Card round-ups اس goal کو تیز کر سکتے ہیں';
+
+  @override
+  String goalCardTeaserBody(String goalName) {
+    return 'Felo Card launch ہونے پر purchases کی spare change $goalName میں جا سکے گی۔';
+  }
+
+  @override
   String get transactionsTitle => 'Transactions';
 
   @override

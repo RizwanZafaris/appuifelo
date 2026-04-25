@@ -17,6 +17,7 @@ abstract class Goal with _$Goal {
     required bool shared,
     required GoalCadence cadence,
     required List<String> contributorNames,
+    @Default(0) int contributionStreakWeeks,
   }) = _Goal;
 
   factory Goal.fromJson(Map<String, Object?> json) => _$GoalFromJson(json);

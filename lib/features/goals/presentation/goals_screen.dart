@@ -34,6 +34,18 @@ class GoalsScreen extends ConsumerWidget {
                     fontWeight: FontWeight.w800,
                   ),
                 ),
+                if (goal.contributionStreakWeeks >= 3) ...[
+                  const SizedBox(height: 8),
+                  Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Chip(
+                      avatar: const Icon(Icons.local_fire_department_rounded),
+                      label: Text(
+                        l10n.goalStreakBadge(goal.contributionStreakWeeks),
+                      ),
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 10),
                 LinearProgressIndicator(
                   value: progress.clamp(0, 1),

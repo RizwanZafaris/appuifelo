@@ -88,6 +88,7 @@ class GoalRepository {
         shared: true,
         cadence: GoalCadence.weekly,
         contributorNames: const ['Rizwan', 'Amina'],
+        contributionStreakWeeks: 4,
       ),
       Goal(
         id: 'goal_emergency',
@@ -916,14 +917,16 @@ class SendMoneyFlow extends _$SendMoneyFlow {
   }
 
   void setAmountMinor(int amountMinor) {
-    final quote = ref.read(sendMoneyRepositoryProvider).quoteForAmountMinor(
-          amountMinor,
-        );
+    final quote = ref
+        .read(sendMoneyRepositoryProvider)
+        .quoteForAmountMinor(amountMinor);
     state = state.copyWith(quote: quote);
   }
 
   void completePreview() {
-    final referenceId = ref.read(sendMoneyRepositoryProvider).referenceFor(state);
+    final referenceId = ref
+        .read(sendMoneyRepositoryProvider)
+        .referenceFor(state);
     state = state.copyWith(referenceId: referenceId);
   }
 
