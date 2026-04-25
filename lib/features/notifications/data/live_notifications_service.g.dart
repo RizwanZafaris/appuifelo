@@ -7,7 +7,7 @@ part of 'live_notifications_service.dart';
 // **************************************************************************
 
 String _$liveNotificationsServiceHash() =>
-    r'e4a9940ae3f6ce31b4a0ac7795a4c21d28cb8901';
+    r'0cc06ad702d6c6ea914aba5dd487dc51c14b5702';
 
 /// Thin facade over backend `/v1/notifications` and `/v1/devices` routes.
 ///

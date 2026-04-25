@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:felo/core/di/fake_repositories.dart';
 import 'package:felo/core/localization/generated/app_localizations.dart';
 import 'package:felo/core/theme/felo_theme.dart';
 import 'package:felo/features/budgets/data/budgets_repository.dart';
@@ -15,8 +16,11 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          // Wave-1: notification synthesis reads budgets/goals via async
-          // providers. Override with fakes so tests don't hit the network.
+          // Force the inbox down the fake-synthesis path. Without this,
+          // the inbox would call /v1/notifications which fails in tests.
+          useFakeNotificationsSourceProvider.overrideWith((_) => true),
+          // Wave-1/2: synthesis reads budgets/goals via async providers.
+          // Override with fakes so tests don't hit the network.
           budgetsRepositoryProvider.overrideWithValue(FakeBudgetsRepository()),
           goalsRepositoryProvider.overrideWithValue(FakeGoalsRepository()),
           transactionsRepositoryProvider.overrideWithValue(
