@@ -736,5 +736,14 @@
   "recurringFreqWeekly": "ہفتہ وار",
   "recurringFreqMonthly": "ماہانہ",
   "recurringFreqQuarterly": "سہ ماہی",
-  "recurringFreqYearly": "سالانہ"
+  "recurringFreqYearly": "سالانہ",
+  "notificationsTestTitle": "Test notification بھیجیں",
+  "notificationsTestBlurb": "Live backend سے test notification بھیجتا ہے۔ صرف debug builds — production میں endpoint block ہے۔",
+  "notificationsTestTitleLabel": "عنوان",
+  "notificationsTestBodyLabel": "متن",
+  "notificationsTestDefaultTitle": "Felo سے سلام",
+  "notificationsTestDefaultBody": "یہ ایک test notification ہے جو debug screen سے بھیجا گیا۔",
+  "notificationsTestSend": "بھیجیں",
+  "notificationsTestSent": "بھیج دیا — inbox refresh کریں۔",
+  "notificationsTestProdDisabled": "Production builds میں test notifications disabled ہیں۔"
 }

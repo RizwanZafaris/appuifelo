@@ -148,6 +148,13 @@ RouteBase get $notificationsRoute => GoRouteData.$route(
   path: '/notifications',
 
   factory: $NotificationsRouteExtension._fromState,
+  routes: [
+    GoRouteData.$route(
+      path: 'test',
+
+      factory: $NotificationsTestRouteExtension._fromState,
+    ),
+  ],
 );
 
 extension $NotificationsRouteExtension on NotificationsRoute {
@@ -155,6 +162,22 @@ extension $NotificationsRouteExtension on NotificationsRoute {
       const NotificationsRoute();
 
   String get location => GoRouteData.$location('/notifications');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $NotificationsTestRouteExtension on NotificationsTestRoute {
+  static NotificationsTestRoute _fromState(GoRouterState state) =>
+      const NotificationsTestRoute();
+
+  String get location => GoRouteData.$location('/notifications/test');
 
   void go(BuildContext context) => context.go(location);
 

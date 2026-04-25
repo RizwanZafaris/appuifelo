@@ -1750,4 +1750,34 @@ class AppLocalizationsUr extends AppLocalizations {
 
   @override
   String get recurringFreqYearly => 'سالانہ';
+
+  @override
+  String get notificationsTestTitle => 'Test notification بھیجیں';
+
+  @override
+  String get notificationsTestBlurb =>
+      'Live backend سے test notification بھیجتا ہے۔ صرف debug builds — production میں endpoint block ہے۔';
+
+  @override
+  String get notificationsTestTitleLabel => 'عنوان';
+
+  @override
+  String get notificationsTestBodyLabel => 'متن';
+
+  @override
+  String get notificationsTestDefaultTitle => 'Felo سے سلام';
+
+  @override
+  String get notificationsTestDefaultBody =>
+      'یہ ایک test notification ہے جو debug screen سے بھیجا گیا۔';
+
+  @override
+  String get notificationsTestSend => 'بھیجیں';
+
+  @override
+  String get notificationsTestSent => 'بھیج دیا — inbox refresh کریں۔';
+
+  @override
+  String get notificationsTestProdDisabled =>
+      'Production builds میں test notifications disabled ہیں۔';
 }

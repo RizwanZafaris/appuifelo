@@ -205,4 +205,30 @@ abstract class FeloApiClient {
 
   @DELETE('/investments/{id}')
   Future<dynamic> archiveInvestment(@Path('id') String id);
+
+  // -------- Notifications -----------------------------------------
+  @GET('/notifications')
+  Future<dynamic> listNotifications({@Query('unreadOnly') bool? unreadOnly});
+
+  @GET('/notifications/unread-count')
+  Future<dynamic> notificationsUnreadCount();
+
+  @POST('/notifications/{id}/read')
+  Future<dynamic> markNotificationRead(@Path('id') String id);
+
+  @POST('/notifications/read-all')
+  Future<dynamic> markAllNotificationsRead();
+
+  @DELETE('/notifications/{id}')
+  Future<dynamic> deleteNotification(@Path('id') String id);
+
+  // -------- Devices -----------------------------------------------
+  @GET('/devices')
+  Future<dynamic> listDevices();
+
+  @POST('/devices')
+  Future<dynamic> registerDevice(@Body() Map<String, dynamic> body);
+
+  @DELETE('/devices/{id}')
+  Future<dynamic> unregisterDevice(@Path('id') String id);
 }

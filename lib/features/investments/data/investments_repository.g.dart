@@ -28,7 +28,7 @@ final investmentPortfolioProvider =
 // ignore: unused_element
 typedef InvestmentPortfolioRef =
     AutoDisposeFutureProviderRef<InvestmentPortfolioSummary>;
-String _$investmentsHash() => r'a2f237765c21e238bb372e0669442c5f9497a141';
+String _$investmentsHash() => r'a4e08ffc93a1546e252423bb9b51a802c7891ae9';
 
 /// Investments inbox — reads from `/v1/investments` and exposes
 /// CRUD + manual price refresh. Wired to FeloApiClient.

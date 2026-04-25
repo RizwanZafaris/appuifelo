@@ -736,5 +736,14 @@
   "recurringFreqWeekly": "Weekly",
   "recurringFreqMonthly": "Monthly",
   "recurringFreqQuarterly": "Quarterly",
-  "recurringFreqYearly": "Yearly"
+  "recurringFreqYearly": "Yearly",
+  "notificationsTestTitle": "Send test notification",
+  "notificationsTestBlurb": "Fires a test notification through the live backend. Debug builds only — production blocks the endpoint.",
+  "notificationsTestTitleLabel": "Title",
+  "notificationsTestBodyLabel": "Body",
+  "notificationsTestDefaultTitle": "Hello from Felo",
+  "notificationsTestDefaultBody": "This is a test notification fired from the debug screen.",
+  "notificationsTestSend": "Send",
+  "notificationsTestSent": "Sent — pull to refresh inbox.",
+  "notificationsTestProdDisabled": "Test notifications are disabled in production builds."
 }
