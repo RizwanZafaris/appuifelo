@@ -1108,7 +1108,59 @@ class AppLocalizationsUr extends AppLocalizations {
   String get insightsThisMonth => 'اس مہینے خرچ';
 
   @override
+  String get insightsSpentThisWeek => 'اس ہفتے خرچ';
+
+  @override
+  String get insightsSpentThisMonth => 'اس مہینے خرچ';
+
+  @override
+  String get insightsSpentThisQuarter => 'اس quarter کا خرچ';
+
+  @override
   String get insightsByCategory => 'Category کے حساب سے';
+
+  @override
+  String get insightsTopMerchants => 'Top merchants';
+
+  @override
+  String get insightsTrend => 'Trend';
+
+  @override
+  String get insightsPeriodWeek => 'ہفتہ';
+
+  @override
+  String get insightsPeriodMonth => 'مہینہ';
+
+  @override
+  String get insightsPeriodQuarter => 'Quarter';
+
+  @override
+  String get insightsEmptyTitle => 'ابھی category spend نہیں';
+
+  @override
+  String get insightsEmptyBody =>
+      'Categorized SMS اور transaction spend یہاں نظر آئے گا۔';
+
+  @override
+  String get insightsNoMerchantsTitle => 'ابھی merchants نہیں';
+
+  @override
+  String get insightsNoMerchantsBody =>
+      'Spending import ہونے کے بعد top merchants یہاں آئیں گے۔';
+
+  @override
+  String get insightsNoTrendTitle => 'ابھی trend نہیں';
+
+  @override
+  String get insightsNoTrendBody =>
+      'Activity sync ہونے کے بعد روزانہ spending points یہاں آئیں گے۔';
+
+  @override
+  String get insightsErrorTitle => 'Insights دستیاب نہیں';
+
+  @override
+  String get insightsErrorBody =>
+      'Spending insights load نہیں ہو سکیں۔ Refresh کریں یا بعد میں دوبارہ کوشش کریں۔';
 
   @override
   String get searchTitle => 'تلاش';

@@ -2132,11 +2132,107 @@ abstract class AppLocalizations {
   /// **'Spent this month'**
   String get insightsThisMonth;
 
+  /// No description provided for @insightsSpentThisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent this week'**
+  String get insightsSpentThisWeek;
+
+  /// No description provided for @insightsSpentThisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent this month'**
+  String get insightsSpentThisMonth;
+
+  /// No description provided for @insightsSpentThisQuarter.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent this quarter'**
+  String get insightsSpentThisQuarter;
+
   /// No description provided for @insightsByCategory.
   ///
   /// In en, this message translates to:
   /// **'By category'**
   String get insightsByCategory;
+
+  /// No description provided for @insightsTopMerchants.
+  ///
+  /// In en, this message translates to:
+  /// **'Top merchants'**
+  String get insightsTopMerchants;
+
+  /// No description provided for @insightsTrend.
+  ///
+  /// In en, this message translates to:
+  /// **'Trend'**
+  String get insightsTrend;
+
+  /// No description provided for @insightsPeriodWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get insightsPeriodWeek;
+
+  /// No description provided for @insightsPeriodMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get insightsPeriodMonth;
+
+  /// No description provided for @insightsPeriodQuarter.
+  ///
+  /// In en, this message translates to:
+  /// **'Quarter'**
+  String get insightsPeriodQuarter;
+
+  /// No description provided for @insightsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No category spend yet'**
+  String get insightsEmptyTitle;
+
+  /// No description provided for @insightsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Categorized SMS and transaction spend will appear here.'**
+  String get insightsEmptyBody;
+
+  /// No description provided for @insightsNoMerchantsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No merchants yet'**
+  String get insightsNoMerchantsTitle;
+
+  /// No description provided for @insightsNoMerchantsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Top merchants will appear once spending is imported.'**
+  String get insightsNoMerchantsBody;
+
+  /// No description provided for @insightsNoTrendTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No trend yet'**
+  String get insightsNoTrendTitle;
+
+  /// No description provided for @insightsNoTrendBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily spending points will appear after activity syncs.'**
+  String get insightsNoTrendBody;
+
+  /// No description provided for @insightsErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Insights unavailable'**
+  String get insightsErrorTitle;
+
+  /// No description provided for @insightsErrorBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We could not load spending insights. Pull to refresh or try again later.'**
+  String get insightsErrorBody;
 
   /// No description provided for @searchTitle.
   ///
