@@ -5,6 +5,192 @@ rationale. New entries on top.
 
 ---
 
+## 2026-04-26 · D-030 · Multi-sink analytics dispatcher
+
+**Source** — User constraint at Review Gate 3 → Stage 4 transition: "GTM
+trigger code, Facebook campaign, our internal tracking system code should
+be there."
+
+**Options considered**
+- A) Internal Postgres `events` table only (the original Stage 0 plan)
+- B) Single third-party provider (e.g., PostHog, Amplitude, Mixpanel)
+- C) **Multi-sink dispatcher** — one event hits N sinks via a fan-out service
+
+**Decision** — C.
+
+**Rationale** — Each sink serves a different stakeholder and serves it
+differently. Trying to consolidate breaks one of them:
+
+- **Internal Postgres `events`** is the source of truth for the funnel
+  queries we ship in Stage 6. SQL-joinable with profile state. Required.
+- **GTM dataLayer** lets marketing stand up new tags (Google Ads, LinkedIn
+  Insight, Pinterest, Quora — whatever campaign mix Felo runs) without
+  shipping app updates. Marketing self-serves via GTM console.
+- **Meta Conversions API** server-side fires Facebook events that bypass
+  iOS ATT restrictions on the client SDK. Critical for Pakistan/India where
+  Facebook + Instagram are dominant install channels.
+- **Extensible** — TikTok Events API, Snap Conversions API, etc. plug into
+  the same dispatcher with a new `AnalyticsSink` implementation.
+
+**Sink semantics**
+
+| Sink | Where it runs | Data path |
+|---|---|---|
+| Postgres `events` | Server | NestJS `AnalyticsDispatcher.dispatch()` → `EventsRepository.insert()` |
+| GTM dataLayer | Client | Flutter posts to JS bridge or native plugin → `dataLayer.push({...})` → GTM container resolves tags client-side |
+| Meta CAPI | Server | NestJS `AnalyticsDispatcher` → `MetaConversionsApi.send()` with hashed user id, fbp/fbc cookies, IP, user-agent |
+| Future (TikTok, Snap) | Server | Same dispatcher; add new `AnalyticsSink` adapter |
+
+**Event payload contract** — single shape, every sink receives the same
+canonical payload:
+
+```ts
+{
+  event_name: string,           // 'phase4_step1_completed'
+  frd_id: string,               // 'FR-4.1.3' (D-001 traceability rule)
+  step_id: string,
+  phase: number,
+  user_id: string | null,       // null pre-Phase-1
+  session_id: string,
+  occurred_at: ISODateTime,
+  properties: Record<string, unknown>,  // phase-specific fields
+  meta: {
+    user_agent: string,
+    ip: string,                 // for CAPI; redacted in Postgres after geo
+    locale: string,
+  }
+}
+```
+
+The dispatcher transforms this canonical payload into each sink's required
+shape (GTM camelCase, Meta CAPI's `data: [{event_name, event_time, ...}]`).
+
+**Privacy & compliance**
+
+- IP retention: server-side CAPI sends IP at event time, then the Postgres
+  insert redacts to country-level. No raw IPs at rest.
+- ATT: the client never calls Meta SDK directly. CAPI server-side fires
+  even if user denies ATT, with the trade-off of lower match-quality but
+  no user prompt.
+- GDPR: `user_id` is Supabase UUID (not PII); email/phone never leave
+  the auth schema. Hash before sending to Meta as `em`/`ph` matching keys.
+
+**Implementation impact for Stage 4**
+
+- New NestJS module `analytics/` with:
+  - `analytics.controller.ts` — `POST /v1/analytics/event`
+  - `analytics-dispatcher.service.ts` — fan-out
+  - `sinks/postgres.sink.ts` — internal table
+  - `sinks/meta-capi.sink.ts` — Facebook server-side
+  - `sinks/gtm.sink.ts` — server-side proxy that returns `dataLayer` payload
+    in the response so Flutter can also push client-side
+- New Flutter mixin `OnboardingAnalyticsMixin` (per Stage 6 instrumentation
+  contract) wraps every screen, fires on `viewed`/`completed`/`skipped`/
+  `back`/`validation_error` with FR-ID baked in via route metadata
+- New Postgres tables in `006_…sql`: `events`, `funnel_sessions`
+- Env config: `META_CAPI_ACCESS_TOKEN`, `META_PIXEL_ID`, `GTM_CONTAINER_ID`
+
+---
+
+## 2026-04-26 · D-029 · Journey is fully data-driven (no hardcoded content in Flutter)
+
+**Source** — User constraint at Review Gate 3 → Stage 4 transition: "this
+journey need to dynamic — all data will be coming from database."
+
+**Options considered**
+- A) Hardcode all option lists, copy strings, templates in Flutter (status
+  quo for most apps)
+- B) Hardcode the journey *shape* (8 phases, step order) but pull *content*
+  (banks, wallets, templates, copy) from DB
+- C) Fully data-driven — phases, steps, conditional logic, content all
+  come from a `journey_config` payload returned at app launch
+
+**Decision** — B (with seam toward C).
+
+**Rationale** — Going full-C (option C above) would let us A/B test phase
+ordering, ship new phases without app updates, and run journey experiments
+from a CMS. But it's expensive: a JSON-driven journey runtime is a
+substantial engineering effort, and the canonical narrative + 28 prior
+decisions have already locked the journey *architecture*.
+
+Going full-A would mean every new bank requires an app store release, every
+copy tweak ships in 2-week cycles, and the marketing/CX team can't move at
+the speed they need.
+
+B is the right balance. The journey **shape** (8 phases, step order, branch
+points) lives in code — it's part of the architectural commitment. Everything
+**inside** the shape is data:
+
+| Lives in code (Flutter) | Lives in DB (returned by `/v1/onboarding/journey-config`) |
+|---|---|
+| Phase order (1-8) | Welcome screen copy (hero, subtitle, CTAs) |
+| Step order within phase | Sign-up method ordering + visibility flags |
+| Branch logic (Phase 6 truth table per D-023) | OTP TTL/attempt limits *(though D-011 default applies)* |
+| Component widget identity (e.g., "this is a pill chip multi-select") | Permission card titles + bodies + WHY copy *(D-014)* |
+| Validation rules (e.g., goal date min 30 days per D-022) | Earning type options list *(currently 8; can grow)* |
+| Continue/Back nav | Bank list per region |
+| Currency formatting | Wallet list per region |
+| | Investment type options |
+| | Goal template options + icons |
+| | Budget templates per (region × earning_type) *(D-019)* |
+| | Family/remittance Phase 6.1 options |
+| | Phase 7 status message templates *(D-025)* |
+| | Phase 8 widget grid render rules |
+| | "Why we ask" microcopy strings *(D-027)* |
+| | Region list + dial codes + currencies |
+
+**Implementation impact for Stage 4**
+
+The DB schema (`006_…sql`) gets these reference tables:
+- `regions`, `banks`, `wallets`, `currencies` (already planned)
+- `goal_templates` (already planned)
+- `budget_templates` (already planned per D-019)
+- `earning_types_master`, `investment_types_master`, `family_remittance_options`
+- `permission_cards`
+- `phase7_status_templates`
+- `phase8_widget_definitions`
+- `journey_strings` — i18n-ready (key, locale, value); v1 only stores `en`
+  but the shape supports D-004's tracked debt for `ur`/`hi`/`bn`/etc.
+- `journey_config_versions` — every content table has a version; the
+  client caches `journey_config` payload by `version_hash`; admin updates
+  bump the hash; client refetches on next launch
+
+NestJS endpoint:
+- `GET /v1/onboarding/journey-config?region={iso2}&earning_types={csv}` —
+  returns the **personalized** journey config payload tailored to the
+  user's already-collected state. Cached on Cloudflare/CDN by version_hash
+  (since content is non-PII).
+
+Flutter side:
+- `OnboardingConfigProvider` (Riverpod) caches the payload locally with
+  TTL = 24 hours; refreshes opportunistically on app foreground
+- All screen widgets read from the cached config; no hardcoded strings
+  beyond fallback copy used when the config is unavailable on first
+  launch (offline guard)
+
+**What this enables**
+
+- Add a new bank to PK list → DB insert + version bump → live for all users
+  on next foreground (no app update)
+- Tweak Phase 5.1 budget template percentages based on funnel data → DB
+  update → live next launch
+- Re-word a permission card → DB update → live next launch
+- A/B test microcopy → branch on `journey_config_version` for two cohorts
+
+**What this does NOT enable**
+
+- Adding a 9th phase → still requires Flutter code change (Phase 9 has no
+  widget render path)
+- Changing branch logic in Phase 6 → still code (truth table is in
+  controller, not config)
+- Adding a new screen-level component (e.g., a slider for budget) → still
+  code
+
+These remain code changes deliberately — pushing them to data would require
+the JSON runtime that option C asked for.
+
+---
+
 ## 2026-04-26 · D-011 through D-028 · PRD lock (Stage 3)
 
 The PRD at [`02-prd/prd-onboarding.md`](./02-prd/prd-onboarding.md) closes all
