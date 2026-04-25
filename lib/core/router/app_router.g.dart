@@ -14,6 +14,7 @@ List<RouteBase> get $appRoutes => [
   $notificationsRoute,
   $accountsRoute,
   $billsRoute,
+  $sendRoute,
   $budgetsRoute,
   $goalsRoute,
   $transactionsRoute,
@@ -22,6 +23,8 @@ List<RouteBase> get $appRoutes => [
   $familyRoute,
   $profileRoute,
   $remittanceRoute,
+  $helpRoute,
+  $kycRoute,
 ];
 
 RouteBase get $splashRoute =>
@@ -176,6 +179,92 @@ extension $BillsRouteExtension on BillsRoute {
   static BillsRoute _fromState(GoRouterState state) => const BillsRoute();
 
   String get location => GoRouteData.$location('/bills');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $sendRoute => GoRouteData.$route(
+  path: '/send',
+
+  factory: $SendRouteExtension._fromState,
+  routes: [
+    GoRouteData.$route(
+      path: 'amount',
+
+      factory: $SendAmountRouteExtension._fromState,
+    ),
+    GoRouteData.$route(
+      path: 'review',
+
+      factory: $SendReviewRouteExtension._fromState,
+    ),
+    GoRouteData.$route(
+      path: 'success',
+
+      factory: $SendSuccessRouteExtension._fromState,
+    ),
+  ],
+);
+
+extension $SendRouteExtension on SendRoute {
+  static SendRoute _fromState(GoRouterState state) => const SendRoute();
+
+  String get location => GoRouteData.$location('/send');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $SendAmountRouteExtension on SendAmountRoute {
+  static SendAmountRoute _fromState(GoRouterState state) =>
+      const SendAmountRoute();
+
+  String get location => GoRouteData.$location('/send/amount');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $SendReviewRouteExtension on SendReviewRoute {
+  static SendReviewRoute _fromState(GoRouterState state) =>
+      const SendReviewRoute();
+
+  String get location => GoRouteData.$location('/send/review');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $SendSuccessRouteExtension on SendSuccessRoute {
+  static SendSuccessRoute _fromState(GoRouterState state) =>
+      const SendSuccessRoute();
+
+  String get location => GoRouteData.$location('/send/success');
 
   void go(BuildContext context) => context.go(location);
 
@@ -466,6 +555,42 @@ extension $RemittanceRouteExtension on RemittanceRoute {
       const RemittanceRoute();
 
   String get location => GoRouteData.$location('/remittance');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $helpRoute =>
+    GoRouteData.$route(path: '/help', factory: $HelpRouteExtension._fromState);
+
+extension $HelpRouteExtension on HelpRoute {
+  static HelpRoute _fromState(GoRouterState state) => const HelpRoute();
+
+  String get location => GoRouteData.$location('/help');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $kycRoute =>
+    GoRouteData.$route(path: '/kyc', factory: $KycRouteExtension._fromState);
+
+extension $KycRouteExtension on KycRoute {
+  static KycRoute _fromState(GoRouterState state) => const KycRoute();
+
+  String get location => GoRouteData.$location('/kyc');
 
   void go(BuildContext context) => context.go(location);
 

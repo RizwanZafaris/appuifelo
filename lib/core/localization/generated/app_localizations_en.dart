@@ -354,6 +354,84 @@ class AppLocalizationsEn extends AppLocalizations {
   String get billsMarkPaid => 'Mark paid';
 
   @override
+  String get sendTitle => 'Send money';
+
+  @override
+  String get sendPickRecipientTitle => 'Pick recipient';
+
+  @override
+  String get sendAddRecipient => 'Add new recipient';
+
+  @override
+  String get sendRecipientNameLabel => 'Recipient name';
+
+  @override
+  String get sendRecipientPhoneLabel => 'Phone';
+
+  @override
+  String get sendRecipientFallback => 'New recipient';
+
+  @override
+  String get sendRecipientPhoneFallback => '+92 *** *** ****';
+
+  @override
+  String get sendAmountTitle => 'Enter amount';
+
+  @override
+  String get sendNoRecipientTitle => 'Choose a recipient first';
+
+  @override
+  String get sendNoRecipientBody =>
+      'The preview needs a saved or newly added recipient before amount entry.';
+
+  @override
+  String get sendAmountLabel => 'Amount in CAD';
+
+  @override
+  String get sendFxPreviewEmpty => 'Enter an amount to preview PKR';
+
+  @override
+  String sendFxPreview(String amount) {
+    return 'Recipient gets about $amount';
+  }
+
+  @override
+  String sendFxRate(String sourceCurrency, String rate, String targetCurrency) {
+    return 'Mock rate: 1 $sourceCurrency = $rate $targetCurrency';
+  }
+
+  @override
+  String get sendReviewTitle => 'Review preview';
+
+  @override
+  String get sendReviewMissingTitle => 'Preview not ready';
+
+  @override
+  String get sendReviewMissingBody =>
+      'Choose a recipient and amount before reviewing.';
+
+  @override
+  String get sendRecipientLabel => 'Recipient';
+
+  @override
+  String get sendRecipientGetsLabel => 'Recipient gets';
+
+  @override
+  String get sendPreviewDisclaimer =>
+      'This is a preview. No money is moved. Phase 3 will require licensed partners before any transfer flow exists.';
+
+  @override
+  String get sendConfirmPreview => 'Confirm preview';
+
+  @override
+  String get sendSuccessTitle => 'Preview created';
+
+  @override
+  String sendSuccessBody(String referenceId) {
+    return 'Reference $referenceId is for this preview only. No money was moved.';
+  }
+
+  @override
   String get smsParserTitle => 'SMS parser';
 
   @override
@@ -627,4 +705,135 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sampleOnTrack => 'On track';
+
+  @override
+  String get commonDone => 'Done';
+
+  @override
+  String get helpTitle => 'Help & support';
+
+  @override
+  String get helpSearchLabel => 'Search help';
+
+  @override
+  String get helpSearchHint => 'Type a question or keyword';
+
+  @override
+  String get helpNoResults => 'No results yet — try a different search.';
+
+  @override
+  String get helpContactSupport => 'Contact support';
+
+  @override
+  String get helpReportBug => 'Report a bug';
+
+  @override
+  String get helpTerms => 'Terms';
+
+  @override
+  String get helpPrivacy => 'Privacy';
+
+  @override
+  String get helpLicenses => 'Licenses';
+
+  @override
+  String get helpFaq1Q => 'Is Felo a bank?';
+
+  @override
+  String get helpFaq1A =>
+      'No. Felo is a budgeting and goal companion. We never hold or move your money.';
+
+  @override
+  String get helpFaq2Q => 'How does SMS parsing work?';
+
+  @override
+  String get helpFaq2A =>
+      'On Android, Felo reads SMS from saved bank and wallet senders on your device. SMS bodies never leave your phone in Phase 1.';
+
+  @override
+  String get helpFaq3Q => 'Can my family see my transactions?';
+
+  @override
+  String get helpFaq3A =>
+      'Only if you invite them and explicitly enable shared visibility. You can revoke access at any time.';
+
+  @override
+  String get helpFaq4Q => 'How do I change language?';
+
+  @override
+  String get helpFaq4A =>
+      'Open Profile → Settings → Language. Felo supports English and Urdu (RTL).';
+
+  @override
+  String get helpFaq5Q => 'What happens if I delete my account?';
+
+  @override
+  String get helpFaq5A =>
+      'Your data is soft-deleted for 30 days, then permanently erased. You can export everything before deletion.';
+
+  @override
+  String get kycTitle => 'Verify your identity';
+
+  @override
+  String get kycChooseIdType => 'Choose ID type';
+
+  @override
+  String get kycIdPassport => 'Passport';
+
+  @override
+  String get kycIdCnic => 'Pakistani CNIC';
+
+  @override
+  String get kycIdDriversLicense => 'Driver\'s license';
+
+  @override
+  String get kycCaptureIdTitle => 'Capture your ID';
+
+  @override
+  String get kycCaptureFront => 'Capture front';
+
+  @override
+  String get kycCaptureBack => 'Capture back';
+
+  @override
+  String get kycSelfieTitle => 'Take a selfie';
+
+  @override
+  String get kycCaptureSelfie => 'Capture selfie';
+
+  @override
+  String get kycSelfieHint =>
+      'Look straight at the camera in good light. Glasses off.';
+
+  @override
+  String get kycReviewTitle => 'Review and submit';
+
+  @override
+  String get kycReviewIdType => 'ID type';
+
+  @override
+  String get kycReviewIdImages => 'ID images';
+
+  @override
+  String get kycReviewSelfie => 'Selfie';
+
+  @override
+  String get kycReviewCaptured => 'Captured';
+
+  @override
+  String get kycReviewMissing => 'Missing';
+
+  @override
+  String get kycReviewDisclaimer =>
+      'Submitting sends data to a verification partner. Phase 1 builds use a stub — no data leaves the device.';
+
+  @override
+  String get kycSubmit => 'Submit';
+
+  @override
+  String get kycSubmittedTitle => 'Submitted for review';
+
+  @override
+  String get kycSubmittedBody =>
+      'We\'ll notify you when verification completes. You can keep using budgeting features in the meantime.';
 }

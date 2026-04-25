@@ -752,6 +752,144 @@ abstract class AppLocalizations {
   /// **'Mark paid'**
   String get billsMarkPaid;
 
+  /// No description provided for @sendTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Send money'**
+  String get sendTitle;
+
+  /// No description provided for @sendPickRecipientTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick recipient'**
+  String get sendPickRecipientTitle;
+
+  /// No description provided for @sendAddRecipient.
+  ///
+  /// In en, this message translates to:
+  /// **'Add new recipient'**
+  String get sendAddRecipient;
+
+  /// No description provided for @sendRecipientNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipient name'**
+  String get sendRecipientNameLabel;
+
+  /// No description provided for @sendRecipientPhoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get sendRecipientPhoneLabel;
+
+  /// No description provided for @sendRecipientFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'New recipient'**
+  String get sendRecipientFallback;
+
+  /// No description provided for @sendRecipientPhoneFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'+92 *** *** ****'**
+  String get sendRecipientPhoneFallback;
+
+  /// No description provided for @sendAmountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter amount'**
+  String get sendAmountTitle;
+
+  /// No description provided for @sendNoRecipientTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a recipient first'**
+  String get sendNoRecipientTitle;
+
+  /// No description provided for @sendNoRecipientBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The preview needs a saved or newly added recipient before amount entry.'**
+  String get sendNoRecipientBody;
+
+  /// No description provided for @sendAmountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Amount in CAD'**
+  String get sendAmountLabel;
+
+  /// No description provided for @sendFxPreviewEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an amount to preview PKR'**
+  String get sendFxPreviewEmpty;
+
+  /// No description provided for @sendFxPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipient gets about {amount}'**
+  String sendFxPreview(String amount);
+
+  /// No description provided for @sendFxRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Mock rate: 1 {sourceCurrency} = {rate} {targetCurrency}'**
+  String sendFxRate(String sourceCurrency, String rate, String targetCurrency);
+
+  /// No description provided for @sendReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review preview'**
+  String get sendReviewTitle;
+
+  /// No description provided for @sendReviewMissingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview not ready'**
+  String get sendReviewMissingTitle;
+
+  /// No description provided for @sendReviewMissingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a recipient and amount before reviewing.'**
+  String get sendReviewMissingBody;
+
+  /// No description provided for @sendRecipientLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipient'**
+  String get sendRecipientLabel;
+
+  /// No description provided for @sendRecipientGetsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Recipient gets'**
+  String get sendRecipientGetsLabel;
+
+  /// No description provided for @sendPreviewDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a preview. No money is moved. Phase 3 will require licensed partners before any transfer flow exists.'**
+  String get sendPreviewDisclaimer;
+
+  /// No description provided for @sendConfirmPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm preview'**
+  String get sendConfirmPreview;
+
+  /// No description provided for @sendSuccessTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview created'**
+  String get sendSuccessTitle;
+
+  /// No description provided for @sendSuccessBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Reference {referenceId} is for this preview only. No money was moved.'**
+  String sendSuccessBody(String referenceId);
+
   /// No description provided for @smsParserTitle.
   ///
   /// In en, this message translates to:
@@ -1243,6 +1381,252 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'On track'**
   String get sampleOnTrack;
+
+  /// No description provided for @commonDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get commonDone;
+
+  /// No description provided for @helpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Help & support'**
+  String get helpTitle;
+
+  /// No description provided for @helpSearchLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Search help'**
+  String get helpSearchLabel;
+
+  /// No description provided for @helpSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Type a question or keyword'**
+  String get helpSearchHint;
+
+  /// No description provided for @helpNoResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No results yet — try a different search.'**
+  String get helpNoResults;
+
+  /// No description provided for @helpContactSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact support'**
+  String get helpContactSupport;
+
+  /// No description provided for @helpReportBug.
+  ///
+  /// In en, this message translates to:
+  /// **'Report a bug'**
+  String get helpReportBug;
+
+  /// No description provided for @helpTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms'**
+  String get helpTerms;
+
+  /// No description provided for @helpPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy'**
+  String get helpPrivacy;
+
+  /// No description provided for @helpLicenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Licenses'**
+  String get helpLicenses;
+
+  /// No description provided for @helpFaq1Q.
+  ///
+  /// In en, this message translates to:
+  /// **'Is Felo a bank?'**
+  String get helpFaq1Q;
+
+  /// No description provided for @helpFaq1A.
+  ///
+  /// In en, this message translates to:
+  /// **'No. Felo is a budgeting and goal companion. We never hold or move your money.'**
+  String get helpFaq1A;
+
+  /// No description provided for @helpFaq2Q.
+  ///
+  /// In en, this message translates to:
+  /// **'How does SMS parsing work?'**
+  String get helpFaq2Q;
+
+  /// No description provided for @helpFaq2A.
+  ///
+  /// In en, this message translates to:
+  /// **'On Android, Felo reads SMS from saved bank and wallet senders on your device. SMS bodies never leave your phone in Phase 1.'**
+  String get helpFaq2A;
+
+  /// No description provided for @helpFaq3Q.
+  ///
+  /// In en, this message translates to:
+  /// **'Can my family see my transactions?'**
+  String get helpFaq3Q;
+
+  /// No description provided for @helpFaq3A.
+  ///
+  /// In en, this message translates to:
+  /// **'Only if you invite them and explicitly enable shared visibility. You can revoke access at any time.'**
+  String get helpFaq3A;
+
+  /// No description provided for @helpFaq4Q.
+  ///
+  /// In en, this message translates to:
+  /// **'How do I change language?'**
+  String get helpFaq4Q;
+
+  /// No description provided for @helpFaq4A.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Profile → Settings → Language. Felo supports English and Urdu (RTL).'**
+  String get helpFaq4A;
+
+  /// No description provided for @helpFaq5Q.
+  ///
+  /// In en, this message translates to:
+  /// **'What happens if I delete my account?'**
+  String get helpFaq5Q;
+
+  /// No description provided for @helpFaq5A.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data is soft-deleted for 30 days, then permanently erased. You can export everything before deletion.'**
+  String get helpFaq5A;
+
+  /// No description provided for @kycTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify your identity'**
+  String get kycTitle;
+
+  /// No description provided for @kycChooseIdType.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose ID type'**
+  String get kycChooseIdType;
+
+  /// No description provided for @kycIdPassport.
+  ///
+  /// In en, this message translates to:
+  /// **'Passport'**
+  String get kycIdPassport;
+
+  /// No description provided for @kycIdCnic.
+  ///
+  /// In en, this message translates to:
+  /// **'Pakistani CNIC'**
+  String get kycIdCnic;
+
+  /// No description provided for @kycIdDriversLicense.
+  ///
+  /// In en, this message translates to:
+  /// **'Driver\'s license'**
+  String get kycIdDriversLicense;
+
+  /// No description provided for @kycCaptureIdTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Capture your ID'**
+  String get kycCaptureIdTitle;
+
+  /// No description provided for @kycCaptureFront.
+  ///
+  /// In en, this message translates to:
+  /// **'Capture front'**
+  String get kycCaptureFront;
+
+  /// No description provided for @kycCaptureBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Capture back'**
+  String get kycCaptureBack;
+
+  /// No description provided for @kycSelfieTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Take a selfie'**
+  String get kycSelfieTitle;
+
+  /// No description provided for @kycCaptureSelfie.
+  ///
+  /// In en, this message translates to:
+  /// **'Capture selfie'**
+  String get kycCaptureSelfie;
+
+  /// No description provided for @kycSelfieHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Look straight at the camera in good light. Glasses off.'**
+  String get kycSelfieHint;
+
+  /// No description provided for @kycReviewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review and submit'**
+  String get kycReviewTitle;
+
+  /// No description provided for @kycReviewIdType.
+  ///
+  /// In en, this message translates to:
+  /// **'ID type'**
+  String get kycReviewIdType;
+
+  /// No description provided for @kycReviewIdImages.
+  ///
+  /// In en, this message translates to:
+  /// **'ID images'**
+  String get kycReviewIdImages;
+
+  /// No description provided for @kycReviewSelfie.
+  ///
+  /// In en, this message translates to:
+  /// **'Selfie'**
+  String get kycReviewSelfie;
+
+  /// No description provided for @kycReviewCaptured.
+  ///
+  /// In en, this message translates to:
+  /// **'Captured'**
+  String get kycReviewCaptured;
+
+  /// No description provided for @kycReviewMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'Missing'**
+  String get kycReviewMissing;
+
+  /// No description provided for @kycReviewDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitting sends data to a verification partner. Phase 1 builds use a stub — no data leaves the device.'**
+  String get kycReviewDisclaimer;
+
+  /// No description provided for @kycSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get kycSubmit;
+
+  /// No description provided for @kycSubmittedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted for review'**
+  String get kycSubmittedTitle;
+
+  /// No description provided for @kycSubmittedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll notify you when verification completes. You can keep using budgeting features in the meantime.'**
+  String get kycSubmittedBody;
 }
 
 class _AppLocalizationsDelegate

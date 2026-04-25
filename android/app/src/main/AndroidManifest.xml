@@ -1,4 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+      SMS permissions are required for Phase 1 on-device parsing of bank
+      and wallet transaction alerts (Easypaisa, JazzCash, HBL, Meezan, etc.).
+      The SMS body never leaves the device — parsing happens locally and only
+      derived structured fields (amount, merchant, currency) are persisted.
+      Runtime permission must still be requested via permission_handler.
+    -->
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <!-- Receipt capture (Phase 2) -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+
     <application
         android:label="felo"
         android:name="${applicationName}"

@@ -12,7 +12,9 @@ import 'package:felo/features/coach/presentation/coach_screen.dart';
 import 'package:felo/features/family/presentation/family_screen.dart';
 import 'package:felo/features/goals/presentation/goal_detail_screen.dart';
 import 'package:felo/features/goals/presentation/goals_screen.dart';
+import 'package:felo/features/help/presentation/help_screen.dart';
 import 'package:felo/features/home_dashboard/presentation/home_screen.dart';
+import 'package:felo/features/kyc/presentation/kyc_screen.dart';
 import 'package:felo/features/notifications/presentation/notifications_screen.dart';
 import 'package:felo/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:felo/features/onboarding/presentation/splash_screen.dart';
@@ -289,4 +291,20 @@ class RemittanceRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) {
     return const RemittanceStubScreen();
   }
+}
+
+@TypedGoRoute<HelpRoute>(path: '/help')
+class HelpRoute extends GoRouteData {
+  const HelpRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const HelpScreen();
+}
+
+@TypedGoRoute<KycRoute>(path: '/kyc')
+class KycRoute extends GoRouteData {
+  const KycRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => const KycScreen();
 }

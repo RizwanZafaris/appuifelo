@@ -436,6 +436,43 @@ final billsRepositoryProvider = AutoDisposeProvider<BillsRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef BillsRepositoryRef = AutoDisposeProviderRef<BillsRepository>;
+String _$sendMoneyRepositoryHash() =>
+    r'4c04eacb0cc38c24c8d5a434d45787a2d1ca4517';
+
+/// See also [sendMoneyRepository].
+@ProviderFor(sendMoneyRepository)
+final sendMoneyRepositoryProvider =
+    AutoDisposeProvider<SendMoneyRepository>.internal(
+      sendMoneyRepository,
+      name: r'sendMoneyRepositoryProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$sendMoneyRepositoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef SendMoneyRepositoryRef = AutoDisposeProviderRef<SendMoneyRepository>;
+String _$sendRecipientsHash() => r'aed55196ae9b9c9a16a64c9ae23c77e2cdb57a48';
+
+/// See also [sendRecipients].
+@ProviderFor(sendRecipients)
+final sendRecipientsProvider =
+    AutoDisposeProvider<List<SendRecipient>>.internal(
+      sendRecipients,
+      name: r'sendRecipientsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$sendRecipientsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef SendRecipientsRef = AutoDisposeProviderRef<List<SendRecipient>>;
 String _$transactionsHash() => r'08489c1e1b43e0fd4af3aea4fdced425d2f82315';
 
 /// See also [Transactions].
@@ -709,5 +746,21 @@ final billsProvider = AutoDisposeNotifierProvider<Bills, List<Bill>>.internal(
 );
 
 typedef _$Bills = AutoDisposeNotifier<List<Bill>>;
+String _$sendMoneyFlowHash() => r'6eebc931e69d563833b2e2dfebdc27861838da5c';
+
+/// See also [SendMoneyFlow].
+@ProviderFor(SendMoneyFlow)
+final sendMoneyFlowProvider =
+    AutoDisposeNotifierProvider<SendMoneyFlow, SendMoneyDraft>.internal(
+      SendMoneyFlow.new,
+      name: r'sendMoneyFlowProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$sendMoneyFlowHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$SendMoneyFlow = AutoDisposeNotifier<SendMoneyDraft>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

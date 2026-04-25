@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:felo/core/di/fake_repositories.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
@@ -34,22 +35,39 @@ class ProfileScreen extends ConsumerWidget {
         _ProfileRow(label: l10n.profileNotifications, value: l10n.commonView),
         _ProfileRow(label: l10n.profileLogout, value: l10n.commonView),
         _ProfileRow(label: l10n.profileDelete, value: l10n.commonView),
+        const SizedBox(height: 6),
+        _ProfileRow(
+          label: l10n.kycTitle,
+          value: l10n.commonContinue,
+          onTap: () => context.go('/kyc'),
+        ),
+        _ProfileRow(
+          label: l10n.helpTitle,
+          value: l10n.commonView,
+          onTap: () => context.go('/help'),
+        ),
       ],
     );
   }
 }
 
 class _ProfileRow extends StatelessWidget {
-  const _ProfileRow({required this.label, required this.value});
+  const _ProfileRow({
+    required this.label,
+    required this.value,
+    this.onTap,
+  });
 
   final String label;
   final String value;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: FeloCard(
+        onTap: onTap,
         child: Row(
           children: [
             Expanded(child: Text(label)),

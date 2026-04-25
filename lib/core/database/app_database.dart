@@ -105,6 +105,34 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   int get schemaVersion => 1;
+
+  /// Forward-only migration strategy. When introducing a schema change:
+  ///   1. Bump [schemaVersion] above.
+  ///   2. Add a `from: N, to: N+1` branch in the switch below using
+  ///      `m.addColumn`, `m.createTable`, `m.alterTable`, etc.
+  ///   3. Ship a Drift schema dump under `drift_schemas/` for tests.
+  ///
+  /// Never mutate an existing migration step in place — append a new one.
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        onCreate: (Migrator m) async {
+          await m.createAll();
+        },
+        onUpgrade: (Migrator m, int from, int to) async {
+          // Example for the next schema bump:
+          // for (var v = from + 1; v <= to; v++) {
+          //   switch (v) {
+          //     case 2:
+          //       await m.addColumn(transactions, transactions.receiptUrl);
+          //       break;
+          //   }
+          // }
+        },
+        beforeOpen: (OpeningDetails details) async {
+          // Enforce foreign keys on every connection (SQLite default is off).
+          await customStatement('PRAGMA foreign_keys = ON;');
+        },
+      );
 }
 
 LazyDatabase _openConnection() {
