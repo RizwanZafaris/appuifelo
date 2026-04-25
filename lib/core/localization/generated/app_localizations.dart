@@ -2300,11 +2300,107 @@ abstract class AppLocalizations {
   /// **'Spent this month'**
   String get insightsThisMonth;
 
+  /// No description provided for @insightsSpentThisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent this week'**
+  String get insightsSpentThisWeek;
+
+  /// No description provided for @insightsSpentThisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent this month'**
+  String get insightsSpentThisMonth;
+
+  /// No description provided for @insightsSpentThisQuarter.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent this quarter'**
+  String get insightsSpentThisQuarter;
+
   /// No description provided for @insightsByCategory.
   ///
   /// In en, this message translates to:
   /// **'By category'**
   String get insightsByCategory;
+
+  /// No description provided for @insightsTopMerchants.
+  ///
+  /// In en, this message translates to:
+  /// **'Top merchants'**
+  String get insightsTopMerchants;
+
+  /// No description provided for @insightsTrend.
+  ///
+  /// In en, this message translates to:
+  /// **'Trend'**
+  String get insightsTrend;
+
+  /// No description provided for @insightsPeriodWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Week'**
+  String get insightsPeriodWeek;
+
+  /// No description provided for @insightsPeriodMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get insightsPeriodMonth;
+
+  /// No description provided for @insightsPeriodQuarter.
+  ///
+  /// In en, this message translates to:
+  /// **'Quarter'**
+  String get insightsPeriodQuarter;
+
+  /// No description provided for @insightsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No category spend yet'**
+  String get insightsEmptyTitle;
+
+  /// No description provided for @insightsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Categorized SMS and transaction spend will appear here.'**
+  String get insightsEmptyBody;
+
+  /// No description provided for @insightsNoMerchantsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No merchants yet'**
+  String get insightsNoMerchantsTitle;
+
+  /// No description provided for @insightsNoMerchantsBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Top merchants will appear once spending is imported.'**
+  String get insightsNoMerchantsBody;
+
+  /// No description provided for @insightsNoTrendTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No trend yet'**
+  String get insightsNoTrendTitle;
+
+  /// No description provided for @insightsNoTrendBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily spending points will appear after activity syncs.'**
+  String get insightsNoTrendBody;
+
+  /// No description provided for @insightsErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Insights unavailable'**
+  String get insightsErrorTitle;
+
+  /// No description provided for @insightsErrorBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We could not load spending insights. Pull to refresh or try again later.'**
+  String get insightsErrorBody;
 
   /// No description provided for @searchTitle.
   ///
@@ -2737,6 +2833,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Check your connection and try again.'**
   String get feloPlusErrorBody;
+
+  /// No description provided for @categoryGroceries.
+  ///
+  /// In en, this message translates to:
+  /// **'Groceries'**
+  String get categoryGroceries;
+
+  /// No description provided for @categoryFamilySupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Family support'**
+  String get categoryFamilySupport;
+
+  /// No description provided for @categoryTransport.
+  ///
+  /// In en, this message translates to:
+  /// **'Transport'**
+  String get categoryTransport;
+
+  /// No description provided for @categoryBills.
+  ///
+  /// In en, this message translates to:
+  /// **'Bills'**
+  String get categoryBills;
+
+  /// No description provided for @categoryEatingOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Eating out'**
+  String get categoryEatingOut;
+
+  /// No description provided for @categoryIncome.
+  ///
+  /// In en, this message translates to:
+  /// **'Income'**
+  String get categoryIncome;
+
+  /// No description provided for @categoryNewLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New category {n}'**
+  String categoryNewLabel(int n);
+
+  /// No description provided for @recurringFreqWeekly.
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly'**
+  String get recurringFreqWeekly;
+
+  /// No description provided for @recurringFreqMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get recurringFreqMonthly;
+
+  /// No description provided for @recurringFreqQuarterly.
+  ///
+  /// In en, this message translates to:
+  /// **'Quarterly'**
+  String get recurringFreqQuarterly;
+
+  /// No description provided for @recurringFreqYearly.
+  ///
+  /// In en, this message translates to:
+  /// **'Yearly'**
+  String get recurringFreqYearly;
 }
 
 class _AppLocalizationsDelegate

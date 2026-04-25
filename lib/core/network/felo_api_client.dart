@@ -138,4 +138,8 @@ abstract class FeloApiClient {
 
   @DELETE('/security/mfa')
   Future<dynamic> mfaDisable();
+
+  // -------- Insights -----------------------------------------------
+  @GET('/insights/spending')
+  Future<dynamic> getSpendingInsights(@Query('period') String period);
 }

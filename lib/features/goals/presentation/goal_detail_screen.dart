@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:felo/core/di/fake_repositories.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
-import 'package:felo/core/network/dio_provider.dart';
+import 'package:felo/core/network/felo_api_client_provider.dart';
 import 'package:felo/core/theme/felo_colors.dart';
 import 'package:felo/features/goals/domain/goal.dart';
 import 'package:felo/shared/utils/money_format.dart';

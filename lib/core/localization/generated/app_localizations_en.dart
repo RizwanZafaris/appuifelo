@@ -1205,7 +1205,59 @@ class AppLocalizationsEn extends AppLocalizations {
   String get insightsThisMonth => 'Spent this month';
 
   @override
+  String get insightsSpentThisWeek => 'Spent this week';
+
+  @override
+  String get insightsSpentThisMonth => 'Spent this month';
+
+  @override
+  String get insightsSpentThisQuarter => 'Spent this quarter';
+
+  @override
   String get insightsByCategory => 'By category';
+
+  @override
+  String get insightsTopMerchants => 'Top merchants';
+
+  @override
+  String get insightsTrend => 'Trend';
+
+  @override
+  String get insightsPeriodWeek => 'Week';
+
+  @override
+  String get insightsPeriodMonth => 'Month';
+
+  @override
+  String get insightsPeriodQuarter => 'Quarter';
+
+  @override
+  String get insightsEmptyTitle => 'No category spend yet';
+
+  @override
+  String get insightsEmptyBody =>
+      'Categorized SMS and transaction spend will appear here.';
+
+  @override
+  String get insightsNoMerchantsTitle => 'No merchants yet';
+
+  @override
+  String get insightsNoMerchantsBody =>
+      'Top merchants will appear once spending is imported.';
+
+  @override
+  String get insightsNoTrendTitle => 'No trend yet';
+
+  @override
+  String get insightsNoTrendBody =>
+      'Daily spending points will appear after activity syncs.';
+
+  @override
+  String get insightsErrorTitle => 'Insights unavailable';
+
+  @override
+  String get insightsErrorBody =>
+      'We could not load spending insights. Pull to refresh or try again later.';
 
   @override
   String get searchTitle => 'Search';
@@ -1437,4 +1489,39 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get feloPlusErrorBody => 'Check your connection and try again.';
+
+  @override
+  String get categoryGroceries => 'Groceries';
+
+  @override
+  String get categoryFamilySupport => 'Family support';
+
+  @override
+  String get categoryTransport => 'Transport';
+
+  @override
+  String get categoryBills => 'Bills';
+
+  @override
+  String get categoryEatingOut => 'Eating out';
+
+  @override
+  String get categoryIncome => 'Income';
+
+  @override
+  String categoryNewLabel(int n) {
+    return 'New category $n';
+  }
+
+  @override
+  String get recurringFreqWeekly => 'Weekly';
+
+  @override
+  String get recurringFreqMonthly => 'Monthly';
+
+  @override
+  String get recurringFreqQuarterly => 'Quarterly';
+
+  @override
+  String get recurringFreqYearly => 'Yearly';
 }
