@@ -5,6 +5,139 @@ rationale. New entries on top.
 
 ---
 
+## 2026-04-26 · D-010 · Stage 7 success criterion is "the dashboard reflects every input"
+
+**Source** — `docs/00-discovery/user-journey-as-told.md` Phase 8 + final
+"What implementation must remember" rule:
+
+> "The dashboard handoff is the success criterion. Every onboarding input
+> must visibly show up on the dashboard for this build to count as done."
+
+**Options considered**
+- A) Stage 7 done = "all 8 phases complete + funnel queryable" (the brief's
+  default acceptance criterion)
+- B) Stage 7 done = A + "every onboarding input demonstrably wired into a
+  dashboard widget on the handoff screen"
+
+**Decision** — B.
+
+**Rationale** — The brief originally scoped Phase 8 (Dashboard) as
+out-of-scope with only a handoff contract. The user-journey doc tightens
+that: Phase 8 isn't just a contract, it's the *test*. If the dashboard
+shows generic placeholders, the entire onboarding journey failed
+regardless of the funnel completion number.
+
+**Implementation impact for Stage 7**:
+
+- Stage 7 ships a **dashboard handoff stub** (not the full dashboard) that
+  renders a configurable widget grid driven by `OnboardingState`:
+  - Greeting card → user's `name`
+  - Currency badge → primary region's currency
+  - Account tiles → one tile per selected bank/wallet (placeholder
+    "Connect" CTA — real linking is post-onboarding)
+  - Budget ring → total monthly budget from Phase 5.1
+  - 2 goal hero cards → with progress rings at 0%, target amount/date
+    visible
+  - Investment section → present iff Phase 4.4 had selections
+  - Remittance tile → present iff Phase 6 had send/receive selections
+  - Earning-type widget → tailored row (e.g., "Days until next salary"
+    for Salaried; "This week's invoices" for Freelancer)
+- A reviewer can run the journey and immediately see "the dashboard
+  matches what I told it" — the integration test exercises this assertion
+  by snapshotting the handoff screen state for each persona path.
+
+**Tracked debt** — The actual rich dashboard (transactions ledger, charts,
+deeper widgets) remains a separate downstream deliverable. The handoff stub
+proves the data flowed; v1.1+ will replace its widgets with the real ones
+without changing the contract.
+
+---
+
+## 2026-04-26 · D-009 · State persistence: write on every Continue, resume from last step
+
+**Source** — `docs/00-discovery/user-journey-as-told.md` "What implementation
+must remember":
+
+> "Every screen must persist state immediately on Continue. Closing the app
+> and reopening should resume at the last completed step."
+
+**Options considered**
+- A) Persist on field-blur (every keystroke debounced into local + remote state)
+- B) Persist on Continue tap only (one write per phase step; resume from last
+  completed step)
+- C) Persist on app-background (every input held in-memory; flush when user
+  backgrounds)
+
+**Decision** — B.
+
+**Rationale** — The user-journey doc explicitly mandates "Continue" as the
+write trigger and "last completed step" as the resume anchor. This is the
+right UX call:
+
+- A would create write amplification (~50× more writes for the typical
+  Phase 5 budget step's 8 categories) and surface partial state on resume
+  ("you were typing '23,5'…")
+- C is fragile — mobile OSes kill backgrounded apps unpredictably; we'd
+  lose data on cold-kill
+- B is the natural fit for the "I'll come back to it" mental model: users
+  trust that what they confirmed is saved, what they were drafting is not
+
+**Implementation impact**:
+
+- `OnboardingController.continueToNext()` is the only method that writes
+  state remotely. Every screen's Continue button calls it.
+- Local persistence (`flutter_secure_storage`) is updated synchronously
+  inside `continueToNext` *before* the network call so a crash mid-write
+  still resumes correctly.
+- `OnboardingState.lastCompletedStep` is the resume anchor on cold start.
+- Edit-earlier-answer flow: if a user navigates back and changes an answer
+  that invalidates a later step (e.g., region change after bank selection),
+  the controller marks invalidated steps as `requiresRePrompt`, the
+  progress bar reflects this, and Continue from the changed step pushes
+  through to the first invalidated step rather than jumping back to where
+  they were.
+
+---
+
+## 2026-04-26 · D-008 · 2-goal limit is a hard product constraint
+
+**Source** — `docs/00-discovery/user-journey-as-told.md` Phase 5.2 +
+"What implementation must remember" rule #1:
+
+> "The 2-goal limit is a hard product constraint, not a soft suggestion."
+
+**Options considered**
+- A) "Up to 2" — soft cap, allow 0/1/2
+- B) "At least 1" — soft floor, no upper cap
+- C) **Exactly 2** — hard constraint enforced by UI + backend
+
+**Decision** — C.
+
+**Rationale** — Three reasons documented in the journey doc itself:
+
+1. **Decision focus** — research shows users with 2 goals achieve them at
+   higher rates than users with 5
+2. **Dashboard real estate** — two goals fit beautifully as hero cards;
+   five become a cluttered list
+3. **Product strategy** — unlimited goals will be a premium feature later;
+   "exactly 2" now sets up the upsell organically
+
+**Implementation impact**:
+
+- Goals screen (Phase 5.2) UI: Continue button is disabled until exactly
+  2 goal cards are selected. Selecting a 3rd deselects the first (FIFO),
+  with a brief inline note "FELO Plus members can set unlimited goals"
+  to plant the upsell seed.
+- Backend (`POST /v1/onboarding/goals`) validates `goals.length === 2`
+  and rejects with `400` otherwise. Don't trust the client.
+- DB constraint: the `goals` table for onboarded users has a `slot` column
+  (1 or 2) with a partial unique index `(user_id, slot)` so the 2-row
+  invariant survives application bugs.
+- Tracked: when premium-tier scaffolding lands (post-v1), the slot column
+  migrates to allow `slot = 3..N` for Plus users; v1 users stay at 2.
+
+---
+
 ## 2026-04-26 · D-007 · SMS-vendor list is illustrative, not procured
 
 **Context** — User has active vendor discussions but no signed contracts yet.

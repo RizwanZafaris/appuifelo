@@ -4,6 +4,13 @@ Staged execution model for the **8-phase onboarding journey** (`onboarding_v2`).
 Lives alongside the production app (`lib/features/onboarding/` is the legacy
 flow, kept behind a feature flag during rollout).
 
+## 📜 Read this first
+
+[**`00-discovery/user-journey-as-told.md`**](./00-discovery/user-journey-as-told.md)
+— **canonical narrative** in the product owner's voice. Every downstream
+artifact (PRD, FRD, system design, code, analytics) must conform to it. If
+something contradicts the narrative, the contradiction is the bug.
+
 ## Folder map
 
 | Folder | Stage | What lives here |
