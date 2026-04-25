@@ -77,21 +77,13 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
 
     if (rows != null) {
       _templateUsed = key;
-      // Pre-fill at a baseline 100k for PKR / 5000 for CAD/USD/AED — user
-      // adjusts the total at the top and percentages re-apply.
-      const baselineByCurrency = {
-        'PKR': 100000,
-        'INR': 30000,
-        'BDT': 30000,
-        'NPR': 30000,
-        'LKR': 50000,
-        'CAD': 5000,
-        'USD': 5000,
-        'GBP': 4000,
-        'AED': 8000,
-        'SAR': 10000,
-      };
-      _totalMinor = (baselineByCurrency[_currency] ?? 5000) * 100;
+      // D-019 — anchor amount comes from `budget_baselines_by_currency` on
+      // the journey-config payload. Product team owns these numbers; see
+      // `db/supabase/007_budget_baselines.sql`. The hardcoded `_kEmergencyBaselineMajor`
+      // below is a last-resort fallback if the network failed AND no
+      // cached config exists — in practice the bundled config ships with
+      // the table baked in.
+      _totalMinor = _resolveBaselineMajor(config, _currency) * 100;
       for (final r in rows) {
         final pct = r['default_pct'] as int;
         final amount = (_totalMinor * pct / 100).round();
@@ -128,6 +120,29 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
         ),
       ]);
     }
+  }
+
+  /// Last-resort fallback when journey-config has not loaded AND nothing
+  /// is cached locally — should never fire in production where the DB
+  /// payload is always available. Kept conservative (5,000 of any
+  /// currency = sensible "small" total the user will edit anyway).
+  static const int _kEmergencyBaselineMajor = 5000;
+
+  /// D-019 — resolve the absolute monthly baseline for the user's currency
+  /// from the DB-driven journey-config payload. Product team owns the
+  /// values via `public.budget_baselines`; this function is shape-only.
+  static int _resolveBaselineMajor(
+    Map<String, dynamic>? config,
+    String currency,
+  ) {
+    final raw = config?['budget_baselines_by_currency']
+        as Map<String, dynamic>?;
+    if (raw == null) return _kEmergencyBaselineMajor;
+    final entry = raw[currency] as Map<String, dynamic>?;
+    final value = entry?['baseline_major'];
+    if (value is int) return value;
+    if (value is num) return value.toInt();
+    return _kEmergencyBaselineMajor;
   }
 
   static String _topEarningType(List<String> types) {
