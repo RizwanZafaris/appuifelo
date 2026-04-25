@@ -105,4 +105,14 @@ abstract class FeloApiClient {
 
   @POST('/recurring-bills')
   Future<void> createRecurringBill(@Body() Map<String, dynamic> body);
+
+  // -------- Coach --------------------------------------------------
+  // NOTE: dynamic return — retrofit_generator 9.7 produces broken
+  // codegen for `Map<String, dynamic>` return types. The coach
+  // controllers cast at the call site.
+  @GET('/coach/conversations')
+  Future<dynamic> listCoachConversations();
+
+  @POST('/coach/ask')
+  Future<dynamic> askCoach(@Body() Map<String, dynamic> body);
 }
