@@ -166,27 +166,22 @@ class NewSplitScreen extends ConsumerStatefulWidget {
 }
 
 class _NewSplitScreenState extends ConsumerState<NewSplitScreen> {
-  final _nameController = TextEditingController(text: 'Dinner split');
-  final _currencyController = TextEditingController(text: 'CAD');
-  final _amountController = TextEditingController(text: '120.00');
-  final List<_ParticipantControllers> _participants = [
-    _ParticipantControllers(
-      name: 'Rizwan',
-      contact: 'rizwan@example.com',
-      share: '60.00',
-    ),
-    _ParticipantControllers(
-      name: 'Saad',
-      contact: '+1 647 *** 2211',
-      share: '60.00',
-    ),
-  ];
+  // Form fields start empty; defaults are populated in initState() so
+  // dismiss-without-edit doesn't ship hardcoded placeholders into real
+  // submissions. Senior review flagged the previous defaults
+  // ('Dinner split', 'CAD', '120.00', 'Rizwan'/'Saad' mock people).
+  final _nameController = TextEditingController();
+  final _currencyController = TextEditingController();
+  final _amountController = TextEditingController();
+  final List<_ParticipantControllers> _participants = [];
   bool _equalShares = true;
   int _step = 0;
 
   @override
   void initState() {
     super.initState();
+    // Sensible currency default — start blank so the user actively picks.
+    // (When the profile API exposes a default currency, set it here.)
     _nameController.addListener(_refresh);
     _currencyController.addListener(_refresh);
     _amountController.addListener(_refresh);
