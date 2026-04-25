@@ -12,6 +12,7 @@ import 'package:felo/features/budgets/domain/budget.dart';
 import 'package:felo/features/coach/domain/coach_message.dart';
 import 'package:felo/features/family/domain/family_member.dart';
 import 'package:felo/features/goals/domain/goal.dart';
+import 'package:felo/features/investments/domain/investment.dart';
 import 'package:felo/features/notifications/data/notifications_repository.dart';
 import 'package:felo/features/notifications/domain/felo_notification.dart';
 import 'package:felo/features/profile/domain/profile_settings.dart';
@@ -99,6 +100,52 @@ class GoalRepository {
         shared: false,
         cadence: GoalCadence.manual,
         contributorNames: const ['Rizwan'],
+      ),
+    ];
+  }
+}
+
+class InvestmentRepository {
+  List<Investment> seedInvestments() {
+    return [
+      Investment(
+        id: 'inv_vfv',
+        symbol: 'VFV',
+        name: 'Vanguard S&P 500 ETF',
+        assetClass: InvestmentAssetClass.stockEtf,
+        currency: 'CAD',
+        units: 18,
+        costBasisMinor: 186000,
+        latestPriceMinor: 11240,
+        marketValueMinor: 202320,
+        notes: 'TFSA tracker entry',
+        updatedAt: DateTime(2026, 4, 25, 9),
+      ),
+      Investment(
+        id: 'inv_btc',
+        symbol: 'BTC',
+        name: 'Bitcoin',
+        assetClass: InvestmentAssetClass.crypto,
+        currency: 'CAD',
+        units: 0.024,
+        costBasisMinor: 210000,
+        latestPriceMinor: 9250000,
+        marketValueMinor: 222000,
+        notes: 'Newton wallet balance',
+        updatedAt: DateTime(2026, 4, 25, 9),
+      ),
+      Investment(
+        id: 'inv_eobi',
+        symbol: 'EOBI',
+        name: 'EOBI pension estimate',
+        assetClass: InvestmentAssetClass.retirementAbroad,
+        currency: 'PKR',
+        units: 1,
+        costBasisMinor: 9500000,
+        latestPriceMinor: 9900000,
+        marketValueMinor: 9900000,
+        notes: 'Manual value in PKR',
+        updatedAt: DateTime(2026, 4, 22, 16, 30),
       ),
     ];
   }
@@ -565,6 +612,79 @@ GoalRepository goalRepository(GoalRepositoryRef ref) => GoalRepository();
 List<Goal> goals(GoalsRef ref) => ref.watch(goalRepositoryProvider).listGoals();
 
 @riverpod
+InvestmentRepository investmentRepository(InvestmentRepositoryRef ref) {
+  return InvestmentRepository();
+}
+
+@riverpod
+class Investments extends _$Investments {
+  @override
+  List<Investment> build() {
+    return ref.watch(investmentRepositoryProvider).seedInvestments();
+  }
+
+  Investment create({
+    required String symbol,
+    required String name,
+    required InvestmentAssetClass assetClass,
+    required String currency,
+    required double units,
+    required int costBasisMinor,
+    required String notes,
+  }) {
+    final latestPriceMinor = units == 0
+        ? costBasisMinor
+        : (costBasisMinor / units).round();
+    final investment = Investment(
+      id: 'inv_manual_${DateTime.now().microsecondsSinceEpoch}',
+      symbol: symbol,
+      name: name,
+      assetClass: assetClass,
+      currency: currency,
+      units: units,
+      costBasisMinor: costBasisMinor,
+      latestPriceMinor: latestPriceMinor,
+      marketValueMinor: (latestPriceMinor * units).round(),
+      notes: notes,
+      updatedAt: DateTime.now(),
+    );
+    state = [investment, ...state];
+    return investment;
+  }
+
+  void updatePrice({required String investmentId, required int priceMinor}) {
+    state = [
+      for (final investment in state)
+        if (investment.id == investmentId)
+          investment.copyWith(
+            latestPriceMinor: priceMinor,
+            marketValueMinor: (priceMinor * investment.units).round(),
+            updatedAt: DateTime.now(),
+          )
+        else
+          investment,
+    ];
+  }
+
+  void archive(String investmentId) {
+    state = [
+      for (final investment in state)
+        if (investment.id == investmentId)
+          investment.copyWith(archived: true, updatedAt: DateTime.now())
+        else
+          investment,
+    ];
+  }
+}
+
+@riverpod
+InvestmentPortfolioSummary investmentPortfolio(InvestmentPortfolioRef ref) {
+  return InvestmentPortfolioSummary.fromHoldings(
+    ref.watch(investmentsProvider),
+  );
+}
+
+@riverpod
 TransactionRepository transactionRepository(TransactionRepositoryRef ref) {
   return TransactionRepository();
 }
@@ -916,14 +1036,16 @@ class SendMoneyFlow extends _$SendMoneyFlow {
   }
 
   void setAmountMinor(int amountMinor) {
-    final quote = ref.read(sendMoneyRepositoryProvider).quoteForAmountMinor(
-          amountMinor,
-        );
+    final quote = ref
+        .read(sendMoneyRepositoryProvider)
+        .quoteForAmountMinor(amountMinor);
     state = state.copyWith(quote: quote);
   }
 
   void completePreview() {
-    final referenceId = ref.read(sendMoneyRepositoryProvider).referenceFor(state);
+    final referenceId = ref
+        .read(sendMoneyRepositoryProvider)
+        .referenceFor(state);
     state = state.copyWith(referenceId: referenceId);
   }
 

@@ -18,6 +18,7 @@ List<RouteBase> get $appRoutes => [
   $sendRoute,
   $budgetsRoute,
   $goalsRoute,
+  $investmentsRoute,
   $transactionsRoute,
   $smsParserRoute,
   $coachRoute,
@@ -412,6 +413,74 @@ extension $GoalDetailRouteExtension on GoalDetailRoute {
 
   String get location =>
       GoRouteData.$location('/goals/${Uri.encodeComponent(goalId)}');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $investmentsRoute => GoRouteData.$route(
+  path: '/investments',
+
+  factory: $InvestmentsRouteExtension._fromState,
+  routes: [
+    GoRouteData.$route(
+      path: 'new',
+
+      factory: $InvestmentAddRouteExtension._fromState,
+    ),
+    GoRouteData.$route(
+      path: ':investmentId',
+
+      factory: $InvestmentDetailRouteExtension._fromState,
+    ),
+  ],
+);
+
+extension $InvestmentsRouteExtension on InvestmentsRoute {
+  static InvestmentsRoute _fromState(GoRouterState state) =>
+      const InvestmentsRoute();
+
+  String get location => GoRouteData.$location('/investments');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $InvestmentAddRouteExtension on InvestmentAddRoute {
+  static InvestmentAddRoute _fromState(GoRouterState state) =>
+      const InvestmentAddRoute();
+
+  String get location => GoRouteData.$location('/investments/new');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $InvestmentDetailRouteExtension on InvestmentDetailRoute {
+  static InvestmentDetailRoute _fromState(GoRouterState state) =>
+      InvestmentDetailRoute(state.pathParameters['investmentId']!);
+
+  String get location => GoRouteData.$location(
+    '/investments/${Uri.encodeComponent(investmentId)}',
+  );
 
   void go(BuildContext context) => context.go(location);
 

@@ -1195,6 +1195,115 @@ class AppLocalizationsEn extends AppLocalizations {
   String get familyInviteAccepted => 'You\'re now part of the family group.';
 
   @override
+  String get investmentsTitle => 'Investments';
+
+  @override
+  String get investmentsTrackerOnly =>
+      'Tracker only — Felo does not give investment advice.';
+
+  @override
+  String get investmentsEmptyTitle => 'No tracked assets yet';
+
+  @override
+  String get investmentsEmptyBody =>
+      'Add manual assets to see your read-only portfolio picture.';
+
+  @override
+  String get investmentsAddAsset => 'Add asset';
+
+  @override
+  String get investmentsRefreshPrices => 'Refresh prices';
+
+  @override
+  String get investmentsRefreshPricesBody =>
+      'Enter latest manual prices for each holding. No trade or money movement happens.';
+
+  @override
+  String get investmentsPortfolioValue => 'Total market value';
+
+  @override
+  String get investmentsProfitLoss => 'P&L';
+
+  @override
+  String get investmentsReturnPercent => 'Return';
+
+  @override
+  String get investmentsAllocation => 'Mix by asset class';
+
+  @override
+  String get investmentsNoAllocation => 'No allocation yet';
+
+  @override
+  String get investmentsHoldings => 'Holdings';
+
+  @override
+  String get investmentsLatestPrice => 'Latest price';
+
+  @override
+  String get investmentsSymbolLabel => 'Symbol';
+
+  @override
+  String get investmentsNameLabel => 'Name';
+
+  @override
+  String get investmentsCurrencyLabel => 'Currency';
+
+  @override
+  String get investmentsUnitsLabel => 'Units';
+
+  @override
+  String get investmentsCostBasisLabel => 'Cost basis';
+
+  @override
+  String get investmentsNotesLabel => 'Notes';
+
+  @override
+  String get investmentsSaveAsset => 'Save asset';
+
+  @override
+  String get investmentsManualSymbolFallback => 'MANUAL';
+
+  @override
+  String get investmentsManualNameFallback => 'Manual asset';
+
+  @override
+  String get investmentsDetailTitle => 'Investment detail';
+
+  @override
+  String get investmentsMissingTitle => 'Asset not found';
+
+  @override
+  String get investmentsMissingBody =>
+      'This tracked asset may have been archived.';
+
+  @override
+  String get investmentsUpdatePrice => 'Update price';
+
+  @override
+  String get investmentsArchive => 'Archive';
+
+  @override
+  String get investmentsMarketValue => 'Market value';
+
+  @override
+  String get investmentsAssetStockEtf => 'Stocks / ETFs';
+
+  @override
+  String get investmentsAssetCrypto => 'Crypto';
+
+  @override
+  String get investmentsAssetRrspTfsa => 'RRSP / TFSA';
+
+  @override
+  String get investmentsAssetRetirementAbroad => 'Retirement abroad';
+
+  @override
+  String get investmentsAssetRealEstate => 'Real estate';
+
+  @override
+  String get investmentsAssetGold => 'Gold';
+
+  @override
   String familyInviteTokenHint(String token) {
     return 'Invite token: $token';
   }

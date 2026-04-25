@@ -1197,6 +1197,115 @@ class AppLocalizationsUr extends AppLocalizations {
   String get familyInviteAccepted => 'آپ اب family group کا حصہ ہیں۔';
 
   @override
+  String get investmentsTitle => 'سرمایہ کاری';
+
+  @override
+  String get investmentsTrackerOnly =>
+      'صرف tracker — Felo سرمایہ کاری کا مشورہ نہیں دیتا۔';
+
+  @override
+  String get investmentsEmptyTitle => 'ابھی کوئی asset track نہیں';
+
+  @override
+  String get investmentsEmptyBody =>
+      'اپنی read-only portfolio تصویر کے لئے manual assets شامل کریں۔';
+
+  @override
+  String get investmentsAddAsset => 'Asset شامل کریں';
+
+  @override
+  String get investmentsRefreshPrices => 'Prices refresh کریں';
+
+  @override
+  String get investmentsRefreshPricesBody =>
+      'ہر holding کے لئے تازہ manual price درج کریں۔ کوئی trade یا money movement نہیں ہوتی۔';
+
+  @override
+  String get investmentsPortfolioValue => 'Total market value';
+
+  @override
+  String get investmentsProfitLoss => 'P&L';
+
+  @override
+  String get investmentsReturnPercent => 'Return';
+
+  @override
+  String get investmentsAllocation => 'Asset class کے حساب سے mix';
+
+  @override
+  String get investmentsNoAllocation => 'ابھی allocation نہیں';
+
+  @override
+  String get investmentsHoldings => 'Holdings';
+
+  @override
+  String get investmentsLatestPrice => 'Latest price';
+
+  @override
+  String get investmentsSymbolLabel => 'Symbol';
+
+  @override
+  String get investmentsNameLabel => 'Name';
+
+  @override
+  String get investmentsCurrencyLabel => 'Currency';
+
+  @override
+  String get investmentsUnitsLabel => 'Units';
+
+  @override
+  String get investmentsCostBasisLabel => 'Cost basis';
+
+  @override
+  String get investmentsNotesLabel => 'Notes';
+
+  @override
+  String get investmentsSaveAsset => 'Asset محفوظ کریں';
+
+  @override
+  String get investmentsManualSymbolFallback => 'MANUAL';
+
+  @override
+  String get investmentsManualNameFallback => 'Manual asset';
+
+  @override
+  String get investmentsDetailTitle => 'Investment detail';
+
+  @override
+  String get investmentsMissingTitle => 'Asset نہیں ملا';
+
+  @override
+  String get investmentsMissingBody =>
+      'یہ tracked asset archive ہو چکا ہو سکتا ہے۔';
+
+  @override
+  String get investmentsUpdatePrice => 'Price update کریں';
+
+  @override
+  String get investmentsArchive => 'Archive';
+
+  @override
+  String get investmentsMarketValue => 'Market value';
+
+  @override
+  String get investmentsAssetStockEtf => 'Stocks / ETFs';
+
+  @override
+  String get investmentsAssetCrypto => 'Crypto';
+
+  @override
+  String get investmentsAssetRrspTfsa => 'RRSP / TFSA';
+
+  @override
+  String get investmentsAssetRetirementAbroad => 'Retirement abroad';
+
+  @override
+  String get investmentsAssetRealEstate => 'Real estate';
+
+  @override
+  String get investmentsAssetGold => 'Gold';
+
+  @override
   String familyInviteTokenHint(String token) {
     return 'Invite token: $token';
   }

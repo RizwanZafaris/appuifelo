@@ -2306,6 +2306,216 @@ abstract class AppLocalizations {
   /// **'You\'re now part of the family group.'**
   String get familyInviteAccepted;
 
+  /// No description provided for @investmentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Investments'**
+  String get investmentsTitle;
+
+  /// No description provided for @investmentsTrackerOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Tracker only — Felo does not give investment advice.'**
+  String get investmentsTrackerOnly;
+
+  /// No description provided for @investmentsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No tracked assets yet'**
+  String get investmentsEmptyTitle;
+
+  /// No description provided for @investmentsEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add manual assets to see your read-only portfolio picture.'**
+  String get investmentsEmptyBody;
+
+  /// No description provided for @investmentsAddAsset.
+  ///
+  /// In en, this message translates to:
+  /// **'Add asset'**
+  String get investmentsAddAsset;
+
+  /// No description provided for @investmentsRefreshPrices.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh prices'**
+  String get investmentsRefreshPrices;
+
+  /// No description provided for @investmentsRefreshPricesBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter latest manual prices for each holding. No trade or money movement happens.'**
+  String get investmentsRefreshPricesBody;
+
+  /// No description provided for @investmentsPortfolioValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Total market value'**
+  String get investmentsPortfolioValue;
+
+  /// No description provided for @investmentsProfitLoss.
+  ///
+  /// In en, this message translates to:
+  /// **'P&L'**
+  String get investmentsProfitLoss;
+
+  /// No description provided for @investmentsReturnPercent.
+  ///
+  /// In en, this message translates to:
+  /// **'Return'**
+  String get investmentsReturnPercent;
+
+  /// No description provided for @investmentsAllocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Mix by asset class'**
+  String get investmentsAllocation;
+
+  /// No description provided for @investmentsNoAllocation.
+  ///
+  /// In en, this message translates to:
+  /// **'No allocation yet'**
+  String get investmentsNoAllocation;
+
+  /// No description provided for @investmentsHoldings.
+  ///
+  /// In en, this message translates to:
+  /// **'Holdings'**
+  String get investmentsHoldings;
+
+  /// No description provided for @investmentsLatestPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest price'**
+  String get investmentsLatestPrice;
+
+  /// No description provided for @investmentsSymbolLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Symbol'**
+  String get investmentsSymbolLabel;
+
+  /// No description provided for @investmentsNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get investmentsNameLabel;
+
+  /// No description provided for @investmentsCurrencyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Currency'**
+  String get investmentsCurrencyLabel;
+
+  /// No description provided for @investmentsUnitsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Units'**
+  String get investmentsUnitsLabel;
+
+  /// No description provided for @investmentsCostBasisLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cost basis'**
+  String get investmentsCostBasisLabel;
+
+  /// No description provided for @investmentsNotesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get investmentsNotesLabel;
+
+  /// No description provided for @investmentsSaveAsset.
+  ///
+  /// In en, this message translates to:
+  /// **'Save asset'**
+  String get investmentsSaveAsset;
+
+  /// No description provided for @investmentsManualSymbolFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'MANUAL'**
+  String get investmentsManualSymbolFallback;
+
+  /// No description provided for @investmentsManualNameFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual asset'**
+  String get investmentsManualNameFallback;
+
+  /// No description provided for @investmentsDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Investment detail'**
+  String get investmentsDetailTitle;
+
+  /// No description provided for @investmentsMissingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Asset not found'**
+  String get investmentsMissingTitle;
+
+  /// No description provided for @investmentsMissingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This tracked asset may have been archived.'**
+  String get investmentsMissingBody;
+
+  /// No description provided for @investmentsUpdatePrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Update price'**
+  String get investmentsUpdatePrice;
+
+  /// No description provided for @investmentsArchive.
+  ///
+  /// In en, this message translates to:
+  /// **'Archive'**
+  String get investmentsArchive;
+
+  /// No description provided for @investmentsMarketValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Market value'**
+  String get investmentsMarketValue;
+
+  /// No description provided for @investmentsAssetStockEtf.
+  ///
+  /// In en, this message translates to:
+  /// **'Stocks / ETFs'**
+  String get investmentsAssetStockEtf;
+
+  /// No description provided for @investmentsAssetCrypto.
+  ///
+  /// In en, this message translates to:
+  /// **'Crypto'**
+  String get investmentsAssetCrypto;
+
+  /// No description provided for @investmentsAssetRrspTfsa.
+  ///
+  /// In en, this message translates to:
+  /// **'RRSP / TFSA'**
+  String get investmentsAssetRrspTfsa;
+
+  /// No description provided for @investmentsAssetRetirementAbroad.
+  ///
+  /// In en, this message translates to:
+  /// **'Retirement abroad'**
+  String get investmentsAssetRetirementAbroad;
+
+  /// No description provided for @investmentsAssetRealEstate.
+  ///
+  /// In en, this message translates to:
+  /// **'Real estate'**
+  String get investmentsAssetRealEstate;
+
+  /// No description provided for @investmentsAssetGold.
+  ///
+  /// In en, this message translates to:
+  /// **'Gold'**
+  String get investmentsAssetGold;
+
   /// No description provided for @familyInviteTokenHint.
   ///
   /// In en, this message translates to:

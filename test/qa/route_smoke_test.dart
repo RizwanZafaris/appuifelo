@@ -23,6 +23,7 @@ import 'package:felo/features/family/presentation/family_screen.dart';
 import 'package:felo/features/goals/presentation/goals_screen.dart';
 import 'package:felo/features/help/presentation/help_screen.dart';
 import 'package:felo/features/home_dashboard/presentation/home_screen.dart';
+import 'package:felo/features/investments/presentation/investments_screens.dart';
 import 'package:felo/features/kyc/presentation/kyc_screen.dart';
 import 'package:felo/features/notifications/presentation/notifications_screen.dart';
 import 'package:felo/features/onboarding/presentation/onboarding_screen.dart';
@@ -76,6 +77,9 @@ void main() {
     'send_success': const SendSuccessScreen(),
     'budgets': const BudgetsScreen(),
     'goals': const GoalsScreen(),
+    'investments': const InvestmentsScreen(),
+    'investment_add': const InvestmentAddScreen(),
+    'investment_detail': const InvestmentDetailScreen(investmentId: 'inv_vfv'),
     'transactions': const TransactionsScreen(),
     'sms_parser': const SmsParserScreen(),
     'coach': const CoachScreen(),

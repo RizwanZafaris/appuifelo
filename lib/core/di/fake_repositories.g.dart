@@ -108,6 +108,45 @@ final goalsProvider = AutoDisposeProvider<List<Goal>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GoalsRef = AutoDisposeProviderRef<List<Goal>>;
+String _$investmentRepositoryHash() =>
+    r'194becaacbe4375fda89bf67e6d8b45bc8490600';
+
+/// See also [investmentRepository].
+@ProviderFor(investmentRepository)
+final investmentRepositoryProvider =
+    AutoDisposeProvider<InvestmentRepository>.internal(
+      investmentRepository,
+      name: r'investmentRepositoryProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$investmentRepositoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef InvestmentRepositoryRef = AutoDisposeProviderRef<InvestmentRepository>;
+String _$investmentPortfolioHash() =>
+    r'258b254ec43cffb39b89d162c028265a4237eaed';
+
+/// See also [investmentPortfolio].
+@ProviderFor(investmentPortfolio)
+final investmentPortfolioProvider =
+    AutoDisposeProvider<InvestmentPortfolioSummary>.internal(
+      investmentPortfolio,
+      name: r'investmentPortfolioProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$investmentPortfolioHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef InvestmentPortfolioRef =
+    AutoDisposeProviderRef<InvestmentPortfolioSummary>;
 String _$transactionRepositoryHash() =>
     r'c2847b825170bbc3b692461530c126430d879de0';
 
@@ -473,6 +512,22 @@ final sendRecipientsProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SendRecipientsRef = AutoDisposeProviderRef<List<SendRecipient>>;
+String _$investmentsHash() => r'8adf70178826cc31ce4f0c1cfa48fb325b4c1d61';
+
+/// See also [Investments].
+@ProviderFor(Investments)
+final investmentsProvider =
+    AutoDisposeNotifierProvider<Investments, List<Investment>>.internal(
+      Investments.new,
+      name: r'investmentsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$investmentsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$Investments = AutoDisposeNotifier<List<Investment>>;
 String _$transactionsHash() => r'08489c1e1b43e0fd4af3aea4fdced425d2f82315';
 
 /// See also [Transactions].
