@@ -40,23 +40,6 @@ final currentUserProvider = AutoDisposeProvider<AppUser>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef CurrentUserRef = AutoDisposeProviderRef<AppUser>;
-String _$splitsRepositoryHash() => r'9a12945a7625845b8d22737bea7936dae75876ab';
-
-/// See also [splitsRepository].
-@ProviderFor(splitsRepository)
-final splitsRepositoryProvider = AutoDisposeProvider<SplitsRepository>.internal(
-  splitsRepository,
-  name: r'splitsRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$splitsRepositoryHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef SplitsRepositoryRef = AutoDisposeProviderRef<SplitsRepository>;
 String _$smsParserRepositoryHash() =>
     r'c5d588692689e4f23aa30b8dbd484d2c204accb4';
 
@@ -254,6 +237,51 @@ final notificationsRepositoryProvider =
 // ignore: unused_element
 typedef NotificationsRepositoryRef =
     AutoDisposeProviderRef<NotificationsRepository>;
+String _$liveNotificationsHash() => r'670d23d749adc8b626377e976c446fd7e26fd326';
+
+/// Live notifications fetcher — only used in non-fake mode.
+///
+/// Copied from [liveNotifications].
+@ProviderFor(liveNotifications)
+final liveNotificationsProvider =
+    AutoDisposeFutureProvider<List<FeloNotification>>.internal(
+      liveNotifications,
+      name: r'liveNotificationsProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$liveNotificationsHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef LiveNotificationsRef =
+    AutoDisposeFutureProviderRef<List<FeloNotification>>;
+String _$useFakeNotificationsSourceHash() =>
+    r'568ec408e00ba5434eb82a56a75de7c3700a24f4';
+
+/// Source-of-truth selector for the notifications inbox.
+///
+/// Defaults to [FeloEnv.useFakeData], but tests override this directly so
+/// they can exercise the synthesis path without flipping a compile-time
+/// constant.
+///
+/// Copied from [useFakeNotificationsSource].
+@ProviderFor(useFakeNotificationsSource)
+final useFakeNotificationsSourceProvider = AutoDisposeProvider<bool>.internal(
+  useFakeNotificationsSource,
+  name: r'useFakeNotificationsSourceProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$useFakeNotificationsSourceHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef UseFakeNotificationsSourceRef = AutoDisposeProviderRef<bool>;
 String _$filteredNotificationsHash() =>
     r'2de35a33424a34f08ca8ae69b210c352e7da602c';
 
@@ -366,23 +394,7 @@ final sendRecipientsProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SendRecipientsRef = AutoDisposeProviderRef<List<SendRecipient>>;
-String _$splitsHash() => r'4ac0e244a1c38b39e0c3f85a93345b8eeaa81d1e';
-
-/// See also [Splits].
-@ProviderFor(Splits)
-final splitsProvider =
-    AutoDisposeNotifierProvider<Splits, List<Split>>.internal(
-      Splits.new,
-      name: r'splitsProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$splitsHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-typedef _$Splits = AutoDisposeNotifier<List<Split>>;
-String _$notificationInboxHash() => r'7d8f0ce376077c4186ebc30307f0d3f48efd95e8';
+String _$notificationInboxHash() => r'c1b4ea31f952378618b2f61a3606acabb707b235';
 
 /// See also [NotificationInbox].
 @ProviderFor(NotificationInbox)

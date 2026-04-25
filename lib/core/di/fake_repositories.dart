@@ -13,6 +13,8 @@ import 'package:felo/features/coach/domain/coach_message.dart';
 import 'package:felo/features/family/domain/family_member.dart';
 import 'package:felo/features/goals/data/goals_repository.dart';
 import 'package:felo/features/goals/domain/goal.dart';
+import 'package:felo/core/config/felo_env.dart';
+import 'package:felo/features/notifications/data/live_notifications_service.dart';
 import 'package:felo/features/notifications/data/notifications_repository.dart';
 import 'package:felo/features/notifications/domain/felo_notification.dart';
 import 'package:felo/features/profile/domain/profile_settings.dart';
@@ -22,8 +24,7 @@ import 'package:felo/features/remittance_stub/domain/remittance_waitlist.dart';
 import 'package:felo/features/send_money/data/send_money_repository.dart';
 import 'package:felo/features/send_money/domain/send_money.dart';
 import 'package:felo/features/sms_parser/domain/parsed_sms.dart';
-import 'package:felo/features/splits/data/splits_repository.dart';
-import 'package:felo/features/splits/domain/split.dart';
+// Splits moved to lib/features/splits/data/splits_repository.dart
 import 'package:felo/features/transactions/data/transactions_repository.dart';
 import 'package:felo/features/transactions/domain/felo_transaction.dart';
 
@@ -288,100 +289,7 @@ AppUser currentUser(CurrentUserRef ref) =>
 // Budget / Goal / Transaction providers moved to feature-data layers.
 // See: lib/features/{budgets,goals,transactions}/data/*_repository.dart
 
-@riverpod
-SplitsRepository splitsRepository(SplitsRepositoryRef ref) =>
-    SplitsRepository();
-
-@riverpod
-class Splits extends _$Splits {
-  @override
-  List<Split> build() => ref.watch(splitsRepositoryProvider).seedSplits();
-
-  Split createSplit({
-    required String name,
-    required String currency,
-    required int totalMinor,
-    required List<SplitParticipantDraft> participants,
-  }) {
-    final split = ref
-        .read(splitsRepositoryProvider)
-        .createSplit(
-          name: name,
-          currency: currency,
-          totalMinor: totalMinor,
-          participants: participants,
-        );
-    state = [split, ...state];
-    return split;
-  }
-
-  void setParticipantPaid({
-    required String splitId,
-    required String participantId,
-    required bool paid,
-  }) {
-    state = [
-      for (final split in state)
-        if (split.id == splitId)
-          _syncStatus(
-            split.copyWith(
-              participants: [
-                for (final participant in split.participants)
-                  if (participant.id == participantId)
-                    participant.copyWith(
-                      paidMinor: paid ? participant.shareMinor : 0,
-                      status: paid
-                          ? SplitParticipantStatus.paid
-                          : SplitParticipantStatus.pending,
-                    )
-                  else
-                    participant,
-              ],
-            ),
-          )
-        else
-          split,
-    ];
-  }
-
-  void settleSplit(String splitId) {
-    state = [
-      for (final split in state)
-        if (split.id == splitId)
-          split.copyWith(
-            status: SplitStatus.settled,
-            participants: [
-              for (final participant in split.participants)
-                participant.copyWith(
-                  paidMinor: participant.shareMinor,
-                  status: SplitParticipantStatus.paid,
-                ),
-            ],
-          )
-        else
-          split,
-    ];
-  }
-
-  Split? byId(String splitId) {
-    for (final split in state) {
-      if (split.id == splitId) {
-        return split;
-      }
-    }
-    return null;
-  }
-
-  Split _syncStatus(Split split) {
-    if (split.participants.isNotEmpty &&
-        split.participants.every(
-          (participant) => participant.status == SplitParticipantStatus.paid,
-        )) {
-      return split.copyWith(status: SplitStatus.settled);
-    }
-    return split.copyWith(status: SplitStatus.active);
-  }
-}
+// Splits provider moved to lib/features/splits/data/splits_repository.dart
 
 // Transactions provider moved to lib/features/transactions/data/transactions_repository.dart.
 
@@ -438,27 +346,50 @@ NotificationsRepository notificationsRepository(
   return FakeNotificationsRepository();
 }
 
+/// Live notifications fetcher — only used in non-fake mode.
+@riverpod
+Future<List<FeloNotification>> liveNotifications(
+  LiveNotificationsRef ref,
+) async {
+  final service = ref.watch(liveNotificationsServiceProvider.notifier);
+  return service.list();
+}
+
+/// Source-of-truth selector for the notifications inbox.
+///
+/// Defaults to [FeloEnv.useFakeData], but tests override this directly so
+/// they can exercise the synthesis path without flipping a compile-time
+/// constant.
+@riverpod
+bool useFakeNotificationsSource(UseFakeNotificationsSourceRef ref) {
+  return FeloEnv.useFakeData;
+}
+
 @riverpod
 class NotificationInbox extends _$NotificationInbox {
   @override
   List<FeloNotification> build() {
-    // Budgets / goals are async post-wire-through. Notification synthesis is
-    // a fake-data convenience; while live data is loading we just emit no
-    // synthesized alerts (the real `/v1/notifications` feed will replace this
-    // synthesis entirely once the notifications screen is wired in Wave 2).
-    final budgetsAsync = ref.watch(budgetsProvider);
-    final goalsAsync = ref.watch(goalsProvider);
-    return ref
-        .watch(notificationsRepositoryProvider)
-        .seedNotifications(
-          budgets: budgetsAsync.valueOrNull ?? const <Budget>[],
-          goals: goalsAsync.valueOrNull ?? const <Goal>[],
-          parsedSmsMessages: ref.watch(parsedSmsMessagesProvider),
-          familyMembers: ref.watch(familyMembersProvider),
-        );
+    if (ref.watch(useFakeNotificationsSourceProvider)) {
+      // Fake mode: synthesize from local budgets/goals/sms/family state.
+      // (Budgets/goals are async post-Wave-1; we tolerate the loading window.)
+      final budgetsAsync = ref.watch(budgetsProvider);
+      final goalsAsync = ref.watch(goalsProvider);
+      return ref
+          .watch(notificationsRepositoryProvider)
+          .seedNotifications(
+            budgets: budgetsAsync.valueOrNull ?? const <Budget>[],
+            goals: goalsAsync.valueOrNull ?? const <Goal>[],
+            parsedSmsMessages: ref.watch(parsedSmsMessagesProvider),
+            familyMembers: ref.watch(familyMembersProvider),
+          );
+    }
+    // Live mode: pull from `/v1/notifications`. Renders an empty list
+    // while loading; the screen still has loading affordances.
+    return ref.watch(liveNotificationsProvider).valueOrNull ??
+        const <FeloNotification>[];
   }
 
-  void markAsRead(String notificationId) {
+  Future<void> markAsRead(String notificationId) async {
     state = [
       for (final notification in state)
         if (notification.id == notificationId)
@@ -466,15 +397,23 @@ class NotificationInbox extends _$NotificationInbox {
         else
           notification,
     ];
+    if (!ref.read(useFakeNotificationsSourceProvider)) {
+      await ref
+          .read(liveNotificationsServiceProvider.notifier)
+          .markRead(notificationId);
+    }
   }
 
-  void markAllRead() {
+  Future<void> markAllRead() async {
     state = [
       for (final notification in state) notification.copyWith(isRead: true),
     ];
+    if (!ref.read(useFakeNotificationsSourceProvider)) {
+      await ref.read(liveNotificationsServiceProvider.notifier).markAllRead();
+    }
   }
 
-  void archive(String notificationId) {
+  Future<void> archive(String notificationId) async {
     state = [
       for (final notification in state)
         if (notification.id == notificationId)
@@ -482,6 +421,11 @@ class NotificationInbox extends _$NotificationInbox {
         else
           notification,
     ];
+    if (!ref.read(useFakeNotificationsSourceProvider)) {
+      await ref
+          .read(liveNotificationsServiceProvider.notifier)
+          .archive(notificationId);
+    }
   }
 }
 

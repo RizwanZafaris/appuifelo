@@ -2,7 +2,6 @@ import 'package:flutter/material.dart' hide Split;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:felo/core/di/fake_repositories.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
 import 'package:felo/features/splits/data/splits_repository.dart';
 import 'package:felo/features/splits/domain/split.dart';
@@ -20,7 +19,8 @@ class SplitsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final splits = ref.watch(splitsProvider);
+    final splitsAsync = ref.watch(splitsProvider);
+    final splits = splitsAsync.valueOrNull ?? const <Split>[];
     final active = splits
         .where((split) => split.status == SplitStatus.active)
         .toList();
@@ -415,7 +415,7 @@ class _NewSplitScreenState extends ConsumerState<NewSplitScreen> {
     return true;
   }
 
-  void _advance(int totalMinor) {
+  Future<void> _advance(int totalMinor) async {
     if (_step < 3) {
       setState(() {
         _step += 1;
@@ -426,7 +426,7 @@ class _NewSplitScreenState extends ConsumerState<NewSplitScreen> {
       return;
     }
 
-    final split = ref
+    final split = await ref
         .read(splitsProvider.notifier)
         .createSplit(
           name: _name,
@@ -434,6 +434,7 @@ class _NewSplitScreenState extends ConsumerState<NewSplitScreen> {
           totalMinor: totalMinor,
           participants: _draftParticipants(totalMinor),
         );
+    if (!mounted) return;
     context.go('/splits/${split.id}');
   }
 
@@ -490,8 +491,10 @@ class SplitDetailScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final split = ref.watch(
-      splitsProvider.select((splits) {
-        for (final split in splits) {
+      splitsProvider.select((async) {
+        final list = async.valueOrNull;
+        if (list == null) return null;
+        for (final split in list) {
           if (split.id == splitId) {
             return split;
           }
