@@ -31,6 +31,13 @@ abstract class BillsRepository {
     String currency = 'CAD',
     bool autoPayEnabled = false,
   });
+
+  /// Records a payment for the current period: backend advances
+  /// `next_expected` by one frequency unit and returns the updated row.
+  /// Status flips to `paid` locally; the backend doesn't yet model that
+  /// state per-period (no payment audit log) — see backend gap-closure
+  /// PR2 for context.
+  Future<Bill> markPaid(String id);
 }
 
 class ApiBillsRepository implements BillsRepository {
@@ -85,6 +92,15 @@ class ApiBillsRepository implements BillsRepository {
       'autoPayEnabled': autoPayEnabled,
     });
     return _billFromApi((raw as Map).cast<String, dynamic>());
+  }
+
+  @override
+  Future<Bill> markPaid(String id) async {
+    final raw = await _api.markRecurringBillPaid(id);
+    final map = (raw as Map).cast<String, dynamic>();
+    // Backend persists the next-period advance; locally also flip the
+    // status to `paid` so the UI reflects "this period is done".
+    return _billFromApi(map).copyWith(status: BillStatus.paid);
   }
 }
 
@@ -175,6 +191,15 @@ class FakeBillsRepository implements BillsRepository {
     _store.insert(0, bill);
     return bill;
   }
+
+  @override
+  Future<Bill> markPaid(String id) async {
+    final idx = _store.indexWhere((b) => b.id == id);
+    if (idx < 0) throw StateError('Fake bill $id not found');
+    final updated = _store[idx].copyWith(status: BillStatus.paid);
+    _store[idx] = updated;
+    return updated;
+  }
 }
 
 Bill _billFromApi(Map<String, dynamic> json) {
@@ -251,15 +276,24 @@ class Bills extends _$Bills {
     state = AsyncValue.data([bill, ...current]);
   }
 
-  void markPaid(String billId) {
+  Future<void> markPaid(String billId) async {
+    // Optimistic local update first so the UI reflects the tap immediately.
     final current = state.valueOrNull;
     if (current == null) return;
     state = AsyncValue.data([
       for (final bill in current)
         if (bill.id == billId) bill.copyWith(status: BillStatus.paid) else bill,
     ]);
-    // TODO(felo): wire backend mark-paid when /v1/recurring-bills/:id/paid
-    // ships. For now this is local-only.
+    try {
+      // Backend advances `next_expected`; we keep our `paid` flip locally.
+      await ref.read(billsRepositoryProvider).markPaid(billId);
+      // Refresh once more so the next-due-date update lands.
+      await refresh();
+    } catch (_) {
+      // Roll back the optimistic flip on failure so the user can retry.
+      state = AsyncValue.data(current);
+      rethrow;
+    }
   }
 
   Future<void> refresh() async {
