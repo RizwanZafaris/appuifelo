@@ -37,6 +37,46 @@ class ProfileScreen extends ConsumerWidget {
         _ProfileRow(label: l10n.profileDelete, value: l10n.commonView),
         const SizedBox(height: 6),
         _ProfileRow(
+          label: l10n.languageTitle,
+          value: l10n.commonView,
+          onTap: () => context.go('/settings/language'),
+        ),
+        _ProfileRow(
+          label: l10n.themeTitle,
+          value: l10n.commonView,
+          onTap: () => context.go('/settings/theme'),
+        ),
+        _ProfileRow(
+          label: l10n.notifPrefsTitle,
+          value: l10n.commonView,
+          onTap: () => context.go('/settings/notifications'),
+        ),
+        _ProfileRow(
+          label: l10n.biometricTitle,
+          value: l10n.commonView,
+          onTap: () => context.go('/auth/biometric'),
+        ),
+        _ProfileRow(
+          label: l10n.mfaTitle,
+          value: l10n.commonView,
+          onTap: () => context.go('/auth/mfa'),
+        ),
+        _ProfileRow(
+          label: l10n.dataExportTitle,
+          value: l10n.commonView,
+          onTap: () => context.go('/settings/export'),
+        ),
+        _ProfileRow(
+          label: l10n.deleteAccountTitle,
+          value: l10n.commonView,
+          onTap: () => context.go('/settings/delete'),
+        ),
+        _ProfileRow(
+          label: l10n.aboutTitle,
+          value: l10n.commonView,
+          onTap: () => context.go('/settings/about'),
+        ),
+        _ProfileRow(
           label: l10n.kycTitle,
           value: l10n.commonContinue,
           onTap: () => context.go('/kyc'),

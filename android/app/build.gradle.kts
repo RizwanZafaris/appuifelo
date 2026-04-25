@@ -30,10 +30,40 @@ android {
         versionName = flutter.versionName
     }
 
+    // -------------------------------------------------------------------
+    // RELEASE SIGNING — PRODUCTION BLOCKER
+    //
+    // The release build below is currently signed with the Android *debug*
+    // keystore so `flutter run --release` works during development.
+    // This MUST be replaced with a real upload keystore before any APK or
+    // AAB is published to internal testing, beta, or production tracks.
+    //
+    // Steps to wire production signing:
+    //   1. Generate a keystore:
+    //        keytool -genkey -v -keystore upload-keystore.jks \
+    //          -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+    //   2. Store credentials outside source control in
+    //        android/key.properties (gitignored).
+    //   3. Replace the `release` block with a `signingConfigs.create("release")`
+    //        that loads from key.properties.
+    //   4. Wire CI secrets (GitHub Actions / Codemagic) — never commit the keystore.
+    //
+    // Build will hard-fail if FELO_REQUIRE_RELEASE_SIGNING=1 is set, to
+    // prevent shipping debug-signed binaries from CI by accident.
+    // -------------------------------------------------------------------
+    val requireReleaseSigning =
+        (System.getenv("FELO_REQUIRE_RELEASE_SIGNING") ?: "0") == "1"
+    if (requireReleaseSigning) {
+        throw GradleException(
+            "FELO_REQUIRE_RELEASE_SIGNING is set but no real release " +
+                "signingConfig is configured. Refusing to build with the " +
+                "debug keystore. See android/app/build.gradle.kts.",
+        )
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            // DEV ONLY — see signing block above.
             signingConfig = signingConfigs.getByName("debug")
         }
     }

@@ -838,4 +838,323 @@ class AppLocalizationsUr extends AppLocalizations {
   @override
   String get kycSubmittedBody =>
       'Verification مکمل ہونے پر ہم آپ کو notify کریں گے۔ اس دوران آپ budgeting features استعمال کر سکتے ہیں۔';
+
+  @override
+  String get authEmailLabel => 'ای میل';
+
+  @override
+  String get forgotPasswordTitle => 'پاسورڈ ری سیٹ';
+
+  @override
+  String get forgotPasswordBody =>
+      'اپنے Felo اکاؤنٹ کا email لکھیں۔ ہم reset link بھیج دیں گے۔';
+
+  @override
+  String get forgotPasswordSendCta => 'Reset link بھیجیں';
+
+  @override
+  String get forgotPasswordSentTitle => 'اپنا inbox دیکھیں';
+
+  @override
+  String get forgotPasswordSentBody =>
+      'اگر اس email پر اکاؤنٹ موجود ہے تو reset link بھیجا جا چکا ہے۔ link 30 منٹ میں expire ہو جائے گا۔';
+
+  @override
+  String get emailVerifyTitle => 'Email verify کریں';
+
+  @override
+  String get emailVerifyHeading => 'اپنی email confirm کریں';
+
+  @override
+  String get emailVerifyBody =>
+      'Setup مکمل کرنے کے لیے ابھی بھیجی گئی email میں موجود link پر tap کریں۔';
+
+  @override
+  String get emailVerifyResend => 'Email دوبارہ بھیجیں';
+
+  @override
+  String emailVerifyResendIn(String seconds) {
+    return '$seconds سیکنڈ بعد دوبارہ بھیجیں';
+  }
+
+  @override
+  String get mfaTitle => 'Two-factor authentication';
+
+  @override
+  String get mfaBody =>
+      'Authenticator app سے QR کو scan کریں، پھر confirm کے لیے 6-digit code لکھیں۔';
+
+  @override
+  String get mfaCopySecret => 'Secret key کاپی کریں';
+
+  @override
+  String get mfaSecretCopied => 'Secret کاپی ہو گیا';
+
+  @override
+  String get mfaCodeLabel => '6-digit code';
+
+  @override
+  String get mfaVerifyCta => 'Code verify کریں';
+
+  @override
+  String get mfaVerified => 'Two-factor enable ہو گیا';
+
+  @override
+  String get biometricTitle => 'App lock';
+
+  @override
+  String get biometricBody =>
+      'Felo صرف آپ کھول سکیں اس کے لیے biometric lock لگائیں۔';
+
+  @override
+  String get biometricEnable => 'Biometric unlock استعمال کریں';
+
+  @override
+  String get biometricAutoLock => 'Auto-lock وقت';
+
+  @override
+  String get biometricImmediate => 'فوراً';
+
+  @override
+  String get biometricAfter1Min => '1 منٹ کی غیر فعالیت کے بعد';
+
+  @override
+  String get biometricAfter5Min => '5 منٹ کی غیر فعالیت کے بعد';
+
+  @override
+  String get biometricAfter15Min => '15 منٹ کی غیر فعالیت کے بعد';
+
+  @override
+  String get languageTitle => 'زبان';
+
+  @override
+  String get languageEnglish => 'English';
+
+  @override
+  String get languageUrdu => 'اردو';
+
+  @override
+  String get languageHelper =>
+      'ہم numbers اور currencies localize کرتے ہیں مگر amounts translate نہیں کرتے۔';
+
+  @override
+  String get themeTitle => 'Theme';
+
+  @override
+  String get themeSystem => 'System کے مطابق';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get notifPrefsTitle => 'Notification preferences';
+
+  @override
+  String get notifPrefsBudgets => 'Budget alerts';
+
+  @override
+  String get notifPrefsGoals => 'Goal milestones';
+
+  @override
+  String get notifPrefsFamily => 'Family activity';
+
+  @override
+  String get notifPrefsCoach => 'Coach nudges';
+
+  @override
+  String get notifPrefsSystem => 'System اور security';
+
+  @override
+  String get notifPrefsQuietHours => 'Quiet hours';
+
+  @override
+  String get notifPrefsQuietHoursHelper =>
+      'رات (10pm–7am) غیر ضروری alerts mute رکھیں۔';
+
+  @override
+  String get dataExportTitle => 'Data export کریں';
+
+  @override
+  String get dataExportBody =>
+      'ہم آپ کے اکاؤنٹ سے منسلک سب کچھ کا downloadable archive تیار کریں گے۔';
+
+  @override
+  String get dataExportScopeAll => 'سب کچھ';
+
+  @override
+  String get dataExportScopeTransactions => 'صرف transactions';
+
+  @override
+  String get dataExportScopeBudgets => 'صرف budgets';
+
+  @override
+  String get dataExportScopeGoals => 'صرف goals';
+
+  @override
+  String get dataExportRequestCta => 'Export request کریں';
+
+  @override
+  String get dataExportRequested => 'Export request کر دیا گیا';
+
+  @override
+  String get dataExportEta => 'ہم 24 گھنٹوں میں email پر link بھیج دیں گے۔';
+
+  @override
+  String get deleteAccountTitle => 'اکاؤنٹ ڈیلیٹ کریں';
+
+  @override
+  String get deleteAccountWarningTitle => '30 دن بعد یہ مستقل ہو جائے گا۔';
+
+  @override
+  String get deleteAccountWarningBody =>
+      'آپ کا data فوراً soft-delete ہو جاتا ہے اور 30 دن بعد مکمل مٹا دیا جاتا ہے۔ اس grace period میں sign in کر کے آپ cancel کر سکتے ہیں۔';
+
+  @override
+  String get deleteAccountTypePrompt =>
+      'Confirm کے لیے بڑے حروف میں DELETE لکھیں۔';
+
+  @override
+  String get deleteAccountConfirmLabel => 'DELETE لکھیں';
+
+  @override
+  String get deleteAccountCta => 'میرا اکاؤنٹ ڈیلیٹ کریں';
+
+  @override
+  String get deleteAccountSubmittedTitle => 'اکاؤنٹ ڈیلیٹ کے لیے schedule';
+
+  @override
+  String get deleteAccountSubmittedBody =>
+      'ہم نے آپ کو sign out کر دیا ہے۔ Confirmation email جلد آ جائے گی۔';
+
+  @override
+  String get aboutTitle => 'Felo کے بارے میں';
+
+  @override
+  String get aboutTagline =>
+      'پاکستانی diaspora کے لیے no-custody money companion۔';
+
+  @override
+  String get aboutVersion => 'Version';
+
+  @override
+  String get aboutBuild => 'Build';
+
+  @override
+  String get aboutCopyright => 'Copyright';
+
+  @override
+  String get categoriesTitle => 'Categories';
+
+  @override
+  String get categoriesAdd => 'Category شامل کریں';
+
+  @override
+  String get recurringTitle => 'Recurring';
+
+  @override
+  String get recurringBody =>
+      'Subscriptions اور bills جو ہمیں آپ کی activity میں نظر آئیں۔';
+
+  @override
+  String get insightsTitle => 'Insights';
+
+  @override
+  String get insightsThisMonth => 'اس مہینے خرچ';
+
+  @override
+  String get insightsByCategory => 'Category کے حساب سے';
+
+  @override
+  String get searchTitle => 'تلاش';
+
+  @override
+  String get searchLabel => 'Felo میں تلاش کریں';
+
+  @override
+  String get searchHint => 'Merchant، category، goal…';
+
+  @override
+  String get searchPrompt => 'تلاش کے لیے کم از کم ایک حرف لکھیں۔';
+
+  @override
+  String get searchEmptyTitle => 'کوئی match نہیں';
+
+  @override
+  String get searchEmptyBody => 'مختلف keyword آزمائیں۔';
+
+  @override
+  String get searchTransactions => 'Transactions';
+
+  @override
+  String get searchBudgets => 'Budgets';
+
+  @override
+  String get searchGoals => 'Goals';
+
+  @override
+  String get networkErrorTitle => 'Connection مسئلہ';
+
+  @override
+  String get networkErrorHeading => 'ہم network تک نہیں پہنچ پائے';
+
+  @override
+  String get networkErrorBody =>
+      'Felo cached data کے ساتھ offline کام کرتا ہے — sync کے لیے دوبارہ کوشش کریں۔';
+
+  @override
+  String get networkErrorRetry => 'دوبارہ کوشش کریں';
+
+  @override
+  String get appLockTitle => 'App lock';
+
+  @override
+  String get appLockHeading => 'خوش آمدید';
+
+  @override
+  String get appLockPinLabel => 'PIN لکھیں';
+
+  @override
+  String get appLockUnlock => 'Unlock';
+
+  @override
+  String get appLockUseBiometric => 'Biometric استعمال کریں';
+
+  @override
+  String get appLockWrongPin => 'PIN غلط ہے۔ دوبارہ کوشش کریں۔';
+
+  @override
+  String get familyInviteTitle => 'Family invite';
+
+  @override
+  String get familyInviteFromHeading => 'آپ کو invite کیا گیا ہے';
+
+  @override
+  String get familyInviteDescription =>
+      'منتخب budgets اور goals پر visibility share کرنے کے لیے family group join کریں۔';
+
+  @override
+  String get familyInvitePermViewTxns => 'Shared transactions دیکھیں';
+
+  @override
+  String get familyInvitePermViewBudgets => 'Shared budgets دیکھیں';
+
+  @override
+  String get familyInvitePermEditBudgets => 'Shared budgets edit کریں';
+
+  @override
+  String get familyInviteAcceptCta => 'Invite قبول کریں';
+
+  @override
+  String get familyInviteDeclineCta => 'Decline';
+
+  @override
+  String get familyInviteAccepted => 'آپ اب family group کا حصہ ہیں۔';
+
+  @override
+  String familyInviteTokenHint(String token) {
+    return 'Invite token: $token';
+  }
 }

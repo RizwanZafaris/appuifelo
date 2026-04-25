@@ -836,4 +836,321 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get kycSubmittedBody =>
       'We\'ll notify you when verification completes. You can keep using budgeting features in the meantime.';
+
+  @override
+  String get authEmailLabel => 'Email';
+
+  @override
+  String get forgotPasswordTitle => 'Reset password';
+
+  @override
+  String get forgotPasswordBody =>
+      'Enter the email tied to your Felo account. We\'ll send you a reset link.';
+
+  @override
+  String get forgotPasswordSendCta => 'Send reset link';
+
+  @override
+  String get forgotPasswordSentTitle => 'Check your inbox';
+
+  @override
+  String get forgotPasswordSentBody =>
+      'If an account exists for that email, a reset link is on its way. The link expires in 30 minutes.';
+
+  @override
+  String get emailVerifyTitle => 'Verify email';
+
+  @override
+  String get emailVerifyHeading => 'Confirm your email';
+
+  @override
+  String get emailVerifyBody =>
+      'Tap the link in the email we just sent to finish setting up your Felo account.';
+
+  @override
+  String get emailVerifyResend => 'Resend email';
+
+  @override
+  String emailVerifyResendIn(String seconds) {
+    return 'Resend in ${seconds}s';
+  }
+
+  @override
+  String get mfaTitle => 'Two-factor authentication';
+
+  @override
+  String get mfaBody =>
+      'Scan the QR code with an authenticator app, then enter the 6-digit code to confirm.';
+
+  @override
+  String get mfaCopySecret => 'Copy secret key';
+
+  @override
+  String get mfaSecretCopied => 'Secret copied';
+
+  @override
+  String get mfaCodeLabel => '6-digit code';
+
+  @override
+  String get mfaVerifyCta => 'Verify code';
+
+  @override
+  String get mfaVerified => 'Two-factor enabled';
+
+  @override
+  String get biometricTitle => 'App lock';
+
+  @override
+  String get biometricBody => 'Add a biometric lock so only you can open Felo.';
+
+  @override
+  String get biometricEnable => 'Use biometric unlock';
+
+  @override
+  String get biometricAutoLock => 'Auto-lock after';
+
+  @override
+  String get biometricImmediate => 'Immediately';
+
+  @override
+  String get biometricAfter1Min => '1 minute of inactivity';
+
+  @override
+  String get biometricAfter5Min => '5 minutes of inactivity';
+
+  @override
+  String get biometricAfter15Min => '15 minutes of inactivity';
+
+  @override
+  String get languageTitle => 'Language';
+
+  @override
+  String get languageEnglish => 'English';
+
+  @override
+  String get languageUrdu => 'Urdu (اردو)';
+
+  @override
+  String get languageHelper =>
+      'We localize numbers and currencies, but never translate amounts.';
+
+  @override
+  String get themeTitle => 'Theme';
+
+  @override
+  String get themeSystem => 'Match system';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get notifPrefsTitle => 'Notification preferences';
+
+  @override
+  String get notifPrefsBudgets => 'Budget alerts';
+
+  @override
+  String get notifPrefsGoals => 'Goal milestones';
+
+  @override
+  String get notifPrefsFamily => 'Family activity';
+
+  @override
+  String get notifPrefsCoach => 'Coach nudges';
+
+  @override
+  String get notifPrefsSystem => 'System & security';
+
+  @override
+  String get notifPrefsQuietHours => 'Quiet hours';
+
+  @override
+  String get notifPrefsQuietHoursHelper =>
+      'Mute non-critical alerts overnight (10pm–7am).';
+
+  @override
+  String get dataExportTitle => 'Export your data';
+
+  @override
+  String get dataExportBody =>
+      'We\'ll prepare a downloadable archive of everything tied to your account.';
+
+  @override
+  String get dataExportScopeAll => 'Everything';
+
+  @override
+  String get dataExportScopeTransactions => 'Transactions only';
+
+  @override
+  String get dataExportScopeBudgets => 'Budgets only';
+
+  @override
+  String get dataExportScopeGoals => 'Goals only';
+
+  @override
+  String get dataExportRequestCta => 'Request export';
+
+  @override
+  String get dataExportRequested => 'Export requested';
+
+  @override
+  String get dataExportEta => 'We\'ll email you a link within 24 hours.';
+
+  @override
+  String get deleteAccountTitle => 'Delete account';
+
+  @override
+  String get deleteAccountWarningTitle => 'This is permanent after 30 days.';
+
+  @override
+  String get deleteAccountWarningBody =>
+      'Your data is soft-deleted immediately and fully erased after 30 days. You can cancel during the grace period by signing in.';
+
+  @override
+  String get deleteAccountTypePrompt => 'Type DELETE in capitals to confirm.';
+
+  @override
+  String get deleteAccountConfirmLabel => 'Type DELETE';
+
+  @override
+  String get deleteAccountCta => 'Delete my account';
+
+  @override
+  String get deleteAccountSubmittedTitle => 'Account scheduled for deletion';
+
+  @override
+  String get deleteAccountSubmittedBody =>
+      'We\'ve signed you out. You\'ll receive a confirmation email shortly.';
+
+  @override
+  String get aboutTitle => 'About Felo';
+
+  @override
+  String get aboutTagline =>
+      'A no-custody money companion for the Pakistani diaspora.';
+
+  @override
+  String get aboutVersion => 'Version';
+
+  @override
+  String get aboutBuild => 'Build';
+
+  @override
+  String get aboutCopyright => 'Copyright';
+
+  @override
+  String get categoriesTitle => 'Categories';
+
+  @override
+  String get categoriesAdd => 'Add category';
+
+  @override
+  String get recurringTitle => 'Recurring';
+
+  @override
+  String get recurringBody =>
+      'Subscriptions and bills we\'ve spotted in your activity.';
+
+  @override
+  String get insightsTitle => 'Insights';
+
+  @override
+  String get insightsThisMonth => 'Spent this month';
+
+  @override
+  String get insightsByCategory => 'By category';
+
+  @override
+  String get searchTitle => 'Search';
+
+  @override
+  String get searchLabel => 'Search Felo';
+
+  @override
+  String get searchHint => 'Merchant, category, goal…';
+
+  @override
+  String get searchPrompt => 'Type at least one character to search.';
+
+  @override
+  String get searchEmptyTitle => 'No matches';
+
+  @override
+  String get searchEmptyBody => 'Try a different keyword.';
+
+  @override
+  String get searchTransactions => 'Transactions';
+
+  @override
+  String get searchBudgets => 'Budgets';
+
+  @override
+  String get searchGoals => 'Goals';
+
+  @override
+  String get networkErrorTitle => 'Connection issue';
+
+  @override
+  String get networkErrorHeading => 'We can\'t reach the network';
+
+  @override
+  String get networkErrorBody =>
+      'Felo works offline for cached data — try again to sync.';
+
+  @override
+  String get networkErrorRetry => 'Try again';
+
+  @override
+  String get appLockTitle => 'App locked';
+
+  @override
+  String get appLockHeading => 'Welcome back';
+
+  @override
+  String get appLockPinLabel => 'Enter PIN';
+
+  @override
+  String get appLockUnlock => 'Unlock';
+
+  @override
+  String get appLockUseBiometric => 'Use biometric';
+
+  @override
+  String get appLockWrongPin => 'Wrong PIN. Try again.';
+
+  @override
+  String get familyInviteTitle => 'Family invite';
+
+  @override
+  String get familyInviteFromHeading => 'You\'ve been invited';
+
+  @override
+  String get familyInviteDescription =>
+      'Join a family group to share visibility on selected budgets and goals.';
+
+  @override
+  String get familyInvitePermViewTxns => 'View shared transactions';
+
+  @override
+  String get familyInvitePermViewBudgets => 'View shared budgets';
+
+  @override
+  String get familyInvitePermEditBudgets => 'Edit shared budgets';
+
+  @override
+  String get familyInviteAcceptCta => 'Accept invite';
+
+  @override
+  String get familyInviteDeclineCta => 'Decline';
+
+  @override
+  String get familyInviteAccepted => 'You\'re now part of the family group.';
+
+  @override
+  String familyInviteTokenHint(String token) {
+    return 'Invite token: $token';
+  }
 }

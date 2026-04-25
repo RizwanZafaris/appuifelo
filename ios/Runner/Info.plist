@@ -4,6 +4,21 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<!--
+	  Privacy purpose strings — required by iOS for runtime feature use.
+	  Missing strings cause hard crashes the first time the API is invoked.
+	  Update the wording for App Store submission; copy is shown verbatim.
+	-->
+	<key>NSCameraUsageDescription</key>
+	<string>Felo uses the camera so you can capture receipts and verification documents.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Felo accesses your photo library so you can attach existing receipts to transactions.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Felo saves exported summaries to your photo library when you ask.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Felo can use Face ID to keep your financial data locked to you.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Felo helps you pick recipients from your contacts when sending money.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

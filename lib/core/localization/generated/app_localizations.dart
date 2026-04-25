@@ -1627,6 +1627,606 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We\'ll notify you when verification completes. You can keep using budgeting features in the meantime.'**
   String get kycSubmittedBody;
+
+  /// No description provided for @authEmailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get authEmailLabel;
+
+  /// No description provided for @forgotPasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset password'**
+  String get forgotPasswordTitle;
+
+  /// No description provided for @forgotPasswordBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the email tied to your Felo account. We\'ll send you a reset link.'**
+  String get forgotPasswordBody;
+
+  /// No description provided for @forgotPasswordSendCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Send reset link'**
+  String get forgotPasswordSendCta;
+
+  /// No description provided for @forgotPasswordSentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your inbox'**
+  String get forgotPasswordSentTitle;
+
+  /// No description provided for @forgotPasswordSentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'If an account exists for that email, a reset link is on its way. The link expires in 30 minutes.'**
+  String get forgotPasswordSentBody;
+
+  /// No description provided for @emailVerifyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify email'**
+  String get emailVerifyTitle;
+
+  /// No description provided for @emailVerifyHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm your email'**
+  String get emailVerifyHeading;
+
+  /// No description provided for @emailVerifyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the link in the email we just sent to finish setting up your Felo account.'**
+  String get emailVerifyBody;
+
+  /// No description provided for @emailVerifyResend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend email'**
+  String get emailVerifyResend;
+
+  /// No description provided for @emailVerifyResendIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend in {seconds}s'**
+  String emailVerifyResendIn(String seconds);
+
+  /// No description provided for @mfaTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Two-factor authentication'**
+  String get mfaTitle;
+
+  /// No description provided for @mfaBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan the QR code with an authenticator app, then enter the 6-digit code to confirm.'**
+  String get mfaBody;
+
+  /// No description provided for @mfaCopySecret.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy secret key'**
+  String get mfaCopySecret;
+
+  /// No description provided for @mfaSecretCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Secret copied'**
+  String get mfaSecretCopied;
+
+  /// No description provided for @mfaCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'6-digit code'**
+  String get mfaCodeLabel;
+
+  /// No description provided for @mfaVerifyCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify code'**
+  String get mfaVerifyCta;
+
+  /// No description provided for @mfaVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'Two-factor enabled'**
+  String get mfaVerified;
+
+  /// No description provided for @biometricTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'App lock'**
+  String get biometricTitle;
+
+  /// No description provided for @biometricBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a biometric lock so only you can open Felo.'**
+  String get biometricBody;
+
+  /// No description provided for @biometricEnable.
+  ///
+  /// In en, this message translates to:
+  /// **'Use biometric unlock'**
+  String get biometricEnable;
+
+  /// No description provided for @biometricAutoLock.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-lock after'**
+  String get biometricAutoLock;
+
+  /// No description provided for @biometricImmediate.
+  ///
+  /// In en, this message translates to:
+  /// **'Immediately'**
+  String get biometricImmediate;
+
+  /// No description provided for @biometricAfter1Min.
+  ///
+  /// In en, this message translates to:
+  /// **'1 minute of inactivity'**
+  String get biometricAfter1Min;
+
+  /// No description provided for @biometricAfter5Min.
+  ///
+  /// In en, this message translates to:
+  /// **'5 minutes of inactivity'**
+  String get biometricAfter5Min;
+
+  /// No description provided for @biometricAfter15Min.
+  ///
+  /// In en, this message translates to:
+  /// **'15 minutes of inactivity'**
+  String get biometricAfter15Min;
+
+  /// No description provided for @languageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get languageTitle;
+
+  /// No description provided for @languageEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get languageEnglish;
+
+  /// No description provided for @languageUrdu.
+  ///
+  /// In en, this message translates to:
+  /// **'Urdu (اردو)'**
+  String get languageUrdu;
+
+  /// No description provided for @languageHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'We localize numbers and currencies, but never translate amounts.'**
+  String get languageHelper;
+
+  /// No description provided for @themeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get themeTitle;
+
+  /// No description provided for @themeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'Match system'**
+  String get themeSystem;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
+
+  /// No description provided for @notifPrefsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification preferences'**
+  String get notifPrefsTitle;
+
+  /// No description provided for @notifPrefsBudgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Budget alerts'**
+  String get notifPrefsBudgets;
+
+  /// No description provided for @notifPrefsGoals.
+  ///
+  /// In en, this message translates to:
+  /// **'Goal milestones'**
+  String get notifPrefsGoals;
+
+  /// No description provided for @notifPrefsFamily.
+  ///
+  /// In en, this message translates to:
+  /// **'Family activity'**
+  String get notifPrefsFamily;
+
+  /// No description provided for @notifPrefsCoach.
+  ///
+  /// In en, this message translates to:
+  /// **'Coach nudges'**
+  String get notifPrefsCoach;
+
+  /// No description provided for @notifPrefsSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System & security'**
+  String get notifPrefsSystem;
+
+  /// No description provided for @notifPrefsQuietHours.
+  ///
+  /// In en, this message translates to:
+  /// **'Quiet hours'**
+  String get notifPrefsQuietHours;
+
+  /// No description provided for @notifPrefsQuietHoursHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'Mute non-critical alerts overnight (10pm–7am).'**
+  String get notifPrefsQuietHoursHelper;
+
+  /// No description provided for @dataExportTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Export your data'**
+  String get dataExportTitle;
+
+  /// No description provided for @dataExportBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll prepare a downloadable archive of everything tied to your account.'**
+  String get dataExportBody;
+
+  /// No description provided for @dataExportScopeAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything'**
+  String get dataExportScopeAll;
+
+  /// No description provided for @dataExportScopeTransactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions only'**
+  String get dataExportScopeTransactions;
+
+  /// No description provided for @dataExportScopeBudgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Budgets only'**
+  String get dataExportScopeBudgets;
+
+  /// No description provided for @dataExportScopeGoals.
+  ///
+  /// In en, this message translates to:
+  /// **'Goals only'**
+  String get dataExportScopeGoals;
+
+  /// No description provided for @dataExportRequestCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Request export'**
+  String get dataExportRequestCta;
+
+  /// No description provided for @dataExportRequested.
+  ///
+  /// In en, this message translates to:
+  /// **'Export requested'**
+  String get dataExportRequested;
+
+  /// No description provided for @dataExportEta.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll email you a link within 24 hours.'**
+  String get dataExportEta;
+
+  /// No description provided for @deleteAccountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get deleteAccountTitle;
+
+  /// No description provided for @deleteAccountWarningTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This is permanent after 30 days.'**
+  String get deleteAccountWarningTitle;
+
+  /// No description provided for @deleteAccountWarningBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data is soft-deleted immediately and fully erased after 30 days. You can cancel during the grace period by signing in.'**
+  String get deleteAccountWarningBody;
+
+  /// No description provided for @deleteAccountTypePrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Type DELETE in capitals to confirm.'**
+  String get deleteAccountTypePrompt;
+
+  /// No description provided for @deleteAccountConfirmLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Type DELETE'**
+  String get deleteAccountConfirmLabel;
+
+  /// No description provided for @deleteAccountCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete my account'**
+  String get deleteAccountCta;
+
+  /// No description provided for @deleteAccountSubmittedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Account scheduled for deletion'**
+  String get deleteAccountSubmittedTitle;
+
+  /// No description provided for @deleteAccountSubmittedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ve signed you out. You\'ll receive a confirmation email shortly.'**
+  String get deleteAccountSubmittedBody;
+
+  /// No description provided for @aboutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'About Felo'**
+  String get aboutTitle;
+
+  /// No description provided for @aboutTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'A no-custody money companion for the Pakistani diaspora.'**
+  String get aboutTagline;
+
+  /// No description provided for @aboutVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get aboutVersion;
+
+  /// No description provided for @aboutBuild.
+  ///
+  /// In en, this message translates to:
+  /// **'Build'**
+  String get aboutBuild;
+
+  /// No description provided for @aboutCopyright.
+  ///
+  /// In en, this message translates to:
+  /// **'Copyright'**
+  String get aboutCopyright;
+
+  /// No description provided for @categoriesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categoriesTitle;
+
+  /// No description provided for @categoriesAdd.
+  ///
+  /// In en, this message translates to:
+  /// **'Add category'**
+  String get categoriesAdd;
+
+  /// No description provided for @recurringTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recurring'**
+  String get recurringTitle;
+
+  /// No description provided for @recurringBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscriptions and bills we\'ve spotted in your activity.'**
+  String get recurringBody;
+
+  /// No description provided for @insightsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Insights'**
+  String get insightsTitle;
+
+  /// No description provided for @insightsThisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'Spent this month'**
+  String get insightsThisMonth;
+
+  /// No description provided for @insightsByCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'By category'**
+  String get insightsByCategory;
+
+  /// No description provided for @searchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get searchTitle;
+
+  /// No description provided for @searchLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Felo'**
+  String get searchLabel;
+
+  /// No description provided for @searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Merchant, category, goal…'**
+  String get searchHint;
+
+  /// No description provided for @searchPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Type at least one character to search.'**
+  String get searchPrompt;
+
+  /// No description provided for @searchEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No matches'**
+  String get searchEmptyTitle;
+
+  /// No description provided for @searchEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Try a different keyword.'**
+  String get searchEmptyBody;
+
+  /// No description provided for @searchTransactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Transactions'**
+  String get searchTransactions;
+
+  /// No description provided for @searchBudgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Budgets'**
+  String get searchBudgets;
+
+  /// No description provided for @searchGoals.
+  ///
+  /// In en, this message translates to:
+  /// **'Goals'**
+  String get searchGoals;
+
+  /// No description provided for @networkErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection issue'**
+  String get networkErrorTitle;
+
+  /// No description provided for @networkErrorHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'We can\'t reach the network'**
+  String get networkErrorHeading;
+
+  /// No description provided for @networkErrorBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Felo works offline for cached data — try again to sync.'**
+  String get networkErrorBody;
+
+  /// No description provided for @networkErrorRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get networkErrorRetry;
+
+  /// No description provided for @appLockTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'App locked'**
+  String get appLockTitle;
+
+  /// No description provided for @appLockHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back'**
+  String get appLockHeading;
+
+  /// No description provided for @appLockPinLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter PIN'**
+  String get appLockPinLabel;
+
+  /// No description provided for @appLockUnlock.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlock'**
+  String get appLockUnlock;
+
+  /// No description provided for @appLockUseBiometric.
+  ///
+  /// In en, this message translates to:
+  /// **'Use biometric'**
+  String get appLockUseBiometric;
+
+  /// No description provided for @appLockWrongPin.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong PIN. Try again.'**
+  String get appLockWrongPin;
+
+  /// No description provided for @familyInviteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Family invite'**
+  String get familyInviteTitle;
+
+  /// No description provided for @familyInviteFromHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve been invited'**
+  String get familyInviteFromHeading;
+
+  /// No description provided for @familyInviteDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Join a family group to share visibility on selected budgets and goals.'**
+  String get familyInviteDescription;
+
+  /// No description provided for @familyInvitePermViewTxns.
+  ///
+  /// In en, this message translates to:
+  /// **'View shared transactions'**
+  String get familyInvitePermViewTxns;
+
+  /// No description provided for @familyInvitePermViewBudgets.
+  ///
+  /// In en, this message translates to:
+  /// **'View shared budgets'**
+  String get familyInvitePermViewBudgets;
+
+  /// No description provided for @familyInvitePermEditBudgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit shared budgets'**
+  String get familyInvitePermEditBudgets;
+
+  /// No description provided for @familyInviteAcceptCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept invite'**
+  String get familyInviteAcceptCta;
+
+  /// No description provided for @familyInviteDeclineCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Decline'**
+  String get familyInviteDeclineCta;
+
+  /// No description provided for @familyInviteAccepted.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re now part of the family group.'**
+  String get familyInviteAccepted;
+
+  /// No description provided for @familyInviteTokenHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite token: {token}'**
+  String familyInviteTokenHint(String token);
 }
 
 class _AppLocalizationsDelegate
