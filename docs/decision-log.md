@@ -5,6 +5,41 @@ rationale. New entries on top.
 
 ---
 
+## 2026-04-26 · D-011 through D-028 · PRD lock (Stage 3)
+
+The PRD at [`02-prd/prd-onboarding.md`](./02-prd/prd-onboarding.md) closes all
+18 open questions from Stages 1+2 by locking 18 architectural decisions.
+Summary here; full rationale per decision is in the PRD itself (§6).
+
+| ID | Decision | Resolves |
+|---|---|---|
+| **D-011** | OTP TTL = 5 min · max attempts per challenge = 3 · max resends per signup = 3 · then force signup-method switch | (PRD-internal) |
+| **D-012** | IP detection: MaxMind GeoLite2 self-hosted (prod) + ipinfo.io (dev) · failure UX = picker with hint, no block | Q3, Q10 |
+| **D-013** | Secondary regions cap = 3 in v1 | (PRD-internal) |
+| **D-014** | SMS permission copy includes "applies when bank sends SMS to this device" — diaspora users on foreign SIMs aren't pressured | Q14 |
+| **D-015** | Multi-earning-type widget precedence: Salaried > Business owner > Freelancer > Investor > Finance pro > Student > Homemaker > Other | Q16, Q18 |
+| **D-016** | Secondary-region banks hidden by default in Phase 4.2; "Show banks from my secondary regions" toggle reveals them | Q15 |
+| **D-017** | "I'll add accounts later" footer link sets `accounts_deferred = true`; Phase 8 shows richer "Add your first account" CTA | Q7 |
+| **D-018** | Investment platform/broker: never auto-prompted during onboarding; surfaced as "Add your broker" CTA per type on Phase 8 dashboard widget | Q5 |
+| **D-019** | Budget pre-fill template matrix: `budget_templates` reference table seeded with (region × earning-type) presets; values are starting points, every field editable | (PRD-internal) |
+| **D-020** | "Family contribution" budget category is bidirectional: students see "Family allowance received" (inflow), all others see "Family support" (outflow); stored as `budget_categories.semantic ∈ {'inflow','outflow'}` | Q17 |
+| **D-021** | Multi-currency goal targets: each goal independently chooses currency from {primary, secondary regions, USD, EUR}; stored as `target_amount_minor + currency`; Phase 8 displays in goal's native currency with primary equivalent in parentheses | Q12 |
+| **D-022** | Goal target date: min 30 days, no max; native picker for ≤1y horizons, custom month/year picker for >1y | Q4 |
+| **D-023** | Phase 6.1 → 6.2 trigger truth table (8 cases enumerated in PRD §2.6.1); domestic-only "support" alone skips 6.2; any "send regularly" or "receive abroad" fires 6.2 | Q13 |
+| **D-024** | Corridor pre-fill rules: diaspora primary regions (CA/UK/US/UAE/SA) default to "Send to" with secondary regions; South Asian primary regions default to "Receive from" with secondary regions; user can always override | (PRD-internal) |
+| **D-025** | Phase 7 status messages reference user's actual inputs (no generic strings); 8 templates locked; messages skip if their condition doesn't apply; total Phase 7 = 3-5s | (per canonical narrative; PRD-internal) |
+| **D-026** | Phase 7 timeout/error: per-message 6s skip → degraded dashboard; core profile/budget/goals build failure → retryable error (3 attempts) → support email + skip-to-degraded-dashboard option | Q6 |
+| **D-027** | "Why we ask" microcopy: always-shown for sensitive Qs (earning type, accounts, budget total, family/remittance); tap-to-reveal for low-stakes (name, goal labels); never shown for signup method or permissions | Q1 |
+| **D-028** | Premium-tier disclosure: exactly one place during onboarding — the inline note on the 3rd-goal-tap deselection at Phase 5.2 ("FELO Plus members can set unlimited goals"). No banner on Phase 8. | Q2 |
+
+**Q8** (legacy-flow baseline measurement) and **Q9** (Phase 6.1 wording native-
+speaker review) are tracked as Stage 5 sprint tasks, not architectural
+decisions.
+
+**Q11** (SMS vendor placeholders) is already covered by D-007.
+
+---
+
 ## 2026-04-26 · D-010 · Stage 7 success criterion is "the dashboard reflects every input"
 
 **Source** — `docs/00-discovery/user-journey-as-told.md` Phase 8 + final
