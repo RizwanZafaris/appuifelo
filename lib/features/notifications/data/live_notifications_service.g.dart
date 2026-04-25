@@ -7,7 +7,7 @@ part of 'live_notifications_service.dart';
 // **************************************************************************
 
 String _$liveNotificationsServiceHash() =>
-    r'a66ffb2b2729da27786daa13f7c82ece84486db3';
+    r'e4a9940ae3f6ce31b4a0ac7795a4c21d28cb8901';
 
 /// Thin facade over backend `/v1/notifications` and `/v1/devices` routes.
 ///
@@ -31,7 +31,7 @@ final liveNotificationsServiceProvider =
 
 typedef _$LiveNotificationsService = AutoDisposeAsyncNotifier<void>;
 String _$deviceRegistrationHash() =>
-    r'ed9bbf1d3863020d0e88a06494cd4ca38f6d5dc7';
+    r'd868c0361d9e7bc5c5698b26fc7361a4dc640be2';
 
 /// Registers the current device so the backend can target push later.
 /// Idempotent — safe to call on every app launch.

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:felo/core/di/fake_repositories.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
 import 'package:felo/features/receipt_capture/domain/receipt_capture.dart';
+import 'package:felo/features/transactions/data/transactions_repository.dart';
 import 'package:felo/shared/utils/money_format.dart';
 import 'package:felo/shared/widgets/felo_bottom_sheet.dart';
 import 'package:felo/shared/widgets/felo_button.dart';
@@ -20,9 +21,19 @@ class ReceiptCaptureScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final transaction = ref
-        .watch(transactionsProvider)
-        .firstWhere((item) => item.id == transactionId);
+    final txnsAsync = ref.watch(transactionsProvider);
+    final transactions = txnsAsync.valueOrNull ?? const [];
+    final match = transactions.where((item) => item.id == transactionId);
+    if (match.isEmpty) {
+      return FeloScaffold(
+        title: l10n.receiptCaptureTitle,
+        selectedTab: FeloRootTab.activity,
+        child: txnsAsync.isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : const Center(child: Text('Transaction not found')),
+      );
+    }
+    final transaction = match.first;
     final state = ref.watch(receiptCaptureSessionProvider(transactionId));
     final session = ref.read(
       receiptCaptureSessionProvider(transactionId).notifier,
@@ -75,7 +86,11 @@ class ReceiptCaptureScreen extends ConsumerWidget {
             ),
             ReceiptCaptureReady(:final result) => _OcrResultCard(
               result: result,
-              onConfirm: session.confirm,
+              onConfirm: () {
+                // Fire-and-forget: confirm() returns Future<void>; we don't
+                // need to await here since the notifier updates state.
+                session.confirm();
+              },
               onEdit: () async {
                 await _showEditSheet(context, ref, transactionId, result);
               },

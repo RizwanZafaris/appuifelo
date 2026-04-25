@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:felo/core/di/fake_repositories.dart';
+import 'package:felo/core/localization/generated/app_localizations.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
 import 'package:felo/core/network/felo_api_client_provider.dart';
 import 'package:felo/core/theme/felo_colors.dart';
+import 'package:felo/features/goals/data/goals_repository.dart';
 import 'package:felo/features/goals/domain/goal.dart';
 import 'package:felo/shared/utils/money_format.dart';
 import 'package:felo/shared/widgets/felo_bottom_sheet.dart';
@@ -30,12 +31,45 @@ class _GoalDetailScreenState extends ConsumerState<GoalDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final goal = ref
-        .watch(goalsProvider)
-        .firstWhere((item) => item.id == widget.goalId);
-    final savedMinor = _savedMinorOverride ?? goal.savedMinor;
-    final progress = savedMinor / goal.targetMinor;
+    final goalsAsync = ref.watch(goalsProvider);
 
+    return goalsAsync.when(
+      loading: () => FeloScaffold(
+        title: l10n.goalDetailTitle,
+        selectedTab: FeloRootTab.goals,
+        child: const Center(child: CircularProgressIndicator()),
+      ),
+      error: (error, _) => FeloScaffold(
+        title: l10n.goalDetailTitle,
+        selectedTab: FeloRootTab.goals,
+        child: Center(child: Text('Could not load goal: $error')),
+      ),
+      data: (goals) {
+        final match = goals.where((g) => g.id == widget.goalId);
+        if (match.isEmpty) {
+          return FeloScaffold(
+            title: l10n.goalDetailTitle,
+            selectedTab: FeloRootTab.goals,
+            child: const Center(child: Text('Goal not found')),
+          );
+        }
+        final goal = match.first;
+        final savedMinor = _savedMinorOverride ?? goal.savedMinor;
+        final progress = goal.targetMinor == 0
+            ? 0.0
+            : (savedMinor / goal.targetMinor).clamp(0.0, 1.0);
+        return _buildGoalView(context, l10n, goal, savedMinor, progress);
+      },
+    );
+  }
+
+  Widget _buildGoalView(
+    BuildContext context,
+    AppLocalizations l10n,
+    Goal goal,
+    int savedMinor,
+    double progress,
+  ) {
     return FeloScaffold(
       title: l10n.goalDetailTitle,
       selectedTab: FeloRootTab.goals,

@@ -7,12 +7,25 @@ import 'package:felo/core/localization/generated/app_localizations.dart';
 import 'package:felo/core/theme/felo_theme.dart';
 import 'package:felo/features/auth/data/mfa_repository.dart';
 import 'package:felo/features/auth/presentation/auth_recovery_screens.dart';
+import 'package:felo/features/budgets/data/budgets_repository.dart';
+import 'package:felo/features/goals/data/goals_repository.dart';
 import 'package:felo/features/profile/presentation/settings_screens.dart';
 import 'package:felo/features/system/presentation/system_screens.dart';
+import 'package:felo/features/transactions/data/transactions_repository.dart';
 import 'package:felo/features/transactions/presentation/money_extension_screens.dart';
 
 Widget wrap(Widget child) => ProviderScope(
-  overrides: [mfaRepositoryProvider.overrideWithValue(_FakeMfaRepository())],
+  overrides: [
+    mfaRepositoryProvider.overrideWithValue(_FakeMfaRepository()),
+    // Wave-1 wire-through: tests use fakes since CI has no backend.
+    // The compile-time `FELO_USE_FAKE_DATA` flag can't be flipped at
+    // runtime, so we override the per-domain repository providers.
+    budgetsRepositoryProvider.overrideWithValue(FakeBudgetsRepository()),
+    goalsRepositoryProvider.overrideWithValue(FakeGoalsRepository()),
+    transactionsRepositoryProvider.overrideWithValue(
+      FakeTransactionsRepository(),
+    ),
+  ],
   child: MaterialApp(
     locale: const Locale('en'),
     localizationsDelegates: const [

@@ -5,12 +5,26 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:felo/core/localization/generated/app_localizations.dart';
 import 'package:felo/core/theme/felo_theme.dart';
+import 'package:felo/features/budgets/data/budgets_repository.dart';
+import 'package:felo/features/goals/data/goals_repository.dart';
 import 'package:felo/features/notifications/presentation/notifications_screen.dart';
+import 'package:felo/features/transactions/data/transactions_repository.dart';
 
 void main() {
   testWidgets('notifications can be filtered and marked read', (tester) async {
     await tester.pumpWidget(
-      const ProviderScope(child: _NotificationsTestApp()),
+      ProviderScope(
+        overrides: [
+          // Wave-1: notification synthesis reads budgets/goals via async
+          // providers. Override with fakes so tests don't hit the network.
+          budgetsRepositoryProvider.overrideWithValue(FakeBudgetsRepository()),
+          goalsRepositoryProvider.overrideWithValue(FakeGoalsRepository()),
+          transactionsRepositoryProvider.overrideWithValue(
+            FakeTransactionsRepository(),
+          ),
+        ],
+        child: const _NotificationsTestApp(),
+      ),
     );
     await tester.pumpAndSettle();
 

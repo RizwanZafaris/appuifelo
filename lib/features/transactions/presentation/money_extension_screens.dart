@@ -4,13 +4,15 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:felo/core/di/fake_repositories.dart';
 import 'package:felo/core/localization/generated/app_localizations.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
 import 'package:felo/core/network/felo_api_client_provider.dart';
 import 'package:felo/core/theme/felo_colors.dart';
+import 'package:felo/features/budgets/data/budgets_repository.dart';
 import 'package:felo/features/budgets/domain/budget.dart';
+import 'package:felo/features/goals/data/goals_repository.dart';
 import 'package:felo/features/goals/domain/goal.dart';
+import 'package:felo/features/transactions/data/transactions_repository.dart';
 import 'package:felo/features/transactions/domain/spending_insights.dart';
 import 'package:felo/features/transactions/domain/felo_transaction.dart';
 import 'package:felo/shared/utils/money_format.dart';
@@ -628,9 +630,11 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final txns = ref.watch(transactionsProvider);
-    final budgets = ref.watch(budgetsProvider);
-    final goals = ref.watch(goalsProvider);
+    // Wave-1: search renders best-effort over whatever data is loaded; no
+    // hard wait so the user can start typing immediately.
+    final txns = ref.watch(transactionsProvider).valueOrNull ?? const [];
+    final budgets = ref.watch(budgetsProvider).valueOrNull ?? const [];
+    final goals = ref.watch(goalsProvider).valueOrNull ?? const [];
 
     final txnHits = _query.isEmpty
         ? const <FeloTransaction>[]
