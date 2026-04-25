@@ -7,7 +7,7 @@ part of 'onboarding_analytics_service.dart';
 // **************************************************************************
 
 String _$onboardingAnalyticsServiceHash() =>
-    r'0554466a733869fcbdada91a0bf4fbf7809ba8ce';
+    r'bc742dd7969ea9615a8ae23b922739da13858993';
 
 /// Multi-sink analytics emitter (Flutter side of D-030).
 ///
