@@ -32,6 +32,7 @@ import 'package:felo/features/profile/presentation/settings_screens.dart';
 import 'package:felo/features/remittance_stub/presentation/remittance_stub_screen.dart';
 import 'package:felo/features/send_money/presentation/send_money_screens.dart';
 import 'package:felo/features/sms_parser/presentation/sms_parser_screen.dart';
+import 'package:felo/features/splits/presentation/splits_screens.dart';
 import 'package:felo/features/system/presentation/system_screens.dart';
 import 'package:felo/features/transactions/presentation/money_extension_screens.dart';
 import 'package:felo/features/transactions/presentation/transactions_screen.dart';
@@ -70,6 +71,9 @@ void main() {
     'notifications': const NotificationsScreen(),
     'accounts': const AccountsScreen(),
     'bills': const BillsScreen(),
+    'splits': const SplitsScreen(),
+    'splits_new': const NewSplitScreen(),
+    'splits_detail': const SplitDetailScreen(splitId: 'split_rent_may'),
     'send_recipient': const SendRecipientScreen(),
     'send_amount': const SendAmountScreen(),
     'send_review': const SendReviewScreen(),

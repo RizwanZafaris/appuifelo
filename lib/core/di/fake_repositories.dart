@@ -21,6 +21,8 @@ import 'package:felo/features/remittance_stub/domain/remittance_waitlist.dart';
 import 'package:felo/features/send_money/data/send_money_repository.dart';
 import 'package:felo/features/send_money/domain/send_money.dart';
 import 'package:felo/features/sms_parser/domain/parsed_sms.dart';
+import 'package:felo/features/splits/data/splits_repository.dart';
+import 'package:felo/features/splits/domain/split.dart';
 import 'package:felo/features/transactions/domain/felo_transaction.dart';
 
 part 'fake_repositories.g.dart';
@@ -565,6 +567,101 @@ GoalRepository goalRepository(GoalRepositoryRef ref) => GoalRepository();
 List<Goal> goals(GoalsRef ref) => ref.watch(goalRepositoryProvider).listGoals();
 
 @riverpod
+SplitsRepository splitsRepository(SplitsRepositoryRef ref) =>
+    SplitsRepository();
+
+@riverpod
+class Splits extends _$Splits {
+  @override
+  List<Split> build() => ref.watch(splitsRepositoryProvider).seedSplits();
+
+  Split createSplit({
+    required String name,
+    required String currency,
+    required int totalMinor,
+    required List<SplitParticipantDraft> participants,
+  }) {
+    final split = ref
+        .read(splitsRepositoryProvider)
+        .createSplit(
+          name: name,
+          currency: currency,
+          totalMinor: totalMinor,
+          participants: participants,
+        );
+    state = [split, ...state];
+    return split;
+  }
+
+  void setParticipantPaid({
+    required String splitId,
+    required String participantId,
+    required bool paid,
+  }) {
+    state = [
+      for (final split in state)
+        if (split.id == splitId)
+          _syncStatus(
+            split.copyWith(
+              participants: [
+                for (final participant in split.participants)
+                  if (participant.id == participantId)
+                    participant.copyWith(
+                      paidMinor: paid ? participant.shareMinor : 0,
+                      status: paid
+                          ? SplitParticipantStatus.paid
+                          : SplitParticipantStatus.pending,
+                    )
+                  else
+                    participant,
+              ],
+            ),
+          )
+        else
+          split,
+    ];
+  }
+
+  void settleSplit(String splitId) {
+    state = [
+      for (final split in state)
+        if (split.id == splitId)
+          split.copyWith(
+            status: SplitStatus.settled,
+            participants: [
+              for (final participant in split.participants)
+                participant.copyWith(
+                  paidMinor: participant.shareMinor,
+                  status: SplitParticipantStatus.paid,
+                ),
+            ],
+          )
+        else
+          split,
+    ];
+  }
+
+  Split? byId(String splitId) {
+    for (final split in state) {
+      if (split.id == splitId) {
+        return split;
+      }
+    }
+    return null;
+  }
+
+  Split _syncStatus(Split split) {
+    if (split.participants.isNotEmpty &&
+        split.participants.every(
+          (participant) => participant.status == SplitParticipantStatus.paid,
+        )) {
+      return split.copyWith(status: SplitStatus.settled);
+    }
+    return split.copyWith(status: SplitStatus.active);
+  }
+}
+
+@riverpod
 TransactionRepository transactionRepository(TransactionRepositoryRef ref) {
   return TransactionRepository();
 }
@@ -916,14 +1013,16 @@ class SendMoneyFlow extends _$SendMoneyFlow {
   }
 
   void setAmountMinor(int amountMinor) {
-    final quote = ref.read(sendMoneyRepositoryProvider).quoteForAmountMinor(
-          amountMinor,
-        );
+    final quote = ref
+        .read(sendMoneyRepositoryProvider)
+        .quoteForAmountMinor(amountMinor);
     state = state.copyWith(quote: quote);
   }
 
   void completePreview() {
-    final referenceId = ref.read(sendMoneyRepositoryProvider).referenceFor(state);
+    final referenceId = ref
+        .read(sendMoneyRepositoryProvider)
+        .referenceFor(state);
     state = state.copyWith(referenceId: referenceId);
   }
 

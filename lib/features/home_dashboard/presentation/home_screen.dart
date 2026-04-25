@@ -223,6 +223,11 @@ class HomeScreen extends ConsumerWidget {
                 onTap: () => context.go('/bills'),
               ),
               _ActionTile(
+                label: l10n.splitsTitle,
+                icon: Icons.groups_2_outlined,
+                onTap: () => context.go('/splits'),
+              ),
+              _ActionTile(
                 label: l10n.sendTitle,
                 icon: Icons.send_outlined,
                 onTap: () => context.go('/send'),

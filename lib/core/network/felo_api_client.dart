@@ -22,7 +22,9 @@ abstract class FeloApiClient {
   Future<Map<String, dynamic>> getMyProfile();
 
   @PATCH('/profiles/me')
-  Future<Map<String, dynamic>> updateMyProfile(@Body() Map<String, dynamic> body);
+  Future<Map<String, dynamic>> updateMyProfile(
+    @Body() Map<String, dynamic> body,
+  );
 
   // -------- Accounts -----------------------------------------------
   @GET('/accounts')
@@ -90,10 +92,14 @@ abstract class FeloApiClient {
   });
 
   @GET('/transactions/sync')
-  Future<List<Map<String, dynamic>>> syncTransactions(@Query('since') String since);
+  Future<List<Map<String, dynamic>>> syncTransactions(
+    @Query('since') String since,
+  );
 
   @POST('/transactions')
-  Future<Map<String, dynamic>> createTransaction(@Body() Map<String, dynamic> body);
+  Future<Map<String, dynamic>> createTransaction(
+    @Body() Map<String, dynamic> body,
+  );
 
   // -------- Felo scores --------------------------------------------
   @GET('/felo-scores/latest')
@@ -104,5 +110,50 @@ abstract class FeloApiClient {
   Future<List<Map<String, dynamic>>> listRecurringBills();
 
   @POST('/recurring-bills')
-  Future<Map<String, dynamic>> createRecurringBill(@Body() Map<String, dynamic> body);
+  Future<Map<String, dynamic>> createRecurringBill(
+    @Body() Map<String, dynamic> body,
+  );
+
+  // -------- Splits -------------------------------------------------
+  @GET('/splits')
+  Future<List<Map<String, dynamic>>> listSplits({
+    @Query('status') String? status,
+  });
+
+  @GET('/splits/{id}')
+  Future<Map<String, dynamic>> getSplit(@Path('id') String id);
+
+  @POST('/splits')
+  Future<Map<String, dynamic>> createSplit(@Body() Map<String, dynamic> body);
+
+  @PATCH('/splits/{id}')
+  Future<Map<String, dynamic>> updateSplit(
+    @Path('id') String id,
+    @Body() Map<String, dynamic> body,
+  );
+
+  @DELETE('/splits/{id}')
+  Future<Map<String, dynamic>> deleteSplit(@Path('id') String id);
+
+  @POST('/splits/{id}/participants')
+  Future<Map<String, dynamic>> addSplitParticipant(
+    @Path('id') String id,
+    @Body() Map<String, dynamic> body,
+  );
+
+  @PATCH('/splits/{id}/participants/{participantId}')
+  Future<Map<String, dynamic>> updateSplitParticipant(
+    @Path('id') String id,
+    @Path('participantId') String participantId,
+    @Body() Map<String, dynamic> body,
+  );
+
+  @DELETE('/splits/{id}/participants/{participantId}')
+  Future<Map<String, dynamic>> deleteSplitParticipant(
+    @Path('id') String id,
+    @Path('participantId') String participantId,
+  );
+
+  @POST('/splits/{id}/settle')
+  Future<Map<String, dynamic>> settleSplit(@Path('id') String id);
 }

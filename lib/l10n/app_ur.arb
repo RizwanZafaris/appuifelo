@@ -137,6 +137,75 @@
   "billsPayPreview": "Pay preview",
   "billsPayPreviewBody": "یہ صرف bill-management preview ہے۔ کوئی payment initiate نہیں ہوتی اور کوئی money move نہیں ہوتی۔",
   "billsMarkPaid": "Paid mark کریں",
+  "splitsTitle": "Splits",
+  "splitsDetailTitle": "Split detail",
+  "splitsNewSplit": "New split",
+  "splitsActiveTab": "Active",
+  "splitsSettledTab": "Settled",
+  "splitsEmptyActiveTitle": "کوئی active split نہیں",
+  "splitsEmptyActiveBody": "Chat میں chase کئے بغیر payments track کرنے کے لئے split بنائیں۔",
+  "splitsEmptySettledTitle": "کوئی settled split نہیں",
+  "splitsEmptySettledBody": "Completed splits reference کے لئے یہاں نظر آئیں گے۔",
+  "splitsPaidProgress": "{paid} of {total} paid",
+  "@splitsPaidProgress": {
+    "placeholders": {
+      "paid": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "splitsWizardBasics": "Name اور currency",
+  "splitsWizardAmount": "Total amount",
+  "splitsWizardParticipants": "Participants",
+  "splitsWizardReview": "Review",
+  "splitsNameLabel": "Split name",
+  "splitsNameHint": "Rent، dinner، family gift",
+  "splitsCurrencyLabel": "Currency",
+  "splitsAmountLabel": "Total amount",
+  "splitsEqualShares": "Equal",
+  "splitsCustomShares": "Custom",
+  "splitsAddParticipant": "Participant شامل کریں",
+  "splitsRemoveParticipant": "Participant remove کریں",
+  "splitsParticipantNumber": "Participant {number}",
+  "@splitsParticipantNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "splitsParticipantFallback": "Participant {number}",
+  "@splitsParticipantFallback": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "splitsParticipantName": "Name",
+  "splitsParticipantContact": "Phone یا email",
+  "splitsParticipantShare": "Share",
+  "splitsShareValidationOk": "Shares total سے match کرتے ہیں۔",
+  "splitsShareValidationError": "Shares {current} بنتے ہیں، expected {expected} ہے۔",
+  "@splitsShareValidationError": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "expected": {
+        "type": "String"
+      }
+    }
+  },
+  "splitsCreateSplit": "Split create کریں",
+  "splitsParticipantsTitle": "Participants",
+  "splitsSettleAll": "سب settle کریں",
+  "splitsNotFoundTitle": "Split نہیں ملا",
+  "splitsNotFoundBody": "یہ split close یا remove ہو چکا ہو سکتا ہے۔",
+  "splitsContactMissing": "Contact شامل نہیں",
   "sendTitle": "Send money",
   "sendPickRecipientTitle": "Recipient چنیں",
   "sendAddRecipient": "نیا recipient شامل کریں",

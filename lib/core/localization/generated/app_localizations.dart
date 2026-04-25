@@ -836,6 +836,216 @@ abstract class AppLocalizations {
   /// **'Mark paid'**
   String get billsMarkPaid;
 
+  /// No description provided for @splitsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Splits'**
+  String get splitsTitle;
+
+  /// No description provided for @splitsDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Split detail'**
+  String get splitsDetailTitle;
+
+  /// No description provided for @splitsNewSplit.
+  ///
+  /// In en, this message translates to:
+  /// **'New split'**
+  String get splitsNewSplit;
+
+  /// No description provided for @splitsActiveTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get splitsActiveTab;
+
+  /// No description provided for @splitsSettledTab.
+  ///
+  /// In en, this message translates to:
+  /// **'Settled'**
+  String get splitsSettledTab;
+
+  /// No description provided for @splitsEmptyActiveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No active splits'**
+  String get splitsEmptyActiveTitle;
+
+  /// No description provided for @splitsEmptyActiveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a split to track who has paid without chasing in chat.'**
+  String get splitsEmptyActiveBody;
+
+  /// No description provided for @splitsEmptySettledTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No settled splits'**
+  String get splitsEmptySettledTitle;
+
+  /// No description provided for @splitsEmptySettledBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed splits will appear here for reference.'**
+  String get splitsEmptySettledBody;
+
+  /// No description provided for @splitsPaidProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'{paid} of {total} paid'**
+  String splitsPaidProgress(int paid, int total);
+
+  /// No description provided for @splitsWizardBasics.
+  ///
+  /// In en, this message translates to:
+  /// **'Name and currency'**
+  String get splitsWizardBasics;
+
+  /// No description provided for @splitsWizardAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Total amount'**
+  String get splitsWizardAmount;
+
+  /// No description provided for @splitsWizardParticipants.
+  ///
+  /// In en, this message translates to:
+  /// **'Participants'**
+  String get splitsWizardParticipants;
+
+  /// No description provided for @splitsWizardReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get splitsWizardReview;
+
+  /// No description provided for @splitsNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Split name'**
+  String get splitsNameLabel;
+
+  /// No description provided for @splitsNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Rent, dinner, family gift'**
+  String get splitsNameHint;
+
+  /// No description provided for @splitsCurrencyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Currency'**
+  String get splitsCurrencyLabel;
+
+  /// No description provided for @splitsAmountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Total amount'**
+  String get splitsAmountLabel;
+
+  /// No description provided for @splitsEqualShares.
+  ///
+  /// In en, this message translates to:
+  /// **'Equal'**
+  String get splitsEqualShares;
+
+  /// No description provided for @splitsCustomShares.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get splitsCustomShares;
+
+  /// No description provided for @splitsAddParticipant.
+  ///
+  /// In en, this message translates to:
+  /// **'Add participant'**
+  String get splitsAddParticipant;
+
+  /// No description provided for @splitsRemoveParticipant.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove participant'**
+  String get splitsRemoveParticipant;
+
+  /// No description provided for @splitsParticipantNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Participant {number}'**
+  String splitsParticipantNumber(int number);
+
+  /// No description provided for @splitsParticipantFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'Participant {number}'**
+  String splitsParticipantFallback(int number);
+
+  /// No description provided for @splitsParticipantName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get splitsParticipantName;
+
+  /// No description provided for @splitsParticipantContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone or email'**
+  String get splitsParticipantContact;
+
+  /// No description provided for @splitsParticipantShare.
+  ///
+  /// In en, this message translates to:
+  /// **'Share'**
+  String get splitsParticipantShare;
+
+  /// No description provided for @splitsShareValidationOk.
+  ///
+  /// In en, this message translates to:
+  /// **'Shares match the total.'**
+  String get splitsShareValidationOk;
+
+  /// No description provided for @splitsShareValidationError.
+  ///
+  /// In en, this message translates to:
+  /// **'Shares add up to {current}, expected {expected}.'**
+  String splitsShareValidationError(String current, String expected);
+
+  /// No description provided for @splitsCreateSplit.
+  ///
+  /// In en, this message translates to:
+  /// **'Create split'**
+  String get splitsCreateSplit;
+
+  /// No description provided for @splitsParticipantsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Participants'**
+  String get splitsParticipantsTitle;
+
+  /// No description provided for @splitsSettleAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Settle all'**
+  String get splitsSettleAll;
+
+  /// No description provided for @splitsNotFoundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Split not found'**
+  String get splitsNotFoundTitle;
+
+  /// No description provided for @splitsNotFoundBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This split may have been closed or removed.'**
+  String get splitsNotFoundBody;
+
+  /// No description provided for @splitsContactMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'No contact added'**
+  String get splitsContactMissing;
+
   /// No description provided for @sendTitle.
   ///
   /// In en, this message translates to:
