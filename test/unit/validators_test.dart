@@ -210,9 +210,26 @@ void main() {
       expect(Validators.budgetAmount('-5').error, isNotNull);
     });
 
-    test('clarifies on suspiciously large (5000k = 5M)', () {
-      // 5000k = 5,000,000 — under the >1B sanity check, accepted.
-      expect(Validators.budgetAmount('5000k').majorAmount, 5000000);
+    test('rejects ambiguous "5000k" with clarification (QA Bug 2)', () {
+      // Per audit §8: "If user enters something like 5000k, normalize
+      // or ask clarification." 5000k = 5,000,000 — almost certainly a
+      // typo for 5K or 5M. Must be rejected with clarification.
+      final r = Validators.budgetAmount('5000k');
+      expect(r.majorAmount, isNull);
+      expect(r.clarification, isNotNull);
+      expect(r.clarification, contains('Did you mean'));
+    });
+
+    test('rejects ambiguous "1000l" / "1000m" similarly', () {
+      expect(Validators.budgetAmount('1000l').clarification, isNotNull);
+      expect(Validators.budgetAmount('1000m').clarification, isNotNull);
+    });
+
+    test('still accepts clean shorthand like "5k" or "1.5l"', () {
+      // The ambiguity check fires only on 4+ leading digits.
+      expect(Validators.budgetAmount('5k').majorAmount, 5000);
+      expect(Validators.budgetAmount('999k').majorAmount, 999000);
+      expect(Validators.budgetAmount('1.5l').majorAmount, 150000);
     });
 
     test('clarifies on >1B (likely typo)', () {

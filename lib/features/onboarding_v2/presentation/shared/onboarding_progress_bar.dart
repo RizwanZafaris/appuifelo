@@ -18,8 +18,9 @@ class OnboardingProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final progress =
-        totalSteps == 0 ? 0.0 : (currentStep / totalSteps).clamp(0.0, 1.0);
+    final progress = totalSteps == 0
+        ? 0.0
+        : (currentStep / totalSteps).clamp(0.0, 1.0);
     return SizedBox(
       height: 4,
       child: ClipRRect(

@@ -107,17 +107,17 @@ class _OtpInputState extends State<OtpInput> {
               keyboardType: TextInputType.number,
               maxLength: 1,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.w900,
-                  ),
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-              ],
+              style: Theme.of(
+                context,
+              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               decoration: InputDecoration(
                 counterText: '',
                 contentPadding: const EdgeInsets.symmetric(vertical: 14),
                 filled: true,
-                fillColor: colors.surfaceContainerHighest.withValues(alpha: 0.6),
+                fillColor: colors.surfaceContainerHighest.withValues(
+                  alpha: 0.6,
+                ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(

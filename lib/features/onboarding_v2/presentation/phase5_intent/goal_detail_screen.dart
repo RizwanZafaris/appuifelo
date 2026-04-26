@@ -75,8 +75,16 @@ class _GoalDetailScreenState extends ConsumerState<GoalDetailScreen>
     final base = <String>{};
     if (stored?.budgetCurrency != null) base.add(stored!.budgetCurrency!);
     final regionCurrencies = {
-      'PK': 'PKR', 'IN': 'INR', 'BD': 'BDT', 'NP': 'NPR', 'LK': 'LKR',
-      'CA': 'CAD', 'GB': 'GBP', 'US': 'USD', 'AE': 'AED', 'SA': 'SAR',
+      'PK': 'PKR',
+      'IN': 'INR',
+      'BD': 'BDT',
+      'NP': 'NPR',
+      'LK': 'LKR',
+      'CA': 'CAD',
+      'GB': 'GBP',
+      'US': 'USD',
+      'AE': 'AED',
+      'SA': 'SAR',
     };
     if (stored?.primaryRegion != null) {
       final c = regionCurrencies[stored!.primaryRegion!];
@@ -146,9 +154,9 @@ class _GoalDetailScreenState extends ConsumerState<GoalDetailScreen>
         customLabel: _slug == 'custom' ? _customLabel : null,
       );
     }).toList();
-    await ref.read(onboardingStateControllerProvider.notifier).patch(
-          (s) => s.copyWith(goals: updatedGoals),
-        );
+    await ref
+        .read(onboardingStateControllerProvider.notifier)
+        .patch((s) => s.copyWith(goals: updatedGoals));
     await onContinue({
       'slot': widget.slot,
       'slug': _slug,
@@ -166,7 +174,8 @@ class _GoalDetailScreenState extends ConsumerState<GoalDetailScreen>
 
   int? _monthlyContribution() {
     if (_targetMinor <= 0 || _targetDate == null) return null;
-    final months = (_targetDate!.difference(DateTime.now()).inDays / 30.4).round();
+    final months = (_targetDate!.difference(DateTime.now()).inDays / 30.4)
+        .round();
     if (months <= 0) return null;
     return (_targetMinor / months).round();
   }
@@ -190,8 +199,18 @@ class _GoalDetailScreenState extends ConsumerState<GoalDetailScreen>
 
   String _formatDate(DateTime d) {
     const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return '${months[d.month - 1]} ${d.year}';
   }
@@ -297,9 +316,9 @@ class _GoalDetailScreenState extends ConsumerState<GoalDetailScreen>
               ),
               child: Text(
                 _targetDate == null ? 'Tap to pick' : _formatDate(_targetDate!),
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
               ),
             ),
           ),
@@ -317,16 +336,16 @@ class _GoalDetailScreenState extends ConsumerState<GoalDetailScreen>
                   Text(
                     'To hit this goal',
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     '$_currency ${(monthly / 100).toStringAsFixed(0)} / month',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.w900,
-                          color: FeloColors.feloiTeal,
-                        ),
+                      fontWeight: FontWeight.w900,
+                      color: FeloColors.feloiTeal,
+                    ),
                   ),
                   const SizedBox(height: 10),
                   // Audit §9 — recommend a dedicated account so the
@@ -344,10 +363,11 @@ class _GoalDetailScreenState extends ConsumerState<GoalDetailScreen>
                         child: Text(
                           'Tip: keep a dedicated account or sub-pot for '
                           'this goal so the contribution stays separate.',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onSurfaceVariant,
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
                               ),
                         ),
                       ),

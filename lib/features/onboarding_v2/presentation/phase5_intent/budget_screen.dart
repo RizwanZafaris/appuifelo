@@ -58,14 +58,16 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
     // Resume case: existing categories
     if (stored.budgetCategories.isNotEmpty) {
       for (final c in stored.budgetCategories) {
-        _categories.add(_CategoryEntry(
-          slug: c.categorySlug,
-          amountMinor: c.amountMinor,
-          semantic: c.semantic,
-          controller: TextEditingController(
-            text: (c.amountMinor / 100).toStringAsFixed(0),
+        _categories.add(
+          _CategoryEntry(
+            slug: c.categorySlug,
+            amountMinor: c.amountMinor,
+            semantic: c.semantic,
+            controller: TextEditingController(
+              text: (c.amountMinor / 100).toStringAsFixed(0),
+            ),
           ),
-        ));
+        );
       }
       return;
     }
@@ -74,8 +76,8 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
     final earning = stored.earningTypes.isEmpty
         ? 'salaried'
         : _topEarningType(stored.earningTypes);
-    final templates = config?['budget_templates_by_key']
-        as Map<String, dynamic>?;
+    final templates =
+        config?['budget_templates_by_key'] as Map<String, dynamic>?;
     final key = '$primaryRegion:$earning';
     final fallbackKey = '$primaryRegion:salaried';
     final rows = (templates?[key] ?? templates?[fallbackKey]) as List<dynamic>?;
@@ -92,14 +94,16 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
       for (final r in rows) {
         final pct = r['default_pct'] as int;
         final amount = (_totalMinor * pct / 100).round();
-        _categories.add(_CategoryEntry(
-          slug: r['category_slug'].toString(),
-          amountMinor: amount,
-          semantic: r['semantic'].toString(),
-          controller: TextEditingController(
-            text: (amount / 100).toStringAsFixed(0),
+        _categories.add(
+          _CategoryEntry(
+            slug: r['category_slug'].toString(),
+            amountMinor: amount,
+            semantic: r['semantic'].toString(),
+            controller: TextEditingController(
+              text: (amount / 100).toStringAsFixed(0),
+            ),
           ),
-        ));
+        );
       }
     } else {
       // No template — minimal default categories
@@ -140,8 +144,8 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
     Map<String, dynamic>? config,
     String currency,
   ) {
-    final raw = config?['budget_baselines_by_currency']
-        as Map<String, dynamic>?;
+    final raw =
+        config?['budget_baselines_by_currency'] as Map<String, dynamic>?;
     if (raw == null) return _kEmergencyBaselineMajor;
     final entry = raw[currency] as Map<String, dynamic>?;
     final value = entry?['baseline_major'];
@@ -200,7 +204,13 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
       'savings' => 'Savings',
       'buffer' => 'Buffer',
       'daycare' => 'Daycare',
-      _ => slug.split('_').map((w) => w.isEmpty ? w : '${w[0].toUpperCase()}${w.substring(1)}').join(' '),
+      _ =>
+        slug
+            .split('_')
+            .map(
+              (w) => w.isEmpty ? w : '${w[0].toUpperCase()}${w.substring(1)}',
+            )
+            .join(' '),
     };
   }
 
@@ -241,9 +251,9 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
       if (result.error != null) {
         await onValidationError('budget_invalid');
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(result.error!)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(result.error!)));
         }
         return;
       }
@@ -266,16 +276,20 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
       await onValidationError('zero_total');
       return;
     }
-    await ref.read(onboardingStateControllerProvider.notifier).patch(
+    await ref
+        .read(onboardingStateControllerProvider.notifier)
+        .patch(
           (s) => s.copyWith(
             budgetTotalMinor: _totalMinor,
             budgetCurrency: _currency,
             budgetCategories: _categories
-                .map((c) => OnboardingBudgetCategory(
-                      categorySlug: c.slug,
-                      amountMinor: c.amountMinor,
-                      semantic: c.semantic,
-                    ))
+                .map(
+                  (c) => OnboardingBudgetCategory(
+                    categorySlug: c.slug,
+                    amountMinor: c.amountMinor,
+                    semantic: c.semantic,
+                  ),
+                )
                 .toList(),
           ),
         );
@@ -303,9 +317,11 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
         await onBackPressed();
         if (!mounted) return;
         final invests = stored?.invests == true;
-        context.go(invests
-            ? '/onboarding-v2/invest-types'
-            : '/onboarding-v2/invest-gate');
+        context.go(
+          invests
+              ? '/onboarding-v2/invest-types'
+              : '/onboarding-v2/invest-gate',
+        );
       },
       bottomActions: FeloButton(
         label: 'Continue',
@@ -318,16 +334,16 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
           Text(
             'We pre-filled some defaults — adjust to match your reality.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 4),
           Text(
             'This stays private and is only used on your dashboard.',
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  fontStyle: FontStyle.italic,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              fontStyle: FontStyle.italic,
+            ),
           ),
           const SizedBox(height: 20),
           MoneyInput(
@@ -353,17 +369,17 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
                 _diff < 0
                     ? '$_currency ${(-_diff / 100).toStringAsFixed(0)} over budget'
                     : '$_currency ${(_diff / 100).toStringAsFixed(0)} unallocated',
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w700),
               ),
             ),
           const SizedBox(height: 20),
           Text(
             'Categories',
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w800,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 12),
           ListView.separated(

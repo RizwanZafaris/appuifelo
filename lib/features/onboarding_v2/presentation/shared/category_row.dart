@@ -31,16 +31,14 @@ class CategoryRow extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: Theme.of(context)
-            .colorScheme
-            .surfaceContainerHighest
-            .withValues(alpha: 0.4),
+        color: Theme.of(
+          context,
+        ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.4),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
-          color: Theme.of(context)
-              .colorScheme
-              .outlineVariant
-              .withValues(alpha: 0.4),
+          color: Theme.of(
+            context,
+          ).colorScheme.outlineVariant.withValues(alpha: 0.4),
         ),
       ),
       child: Row(
@@ -57,8 +55,7 @@ class CategoryRow extends StatelessWidget {
             child: Icon(
               icon,
               size: 20,
-              color:
-                  isInflow ? Colors.green.shade800 : FeloColors.feloiTeal,
+              color: isInflow ? Colors.green.shade800 : FeloColors.feloiTeal,
             ),
           ),
           const SizedBox(width: 12),
@@ -73,15 +70,17 @@ class CategoryRow extends StatelessWidget {
                       child: Text(
                         label,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w700,
-                            ),
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                     if (isInflow) ...[
                       const SizedBox(width: 6),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 6, vertical: 2),
+                          horizontal: 6,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.green.shade50,
                           borderRadius: BorderRadius.circular(8),
@@ -105,11 +104,13 @@ class CategoryRow extends StatelessWidget {
             width: 110,
             child: TextField(
               controller: amountController,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType: const TextInputType.numberWithOptions(
+                decimal: true,
+              ),
               textAlign: TextAlign.right,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
               decoration: InputDecoration(
                 prefixText: currency,
                 isDense: true,
@@ -122,7 +123,8 @@ class CategoryRow extends StatelessWidget {
                 final dollars =
                     int.tryParse(parts.first.isEmpty ? '0' : parts.first) ?? 0;
                 final cents = parts.length > 1
-                    ? int.tryParse(parts[1].padRight(2, '0').substring(0, 2)) ?? 0
+                    ? int.tryParse(parts[1].padRight(2, '0').substring(0, 2)) ??
+                          0
                     : 0;
                 onChanged(dollars * 100 + cents);
               },

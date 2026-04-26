@@ -62,12 +62,17 @@ class _OtpScreenState extends ConsumerState<OtpScreen>
     final identifier = _identifierController.text.trim();
     if (identifier.isEmpty) {
       await onValidationError('empty');
-      setState(() => _statusLine = 'Please enter your ${_isMobile ? 'phone number' : 'email'}.');
+      setState(
+        () => _statusLine =
+            'Please enter your ${_isMobile ? 'phone number' : 'email'}.',
+      );
       return;
     }
     if (_isMobile && !RegExp(r'^\+\d{6,20}$').hasMatch(identifier)) {
       await onValidationError('invalid_e164');
-      setState(() => _statusLine = "Use international format, e.g. +923001234567");
+      setState(
+        () => _statusLine = "Use international format, e.g. +923001234567",
+      );
       return;
     }
 
@@ -110,7 +115,8 @@ class _OtpScreenState extends ConsumerState<OtpScreen>
     } on DioException catch (err) {
       setState(() {
         _busy = false;
-        _statusLine = err.response?.data?['message']?.toString() ??
+        _statusLine =
+            err.response?.data?['message']?.toString() ??
             'Failed to send code — please try again.';
       });
     }
@@ -128,10 +134,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen>
       if (_isMobile) {
         final response = await dio.post<Map<String, dynamic>>(
           '/sms/otp/verify',
-          data: {
-            'challengeId': _challengeId,
-            'code': code,
-          },
+          data: {'challengeId': _challengeId, 'code': code},
         );
         final ok = response.data?['ok'] == true;
         if (ok) {
@@ -192,7 +195,9 @@ class _OtpScreenState extends ConsumerState<OtpScreen>
   @override
   Widget build(BuildContext context) {
     return OnboardingShell(
-      title: _otpSent ? 'Enter the code' : 'Verify your ${_isMobile ? 'phone' : 'email'}',
+      title: _otpSent
+          ? 'Enter the code'
+          : 'Verify your ${_isMobile ? 'phone' : 'email'}',
       currentStep: 3,
       totalSteps: 14,
       onBack: () async {
@@ -210,15 +215,16 @@ class _OtpScreenState extends ConsumerState<OtpScreen>
                   ? "We'll send you a 6-digit code."
                   : "We'll email you a 6-digit code.",
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
             ),
             const SizedBox(height: 24),
             FeloInput(
               label: _isMobile ? 'Phone number (e.g. +923001234567)' : 'Email',
               controller: _identifierController,
-              keyboardType:
-                  _isMobile ? TextInputType.phone : TextInputType.emailAddress,
+              keyboardType: _isMobile
+                  ? TextInputType.phone
+                  : TextInputType.emailAddress,
             ),
             const SizedBox(height: 20),
             FeloButton(
@@ -229,10 +235,10 @@ class _OtpScreenState extends ConsumerState<OtpScreen>
             Text(
               _statusLine ?? '',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: _otpError
-                        ? Colors.red.shade400
-                        : Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
+                color: _otpError
+                    ? Colors.red.shade400
+                    : Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
             ),
             const SizedBox(height: 28),
             OtpInput(
@@ -259,8 +265,8 @@ class _OtpScreenState extends ConsumerState<OtpScreen>
               _statusLine!,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
             ),
           ],
         ],

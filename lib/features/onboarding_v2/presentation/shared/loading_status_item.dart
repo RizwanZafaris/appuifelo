@@ -34,17 +34,17 @@ class LoadingStatusItem extends StatelessWidget {
             child: AnimatedDefaultTextStyle(
               duration: const Duration(milliseconds: 200),
               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: switch (state) {
-                      LoadingStatusState.complete => colors.onSurface,
-                      LoadingStatusState.inProgress => colors.onSurface,
-                      LoadingStatusState.pending => colors.onSurfaceVariant
-                          .withValues(alpha: 0.6),
-                      LoadingStatusState.failed => Colors.red.shade400,
-                    },
-                    fontWeight: state == LoadingStatusState.complete
-                        ? FontWeight.w700
-                        : FontWeight.w500,
-                  ),
+                color: switch (state) {
+                  LoadingStatusState.complete => colors.onSurface,
+                  LoadingStatusState.inProgress => colors.onSurface,
+                  LoadingStatusState.pending =>
+                    colors.onSurfaceVariant.withValues(alpha: 0.6),
+                  LoadingStatusState.failed => Colors.red.shade400,
+                },
+                fontWeight: state == LoadingStatusState.complete
+                    ? FontWeight.w700
+                    : FontWeight.w500,
+              ),
               child: Text(label),
             ),
           ),

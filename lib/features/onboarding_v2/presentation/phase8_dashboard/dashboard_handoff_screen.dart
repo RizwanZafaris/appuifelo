@@ -25,8 +25,7 @@ class DashboardHandoffScreen extends ConsumerStatefulWidget {
       _DashboardHandoffScreenState();
 }
 
-class _DashboardHandoffScreenState
-    extends ConsumerState<DashboardHandoffScreen>
+class _DashboardHandoffScreenState extends ConsumerState<DashboardHandoffScreen>
     with OnboardingAnalyticsMixin<DashboardHandoffScreen> {
   @override
   int get phase => 8;
@@ -88,16 +87,16 @@ class _DashboardHandoffScreenState
                 greeting,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontWeight: FontWeight.w900,
-                    ),
+                  fontWeight: FontWeight.w900,
+                ),
               ),
               const SizedBox(height: 10),
               Text(
                 'Your dashboard is ready. Here\'s what you\'ll see.',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
               const SizedBox(height: 28),
               Expanded(
@@ -135,38 +134,47 @@ class _DashboardHandoffScreenState
       ),
     ];
     if ((state?.goals as List?)?.isNotEmpty == true) {
-      widgets.add(const _WidgetSpec(
-        key: 'goals_progress',
-        icon: Icons.flag_outlined,
-        title: 'Goals progress',
-        subtitle: 'Pacing toward your two goals',
-      ));
+      widgets.add(
+        const _WidgetSpec(
+          key: 'goals_progress',
+          icon: Icons.flag_outlined,
+          title: 'Goals progress',
+          subtitle: 'Pacing toward your two goals',
+        ),
+      );
     }
-    final hasCorridor = ((state?.sendsTo as List?)?.isNotEmpty == true) ||
+    final hasCorridor =
+        ((state?.sendsTo as List?)?.isNotEmpty == true) ||
         ((state?.receivesFrom as List?)?.isNotEmpty == true);
     if (hasCorridor) {
-      widgets.add(const _WidgetSpec(
-        key: 'remittance_corridors',
-        icon: Icons.swap_horiz_rounded,
-        title: 'Remittance corridors',
-        subtitle: 'FX & fee snapshots for your routes',
-      ));
+      widgets.add(
+        const _WidgetSpec(
+          key: 'remittance_corridors',
+          icon: Icons.swap_horiz_rounded,
+          title: 'Remittance corridors',
+          subtitle: 'FX & fee snapshots for your routes',
+        ),
+      );
     }
     if (state?.invests == true) {
-      widgets.add(const _WidgetSpec(
-        key: 'investments_overview',
-        icon: Icons.trending_up_rounded,
-        title: 'Investments overview',
-        subtitle: 'Holdings across your account types',
-      ));
+      widgets.add(
+        const _WidgetSpec(
+          key: 'investments_overview',
+          icon: Icons.trending_up_rounded,
+          title: 'Investments overview',
+          subtitle: 'Holdings across your account types',
+        ),
+      );
     }
     if (state?.accountsDeferred == true) {
-      widgets.add(const _WidgetSpec(
-        key: 'sms_paste_inbox',
-        icon: Icons.sms_outlined,
-        title: 'SMS paste inbox',
-        subtitle: 'Forward bank SMS to enrich your data',
-      ));
+      widgets.add(
+        const _WidgetSpec(
+          key: 'sms_paste_inbox',
+          icon: Icons.sms_outlined,
+          title: 'SMS paste inbox',
+          subtitle: 'Forward bank SMS to enrich your data',
+        ),
+      );
     }
     return widgets;
   }
@@ -198,9 +206,7 @@ class _WidgetPreviewRow extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outlineVariant,
-        ),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Row(
         children: [
@@ -221,22 +227,21 @@ class _WidgetPreviewRow extends StatelessWidget {
               children: [
                 Text(
                   spec.title,
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w800,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   spec.subtitle,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                 ),
               ],
             ),
           ),
-          const Icon(Icons.check_circle_rounded,
-              color: FeloColors.feloiTeal),
+          const Icon(Icons.check_circle_rounded, color: FeloColors.feloiTeal),
         ],
       ),
     );

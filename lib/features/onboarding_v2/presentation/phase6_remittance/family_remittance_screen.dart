@@ -19,8 +19,7 @@ class FamilyRemittanceScreen extends ConsumerStatefulWidget {
       _FamilyRemittanceScreenState();
 }
 
-class _FamilyRemittanceScreenState
-    extends ConsumerState<FamilyRemittanceScreen>
+class _FamilyRemittanceScreenState extends ConsumerState<FamilyRemittanceScreen>
     with OnboardingAnalyticsMixin<FamilyRemittanceScreen> {
   @override
   int get phase => 6;
@@ -48,8 +47,10 @@ class _FamilyRemittanceScreenState
 
   bool get _needsLocalCrossBorderQuestion {
     if (_selected.contains('none')) return false;
-    if (_selected.contains('send_regularly')) return false; // implicitly cross-border
-    if (_selected.contains('receive_abroad')) return false; // implicitly cross-border
+    if (_selected.contains('send_regularly'))
+      return false; // implicitly cross-border
+    if (_selected.contains('receive_abroad'))
+      return false; // implicitly cross-border
     return _selected.contains('support_financially') ||
         _selected.contains('manage_household');
   }
@@ -112,9 +113,9 @@ class _FamilyRemittanceScreenState
       selections: _selected,
       supportIsCrossBorder: _supportIsCrossBorder,
     );
-    await ref.read(onboardingStateControllerProvider.notifier).patch(
-          (s) => s.copyWith(remittanceOptions: _selected.toList()),
-        );
+    await ref
+        .read(onboardingStateControllerProvider.notifier)
+        .patch((s) => s.copyWith(remittanceOptions: _selected.toList()));
     await onContinue({
       'options': _selected.toList(),
       'step2_will_fire': fireStep2,
@@ -130,7 +131,8 @@ class _FamilyRemittanceScreenState
   @override
   Widget build(BuildContext context) {
     final config = ref.watch(onboardingConfigProvider).valueOrNull;
-    final options = (config?['family_remittance_options'] as List<dynamic>?)
+    final options =
+        (config?['family_remittance_options'] as List<dynamic>?)
             ?.map((e) => e['slug'].toString())
             .toList() ??
         const [
@@ -161,16 +163,16 @@ class _FamilyRemittanceScreenState
           Text(
             'Pick all that apply.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 4),
           Text(
             'This helps us show the right corridor for you.',
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  fontStyle: FontStyle.italic,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              fontStyle: FontStyle.italic,
+            ),
           ),
           const SizedBox(height: 20),
           for (final slug in options) ...[
@@ -186,9 +188,9 @@ class _FamilyRemittanceScreenState
             const SizedBox(height: 14),
             Text(
               'Is this within your country, or across borders?',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w800,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 8),
             Row(
@@ -272,8 +274,8 @@ class _LocalCrossBorderChip extends StatelessWidget {
           label,
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: selected ? FontWeight.w800 : FontWeight.w500,
-              ),
+            fontWeight: selected ? FontWeight.w800 : FontWeight.w500,
+          ),
         ),
       ),
     );

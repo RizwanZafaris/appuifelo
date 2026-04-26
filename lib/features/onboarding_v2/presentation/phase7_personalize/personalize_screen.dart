@@ -127,10 +127,11 @@ class _PersonalizeScreenState extends ConsumerState<PersonalizeScreen>
 
       await onContinue({
         'goal_count': (response.data?['goal_ids'] as List?)?.length ?? 0,
-        'corridor_count': (response.data?['corridor_ids'] as List?)?.length ?? 0,
+        'corridor_count':
+            (response.data?['corridor_ids'] as List?)?.length ?? 0,
         'widgets':
             (response.data?['dashboard_widgets'] as List?)?.cast<String>() ??
-                const <String>[],
+            const <String>[],
       });
 
       // Slight pause so user sees the final ✓ before nav.
@@ -211,17 +212,17 @@ class _PersonalizeScreenState extends ConsumerState<PersonalizeScreen>
           Text(
             'Personalizing your FELO',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w900,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
           ),
           const SizedBox(height: 8),
           Text(
             "We're building your dashboard around what you told us.",
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 32),
           for (final step in _steps)
@@ -240,8 +241,7 @@ class _PersonalizeScreenState extends ConsumerState<PersonalizeScreen>
               ),
               child: Row(
                 children: [
-                  Icon(Icons.warning_amber_rounded,
-                      color: Colors.red.shade700),
+                  Icon(Icons.warning_amber_rounded, color: Colors.red.shade700),
                   const SizedBox(width: 10),
                   Expanded(
                     child: Text(

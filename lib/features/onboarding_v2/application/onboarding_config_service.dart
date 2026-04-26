@@ -80,10 +80,7 @@ class OnboardingConfig extends _$OnboardingConfig {
   }
 
   Future<void> _writeCache(Map<String, dynamic> payload) async {
-    await _storage.write(
-      key: _kConfigCacheKey,
-      value: jsonEncode(payload),
-    );
+    await _storage.write(key: _kConfigCacheKey, value: jsonEncode(payload));
     final version = payload['version']?.toString();
     if (version != null) {
       await _storage.write(key: _kConfigVersionKey, value: version);

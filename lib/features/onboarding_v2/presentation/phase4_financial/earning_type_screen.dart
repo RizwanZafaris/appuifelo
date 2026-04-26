@@ -77,11 +77,14 @@ class _EarningTypeScreenState extends ConsumerState<EarningTypeScreen>
       await onValidationError('other_empty');
       return;
     }
-    await ref.read(onboardingStateControllerProvider.notifier).patch(
+    await ref
+        .read(onboardingStateControllerProvider.notifier)
+        .patch(
           (s) => s.copyWith(
             earningTypes: _selected.toList(),
-            earningTypeCustom:
-                _selected.contains('other') ? _customValue.trim() : null,
+            earningTypeCustom: _selected.contains('other')
+                ? _customValue.trim()
+                : null,
           ),
         );
     await onContinue({
@@ -95,7 +98,8 @@ class _EarningTypeScreenState extends ConsumerState<EarningTypeScreen>
   @override
   Widget build(BuildContext context) {
     final config = ref.watch(onboardingConfigProvider).valueOrNull;
-    final earningTypes = (config?['earning_types'] as List<dynamic>?)
+    final earningTypes =
+        (config?['earning_types'] as List<dynamic>?)
             ?.map((e) => e['slug'].toString())
             .toList() ??
         [
@@ -129,16 +133,16 @@ class _EarningTypeScreenState extends ConsumerState<EarningTypeScreen>
           Text(
             'Pick all that apply. Real life is hybrid — feel free to choose more than one.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 8),
           Text(
             "We use this to suggest budget categories.",
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  fontStyle: FontStyle.italic,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              fontStyle: FontStyle.italic,
+            ),
           ),
           const SizedBox(height: 20),
           PillMultiselect<String>(

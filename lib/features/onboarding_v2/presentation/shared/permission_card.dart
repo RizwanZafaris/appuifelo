@@ -85,9 +85,7 @@ class PermissionCard extends StatelessWidget {
                             child: Text(
                               'Optional',
                               style: Theme.of(context).textTheme.labelSmall
-                                  ?.copyWith(
-                                    color: colors.onSurfaceVariant,
-                                  ),
+                                  ?.copyWith(color: colors.onSurfaceVariant),
                             ),
                           ),
                       ],
@@ -96,8 +94,8 @@ class PermissionCard extends StatelessWidget {
                     Text(
                       body,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: colors.onSurfaceVariant,
-                          ),
+                        color: colors.onSurfaceVariant,
+                      ),
                     ),
                   ],
                 ),
@@ -121,8 +119,8 @@ class PermissionCard extends StatelessWidget {
                     granted == true
                         ? 'Allowed'
                         : skipped == true
-                            ? 'Skipped'
-                            : allowLabel,
+                        ? 'Skipped'
+                        : allowLabel,
                   ),
                 ),
               ),

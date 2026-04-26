@@ -70,7 +70,9 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen>
       return;
     }
     // Persist goal slots (without amount/date yet — captured in detail screen)
-    await ref.read(onboardingStateControllerProvider.notifier).patch(
+    await ref
+        .read(onboardingStateControllerProvider.notifier)
+        .patch(
           (s) => s.copyWith(
             goals: [
               for (var i = 0; i < 2; i++)
@@ -84,7 +86,10 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen>
             ],
           ),
         );
-    await onContinue({'slot_1': _selectedSlugs[0], 'slot_2': _selectedSlugs[1]});
+    await onContinue({
+      'slot_1': _selectedSlugs[0],
+      'slot_2': _selectedSlugs[1],
+    });
     if (!mounted) return;
     context.go('/onboarding-v2/goal-detail/1');
   }
@@ -92,18 +97,47 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen>
   @override
   Widget build(BuildContext context) {
     final config = ref.watch(onboardingConfigProvider).valueOrNull;
-    final templates = (config?['goal_templates'] as List<dynamic>?) ??
+    final templates =
+        (config?['goal_templates'] as List<dynamic>?) ??
         const [
           {'slug': 'home', 'default_label': 'Buy a home', 'icon_key': 'home'},
-          {'slug': 'vehicle', 'default_label': 'Buy a vehicle', 'icon_key': 'car'},
-          {'slug': 'education_fund', 'default_label': 'Education fund', 'icon_key': 'graduation_cap'},
+          {
+            'slug': 'vehicle',
+            'default_label': 'Buy a vehicle',
+            'icon_key': 'car',
+          },
+          {
+            'slug': 'education_fund',
+            'default_label': 'Education fund',
+            'icon_key': 'graduation_cap',
+          },
           {'slug': 'travel', 'default_label': 'Travel', 'icon_key': 'plane'},
           {'slug': 'wedding', 'default_label': 'Wedding', 'icon_key': 'rings'},
-          {'slug': 'family_planning', 'default_label': 'Family planning', 'icon_key': 'family'},
-          {'slug': 'retirement', 'default_label': 'Retirement', 'icon_key': 'sun'},
-          {'slug': 'build_wealth', 'default_label': 'Build wealth', 'icon_key': 'trending_up'},
-          {'slug': 'emergency_fund', 'default_label': 'Emergency fund', 'icon_key': 'shield'},
-          {'slug': 'hajj_umrah', 'default_label': 'Hajj/Umrah', 'icon_key': 'kaaba'},
+          {
+            'slug': 'family_planning',
+            'default_label': 'Family planning',
+            'icon_key': 'family',
+          },
+          {
+            'slug': 'retirement',
+            'default_label': 'Retirement',
+            'icon_key': 'sun',
+          },
+          {
+            'slug': 'build_wealth',
+            'default_label': 'Build wealth',
+            'icon_key': 'trending_up',
+          },
+          {
+            'slug': 'emergency_fund',
+            'default_label': 'Emergency fund',
+            'icon_key': 'shield',
+          },
+          {
+            'slug': 'hajj_umrah',
+            'default_label': 'Hajj/Umrah',
+            'icon_key': 'kaaba',
+          },
           {'slug': 'custom', 'default_label': 'Custom', 'icon_key': 'pencil'},
         ];
 
@@ -127,8 +161,8 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen>
           Text(
             'Two is the sweet spot — research shows users with 2 goals achieve them more often.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           if (_showUpsellNote) ...[
             const SizedBox(height: 12),
@@ -140,15 +174,18 @@ class _GoalsScreenState extends ConsumerState<GoalsScreen>
               ),
               child: Row(
                 children: [
-                  Icon(Icons.workspace_premium_rounded,
-                      size: 18, color: FeloColors.feloiTeal),
+                  Icon(
+                    Icons.workspace_premium_rounded,
+                    size: 18,
+                    color: FeloColors.feloiTeal,
+                  ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       'FELO Plus members can set unlimited goals.',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                 ],

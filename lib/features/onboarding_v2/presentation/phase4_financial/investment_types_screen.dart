@@ -69,9 +69,9 @@ class _InvestmentTypesScreenState extends ConsumerState<InvestmentTypesScreen>
       await onValidationError('no_selection');
       return;
     }
-    await ref.read(onboardingStateControllerProvider.notifier).patch(
-          (s) => s.copyWith(investmentTypes: _selected.toList()),
-        );
+    await ref
+        .read(onboardingStateControllerProvider.notifier)
+        .patch((s) => s.copyWith(investmentTypes: _selected.toList()));
     await onContinue({'types': _selected.toList()});
     if (!mounted) return;
     context.go('/onboarding-v2/budget');
@@ -80,7 +80,8 @@ class _InvestmentTypesScreenState extends ConsumerState<InvestmentTypesScreen>
   @override
   Widget build(BuildContext context) {
     final config = ref.watch(onboardingConfigProvider).valueOrNull;
-    final types = (config?['investment_types'] as List<dynamic>?)
+    final types =
+        (config?['investment_types'] as List<dynamic>?)
             ?.map((e) => e['slug'].toString())
             .toList() ??
         [
@@ -113,8 +114,8 @@ class _InvestmentTypesScreenState extends ConsumerState<InvestmentTypesScreen>
           Text(
             'Pick all that apply. We use this to show the right widgets.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 20),
           PillMultiselect<String>(

@@ -81,25 +81,62 @@ class _ConfirmRegionScreenState extends ConsumerState<ConfirmRegionScreen>
           final status = (r as Map)['country_status']?.toString() ?? 'active';
           return status == 'active';
         })
-        .map((r) => RegionOption(
-              iso2: r['iso2'].toString(),
-              name: r['name'].toString(),
-              currencyIso: r['currency_iso'].toString(),
-              dialCode: r['dial_code'].toString(),
-            ))
+        .map(
+          (r) => RegionOption(
+            iso2: r['iso2'].toString(),
+            name: r['name'].toString(),
+            currencyIso: r['currency_iso'].toString(),
+            dialCode: r['dial_code'].toString(),
+          ),
+        )
         .toList();
   }
 
   // Bundled fallback if journey-config hasn't loaded yet.
   static const List<RegionOption> _bundledRegions = [
-    RegionOption(iso2: 'PK', name: 'Pakistan', currencyIso: 'PKR', dialCode: '+92'),
-    RegionOption(iso2: 'IN', name: 'India', currencyIso: 'INR', dialCode: '+91'),
-    RegionOption(iso2: 'BD', name: 'Bangladesh', currencyIso: 'BDT', dialCode: '+880'),
-    RegionOption(iso2: 'CA', name: 'Canada', currencyIso: 'CAD', dialCode: '+1'),
-    RegionOption(iso2: 'GB', name: 'United Kingdom', currencyIso: 'GBP', dialCode: '+44'),
-    RegionOption(iso2: 'US', name: 'United States', currencyIso: 'USD', dialCode: '+1'),
+    RegionOption(
+      iso2: 'PK',
+      name: 'Pakistan',
+      currencyIso: 'PKR',
+      dialCode: '+92',
+    ),
+    RegionOption(
+      iso2: 'IN',
+      name: 'India',
+      currencyIso: 'INR',
+      dialCode: '+91',
+    ),
+    RegionOption(
+      iso2: 'BD',
+      name: 'Bangladesh',
+      currencyIso: 'BDT',
+      dialCode: '+880',
+    ),
+    RegionOption(
+      iso2: 'CA',
+      name: 'Canada',
+      currencyIso: 'CAD',
+      dialCode: '+1',
+    ),
+    RegionOption(
+      iso2: 'GB',
+      name: 'United Kingdom',
+      currencyIso: 'GBP',
+      dialCode: '+44',
+    ),
+    RegionOption(
+      iso2: 'US',
+      name: 'United States',
+      currencyIso: 'USD',
+      dialCode: '+1',
+    ),
     RegionOption(iso2: 'AE', name: 'UAE', currencyIso: 'AED', dialCode: '+971'),
-    RegionOption(iso2: 'SA', name: 'Saudi Arabia', currencyIso: 'SAR', dialCode: '+966'),
+    RegionOption(
+      iso2: 'SA',
+      name: 'Saudi Arabia',
+      currencyIso: 'SAR',
+      dialCode: '+966',
+    ),
   ];
 
   RegionOption? _regionByIso(List<RegionOption> regions, String? iso2) {
@@ -122,9 +159,7 @@ class _ConfirmRegionScreenState extends ConsumerState<ConfirmRegionScreen>
   }
 
   Future<void> _addSecondary(List<RegionOption> regions) async {
-    final filtered = regions
-        .where((r) => r.iso2 != _confirmedRegion)
-        .toList();
+    final filtered = regions.where((r) => r.iso2 != _confirmedRegion).toList();
     final result = await RegionPickerSheet.show(
       context: context,
       regions: filtered,
@@ -145,7 +180,9 @@ class _ConfirmRegionScreenState extends ConsumerState<ConfirmRegionScreen>
       await onValidationError('no_primary_region');
       return;
     }
-    await ref.read(onboardingStateControllerProvider.notifier).patch(
+    await ref
+        .read(onboardingStateControllerProvider.notifier)
+        .patch(
           (s) => s.copyWith(
             primaryRegion: _confirmedRegion,
             secondaryRegions: _secondaryRegions.toList(),
@@ -193,7 +230,8 @@ class _ConfirmRegionScreenState extends ConsumerState<ConfirmRegionScreen>
           else ...[
             _RegionConfirmCard(
               region: confirmed ?? detected,
-              autoDetected: _detectedCountry != null &&
+              autoDetected:
+                  _detectedCountry != null &&
                   _confirmedRegion == _detectedCountry,
               onChange: () => _pickPrimary(regions),
             ),
@@ -201,9 +239,9 @@ class _ConfirmRegionScreenState extends ConsumerState<ConfirmRegionScreen>
             if (_secondaryRegions.isNotEmpty) ...[
               Text(
                 'Other regions you have ties to',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
               ),
               const SizedBox(height: 8),
               Wrap(
@@ -213,12 +251,14 @@ class _ConfirmRegionScreenState extends ConsumerState<ConfirmRegionScreen>
                     .map((iso) => _regionByIso(regions, iso))
                     .where((r) => r != null)
                     .cast<RegionOption>()
-                    .map((r) => Chip(
-                          label: Text('${r.iso2} · ${r.currencyIso}'),
-                          onDeleted: () {
-                            setState(() => _secondaryRegions.remove(r.iso2));
-                          },
-                        ))
+                    .map(
+                      (r) => Chip(
+                        label: Text('${r.iso2} · ${r.currencyIso}'),
+                        onDeleted: () {
+                          setState(() => _secondaryRegions.remove(r.iso2));
+                        },
+                      ),
+                    )
                     .toList(),
               ),
               const SizedBox(height: 12),
@@ -258,7 +298,9 @@ class _RegionConfirmCard extends StatelessWidget {
       return Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+          border: Border.all(
+            color: Theme.of(context).colorScheme.outlineVariant,
+          ),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
@@ -306,16 +348,16 @@ class _RegionConfirmCard extends StatelessWidget {
           const SizedBox(height: 14),
           Text(
             autoDetected ? "You're in ${region!.name}?" : region!.name,
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.w900,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900),
           ),
           const SizedBox(height: 6),
           Text(
             '${region!.dialCode} · ${region!.currencyIso}',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 20),
           TextButton.icon(

@@ -81,31 +81,37 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen>
     for (final iso2 in regions) {
       final banks = banksByRegion[iso2] as List<dynamic>? ?? [];
       for (final b in banks) {
-        out.add(_AccountChoice(
-          kind: 'bank',
-          slug: b['slug'].toString(),
-          name: b['name'].toString(),
-          regionIso2: iso2,
-          icon: Icons.account_balance_outlined,
-        ));
+        out.add(
+          _AccountChoice(
+            kind: 'bank',
+            slug: b['slug'].toString(),
+            name: b['name'].toString(),
+            regionIso2: iso2,
+            icon: Icons.account_balance_outlined,
+          ),
+        );
       }
       final wallets = walletsByRegion[iso2] as List<dynamic>? ?? [];
       for (final w in wallets) {
-        out.add(_AccountChoice(
-          kind: 'wallet',
-          slug: w['slug'].toString(),
-          name: w['name'].toString(),
-          regionIso2: iso2,
-          icon: Icons.account_balance_wallet_outlined,
-        ));
+        out.add(
+          _AccountChoice(
+            kind: 'wallet',
+            slug: w['slug'].toString(),
+            name: w['name'].toString(),
+            regionIso2: iso2,
+            icon: Icons.account_balance_wallet_outlined,
+          ),
+        );
       }
     }
     if (_query.isNotEmpty) {
       final q = _query.toLowerCase();
       return out
-          .where((c) =>
-              c.name.toLowerCase().contains(q) ||
-              c.slug.toLowerCase().contains(q))
+          .where(
+            (c) =>
+                c.name.toLowerCase().contains(q) ||
+                c.slug.toLowerCase().contains(q),
+          )
           .toList();
     }
     return out;
@@ -126,16 +132,15 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen>
               providerSlug: parts[2],
             );
           }).toList();
-    await ref.read(onboardingStateControllerProvider.notifier).patch(
+    await ref
+        .read(onboardingStateControllerProvider.notifier)
+        .patch(
           (s) => s.copyWith(
             accounts: selectedAccounts,
             accountsDeferred: deferred,
           ),
         );
-    await onContinue({
-      'count': selectedAccounts.length,
-      'deferred': deferred,
-    });
+    await onContinue({'count': selectedAccounts.length, 'deferred': deferred});
     if (!mounted) return;
     context.go('/onboarding-v2/invest-gate');
   }
@@ -169,16 +174,16 @@ class _AccountsScreenState extends ConsumerState<AccountsScreen>
           Text(
             'Pick all that apply. You can add more later.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 4),
           Text(
             "We use this to organize your dashboard. We don't access your bank yet.",
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  fontStyle: FontStyle.italic,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              fontStyle: FontStyle.italic,
+            ),
           ),
           const SizedBox(height: 16),
           if (choices.length > 8)

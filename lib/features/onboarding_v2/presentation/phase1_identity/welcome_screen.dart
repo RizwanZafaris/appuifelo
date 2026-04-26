@@ -38,7 +38,8 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen>
   @override
   Widget build(BuildContext context) {
     final configAsync = ref.watch(onboardingConfigProvider);
-    final strings = configAsync.valueOrNull?['strings'] as Map<String, dynamic>?;
+    final strings =
+        configAsync.valueOrNull?['strings'] as Map<String, dynamic>?;
 
     String s(String key, String fallback) =>
         strings?[key]?.toString() ?? fallback;
@@ -82,17 +83,16 @@ class _WelcomeScreenState extends ConsumerState<WelcomeScreen>
                 hero,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      fontWeight: FontWeight.w900,
-                    ),
+                  fontWeight: FontWeight.w900,
+                ),
               ),
               const SizedBox(height: 14),
               Text(
                 subtitle,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color:
-                          Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
               const Spacer(flex: 3),
               FeloButton(

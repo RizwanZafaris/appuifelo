@@ -82,9 +82,11 @@ class _RegionPickerSheetState extends State<RegionPickerSheet> {
     if (_query.isEmpty) return widget.regions;
     final q = _query.toLowerCase();
     return widget.regions
-        .where((r) =>
-            r.name.toLowerCase().contains(q) ||
-            r.iso2.toLowerCase().contains(q))
+        .where(
+          (r) =>
+              r.name.toLowerCase().contains(q) ||
+              r.iso2.toLowerCase().contains(q),
+        )
         .toList();
   }
 
@@ -95,7 +97,8 @@ class _RegionPickerSheetState extends State<RegionPickerSheet> {
           _selected.remove(region.iso2);
         } else {
           if (widget.maxSelections != null &&
-              _selected.length >= widget.maxSelections!) return;
+              _selected.length >= widget.maxSelections!)
+            return;
           _selected.add(region.iso2);
         }
       } else {
@@ -107,9 +110,7 @@ class _RegionPickerSheetState extends State<RegionPickerSheet> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.viewInsetsOf(context).bottom,
-      ),
+      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       child: SizedBox(
         height: MediaQuery.sizeOf(context).height * 0.8,
         child: Column(
@@ -132,17 +133,16 @@ class _RegionPickerSheetState extends State<RegionPickerSheet> {
                   Text(
                     widget.title,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.w900,
-                        ),
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                   if (widget.subtitle != null) ...[
                     const SizedBox(height: 6),
                     Text(
                       widget.subtitle!,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                     ),
                   ],
                 ],
@@ -174,8 +174,9 @@ class _RegionPickerSheetState extends State<RegionPickerSheet> {
                   return ListTile(
                     onTap: () => _toggle(region),
                     leading: CircleAvatar(
-                      backgroundColor:
-                          FeloColors.mintBase.withValues(alpha: 0.4),
+                      backgroundColor: FeloColors.mintBase.withValues(
+                        alpha: 0.4,
+                      ),
                       child: Text(
                         region.iso2,
                         style: const TextStyle(

@@ -91,8 +91,8 @@ class _NameScreenState extends ConsumerState<NameScreen>
           Text(
             "Just a first name is fine — it's how the app will greet you.",
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 24),
           FeloInput(

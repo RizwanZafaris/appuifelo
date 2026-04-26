@@ -30,8 +30,7 @@ class PillMultiselect<T> extends StatelessWidget {
   final double spacing;
   final double runSpacing;
 
-  String _label(T option) =>
-      labelOf?.call(option) ?? option.toString();
+  String _label(T option) => labelOf?.call(option) ?? option.toString();
 
   @override
   Widget build(BuildContext context) {
@@ -136,19 +135,16 @@ class _Pill extends StatelessWidget {
                 Icon(
                   icon,
                   size: 18,
-                  color:
-                      selected ? FeloColors.feloiTeal : colors.onSurface,
+                  color: selected ? FeloColors.feloiTeal : colors.onSurface,
                 ),
                 const SizedBox(width: 8),
               ],
               Text(
                 label,
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      fontWeight: selected ? FontWeight.w800 : FontWeight.w600,
-                      color: selected
-                          ? FeloColors.feloiTeal
-                          : colors.onSurface,
-                    ),
+                  fontWeight: selected ? FontWeight.w800 : FontWeight.w600,
+                  color: selected ? FeloColors.feloiTeal : colors.onSurface,
+                ),
               ),
             ],
           ),

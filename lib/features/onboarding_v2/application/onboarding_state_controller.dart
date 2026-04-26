@@ -46,9 +46,7 @@ class OnboardingStateController extends _$OnboardingStateController {
   /// failure; the next successful Continue retries.
   Future<void> patch(OnboardingState Function(OnboardingState) updater) async {
     final current = state.value ?? OnboardingState.empty();
-    final next = updater(current).copyWith(
-      lastUpdatedAt: DateTime.now(),
-    );
+    final next = updater(current).copyWith(lastUpdatedAt: DateTime.now());
     state = AsyncValue.data(next);
 
     // Local persist FIRST — this must complete before nav.
@@ -108,11 +106,11 @@ class OnboardingStateController extends _$OnboardingStateController {
           'investment_types': next.investmentTypes,
         if (next.budgetTotalMinor != null)
           'budget_total_minor': next.budgetTotalMinor,
-        if (next.budgetCurrency != null)
-          'budget_currency': next.budgetCurrency,
+        if (next.budgetCurrency != null) 'budget_currency': next.budgetCurrency,
         if (next.budgetCategories.isNotEmpty)
-          'budget_categories':
-              next.budgetCategories.map((c) => c.toJson()).toList(),
+          'budget_categories': next.budgetCategories
+              .map((c) => c.toJson())
+              .toList(),
         if (next.goals.isNotEmpty)
           'goals': next.goals.map((g) => g.toJson()).toList(),
         if (next.remittanceOptions.isNotEmpty)

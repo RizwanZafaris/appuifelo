@@ -27,9 +27,9 @@ class _InvestGateScreenState extends ConsumerState<InvestGateScreen>
   String get frdId => 'FR-4.3.1';
 
   Future<void> _select(bool invests) async {
-    await ref.read(onboardingStateControllerProvider.notifier).patch(
-          (s) => s.copyWith(invests: invests),
-        );
+    await ref
+        .read(onboardingStateControllerProvider.notifier)
+        .patch((s) => s.copyWith(invests: invests));
     await onContinue({'invests': invests});
     if (!mounted) return;
     if (invests) {
@@ -57,8 +57,8 @@ class _InvestGateScreenState extends ConsumerState<InvestGateScreen>
           Text(
             'Stocks, crypto, gold, real estate, bonds — anything counts.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 28),
           OptionCard(
@@ -71,7 +71,8 @@ class _InvestGateScreenState extends ConsumerState<InvestGateScreen>
           OptionCard(
             icon: Icons.savings_outlined,
             label: 'Not yet',
-            subtitle: "Skip the investment questions and stay focused on budgets.",
+            subtitle:
+                "Skip the investment questions and stay focused on budgets.",
             onTap: () => _select(false),
           ),
           const SizedBox(height: 24),
@@ -98,9 +99,7 @@ class _InvestmentDisclaimer extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surfaceContainerLow,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.outlineVariant,
-        ),
+        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,8 +116,8 @@ class _InvestmentDisclaimer extends StatelessWidget {
               'Your selection helps us personalize the dashboard — it is '
               'not a recommendation to buy or sell any asset.',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
             ),
           ),
         ],

@@ -30,9 +30,7 @@ class Validators {
     }
     final lowered = trimmed.toLowerCase();
     // Simplified RFC 5322: local-part with limited specials, domain with TLD ≥ 2.
-    final regex = RegExp(
-      r"^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$",
-    );
+    final regex = RegExp(r"^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$");
     if (!regex.hasMatch(lowered)) {
       return (normalized: null, error: "That email doesn't look right");
     }
@@ -93,15 +91,13 @@ class Validators {
       return (normalized: null, error: 'Numbers only please');
     }
     if (n.length < rule.minLen || n.length > rule.maxLen) {
-      return (
-        normalized: null,
-        error: 'Expected ${rule.expected} digits',
-      );
+      return (normalized: null, error: 'Expected ${rule.expected} digits');
     }
     if (rule.startsWith != null && !rule.startsWith!.any(n.startsWith)) {
       return (
         normalized: null,
-        error: 'Mobile numbers in this country usually start with '
+        error:
+            'Mobile numbers in this country usually start with '
             '${rule.startsWith!.join(", ")}',
       );
     }
@@ -114,17 +110,27 @@ class Validators {
   /// to pick a different country (safe-by-default).
   static const Map<String, _PhoneRule> _phoneRules = {
     'PK': _PhoneRule(minLen: 10, maxLen: 10, expected: '10', startsWith: ['3']),
-    'IN': _PhoneRule(minLen: 10, maxLen: 10, expected: '10', startsWith: ['6', '7', '8', '9']),
+    'IN': _PhoneRule(
+      minLen: 10,
+      maxLen: 10,
+      expected: '10',
+      startsWith: ['6', '7', '8', '9'],
+    ),
     'BD': _PhoneRule(minLen: 10, maxLen: 10, expected: '10', startsWith: ['1']),
     'NP': _PhoneRule(minLen: 10, maxLen: 10, expected: '10', startsWith: ['9']),
-    'LK': _PhoneRule(minLen: 9,  maxLen: 9,  expected: '9',  startsWith: ['7']),
+    'LK': _PhoneRule(minLen: 9, maxLen: 9, expected: '9', startsWith: ['7']),
     'EG': _PhoneRule(minLen: 10, maxLen: 10, expected: '10', startsWith: ['1']),
     'CA': _PhoneRule(minLen: 10, maxLen: 10, expected: '10'),
     'US': _PhoneRule(minLen: 10, maxLen: 10, expected: '10'),
     'GB': _PhoneRule(minLen: 10, maxLen: 10, expected: '10', startsWith: ['7']),
-    'AE': _PhoneRule(minLen: 9,  maxLen: 9,  expected: '9',  startsWith: ['5']),
-    'SA': _PhoneRule(minLen: 9,  maxLen: 9,  expected: '9',  startsWith: ['5']),
-    'ES': _PhoneRule(minLen: 9,  maxLen: 9,  expected: '9',  startsWith: ['6', '7']),
+    'AE': _PhoneRule(minLen: 9, maxLen: 9, expected: '9', startsWith: ['5']),
+    'SA': _PhoneRule(minLen: 9, maxLen: 9, expected: '9', startsWith: ['5']),
+    'ES': _PhoneRule(
+      minLen: 9,
+      maxLen: 9,
+      expected: '9',
+      startsWith: ['6', '7'],
+    ),
   };
 
   // ───── Personal name ─────
@@ -181,12 +187,28 @@ class Validators {
   /// like 5000k, normalize or ask clarification." We normalize when the
   /// shorthand is unambiguous (`5k`, `1.5l`); we *reject with prompt*
   /// when it's contradictory (`5000k` = 5,000,000 — clearly typo).
-  static ({double? majorAmount, String? error, String? clarification}) budgetAmount(
-    String raw,
-  ) {
+  static ({double? majorAmount, String? error, String? clarification})
+  budgetAmount(String raw) {
     var s = raw.trim().toLowerCase().replaceAll(',', '');
     if (s.isEmpty) {
       return (majorAmount: null, error: 'Enter an amount', clarification: null);
+    }
+    // QA Bug 2 — reject ambiguous large-digit + suffix combos *before*
+    // applying the multiplier so the user is asked to clarify. This
+    // catches "5000k" (= 5,000,000 — almost certainly typo for 5M or
+    // 5K), "1000l" (= 100,000,000 — typo), "1000m" (= 1B).
+    final ambiguous = RegExp(r'^(\d{4,})(\.\d+)?(k|l|lakh|lac|m|million)$');
+    final ambiguousMatch = ambiguous.firstMatch(s);
+    if (ambiguousMatch != null) {
+      final digits = ambiguousMatch.group(1)!;
+      final suffix = ambiguousMatch.group(3)!;
+      return (
+        majorAmount: null,
+        error: null,
+        clarification:
+            'Did you mean ${digits[0]}${suffix.toUpperCase()} or $digits ${suffix.toUpperCase()}? '
+            "Combining a large number with a multiplier is unusual.",
+      );
     }
     double multiplier = 1;
     // Order matters — match longer suffixes first.

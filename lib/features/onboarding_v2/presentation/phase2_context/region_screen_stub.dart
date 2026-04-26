@@ -66,8 +66,8 @@ class _RegionScreenStubState extends ConsumerState<RegionScreenStub>
                     'FR-2.1.0 (IP resolver), FR-2.1.1 (confirm card), FR-2.1.3 (add secondary)',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                   ),
                 ],
               ),

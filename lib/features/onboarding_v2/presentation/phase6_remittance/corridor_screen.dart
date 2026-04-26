@@ -79,16 +79,57 @@ class _CorridorScreenState extends ConsumerState<CorridorScreen>
     }
   }
 
+  /// QA Bug 5 — sanctioned ISOs that must NEVER appear in the corridor
+  /// picker, even when journey-config has not loaded. Mirrors the
+  /// authoritative `regions.country_status` rows seeded in 008.
+  static const _hardcodedSanctionsDenyList = {
+    'IL',
+    'IR',
+    'KP',
+    'SY',
+    'CU',
+    'RU',
+  };
+
+  /// QA Bug 5 — primary→to pairs that must never appear in the picker
+  /// even on bundled fallback. Mirrors `country_corridors` seed rows.
+  static const _hardcodedPairBlocks = {
+    'PK': {'IN', 'IL', 'IR', 'KP', 'SY', 'CU'},
+    'IN': {'PK', 'IL'},
+    'IL': {'PK'},
+  };
+
   /// Audit §4 — filter by `country_status` AND pair-level
   /// `country_corridors`. `country_status != 'active'` is dropped
   /// outright; pairs flagged blocked/sanctioned for the user's primary
   /// region are dropped from corridor pickers.
+  ///
+  /// **QA Bug 5 fix** — when journey-config is unavailable, the
+  /// hardcoded deny-list above runs. It MUST stay in sync with the
+  /// `country_corridors` table (seed in `008_corridor_policy_and_identities.sql`).
+  /// Tracked under follow-up ticket FELO-Stage-7.1 to source from a
+  /// bundled JSON snapshot instead.
   List<RegionOption> _regionOptions(Map<String, dynamic>? config) {
-    final raw = config?['regions'] as List<dynamic>?;
-    if (raw == null) return _bundledRegions;
     final stored = ref.read(onboardingStateControllerProvider).valueOrNull;
     final primary = stored?.primaryRegion;
-    final corridors = (config?['country_corridors'] as List<dynamic>?) ?? const [];
+
+    final raw = config?['regions'] as List<dynamic>?;
+    if (raw == null) {
+      // Bundled fallback — apply hardcoded deny list mirror so PK→IN /
+      // sanctioned ISOs never leak into the picker.
+      final hardBlocks = primary == null
+          ? _hardcodedSanctionsDenyList
+          : {
+              ..._hardcodedSanctionsDenyList,
+              ...(_hardcodedPairBlocks[primary] ?? const {}),
+            };
+      return _bundledRegions
+          .where((r) => !hardBlocks.contains(r.iso2))
+          .toList();
+    }
+
+    final corridors =
+        (config?['country_corridors'] as List<dynamic>?) ?? const [];
     final blockedFromPrimary = <String>{
       for (final c in corridors)
         if (primary != null &&
@@ -103,33 +144,79 @@ class _CorridorScreenState extends ConsumerState<CorridorScreen>
           if (blockedFromPrimary.contains(r['iso2'])) return false;
           return true;
         })
-        .map((r) => RegionOption(
-              iso2: r['iso2'].toString(),
-              name: r['name'].toString(),
-              currencyIso: r['currency_iso'].toString(),
-              dialCode: r['dial_code'].toString(),
-            ))
+        .map(
+          (r) => RegionOption(
+            iso2: r['iso2'].toString(),
+            name: r['name'].toString(),
+            currencyIso: r['currency_iso'].toString(),
+            dialCode: r['dial_code'].toString(),
+          ),
+        )
         .toList();
   }
 
   static const List<RegionOption> _bundledRegions = [
-    RegionOption(iso2: 'PK', name: 'Pakistan', currencyIso: 'PKR', dialCode: '+92'),
-    RegionOption(iso2: 'IN', name: 'India', currencyIso: 'INR', dialCode: '+91'),
-    RegionOption(iso2: 'BD', name: 'Bangladesh', currencyIso: 'BDT', dialCode: '+880'),
-    RegionOption(iso2: 'NP', name: 'Nepal', currencyIso: 'NPR', dialCode: '+977'),
-    RegionOption(iso2: 'LK', name: 'Sri Lanka', currencyIso: 'LKR', dialCode: '+94'),
-    RegionOption(iso2: 'CA', name: 'Canada', currencyIso: 'CAD', dialCode: '+1'),
-    RegionOption(iso2: 'GB', name: 'United Kingdom', currencyIso: 'GBP', dialCode: '+44'),
-    RegionOption(iso2: 'US', name: 'United States', currencyIso: 'USD', dialCode: '+1'),
+    RegionOption(
+      iso2: 'PK',
+      name: 'Pakistan',
+      currencyIso: 'PKR',
+      dialCode: '+92',
+    ),
+    RegionOption(
+      iso2: 'IN',
+      name: 'India',
+      currencyIso: 'INR',
+      dialCode: '+91',
+    ),
+    RegionOption(
+      iso2: 'BD',
+      name: 'Bangladesh',
+      currencyIso: 'BDT',
+      dialCode: '+880',
+    ),
+    RegionOption(
+      iso2: 'NP',
+      name: 'Nepal',
+      currencyIso: 'NPR',
+      dialCode: '+977',
+    ),
+    RegionOption(
+      iso2: 'LK',
+      name: 'Sri Lanka',
+      currencyIso: 'LKR',
+      dialCode: '+94',
+    ),
+    RegionOption(
+      iso2: 'CA',
+      name: 'Canada',
+      currencyIso: 'CAD',
+      dialCode: '+1',
+    ),
+    RegionOption(
+      iso2: 'GB',
+      name: 'United Kingdom',
+      currencyIso: 'GBP',
+      dialCode: '+44',
+    ),
+    RegionOption(
+      iso2: 'US',
+      name: 'United States',
+      currencyIso: 'USD',
+      dialCode: '+1',
+    ),
     RegionOption(iso2: 'AE', name: 'UAE', currencyIso: 'AED', dialCode: '+971'),
-    RegionOption(iso2: 'SA', name: 'Saudi Arabia', currencyIso: 'SAR', dialCode: '+966'),
+    RegionOption(
+      iso2: 'SA',
+      name: 'Saudi Arabia',
+      currencyIso: 'SAR',
+      dialCode: '+966',
+    ),
   ];
 
   Future<void> _pickSendsTo(List<RegionOption> regions) async {
     final stored = ref.read(onboardingStateControllerProvider).valueOrNull;
     final primary = stored?.primaryRegion;
-    final filtered =
-        regions.where((r) => r.iso2 != primary).toList();
+    final filtered = regions.where((r) => r.iso2 != primary).toList();
     final result = await RegionPickerSheet.show(
       context: context,
       regions: filtered,
@@ -147,8 +234,7 @@ class _CorridorScreenState extends ConsumerState<CorridorScreen>
   Future<void> _pickReceivesFrom(List<RegionOption> regions) async {
     final stored = ref.read(onboardingStateControllerProvider).valueOrNull;
     final primary = stored?.primaryRegion;
-    final filtered =
-        regions.where((r) => r.iso2 != primary).toList();
+    final filtered = regions.where((r) => r.iso2 != primary).toList();
     final result = await RegionPickerSheet.show(
       context: context,
       regions: filtered,
@@ -168,7 +254,9 @@ class _CorridorScreenState extends ConsumerState<CorridorScreen>
       await onValidationError('no_corridor_selected');
       return;
     }
-    await ref.read(onboardingStateControllerProvider.notifier).patch(
+    await ref
+        .read(onboardingStateControllerProvider.notifier)
+        .patch(
           (s) => s.copyWith(
             sendsTo: _sendsTo.toList(),
             receivesFrom: _receivesFrom.toList(),
@@ -208,8 +296,8 @@ class _CorridorScreenState extends ConsumerState<CorridorScreen>
           Text(
             'We use this to suggest the right corridor and FX guidance later.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 24),
           _CorridorCard(
@@ -257,17 +345,19 @@ class _CorridorScreenState extends ConsumerState<CorridorScreen>
 
   String _formatRegions(Set<String> isoSet, List<RegionOption> regions) {
     final names = isoSet
-        .map((iso) => regions
-            .firstWhere(
-              (r) => r.iso2 == iso,
-              orElse: () => RegionOption(
-                iso2: iso,
-                name: iso,
-                currencyIso: '',
-                dialCode: '',
-              ),
-            )
-            .name)
+        .map(
+          (iso) => regions
+              .firstWhere(
+                (r) => r.iso2 == iso,
+                orElse: () => RegionOption(
+                  iso2: iso,
+                  name: iso,
+                  currencyIso: '',
+                  dialCode: '',
+                ),
+              )
+              .name,
+        )
         .toList();
     return names.join(' · ');
   }
@@ -321,16 +411,15 @@ class _CorridorCard extends StatelessWidget {
                     Text(
                       title,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       subtitle,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color:
-                                Theme.of(context).colorScheme.onSurfaceVariant,
-                          ),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                     ),
                   ],
                 ),

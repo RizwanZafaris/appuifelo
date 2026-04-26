@@ -54,19 +54,16 @@ class GoalCard extends StatelessWidget {
                   Icon(
                     icon,
                     size: 36,
-                    color:
-                        selected ? FeloColors.feloiTeal : colors.onSurface,
+                    color: selected ? FeloColors.feloiTeal : colors.onSurface,
                   ),
                   const SizedBox(height: 12),
                   Text(
                     label,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.w800,
-                          color: selected
-                              ? FeloColors.feloiTeal
-                              : colors.onSurface,
-                        ),
+                      fontWeight: FontWeight.w800,
+                      color: selected ? FeloColors.feloiTeal : colors.onSurface,
+                    ),
                   ),
                 ],
               ),
@@ -83,9 +80,9 @@ class GoalCard extends StatelessWidget {
                     child: Text(
                       slot!.toString(),
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w900,
-                          ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                      ),
                     ),
                   ),
                 ),

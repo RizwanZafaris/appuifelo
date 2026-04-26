@@ -26,8 +26,7 @@ class SignupMethodScreen extends ConsumerStatefulWidget {
   const SignupMethodScreen({super.key});
 
   @override
-  ConsumerState<SignupMethodScreen> createState() =>
-      _SignupMethodScreenState();
+  ConsumerState<SignupMethodScreen> createState() => _SignupMethodScreenState();
 }
 
 class _SignupMethodScreenState extends ConsumerState<SignupMethodScreen>
@@ -49,7 +48,8 @@ class _SignupMethodScreenState extends ConsumerState<SignupMethodScreen>
   @override
   Widget build(BuildContext context) {
     final configAsync = ref.watch(onboardingConfigProvider);
-    final strings = configAsync.valueOrNull?['strings'] as Map<String, dynamic>?;
+    final strings =
+        configAsync.valueOrNull?['strings'] as Map<String, dynamic>?;
 
     String s(String key, String fallback) =>
         strings?[key]?.toString() ?? fallback;
@@ -70,8 +70,8 @@ class _SignupMethodScreenState extends ConsumerState<SignupMethodScreen>
           Text(
             'Pick how you want to sign up.',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 24),
           OptionCard(
@@ -108,9 +108,7 @@ class _SignupMethodScreenState extends ConsumerState<SignupMethodScreen>
           Center(
             child: TextButton(
               onPressed: () => context.go('/auth'),
-              child: const Text(
-                'I already have an account → Sign in',
-              ),
+              child: const Text('I already have an account → Sign in'),
             ),
           ),
         ],
@@ -122,7 +120,9 @@ class _SignupMethodScreenState extends ConsumerState<SignupMethodScreen>
     // FR-1.2.2..6 — fire `signup_method_selected` event with the chosen
     // method. OAuth (google/apple/facebook) completes in 1 tap → jump
     // to Phase 2. Email/Mobile go via OTP screen.
-    await ref.read(onboardingAnalyticsServiceProvider.notifier).fire(
+    await ref
+        .read(onboardingAnalyticsServiceProvider.notifier)
+        .fire(
           CanonicalEvent(
             eventName: 'signup_method_selected',
             frdId: frdId,

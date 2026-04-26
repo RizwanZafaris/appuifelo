@@ -50,7 +50,8 @@ class OnboardingShell extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.arrow_back_rounded),
                       tooltip: 'Back',
-                      onPressed: onBack ?? () => Navigator.of(context).maybePop(),
+                      onPressed:
+                          onBack ?? () => Navigator.of(context).maybePop(),
                     )
                   else
                     const SizedBox(width: 48), // align with right side
@@ -71,15 +72,12 @@ class OnboardingShell extends StatelessWidget {
                 child: Text(
                   title!,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.w900,
-                      ),
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
               ),
             Expanded(
-              child: SingleChildScrollView(
-                padding: padding,
-                child: body,
-              ),
+              child: SingleChildScrollView(padding: padding, child: body),
             ),
             if (bottomActions != null)
               Padding(

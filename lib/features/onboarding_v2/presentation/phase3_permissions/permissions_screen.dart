@@ -74,7 +74,9 @@ class _PermissionsScreenState extends ConsumerState<PermissionsScreen>
   }
 
   Future<void> _fire(String name) async {
-    await ref.read(onboardingAnalyticsServiceProvider.notifier).fire(
+    await ref
+        .read(onboardingAnalyticsServiceProvider.notifier)
+        .fire(
           CanonicalEvent(
             eventName: name,
             frdId: frdId,
@@ -87,7 +89,9 @@ class _PermissionsScreenState extends ConsumerState<PermissionsScreen>
   }
 
   Future<void> _continue() async {
-    await ref.read(onboardingStateControllerProvider.notifier).patch(
+    await ref
+        .read(onboardingStateControllerProvider.notifier)
+        .patch(
           (s) => s.copyWith(
             smsGranted: _sms,
             notificationsGranted: _notifications,
@@ -126,8 +130,8 @@ class _PermissionsScreenState extends ConsumerState<PermissionsScreen>
           Text(
             "Tap Allow if you want the feature, or Not now to skip. Skipping never blocks anything.",
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ),
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
           ),
           const SizedBox(height: 20),
           if (_smsCardVisible) ...[

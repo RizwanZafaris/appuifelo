@@ -29,18 +29,18 @@ class CanonicalEvent {
   final String? locale;
 
   Map<String, Object?> toJson() => {
-        'event_name': eventName,
-        'frd_id': frdId,
-        'step_id': stepId,
-        'phase': phase,
-        'session_id': sessionId,
-        'occurred_at': occurredAt.toUtc().toIso8601String(),
-        'properties': properties,
-        'meta': {
-          if (userAgent != null) 'user_agent': userAgent,
-          if (locale != null) 'locale': locale,
-        },
-      };
+    'event_name': eventName,
+    'frd_id': frdId,
+    'step_id': stepId,
+    'phase': phase,
+    'session_id': sessionId,
+    'occurred_at': occurredAt.toUtc().toIso8601String(),
+    'properties': properties,
+    'meta': {
+      if (userAgent != null) 'user_agent': userAgent,
+      if (locale != null) 'locale': locale,
+    },
+  };
 }
 
 /// Multi-sink analytics emitter (Flutter side of D-030).
