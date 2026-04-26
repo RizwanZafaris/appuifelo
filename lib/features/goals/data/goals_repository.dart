@@ -82,13 +82,13 @@ class ApiGoalsRepository implements GoalsRepository {
     bool? shared,
   }) async {
     final body = <String, dynamic>{
-      if (name != null) 'name': name,
-      if (currency != null) 'currency': currency,
-      if (targetMinor != null) 'targetMinor': targetMinor,
-      if (savedMinor != null) 'savedMinor': savedMinor,
-      if (targetDate != null) 'targetDate': targetDate.toIso8601String(),
-      if (cadence != null) 'cadence': cadence.name,
-      if (shared != null) 'shared': shared,
+      'name': ?name,
+      'currency': ?currency,
+      'targetMinor': ?targetMinor,
+      'savedMinor': ?savedMinor,
+      'targetDate': ?targetDate?.toIso8601String(),
+      'cadence': ?cadence?.name,
+      'shared': ?shared,
     };
     final raw = await _api.updateGoal(id, body);
     return _goalFromApi((raw as Map).cast<String, dynamic>());

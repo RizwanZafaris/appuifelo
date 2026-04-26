@@ -10,6 +10,9 @@ class FeloInput extends StatelessWidget {
     this.obscureText = false,
     this.enabled,
     this.textCapitalization = TextCapitalization.none,
+    this.errorText,
+    this.autofocus = false,
+    this.onChanged,
   });
 
   final String label;
@@ -19,6 +22,9 @@ class FeloInput extends StatelessWidget {
   final bool obscureText;
   final bool? enabled;
   final TextCapitalization textCapitalization;
+  final String? errorText;
+  final bool autofocus;
+  final ValueChanged<String>? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +33,15 @@ class FeloInput extends StatelessWidget {
       keyboardType: keyboardType,
       obscureText: obscureText,
       enabled: enabled,
+      autofocus: autofocus,
+      onChanged: onChanged,
       textCapitalization: textCapitalization,
       minLines: 1,
-      decoration: InputDecoration(labelText: label, hintText: hint),
+      decoration: InputDecoration(
+        labelText: label,
+        hintText: hint,
+        errorText: errorText,
+      ),
     );
   }
 }
