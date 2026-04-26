@@ -328,6 +328,31 @@ class _GoalDetailScreenState extends ConsumerState<GoalDetailScreen>
                           color: FeloColors.feloiTeal,
                         ),
                   ),
+                  const SizedBox(height: 10),
+                  // Audit §9 — recommend a dedicated account so the
+                  // monthly contribution doesn't blend into checking.
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Icon(
+                        Icons.tips_and_updates_outlined,
+                        size: 16,
+                        color: FeloColors.feloiTeal,
+                      ),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          'Tip: keep a dedicated account or sub-pot for '
+                          'this goal so the contribution stays separate.',
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant,
+                              ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

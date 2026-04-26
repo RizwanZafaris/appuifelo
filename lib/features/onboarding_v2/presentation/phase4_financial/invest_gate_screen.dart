@@ -74,6 +74,53 @@ class _InvestGateScreenState extends ConsumerState<InvestGateScreen>
             subtitle: "Skip the investment questions and stay focused on budgets.",
             onTap: () => _select(false),
           ),
+          const SizedBox(height: 24),
+          // Audit §11 — required educational disclaimer. We collect
+          // preference signal only; FELO does not provide regulated
+          // investment advice.
+          const _InvestmentDisclaimer(),
+        ],
+      ),
+    );
+  }
+}
+
+/// Universal disclaimer used by both invest_gate_screen and
+/// investment_types_screen (Audit §11). Compliance-approved copy.
+/// If the wording changes, change it here only.
+class _InvestmentDisclaimer extends StatelessWidget {
+  const _InvestmentDisclaimer();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.outlineVariant,
+        ),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            Icons.info_outline_rounded,
+            size: 18,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              'This is educational guidance, not financial advice. '
+              'Your selection helps us personalize the dashboard — it is '
+              'not a recommendation to buy or sell any asset.',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+            ),
+          ),
         ],
       ),
     );

@@ -33,6 +33,12 @@ class _FamilyRemittanceScreenState
 
   Set<String> _selected = {};
 
+  /// Audit §10 — when "support_financially" or "manage_household" is
+  /// selected, ask whether it's local or cross-border. Only cross-border
+  /// triggers the corridor screen. Local routes straight to personalize
+  /// (the support shows up as a budget category instead).
+  bool? _supportIsCrossBorder;
+
   @override
   void initState() {
     super.initState();
@@ -40,33 +46,37 @@ class _FamilyRemittanceScreenState
     _selected = (stored?.remittanceOptions ?? const []).toSet();
   }
 
-  /// D-023 truth table — returns true iff Phase 6.2 should fire.
+  bool get _needsLocalCrossBorderQuestion {
+    if (_selected.contains('none')) return false;
+    if (_selected.contains('send_regularly')) return false; // implicitly cross-border
+    if (_selected.contains('receive_abroad')) return false; // implicitly cross-border
+    return _selected.contains('support_financially') ||
+        _selected.contains('manage_household');
+  }
+
+  /// D-023 truth table + Audit §10 local-vs-cross-border refinement.
+  /// Returns true iff Phase 6.2 (corridor) should fire.
+  ///
+  /// Decision tree:
+  ///   "none"                       → false
+  ///   "send_regularly" present     → true  (implicitly cross-border)
+  ///   "receive_abroad" present     → true  (implicitly cross-border)
+  ///   "support" / "manage" only    → ask user; only cross-border fires
   bool _shouldFireStep2({
     required Set<String> selections,
-    required String? primary,
-    required Set<String> secondary,
+    required bool? supportIsCrossBorder,
   }) {
     if (selections.contains('none')) return false;
+    if (selections.contains('send_regularly')) return true;
+    if (selections.contains('receive_abroad')) return true;
 
-    final hasSendRegularly = selections.contains('send_regularly');
-    final hasReceiveAbroad = selections.contains('receive_abroad');
+    // Support / manage household — defer to user's local-vs-cross-border
+    // answer. If they said local → skip corridor; cross-border → fire.
     final hasSupport = selections.contains('support_financially');
-    final hasManageHousehold = selections.contains('manage_household');
-
-    if (hasSendRegularly) return true;
-    if (hasReceiveAbroad) return true;
-
-    // "Support" only with cross-border secondary regions → fire defensively.
-    if (hasSupport && secondary.isNotEmpty) {
-      // Treat any secondary as a corridor signal.
-      return true;
+    final hasManage = selections.contains('manage_household');
+    if (hasSupport || hasManage) {
+      return supportIsCrossBorder ?? false;
     }
-
-    // "Manage household" / "Support" only without secondary → skip.
-    if (hasManageHousehold && !hasSendRegularly && !hasReceiveAbroad) {
-      return false;
-    }
-
     return false;
   }
 
@@ -90,11 +100,17 @@ class _FamilyRemittanceScreenState
       await onValidationError('no_selection');
       return;
     }
-    final stored = ref.read(onboardingStateControllerProvider).valueOrNull;
+    // Audit §10 — if user selected support/manage but didn't answer
+    // local-vs-cross-border, prompt them inline first.
+    if (_needsLocalCrossBorderQuestion && _supportIsCrossBorder == null) {
+      await onValidationError('local_or_cross_border_required');
+      // Build will render the inline question; no nav.
+      setState(() {});
+      return;
+    }
     final fireStep2 = _shouldFireStep2(
       selections: _selected,
-      primary: stored?.primaryRegion,
-      secondary: stored?.secondaryRegions.toSet() ?? {},
+      supportIsCrossBorder: _supportIsCrossBorder,
     );
     await ref.read(onboardingStateControllerProvider.notifier).patch(
           (s) => s.copyWith(remittanceOptions: _selected.toList()),
@@ -166,6 +182,35 @@ class _FamilyRemittanceScreenState
             ),
             const SizedBox(height: 10),
           ],
+          if (_needsLocalCrossBorderQuestion) ...[
+            const SizedBox(height: 14),
+            Text(
+              'Is this within your country, or across borders?',
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w800,
+                  ),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                Expanded(
+                  child: _LocalCrossBorderChip(
+                    label: 'Within my country',
+                    selected: _supportIsCrossBorder == false,
+                    onTap: () => setState(() => _supportIsCrossBorder = false),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: _LocalCrossBorderChip(
+                    label: 'Across borders',
+                    selected: _supportIsCrossBorder == true,
+                    onTap: () => setState(() => _supportIsCrossBorder = true),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ],
       ),
     );
@@ -191,5 +236,46 @@ class _FamilyRemittanceScreenState
       'none' => Icons.do_not_disturb_on_outlined,
       _ => Icons.help_outline_rounded,
     };
+  }
+}
+
+/// Audit §10 — local-vs-cross-border picker chip used inline when the
+/// user selected "support" or "manage household" without an explicit
+/// remittance signal. Local → no corridor; cross-border → corridor screen.
+class _LocalCrossBorderChip extends StatelessWidget {
+  const _LocalCrossBorderChip({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final color = selected
+        ? Theme.of(context).colorScheme.primary
+        : Theme.of(context).colorScheme.outlineVariant;
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          border: Border.all(color: color, width: selected ? 2 : 1),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontWeight: selected ? FontWeight.w800 : FontWeight.w500,
+              ),
+        ),
+      ),
+    );
   }
 }

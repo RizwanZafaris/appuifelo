@@ -70,10 +70,17 @@ class _ConfirmRegionScreenState extends ConsumerState<ConfirmRegionScreen>
     }
   }
 
+  /// Audit §4 — only `country_status = 'active'` regions appear in the
+  /// primary picker. Sanctioned / not_supported / coming_soon are
+  /// filtered out so the user can never select them.
   List<RegionOption> _regionOptions(Map<String, dynamic>? config) {
     final raw = config?['regions'] as List<dynamic>?;
     if (raw == null) return _bundledRegions;
     return raw
+        .where((r) {
+          final status = (r as Map)['country_status']?.toString() ?? 'active';
+          return status == 'active';
+        })
         .map((r) => RegionOption(
               iso2: r['iso2'].toString(),
               name: r['name'].toString(),

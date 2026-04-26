@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:felo/features/onboarding_v2/application/onboarding_analytics_mixin.dart';
 import 'package:felo/features/onboarding_v2/application/onboarding_state_controller.dart';
 import 'package:felo/features/onboarding_v2/presentation/shared/onboarding_shell.dart';
+import 'package:felo/shared/validation/validators.dart';
 import 'package:felo/shared/widgets/felo_button.dart';
 import 'package:felo/shared/widgets/felo_input.dart';
 
@@ -45,17 +46,15 @@ class _NameScreenState extends ConsumerState<NameScreen>
   }
 
   Future<void> _submit() async {
-    final name = _controller.text.trim();
-    if (name.isEmpty) {
-      setState(() => _error = 'Please enter your name');
-      await onValidationError('empty');
+    // Audit §3 — centralized validator: rejects digits/emoji/symbols,
+    // collapses double spaces, accepts Unicode letters across scripts.
+    final result = Validators.personalName(_controller.text);
+    if (result.error != null) {
+      setState(() => _error = result.error);
+      await onValidationError(_classifyNameError(result.error!));
       return;
     }
-    if (name.length > 60) {
-      setState(() => _error = "Let's keep it under 60 characters");
-      await onValidationError('too_long');
-      return;
-    }
+    final name = result.normalized!;
     setState(() => _error = null);
     await ref
         .read(onboardingStateControllerProvider.notifier)
@@ -63,6 +62,14 @@ class _NameScreenState extends ConsumerState<NameScreen>
     await onContinue();
     if (!mounted) return;
     context.go('/onboarding-v2/permissions');
+  }
+
+  String _classifyNameError(String msg) {
+    if (msg.contains('Enter')) return 'empty';
+    if (msg.contains('too short')) return 'too_short';
+    if (msg.contains('too long')) return 'too_long';
+    if (msg.contains('letters')) return 'invalid_chars';
+    return 'other';
   }
 
   @override

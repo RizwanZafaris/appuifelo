@@ -79,10 +79,30 @@ class _CorridorScreenState extends ConsumerState<CorridorScreen>
     }
   }
 
+  /// Audit §4 — filter by `country_status` AND pair-level
+  /// `country_corridors`. `country_status != 'active'` is dropped
+  /// outright; pairs flagged blocked/sanctioned for the user's primary
+  /// region are dropped from corridor pickers.
   List<RegionOption> _regionOptions(Map<String, dynamic>? config) {
     final raw = config?['regions'] as List<dynamic>?;
     if (raw == null) return _bundledRegions;
+    final stored = ref.read(onboardingStateControllerProvider).valueOrNull;
+    final primary = stored?.primaryRegion;
+    final corridors = (config?['country_corridors'] as List<dynamic>?) ?? const [];
+    final blockedFromPrimary = <String>{
+      for (final c in corridors)
+        if (primary != null &&
+            (c as Map)['from'] == primary &&
+            c['status'] != 'allowed')
+          c['to'].toString(),
+    };
     return raw
+        .where((r) {
+          final status = (r as Map)['country_status']?.toString() ?? 'active';
+          if (status != 'active') return false;
+          if (blockedFromPrimary.contains(r['iso2'])) return false;
+          return true;
+        })
         .map((r) => RegionOption(
               iso2: r['iso2'].toString(),
               name: r['name'].toString(),

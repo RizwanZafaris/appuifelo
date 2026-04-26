@@ -10,6 +10,7 @@ import 'package:felo/features/onboarding_v2/application/onboarding_state_control
 import 'package:felo/features/onboarding_v2/presentation/shared/category_row.dart';
 import 'package:felo/features/onboarding_v2/presentation/shared/money_input.dart';
 import 'package:felo/features/onboarding_v2/presentation/shared/onboarding_shell.dart';
+import 'package:felo/shared/validation/validators.dart';
 import 'package:felo/shared/widgets/felo_button.dart';
 
 /// **FR-5.1.1..5** — Set monthly budget.
@@ -40,6 +41,10 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
   final List<_CategoryEntry> _categories = [];
   bool _initialized = false;
   String? _templateUsed;
+
+  /// Audit §8 — raw text from MoneyInput preserved so the shorthand
+  /// validator (`5k` / `1.5l` / `5000k`) can run on Continue.
+  String _pendingRawAmount = '';
 
   void _hydrate(Map<String, dynamic>? config, OnboardingState? stored) {
     if (_initialized) return;
@@ -226,6 +231,37 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
   int get _diff => _totalMinor - _allocated;
 
   Future<void> _continue() async {
+    // Audit §8 — full validation pass via centralized Validators. Even
+    // though MoneyInput only emits int minor units, the user's typed
+    // string is captured in `_pendingRawAmount` so we can run the
+    // shorthand normalizer ("5k", "1.5l", "5000k") and the unrealistic
+    // sanity check.
+    if (_pendingRawAmount.isNotEmpty) {
+      final result = Validators.budgetAmount(_pendingRawAmount);
+      if (result.error != null) {
+        await onValidationError('budget_invalid');
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(result.error!)),
+          );
+        }
+        return;
+      }
+      if (result.clarification != null) {
+        await onValidationError('budget_clarify');
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(result.clarification!),
+              duration: const Duration(seconds: 4),
+            ),
+          );
+        }
+        // Don't block, but make user re-confirm by tapping Continue again.
+        _pendingRawAmount = '';
+        return;
+      }
+    }
     if (_totalMinor <= 0) {
       await onValidationError('zero_total');
       return;
@@ -298,7 +334,10 @@ class _BudgetScreenState extends ConsumerState<BudgetScreen>
             label: 'Total monthly budget',
             currency: _currency,
             initialMinor: _totalMinor,
+            allowShorthand: true,
+            helper: 'Tip: type "5k" or "1.5l" — we\'ll expand it.',
             onChanged: (v) => setState(() => _totalMinor = v),
+            onRawChanged: (s) => _pendingRawAmount = s,
           ),
           const SizedBox(height: 12),
           if (_diff != 0)
