@@ -46,4 +46,20 @@ abstract final class FeloColors {
   static const Color signalAmber = Color(0xFFD8961F);
   static const Color signalRose = roseText;
   static const Color signalCrimson = Color(0xFFD6455D);
+
+  /// Felo brand mark gradient — used by the splash screen and any
+  /// hero "F" mark surface. Light theme.
+  static const LinearGradient feloMarkGradient = LinearGradient(
+    colors: [feloiBlue, skyBlue, feloiTeal],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  /// Felo brand mark gradient — dark theme variant. Slightly deeper
+  /// stops to maintain perceived contrast against a dark background.
+  static const LinearGradient feloMarkGradientDark = LinearGradient(
+    colors: [lavenderPrimary, lavenderMascot, feloiTeal],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }
