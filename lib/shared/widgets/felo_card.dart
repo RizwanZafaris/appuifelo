@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:felo/core/theme/felo_colors.dart';
 import 'package:felo/core/theme/felo_radius.dart';
+import 'package:felo/core/theme/felo_shadows.dart';
 import 'package:felo/core/theme/felo_spacing.dart';
 
 class FeloCard extends StatelessWidget {
@@ -26,13 +26,7 @@ class FeloCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor.withValues(alpha: 0.92),
         borderRadius: radius,
-        boxShadow: [
-          BoxShadow(
-            color: FeloColors.lavenderMascot.withValues(alpha: 0.08),
-            blurRadius: 24,
-            offset: const Offset(0, 8),
-          ),
-        ],
+        boxShadow: FeloShadows.sm,
       ),
       child: Padding(padding: padding, child: child),
     );
