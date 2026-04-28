@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:felo/core/theme/felo_colors.dart';
 import 'package:felo/core/theme/felo_radius.dart';
+import 'package:felo/core/theme/felo_shadows.dart';
 
 enum FeloButtonVariant { primary, secondary, ghost }
 
@@ -58,15 +59,7 @@ class FeloButton extends StatelessWidget {
           colors: [FeloColors.lavenderPrimary, FeloColors.lavenderStrong],
         ),
         borderRadius: radius,
-        boxShadow: enabled
-            ? [
-                BoxShadow(
-                  color: FeloColors.lavenderMascot.withValues(alpha: 0.16),
-                  blurRadius: 24,
-                  offset: const Offset(0, 8),
-                ),
-              ]
-            : null,
+        boxShadow: enabled ? FeloShadows.lg : null,
       ),
       FeloButtonVariant.secondary => BoxDecoration(
         color: colors.primaryContainer,

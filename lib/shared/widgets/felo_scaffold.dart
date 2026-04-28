@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:felo/core/localization/localization_extensions.dart';
-import 'package:felo/core/theme/felo_colors.dart';
 import 'package:felo/core/theme/felo_radius.dart';
+import 'package:felo/core/theme/felo_shadows.dart';
 
 enum FeloRootTab { home, activity, coach, doHub, goals }
 
@@ -76,15 +76,9 @@ class _FeloBottomNav extends StatelessWidget {
       top: false,
       minimum: const EdgeInsets.fromLTRB(16, 0, 16, 12),
       child: DecoratedBox(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: FeloCornerRadius.lgAll,
-          boxShadow: [
-            BoxShadow(
-              color: FeloColors.lavenderMascot.withValues(alpha: 0.12),
-              blurRadius: 28,
-              offset: const Offset(0, 10),
-            ),
-          ],
+          boxShadow: FeloShadows.md,
         ),
         child: ClipRRect(
           borderRadius: FeloCornerRadius.lgAll,
