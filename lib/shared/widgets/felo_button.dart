@@ -6,7 +6,7 @@ import 'package:felo/core/theme/felo_shadows.dart';
 
 enum FeloButtonVariant { primary, secondary, ghost }
 
-class FeloButton extends StatelessWidget {
+class FeloButton extends StatefulWidget {
   const FeloButton({
     required this.label,
     required this.onPressed,
@@ -21,11 +21,18 @@ class FeloButton extends StatelessWidget {
   final FeloButtonVariant variant;
 
   @override
+  State<FeloButton> createState() => _FeloButtonState();
+}
+
+class _FeloButtonState extends State<FeloButton> {
+  bool _focused = false;
+
+  @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    final enabled = onPressed != null;
+    final enabled = widget.onPressed != null;
     const radius = FeloCornerRadius.mdAll;
-    final foregroundColor = switch (variant) {
+    final foregroundColor = switch (widget.variant) {
       FeloButtonVariant.primary => Colors.white,
       FeloButtonVariant.secondary => colors.onPrimaryContainer,
       FeloButtonVariant.ghost => colors.primary,
@@ -34,8 +41,11 @@ class FeloButton extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        if (icon != null) ...[Icon(icon, size: 18), const SizedBox(width: 8)],
-        Flexible(child: Text(label, overflow: TextOverflow.ellipsis)),
+        if (widget.icon != null) ...[
+          Icon(widget.icon, size: 18),
+          const SizedBox(width: 8),
+        ],
+        Flexible(child: Text(widget.label, overflow: TextOverflow.ellipsis)),
       ],
     );
 
@@ -51,7 +61,7 @@ class FeloButton extends StatelessWidget {
       ),
     );
 
-    final decoration = switch (variant) {
+    final decoration = switch (widget.variant) {
       FeloButtonVariant.primary => BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
@@ -60,12 +70,17 @@ class FeloButton extends StatelessWidget {
         ),
         borderRadius: radius,
         boxShadow: enabled ? FeloShadows.lg : null,
+        border: _focused ? Border.all(color: colors.primary, width: 2) : null,
       ),
       FeloButtonVariant.secondary => BoxDecoration(
         color: colors.primaryContainer,
         borderRadius: radius,
+        border: _focused ? Border.all(color: colors.primary, width: 2) : null,
       ),
-      FeloButtonVariant.ghost => const BoxDecoration(borderRadius: radius),
+      FeloButtonVariant.ghost => BoxDecoration(
+        borderRadius: radius,
+        border: _focused ? Border.all(color: colors.primary, width: 2) : null,
+      ),
     };
 
     return Semantics(
@@ -78,12 +93,19 @@ class FeloButton extends StatelessWidget {
           borderRadius: radius,
           child: InkWell(
             borderRadius: radius,
-            onTap: onPressed,
+            onTap: widget.onPressed,
+            focusColor: colors.primary.withValues(alpha: 0.08),
+            onFocusChange: (hasFocus) {
+              if (hasFocus != _focused) {
+                setState(() => _focused = hasFocus);
+              }
+            },
             child: Ink(
               decoration: decoration,
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  minHeight: variant == FeloButtonVariant.ghost ? 48 : 52,
+                  minHeight:
+                      widget.variant == FeloButtonVariant.ghost ? 48 : 52,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
