@@ -6,5 +6,5 @@ abstract final class FeloSpacing {
   static const double lg = 24;
   static const double xl = 32;
   static const double xxl = 48;
-  static const double minTapTarget = 44;
+  static const double minTapTarget = 48;
 }
