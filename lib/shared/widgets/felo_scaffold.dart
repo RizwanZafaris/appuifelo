@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:felo/core/localization/localization_extensions.dart';
 import 'package:felo/core/theme/felo_colors.dart';
+import 'package:felo/core/theme/felo_radius.dart';
 
 enum FeloRootTab { home, activity, coach, doHub, goals }
 
@@ -76,7 +77,7 @@ class _FeloBottomNav extends StatelessWidget {
       minimum: const EdgeInsets.fromLTRB(16, 0, 16, 12),
       child: DecoratedBox(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(28),
+          borderRadius: FeloCornerRadius.lgAll,
           boxShadow: [
             BoxShadow(
               color: FeloColors.lavenderMascot.withValues(alpha: 0.12),
@@ -86,7 +87,7 @@ class _FeloBottomNav extends StatelessWidget {
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(28),
+          borderRadius: FeloCornerRadius.lgAll,
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
             child: NavigationBarTheme(

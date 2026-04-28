@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:felo/core/theme/felo_colors.dart';
+import 'package:felo/core/theme/felo_radius.dart';
 import 'package:felo/core/theme/felo_spacing.dart';
 
 class FeloCard extends StatelessWidget {
@@ -20,7 +21,7 @@ class FeloCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    final radius = BorderRadius.circular(20);
+    const radius = FeloCornerRadius.mdAll;
     final card = DecoratedBox(
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor.withValues(alpha: 0.92),
