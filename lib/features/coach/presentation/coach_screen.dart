@@ -54,11 +54,11 @@ class _CoachScreenState extends ConsumerState<CoachScreen> {
       return;
     }
     _controller.clear();
-    await ref.read(coachConversationProvider.notifier).ask(trimmed);
+    await ref.read(coachConversationProvider.notifier).send(trimmed);
   }
 }
 
-class _CoachConversationView extends StatelessWidget {
+class _CoachConversationView extends ConsumerWidget {
   const _CoachConversationView({
     required this.state,
     required this.controller,
@@ -72,7 +72,7 @@ class _CoachConversationView extends StatelessWidget {
   final VoidCallback onSend;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final prompts = state.suggestions.isEmpty
         ? [l10n.coachPromptOne, l10n.coachPromptTwo, l10n.coachPromptThree]
@@ -89,6 +89,15 @@ class _CoachConversationView extends StatelessWidget {
               Expanded(child: Text(l10n.coachDisclaimer)),
             ],
           ),
+        ),
+        const SizedBox(height: 12),
+        _ModeToggle(
+          mode: state.mode,
+          quotaRemaining: state.quotaRemaining,
+          onChanged: state.isSending
+              ? null
+              : (m) =>
+                  ref.read(coachConversationProvider.notifier).setMode(m),
         ),
         const SizedBox(height: 16),
         SingleChildScrollView(
@@ -160,10 +169,34 @@ class _CoachBubble extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (message.guardrailTriggered) ...[
+                Row(
+                  children: [
+                    Icon(
+                      Icons.shield_outlined,
+                      size: 14,
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      message.refusalCategory ?? 'Guardrail',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Theme.of(context).colorScheme.error,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 6),
+              ],
               Text(message.text),
               if (message.dataPoints.isNotEmpty) ...[
                 const SizedBox(height: 14),
                 _CoachDataChart(dataPoints: message.dataPoints),
+              ],
+              if (message.sources.isNotEmpty) ...[
+                const SizedBox(height: 10),
+                _CoachSourcesView(sources: message.sources),
               ],
             ],
           ),
@@ -340,3 +373,107 @@ class _CoachLoadError extends StatelessWidget {
     );
   }
 }
+
+class _ModeToggle extends StatelessWidget {
+  const _ModeToggle({
+    required this.mode,
+    required this.quotaRemaining,
+    required this.onChanged,
+  });
+
+  final CoachMode mode;
+  final int? quotaRemaining;
+  final ValueChanged<CoachMode>? onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: SegmentedButton<CoachMode>(
+            segments: const [
+              ButtonSegment(
+                value: CoachMode.rules,
+                label: Text('Rules'),
+                icon: Icon(Icons.calculate_outlined, size: 16),
+              ),
+              ButtonSegment(
+                value: CoachMode.llm,
+                label: Text('AI'),
+                icon: Icon(Icons.auto_awesome, size: 16),
+              ),
+            ],
+            selected: {mode},
+            onSelectionChanged: onChanged == null
+                ? null
+                : (s) => onChanged!(s.first),
+          ),
+        ),
+        if (mode == CoachMode.llm && quotaRemaining != null) ...[
+          const SizedBox(width: 12),
+          Text(
+            '$quotaRemaining left',
+            style: TextStyle(
+              fontSize: 12,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class _CoachSourcesView extends StatefulWidget {
+  const _CoachSourcesView({required this.sources});
+
+  final List<CoachSource> sources;
+
+  @override
+  State<_CoachSourcesView> createState() => _CoachSourcesViewState();
+}
+
+class _CoachSourcesViewState extends State<_CoachSourcesView> {
+  bool _open = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        InkWell(
+          onTap: () => setState(() => _open = !_open),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(_open ? Icons.expand_less : Icons.expand_more, size: 16),
+              const SizedBox(width: 4),
+              Text(
+                'Sources (${widget.sources.length})',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (_open) ...[
+          const SizedBox(height: 6),
+          for (final s in widget.sources)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2),
+              child: Text(
+                '• ${s.label}: ${s.value}',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ),
+        ],
+      ],
+    );
+  }
+}
+

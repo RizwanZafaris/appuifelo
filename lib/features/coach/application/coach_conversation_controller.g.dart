@@ -6,7 +6,7 @@ part of 'coach_conversation_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$coachConversationHash() => r'52d6810e136955aee7797b9836cef7f915e67408';
+String _$coachConversationHash() => r'55e2ae88cfa5c88b22c20c15013ad503850ce686';
 
 /// See also [CoachConversation].
 @ProviderFor(CoachConversation)
