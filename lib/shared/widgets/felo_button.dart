@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:felo/core/theme/felo_colors.dart';
+import 'package:felo/core/theme/felo_radius.dart';
 
 enum FeloButtonVariant { primary, secondary, ghost }
 
@@ -22,7 +23,7 @@ class FeloButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final enabled = onPressed != null;
-    final radius = BorderRadius.circular(20);
+    const radius = FeloCornerRadius.mdAll;
     final foregroundColor = switch (variant) {
       FeloButtonVariant.primary => Colors.white,
       FeloButtonVariant.secondary => colors.onPrimaryContainer,
@@ -71,7 +72,7 @@ class FeloButton extends StatelessWidget {
         color: colors.primaryContainer,
         borderRadius: radius,
       ),
-      FeloButtonVariant.ghost => BoxDecoration(borderRadius: radius),
+      FeloButtonVariant.ghost => const BoxDecoration(borderRadius: radius),
     };
 
     return Semantics(
