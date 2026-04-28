@@ -4,7 +4,7 @@ import 'package:felo/core/theme/felo_radius.dart';
 import 'package:felo/core/theme/felo_shadows.dart';
 import 'package:felo/core/theme/felo_spacing.dart';
 
-class FeloCard extends StatelessWidget {
+class FeloCard extends StatefulWidget {
   const FeloCard({
     required this.child,
     super.key,
@@ -19,6 +19,13 @@ class FeloCard extends StatelessWidget {
   final String? semanticLabel;
 
   @override
+  State<FeloCard> createState() => _FeloCardState();
+}
+
+class _FeloCardState extends State<FeloCard> {
+  bool _focused = false;
+
+  @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     const radius = FeloCornerRadius.mdAll;
@@ -27,21 +34,34 @@ class FeloCard extends StatelessWidget {
         color: Theme.of(context).cardColor.withValues(alpha: 0.92),
         borderRadius: radius,
         boxShadow: FeloShadows.sm,
+        border: _focused
+            ? Border.all(color: colors.primary, width: 2)
+            : null,
       ),
-      child: Padding(padding: padding, child: child),
+      child: Padding(padding: widget.padding, child: widget.child),
     );
 
-    if (onTap == null) {
-      return Semantics(label: semanticLabel, child: card);
+    if (widget.onTap == null) {
+      return Semantics(label: widget.semanticLabel, child: card);
     }
 
     return Semantics(
       button: true,
-      label: semanticLabel,
+      label: widget.semanticLabel,
       child: Material(
         color: colors.surface,
         borderRadius: radius,
-        child: InkWell(borderRadius: radius, onTap: onTap, child: card),
+        child: InkWell(
+          borderRadius: radius,
+          onTap: widget.onTap,
+          focusColor: colors.primary.withValues(alpha: 0.08),
+          onFocusChange: (hasFocus) {
+            if (hasFocus != _focused) {
+              setState(() => _focused = hasFocus);
+            }
+          },
+          child: card,
+        ),
       ),
     );
   }
