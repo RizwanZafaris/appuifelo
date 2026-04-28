@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide Split;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:felo/core/localization/generated/app_localizations.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
 import 'package:felo/features/splits/data/splits_repository.dart';
 import 'package:felo/features/splits/domain/split.dart';
@@ -28,52 +29,151 @@ class SplitsScreen extends ConsumerWidget {
         .where((split) => split.status == SplitStatus.settled)
         .toList();
 
+    return FeloScaffold(
+      title: l10n.splitsTitle,
+      selectedTab: FeloRootTab.doHub,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final isTablet = constraints.maxWidth >= splitsTabletBreakpoint;
+          final body = isTablet
+              ? _SplitsTabletBody(active: active, settled: settled, l10n: l10n)
+              : _SplitsPhoneBody(active: active, settled: settled, l10n: l10n);
+          return Stack(
+            children: [
+              body,
+              PositionedDirectional(
+                end: 20,
+                bottom: 20,
+                child: FloatingActionButton.extended(
+                  heroTag: 'new_split_fab',
+                  onPressed: () => context.go('/splits/new'),
+                  icon: const Icon(Icons.group_add_rounded),
+                  label: Text(l10n.splitsNewSplit),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+/// Width threshold (dp) at which `SplitsScreen` switches from a tabbed
+/// single-column layout to a side-by-side two-pane layout.
+@visibleForTesting
+const double splitsTabletBreakpoint = 600;
+
+class _SplitsPhoneBody extends StatelessWidget {
+  const _SplitsPhoneBody({
+    required this.active,
+    required this.settled,
+    required this.l10n,
+  });
+
+  final List<Split> active;
+  final List<Split> settled;
+  final AppLocalizations l10n;
+
+  @override
+  Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: FeloScaffold(
-        title: l10n.splitsTitle,
-        selectedTab: FeloRootTab.doHub,
-        child: Column(
-          children: [
-            TabBar(
-              tabs: [
-                Tab(text: l10n.splitsActiveTab),
-                Tab(text: l10n.splitsSettledTab),
+      child: Column(
+        children: [
+          TabBar(
+            tabs: [
+              Tab(text: l10n.splitsActiveTab),
+              Tab(text: l10n.splitsSettledTab),
+            ],
+          ),
+          Expanded(
+            child: TabBarView(
+              children: [
+                _SplitList(
+                  splits: active,
+                  emptyTitle: l10n.splitsEmptyActiveTitle,
+                  emptyBody: l10n.splitsEmptyActiveBody,
+                ),
+                _SplitList(
+                  splits: settled,
+                  emptyTitle: l10n.splitsEmptySettledTitle,
+                  emptyBody: l10n.splitsEmptySettledBody,
+                ),
               ],
             ),
-            Expanded(
-              child: Stack(
-                children: [
-                  TabBarView(
-                    children: [
-                      _SplitList(
-                        splits: active,
-                        emptyTitle: l10n.splitsEmptyActiveTitle,
-                        emptyBody: l10n.splitsEmptyActiveBody,
-                      ),
-                      _SplitList(
-                        splits: settled,
-                        emptyTitle: l10n.splitsEmptySettledTitle,
-                        emptyBody: l10n.splitsEmptySettledBody,
-                      ),
-                    ],
-                  ),
-                  PositionedDirectional(
-                    end: 20,
-                    bottom: 20,
-                    child: FloatingActionButton.extended(
-                      heroTag: 'new_split_fab',
-                      onPressed: () => context.go('/splits/new'),
-                      icon: const Icon(Icons.group_add_rounded),
-                      label: Text(l10n.splitsNewSplit),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
+    );
+  }
+}
+
+class _SplitsTabletBody extends StatelessWidget {
+  const _SplitsTabletBody({
+    required this.active,
+    required this.settled,
+    required this.l10n,
+  });
+
+  final List<Split> active;
+  final List<Split> settled;
+  final AppLocalizations l10n;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          child: _SplitsPane(
+            title: l10n.splitsActiveTab,
+            child: _SplitList(
+              splits: active,
+              emptyTitle: l10n.splitsEmptyActiveTitle,
+              emptyBody: l10n.splitsEmptyActiveBody,
+            ),
+          ),
+        ),
+        const VerticalDivider(width: 1),
+        Expanded(
+          child: _SplitsPane(
+            title: l10n.splitsSettledTab,
+            child: _SplitList(
+              splits: settled,
+              emptyTitle: l10n.splitsEmptySettledTitle,
+              emptyBody: l10n.splitsEmptySettledBody,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _SplitsPane extends StatelessWidget {
+  const _SplitsPane({required this.title, required this.child});
+
+  final String title;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(20, 16, 20, 8),
+          child: Text(
+            title,
+            style: theme.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        ),
+        Expanded(child: child),
+      ],
     );
   }
 }
