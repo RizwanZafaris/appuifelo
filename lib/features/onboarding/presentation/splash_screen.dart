@@ -85,15 +85,9 @@ class _FeloMark extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [
-            FeloColors.feloiBlue,
-            FeloColors.skyBlue,
-            FeloColors.feloiTeal,
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        gradient: Theme.of(context).brightness == Brightness.dark
+            ? FeloColors.feloMarkGradientDark
+            : FeloColors.feloMarkGradient,
         borderRadius: BorderRadius.circular(size * 0.35),
       ),
       child: Center(
