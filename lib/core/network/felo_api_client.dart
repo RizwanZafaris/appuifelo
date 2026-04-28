@@ -129,6 +129,19 @@ abstract class FeloApiClient {
   @POST('/coach/ask')
   Future<dynamic> askCoach(@Body() Map<String, dynamic> body);
 
+  /// LLM-backed coach chat. Body shape:
+  ///   { message, conversationId?, provider?, model? }
+  /// Server runs the 3-layer pipeline (pre-guardrail → retrieval → LLM →
+  /// post-guardrail) and only deducts quota on a non-refused response.
+  @POST('/coach/chat')
+  Future<dynamic> chatCoach(@Body() Map<String, dynamic> body);
+
+  @GET('/coach/models')
+  Future<dynamic> listCoachModels();
+
+  @GET('/coach/quota')
+  Future<dynamic> coachQuota();
+
   // -------- Security / MFA -----------------------------------------
   @GET('/security/mfa/status')
   Future<dynamic> mfaStatus();
