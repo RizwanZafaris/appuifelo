@@ -36,9 +36,35 @@ abstract final class FeloTheme {
   }
 
   static ThemeData dark() {
-    final colorScheme = ColorScheme.fromSeed(
-      seedColor: FeloColors.feloiTeal,
-      brightness: Brightness.dark,
+    // Explicit dark ColorScheme — no `fromSeed` derivation. Carries
+    // mint / peach / sage / rose semantics through to dark mode using
+    // the *Base shades as containers and ink900/paper50 for
+    // foregrounds, targeting ≥ 4.5:1 contrast against ink900 / ink800.
+    const colorScheme = ColorScheme.dark(
+      primary: FeloColors.lavenderSoft,
+      onPrimary: FeloColors.ink900,
+      primaryContainer: FeloColors.lavenderPrimary,
+      onPrimaryContainer: FeloColors.paper50,
+      secondary: FeloColors.mintBase,
+      onSecondary: FeloColors.ink900,
+      secondaryContainer: FeloColors.mintText,
+      onSecondaryContainer: FeloColors.paper50,
+      tertiary: FeloColors.peachBase,
+      onTertiary: FeloColors.ink900,
+      tertiaryContainer: FeloColors.peachText,
+      onTertiaryContainer: FeloColors.paper50,
+      error: FeloColors.roseBase,
+      onError: FeloColors.ink900,
+      surface: FeloColors.ink900,
+      onSurface: FeloColors.paper50,
+      onSurfaceVariant: FeloColors.ink300,
+      outline: FeloColors.ink500,
+      outlineVariant: FeloColors.ink700,
+      surfaceContainerLowest: FeloColors.ink900,
+      surfaceContainerLow: FeloColors.ink850,
+      surfaceContainer: FeloColors.ink800,
+      surfaceContainerHigh: FeloColors.ink700,
+      surfaceContainerHighest: FeloColors.ink500,
     );
     return _base(colorScheme).copyWith(
       scaffoldBackgroundColor: FeloColors.ink900,
