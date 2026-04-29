@@ -545,6 +545,9 @@ class _NewSplitScreenState extends ConsumerState<NewSplitScreen> {
   }
 
   List<SplitParticipantDraft> _draftParticipants(int totalMinor) {
+    if (_participants.isEmpty) {
+      return const <SplitParticipantDraft>[];
+    }
     if (_equalShares) {
       final baseShare = totalMinor ~/ _participants.length;
       final remainder = totalMinor % _participants.length;
