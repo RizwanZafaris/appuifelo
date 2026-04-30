@@ -247,4 +247,98 @@ abstract class FeloApiClient {
 
   @DELETE('/devices/{id}')
   Future<dynamic> unregisterDevice(@Path('id') String id);
+
+  // -------- Reports (Weekly / Monthly) ------------------------------
+  @GET('/reports/weekly')
+  Future<dynamic> weeklyReport();
+
+  @GET('/reports/monthly/{year}/{month}')
+  Future<dynamic> monthlyReport(
+    @Path('year') int year,
+    @Path('month') int month,
+  );
+
+  // -------- Cash Envelopes ------------------------------------------
+  @GET('/cash-envelopes')
+  Future<dynamic> cashEnvelopes();
+
+  @POST('/cash-envelopes')
+  Future<dynamic> createCashEnvelope(@Body() Map<String, dynamic> body);
+
+  @PATCH('/cash-envelopes/{id}/spend')
+  Future<dynamic> spendCashEnvelope(
+    @Path('id') String id,
+    @Body() Map<String, dynamic> body,
+  );
+
+  @DELETE('/cash-envelopes/{id}')
+  Future<dynamic> deleteCashEnvelope(@Path('id') String id);
+
+  // -------- Remittance Notebook -------------------------------------
+  @GET('/remittance-notebook')
+  Future<dynamic> remittanceNotebook({@Query('status') String? status});
+
+  @GET('/remittance-notebook/summary')
+  Future<dynamic> remittanceSummary();
+
+  @POST('/remittance-notebook')
+  Future<dynamic> createRemittanceEntry(@Body() Map<String, dynamic> body);
+
+  @PATCH('/remittance-notebook/{id}')
+  Future<dynamic> updateRemittanceEntry(
+    @Path('id') String id,
+    @Body() Map<String, dynamic> body,
+  );
+
+  @PATCH('/remittance-notebook/{id}/mark-sent')
+  Future<dynamic> markRemittanceSent(@Path('id') String id);
+
+  @DELETE('/remittance-notebook/{id}')
+  Future<dynamic> deleteRemittanceEntry(@Path('id') String id);
+
+  // -------- Monthly Close -------------------------------------------
+  @GET('/monthly-close')
+  Future<dynamic> listMonthlyCloses();
+
+  @GET('/monthly-close/{year}/{month}')
+  Future<dynamic> monthlyClose(
+    @Path('year') int year,
+    @Path('month') int month,
+  );
+
+  @GET('/monthly-close/{year}/{month}/checklist')
+  Future<dynamic> monthlyCloseChecklist(
+    @Path('year') int year,
+    @Path('month') int month,
+  );
+
+  @PATCH('/monthly-close/{year}/{month}/checklist')
+  Future<dynamic> updateMonthlyCloseChecklist(
+    @Path('year') int year,
+    @Path('month') int month,
+    @Body() Map<String, dynamic> body,
+  );
+
+  @POST('/monthly-close/{year}/{month}/close')
+  Future<dynamic> closeMonth(
+    @Path('year') int year,
+    @Path('month') int month,
+  );
+
+  // -------- Subscriptions / Tier ------------------------------------
+  @GET('/subscriptions/tier')
+  Future<dynamic> subscriptionTier();
+
+  @POST('/subscriptions/upgrade')
+  Future<dynamic> upgradeSubscription(@Body() Map<String, dynamic> body);
+
+  // -------- Export / Data Controls ----------------------------------
+  @POST('/export')
+  Future<dynamic> requestExport(@Body() Map<String, dynamic> body);
+
+  @GET('/export')
+  Future<dynamic> listExports();
+
+  @DELETE('/export/account')
+  Future<dynamic> deleteAccountData();
 }

@@ -31,15 +31,36 @@ import 'package:felo/features/transactions/domain/felo_transaction.dart';
 part 'fake_repositories.g.dart';
 
 class AuthRepository {
-  AppUser currentUser() {
-    return AppUser(
-      id: 'user_rizwan',
-      displayName: 'Rizwan Zafar',
-      email: 'rizwan@example.com',
-      corridor: UserCorridor.canada,
-      languageCode: 'en',
-      createdAt: DateTime(2026, 4, 24),
-    );
+  final dynamic _supabase;
+
+  AuthRepository({dynamic supabase}) : _supabase = supabase;
+
+  AppUser? currentUser() {
+    // Try Supabase first if available
+    try {
+      final user = _supabase?.auth?.currentUser;
+      if (user != null) {
+        final meta = user.userMetadata ?? {};
+        final corridorStr = meta['corridor'] ?? 'other';
+        return AppUser(
+          id: user.id,
+          displayName: meta['display_name'] ?? user.email ?? 'User',
+          email: user.email ?? '',
+          corridor: corridorStr == 'canada'
+              ? UserCorridor.canada
+              : corridorStr == 'pakistan'
+                  ? UserCorridor.pakistan
+                  : UserCorridor.canada,
+          languageCode: meta['language_code'] ?? 'en',
+          createdAt: user.createdAt != null
+              ? DateTime.parse(user.createdAt)
+              : DateTime.now(),
+        );
+      }
+    } catch (_) {
+      // Supabase not available — return null so callers handle gracefully
+    }
+    return null;
   }
 }
 

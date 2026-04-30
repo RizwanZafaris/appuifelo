@@ -57,6 +57,13 @@ import 'package:felo/features/sms_parser/presentation/sms_parser_screen.dart';
 import 'package:felo/features/splits/presentation/splits_screens.dart';
 import 'package:felo/features/system/presentation/system_screens.dart';
 import 'package:felo/features/transactions/presentation/money_extension_screens.dart';
+import 'package:felo/features/reports/presentation/weekly_report_screen.dart';
+import 'package:felo/features/reports/presentation/monthly_report_screen.dart';
+import 'package:felo/features/cash_envelopes/presentation/cash_envelopes_screen.dart';
+import 'package:felo/features/remittance_notebook/presentation/remittance_notebook_screen.dart';
+import 'package:felo/features/monthly_close/presentation/monthly_close_screen.dart';
+import 'package:felo/features/subscriptions/presentation/subscription_screen.dart';
+import 'package:felo/features/export_control/presentation/export_control_screen.dart';
 import 'package:felo/features/transactions/presentation/transaction_detail_screen.dart';
 import 'package:felo/features/transactions/presentation/transactions_screen.dart';
 
@@ -860,4 +867,69 @@ class FamilyInviteRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       FamilyInviteAcceptScreen(token: token);
+}
+
+// ─── Feature Coverage Routes ────────────────────────────────────────────
+
+@TypedGoRoute<WeeklyReportRoute>(path: '/reports/weekly')
+class WeeklyReportRoute extends GoRouteData {
+  const WeeklyReportRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const WeeklyReportScreen();
+}
+
+@TypedGoRoute<MonthlyReportRoute>(path: '/reports/monthly')
+class MonthlyReportRoute extends GoRouteData {
+  const MonthlyReportRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const MonthlyReportScreen();
+}
+
+@TypedGoRoute<CashEnvelopesRoute>(path: '/cash-envelopes')
+class CashEnvelopesRoute extends GoRouteData {
+  const CashEnvelopesRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const CashEnvelopesScreen();
+}
+
+@TypedGoRoute<RemittanceNotebookRoute>(path: '/remittance-notebook')
+class RemittanceNotebookRoute extends GoRouteData {
+  const RemittanceNotebookRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const RemittanceNotebookScreen();
+}
+
+@TypedGoRoute<MonthlyCloseRoute>(path: '/monthly-close')
+class MonthlyCloseRoute extends GoRouteData {
+  const MonthlyCloseRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const MonthlyCloseScreen();
+}
+
+@TypedGoRoute<SubscriptionRoute>(path: '/subscription')
+class SubscriptionRoute extends GoRouteData {
+  const SubscriptionRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const SubscriptionScreen();
+}
+
+@TypedGoRoute<ExportControlRoute>(path: '/export-control')
+class ExportControlRoute extends GoRouteData {
+  const ExportControlRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const ExportControlScreen();
 }
