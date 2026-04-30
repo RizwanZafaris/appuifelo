@@ -4,7 +4,7 @@ part 'report_models.freezed.dart';
 part 'report_models.g.dart';
 
 @freezed
-class WeeklyReport with _$WeeklyReport {
+abstract class WeeklyReport with _$WeeklyReport {
   const factory WeeklyReport({
     required ReportPeriod period,
     required MoneyPulse moneyPulse,
@@ -20,7 +20,7 @@ class WeeklyReport with _$WeeklyReport {
 }
 
 @freezed
-class ReportPeriod with _$ReportPeriod {
+abstract class ReportPeriod with _$ReportPeriod {
   const factory ReportPeriod({
     required String start,
     required String end,
@@ -31,7 +31,7 @@ class ReportPeriod with _$ReportPeriod {
 }
 
 @freezed
-class MoneyPulse with _$MoneyPulse {
+abstract class MoneyPulse with _$MoneyPulse {
   const factory MoneyPulse({
     required int totalLoggedSpend,
     required int remainingBudget,
@@ -43,7 +43,7 @@ class MoneyPulse with _$MoneyPulse {
 }
 
 @freezed
-class TopMover with _$TopMover {
+abstract class TopMover with _$TopMover {
   const factory TopMover({
     required String category,
     required int amount,
@@ -55,7 +55,7 @@ class TopMover with _$TopMover {
 }
 
 @freezed
-class BillAhead with _$BillAhead {
+abstract class BillAhead with _$BillAhead {
   const factory BillAhead({
     required String name,
     required String dueDate,
@@ -68,7 +68,7 @@ class BillAhead with _$BillAhead {
 }
 
 @freezed
-class GoalAtRisk with _$GoalAtRisk {
+abstract class GoalAtRisk with _$GoalAtRisk {
   const factory GoalAtRisk({
     required String name,
     required int progressPercent,
@@ -80,7 +80,7 @@ class GoalAtRisk with _$GoalAtRisk {
 }
 
 @freezed
-class SharedObligation with _$SharedObligation {
+abstract class SharedObligation with _$SharedObligation {
   const factory SharedObligation({
     required String splitName,
     required int pendingAmount,
@@ -92,7 +92,7 @@ class SharedObligation with _$SharedObligation {
 }
 
 @freezed
-class MonthlyReport with _$MonthlyReport {
+abstract class MonthlyReport with _$MonthlyReport {
   const factory MonthlyReport({
     required int year,
     required int month,
@@ -110,7 +110,7 @@ class MonthlyReport with _$MonthlyReport {
 }
 
 @freezed
-class IncomeSummary with _$IncomeSummary {
+abstract class IncomeSummary with _$IncomeSummary {
   const factory IncomeSummary({
     required int totalIncomeMinor,
     required List<IncomeSource> sources,
@@ -121,7 +121,7 @@ class IncomeSummary with _$IncomeSummary {
 }
 
 @freezed
-class IncomeSource with _$IncomeSource {
+abstract class IncomeSource with _$IncomeSource {
   const factory IncomeSource({
     required String category,
     required int amountMinor,
@@ -132,7 +132,7 @@ class IncomeSource with _$IncomeSource {
 }
 
 @freezed
-class ExpenseSummary with _$ExpenseSummary {
+abstract class ExpenseSummary with _$ExpenseSummary {
   const factory ExpenseSummary({
     required int totalExpenseMinor,
     required List<ExpenseCategory> byCategory,
@@ -143,7 +143,7 @@ class ExpenseSummary with _$ExpenseSummary {
 }
 
 @freezed
-class ExpenseCategory with _$ExpenseCategory {
+abstract class ExpenseCategory with _$ExpenseCategory {
   const factory ExpenseCategory({
     required String category,
     required int amountMinor,
@@ -154,7 +154,7 @@ class ExpenseCategory with _$ExpenseCategory {
 }
 
 @freezed
-class BudgetPerformance with _$BudgetPerformance {
+abstract class BudgetPerformance with _$BudgetPerformance {
   const factory BudgetPerformance({
     required String category,
     required int plannedMinor,
@@ -167,7 +167,7 @@ class BudgetPerformance with _$BudgetPerformance {
 }
 
 @freezed
-class GoalProgressReport with _$GoalProgressReport {
+abstract class GoalProgressReport with _$GoalProgressReport {
   const factory GoalProgressReport({
     required String name,
     required int targetMinor,
@@ -180,7 +180,7 @@ class GoalProgressReport with _$GoalProgressReport {
 }
 
 @freezed
-class BillReliability with _$BillReliability {
+abstract class BillReliability with _$BillReliability {
   const factory BillReliability({
     required int paid,
     required int pending,
@@ -192,7 +192,7 @@ class BillReliability with _$BillReliability {
 }
 
 @freezed
-class SharedLedger with _$SharedLedger {
+abstract class SharedLedger with _$SharedLedger {
   const factory SharedLedger({
     required int openObligations,
     required int settledExternally,
@@ -204,7 +204,7 @@ class SharedLedger with _$SharedLedger {
 }
 
 @freezed
-class ValidationChecklistItem with _$ValidationChecklistItem {
+abstract class ValidationChecklistItem with _$ValidationChecklistItem {
   const factory ValidationChecklistItem({
     required String item,
     required bool completed,

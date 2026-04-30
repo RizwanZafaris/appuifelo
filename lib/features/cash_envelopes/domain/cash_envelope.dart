@@ -4,7 +4,7 @@ part 'cash_envelope.freezed.dart';
 part 'cash_envelope.g.dart';
 
 @freezed
-class CashEnvelope with _$CashEnvelope {
+abstract class CashEnvelope with _$CashEnvelope {
   const factory CashEnvelope({
     required String id,
     required String name,

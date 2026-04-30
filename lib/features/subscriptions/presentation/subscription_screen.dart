@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import 'package:felo/core/theme/felo_theme.dart';
-import 'package:felo/core/widgets/felo_card.dart';
-import 'package:felo/core/widgets/felo_scaffold.dart';
+import 'package:felo/shared/widgets/felo_card.dart';
+import 'package:felo/shared/widgets/felo_scaffold.dart';
 import 'package:felo/features/subscriptions/application/subscription_providers.dart';
 
 class SubscriptionScreen extends ConsumerWidget {
@@ -14,7 +14,7 @@ class SubscriptionScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tierAsync = ref.watch(userTierProvider);
 
-    return FeloScaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text('FELO Plus'),
         centerTitle: true,

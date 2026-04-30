@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import 'package:felo/core/theme/felo_theme.dart';
-import 'package:felo/core/widgets/felo_card.dart';
-import 'package:felo/core/widgets/felo_scaffold.dart';
-import 'package:felo/core/widgets/felo_empty_state.dart';
+import 'package:felo/shared/widgets/felo_card.dart';
+import 'package:felo/shared/widgets/felo_scaffold.dart';
+import 'package:felo/shared/widgets/felo_empty_state.dart';
 import 'package:felo/features/reports/application/reports_providers.dart';
 import 'package:felo/features/reports/domain/report_models.dart';
 
@@ -16,7 +16,7 @@ class WeeklyReportScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final weeklyAsync = ref.watch(weeklyReportProvider);
 
-    return FeloScaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text('Weekly Money Pulse'),
         centerTitle: true,
@@ -25,9 +25,8 @@ class WeeklyReportScreen extends ConsumerWidget {
         data: (report) => _ReportContent(report: report),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => FeloEmptyState(
-          icon: Icons.error_outline,
           title: 'Could not load report',
-          subtitle: e.toString(),
+          body: e.toString(),
           actionLabel: 'Retry',
           onAction: () => ref.invalidate(weeklyReportProvider),
         ),
@@ -44,7 +43,6 @@ class _ReportContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colors = theme.extension<FeloColor>()!;
 
     return RefreshIndicator(
       onRefresh: () async {},

@@ -66,6 +66,13 @@ List<RouteBase> get $appRoutes => [
   $networkErrorRoute,
   $appLockRoute,
   $familyInviteRoute,
+  $weeklyReportRoute,
+  $monthlyReportRoute,
+  $cashEnvelopesRoute,
+  $remittanceNotebookRoute,
+  $monthlyCloseRoute,
+  $subscriptionRoute,
+  $exportControlRoute,
 ];
 
 RouteBase get $splashRoute =>
@@ -1674,6 +1681,160 @@ extension $FamilyInviteRouteExtension on FamilyInviteRoute {
 
   String get location =>
       GoRouteData.$location('/family/invite/${Uri.encodeComponent(token)}');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $weeklyReportRoute => GoRouteData.$route(
+  path: '/reports/weekly',
+
+  factory: $WeeklyReportRouteExtension._fromState,
+);
+
+extension $WeeklyReportRouteExtension on WeeklyReportRoute {
+  static WeeklyReportRoute _fromState(GoRouterState state) =>
+      const WeeklyReportRoute();
+
+  String get location => GoRouteData.$location('/reports/weekly');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $monthlyReportRoute => GoRouteData.$route(
+  path: '/reports/monthly',
+
+  factory: $MonthlyReportRouteExtension._fromState,
+);
+
+extension $MonthlyReportRouteExtension on MonthlyReportRoute {
+  static MonthlyReportRoute _fromState(GoRouterState state) =>
+      const MonthlyReportRoute();
+
+  String get location => GoRouteData.$location('/reports/monthly');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $cashEnvelopesRoute => GoRouteData.$route(
+  path: '/cash-envelopes',
+
+  factory: $CashEnvelopesRouteExtension._fromState,
+);
+
+extension $CashEnvelopesRouteExtension on CashEnvelopesRoute {
+  static CashEnvelopesRoute _fromState(GoRouterState state) =>
+      const CashEnvelopesRoute();
+
+  String get location => GoRouteData.$location('/cash-envelopes');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $remittanceNotebookRoute => GoRouteData.$route(
+  path: '/remittance-notebook',
+
+  factory: $RemittanceNotebookRouteExtension._fromState,
+);
+
+extension $RemittanceNotebookRouteExtension on RemittanceNotebookRoute {
+  static RemittanceNotebookRoute _fromState(GoRouterState state) =>
+      const RemittanceNotebookRoute();
+
+  String get location => GoRouteData.$location('/remittance-notebook');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $monthlyCloseRoute => GoRouteData.$route(
+  path: '/monthly-close',
+
+  factory: $MonthlyCloseRouteExtension._fromState,
+);
+
+extension $MonthlyCloseRouteExtension on MonthlyCloseRoute {
+  static MonthlyCloseRoute _fromState(GoRouterState state) =>
+      const MonthlyCloseRoute();
+
+  String get location => GoRouteData.$location('/monthly-close');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $subscriptionRoute => GoRouteData.$route(
+  path: '/subscription',
+
+  factory: $SubscriptionRouteExtension._fromState,
+);
+
+extension $SubscriptionRouteExtension on SubscriptionRoute {
+  static SubscriptionRoute _fromState(GoRouterState state) =>
+      const SubscriptionRoute();
+
+  String get location => GoRouteData.$location('/subscription');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $exportControlRoute => GoRouteData.$route(
+  path: '/export-control',
+
+  factory: $ExportControlRouteExtension._fromState,
+);
+
+extension $ExportControlRouteExtension on ExportControlRoute {
+  static ExportControlRoute _fromState(GoRouterState state) =>
+      const ExportControlRoute();
+
+  String get location => GoRouteData.$location('/export-control');
 
   void go(BuildContext context) => context.go(location);
 

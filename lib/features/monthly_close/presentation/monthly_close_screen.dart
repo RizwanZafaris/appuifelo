@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import 'package:felo/core/widgets/felo_card.dart';
-import 'package:felo/core/widgets/felo_scaffold.dart';
-import 'package:felo/core/widgets/felo_empty_state.dart';
+import 'package:felo/shared/widgets/felo_card.dart';
+import 'package:felo/shared/widgets/felo_scaffold.dart';
+import 'package:felo/shared/widgets/felo_empty_state.dart';
 import 'package:felo/features/monthly_close/application/monthly_close_providers.dart';
 
 class MonthlyCloseScreen extends ConsumerStatefulWidget {
@@ -33,7 +33,7 @@ class _MonthlyCloseScreenState extends ConsumerState<MonthlyCloseScreen> {
     final closeAsync = ref.watch(monthlyCloseProvider(_year, _month));
     final theme = Theme.of(context);
 
-    return FeloScaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text('Validate My Month'),
         centerTitle: true,
@@ -166,9 +166,8 @@ class _MonthlyCloseScreenState extends ConsumerState<MonthlyCloseScreen> {
               },
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (e, _) => FeloEmptyState(
-                icon: Icons.error_outline,
                 title: 'Error',
-                subtitle: e.toString(),
+                body: e.toString(),
               ),
             ),
           ),

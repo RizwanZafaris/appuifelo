@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:felo/core/widgets/felo_card.dart';
-import 'package:felo/core/widgets/felo_scaffold.dart';
+import 'package:felo/shared/widgets/felo_card.dart';
+import 'package:felo/shared/widgets/felo_scaffold.dart';
 
 class ExportControlScreen extends ConsumerStatefulWidget {
   const ExportControlScreen({super.key});
@@ -18,7 +18,7 @@ class _ExportControlScreenState extends ConsumerState<ExportControlScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return FeloScaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text('Your Data'),
         centerTitle: true,

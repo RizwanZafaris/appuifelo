@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import 'package:felo/core/theme/felo_theme.dart';
-import 'package:felo/core/widgets/felo_card.dart';
-import 'package:felo/core/widgets/felo_scaffold.dart';
-import 'package:felo/core/widgets/felo_empty_state.dart';
+import 'package:felo/shared/widgets/felo_card.dart';
+import 'package:felo/shared/widgets/felo_scaffold.dart';
+import 'package:felo/shared/widgets/felo_empty_state.dart';
 import 'package:felo/features/cash_envelopes/application/cash_envelopes_providers.dart';
 import 'package:felo/features/cash_envelopes/domain/cash_envelope.dart';
 
@@ -16,7 +16,7 @@ class CashEnvelopesScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final envelopesAsync = ref.watch(cashEnvelopesProvider);
 
-    return FeloScaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text('Cash Envelopes'),
         centerTitle: true,
@@ -29,18 +29,16 @@ class CashEnvelopesScreen extends ConsumerWidget {
       body: envelopesAsync.when(
         data: (envelopes) => envelopes.isEmpty
             ? FeloEmptyState(
-                icon: Icons.account_balance_wallet_outlined,
                 title: 'No Cash Envelopes',
-                subtitle: 'Create envelopes to track your cash spending by category.',
+                body: 'Create envelopes to track your cash spending by category.',
                 actionLabel: 'Create First Envelope',
                 onAction: () => _showAddEnvelopeSheet(context, ref),
               )
             : _EnvelopesList(envelopes: envelopes),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => FeloEmptyState(
-          icon: Icons.error_outline,
           title: 'Error',
-          subtitle: e.toString(),
+          body: e.toString(),
           actionLabel: 'Retry',
           onAction: () => ref.invalidate(cashEnvelopesProvider),
         ),

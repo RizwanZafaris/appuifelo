@@ -23,11 +23,11 @@ final authRepositoryProvider = AutoDisposeProvider<AuthRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AuthRepositoryRef = AutoDisposeProviderRef<AuthRepository>;
-String _$currentUserHash() => r'd8ff901ddfe38d30c8389cec8db3759f228da2cb';
+String _$currentUserHash() => r'22223838f939ef05730710e8cb1579ea59b8280e';
 
 /// See also [currentUser].
 @ProviderFor(currentUser)
-final currentUserProvider = AutoDisposeProvider<AppUser>.internal(
+final currentUserProvider = AutoDisposeProvider<AppUser?>.internal(
   currentUser,
   name: r'currentUserProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -39,7 +39,7 @@ final currentUserProvider = AutoDisposeProvider<AppUser>.internal(
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef CurrentUserRef = AutoDisposeProviderRef<AppUser>;
+typedef CurrentUserRef = AutoDisposeProviderRef<AppUser?>;
 String _$smsParserRepositoryHash() =>
     r'c5d588692689e4f23aa30b8dbd484d2c204accb4';
 

@@ -275,7 +275,7 @@ class FakeNotificationsRepository implements NotificationsRepository {
 AuthRepository authRepository(AuthRepositoryRef ref) => AuthRepository();
 
 @riverpod
-AppUser currentUser(CurrentUserRef ref) =>
+AppUser? currentUser(CurrentUserRef ref) =>
     ref.watch(authRepositoryProvider).currentUser();
 
 // Budget / Goal / Transaction providers moved to feature-data layers.

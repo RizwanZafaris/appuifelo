@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:felo/core/network/felo_api_client.dart';
+import 'package:felo/core/network/felo_api_client_provider.dart';
 import 'package:felo/features/cash_envelopes/domain/cash_envelope.dart';
 
 part 'cash_envelopes_repository.g.dart';
