@@ -19,6 +19,10 @@ import 'package:felo/features/help/presentation/help_screen.dart';
 import 'package:felo/features/home_dashboard/presentation/home_screen.dart';
 import 'package:felo/features/investments/presentation/investments_screens.dart';
 import 'package:felo/features/kyc/presentation/kyc_screen.dart';
+import 'package:felo/features/kyc/presentation/kyc_status_screen.dart';
+import 'package:felo/features/family/presentation/family_screen.dart';
+import 'package:felo/features/family/presentation/family_group_detail_screen.dart';
+import 'package:felo/features/family/presentation/family_invite_screen.dart';
 import 'package:felo/features/notifications/presentation/notifications_screen.dart';
 import 'package:felo/features/notifications/presentation/notifications_test_screen.dart';
 import 'package:felo/core/config/felo_env.dart';
@@ -51,9 +55,8 @@ import 'package:felo/features/receipt_capture/presentation/receipt_capture_scree
 import 'package:felo/features/referrals/presentation/felo_plus_screen.dart';
 import 'package:felo/features/referrals/presentation/referral_redeem_screen.dart';
 import 'package:felo/features/referrals/presentation/referrals_screen.dart';
-import 'package:felo/features/remittance_stub/presentation/remittance_stub_screen.dart';
-import 'package:felo/features/send_money/presentation/send_money_screens.dart';
 import 'package:felo/features/sms_parser/presentation/sms_parser_screen.dart';
+import 'package:felo/features/sms_parser/presentation/sms_ingestion_log_screen.dart';
 import 'package:felo/features/splits/presentation/splits_screens.dart';
 import 'package:felo/features/system/presentation/system_screens.dart';
 import 'package:felo/features/transactions/presentation/money_extension_screens.dart';
@@ -431,50 +434,6 @@ class SplitDetailRoute extends GoRouteData {
   }
 }
 
-@TypedGoRoute<SendRoute>(
-  path: '/send',
-  routes: [
-    TypedGoRoute<SendAmountRoute>(path: 'amount'),
-    TypedGoRoute<SendReviewRoute>(path: 'review'),
-    TypedGoRoute<SendSuccessRoute>(path: 'success'),
-  ],
-)
-class SendRoute extends GoRouteData {
-  const SendRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const SendRecipientScreen();
-  }
-}
-
-class SendAmountRoute extends GoRouteData {
-  const SendAmountRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const SendAmountScreen();
-  }
-}
-
-class SendReviewRoute extends GoRouteData {
-  const SendReviewRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const SendReviewScreen();
-  }
-}
-
-class SendSuccessRoute extends GoRouteData {
-  const SendSuccessRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const SendSuccessScreen();
-  }
-}
-
 @TypedGoRoute<BudgetsRoute>(
   path: '/budgets',
   routes: [
@@ -608,13 +567,24 @@ class ReceiptCaptureRoute extends GoRouteData {
   }
 }
 
-@TypedGoRoute<SmsParserRoute>(path: '/sms-parser')
+@TypedGoRoute<SmsParserRoute>(
+  path: '/sms-parser',
+  routes: [TypedGoRoute<SmsIngestionLogRoute>(path: 'log')],
+)
 class SmsParserRoute extends GoRouteData {
   const SmsParserRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const SmsParserScreen();
+}
+
+class SmsIngestionLogRoute extends GoRouteData {
+  const SmsIngestionLogRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const SmsIngestionLogScreen();
 }
 
 @TypedGoRoute<CoachRoute>(path: '/coach')
@@ -626,13 +596,37 @@ class CoachRoute extends GoRouteData {
       const CoachScreen();
 }
 
-@TypedGoRoute<FamilyRoute>(path: '/family')
+@TypedGoRoute<FamilyRoute>(
+  path: '/family',
+  routes: [
+    TypedGoRoute<FamilyGroupDetailRoute>(path: ':groupId'),
+    TypedGoRoute<FamilyInviteRoute>(path: 'invite'),
+  ],
+)
 class FamilyRoute extends GoRouteData {
   const FamilyRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const FamilyScreen();
+}
+
+class FamilyGroupDetailRoute extends GoRouteData {
+  const FamilyGroupDetailRoute(this.groupId);
+
+  final String groupId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      FamilyGroupDetailScreen(groupId: groupId);
+}
+
+class FamilyInviteRoute extends GoRouteData {
+  const FamilyInviteRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const FamilyInviteScreen();
 }
 
 @TypedGoRoute<ProfileRoute>(path: '/profile')
@@ -673,15 +667,7 @@ class FeloPlusRoute extends GoRouteData {
       const FeloPlusScreen();
 }
 
-@TypedGoRoute<RemittanceRoute>(path: '/remittance')
-class RemittanceRoute extends GoRouteData {
-  const RemittanceRoute();
 
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const RemittanceStubScreen();
-  }
-}
 
 @TypedGoRoute<HelpRoute>(path: '/help')
 class HelpRoute extends GoRouteData {
@@ -691,12 +677,23 @@ class HelpRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) => const HelpScreen();
 }
 
-@TypedGoRoute<KycRoute>(path: '/kyc')
+@TypedGoRoute<KycRoute>(
+  path: '/kyc',
+  routes: [TypedGoRoute<KycStatusRoute>(path: 'status')],
+)
 class KycRoute extends GoRouteData {
   const KycRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) => const KycScreen();
+}
+
+class KycStatusRoute extends GoRouteData {
+  const KycStatusRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const KycStatusScreen();
 }
 
 // ─── Phase-2 polish routes ──────────────────────────────────────────────
@@ -858,9 +855,9 @@ class AppLockRoute extends GoRouteData {
       const AppLockScreen();
 }
 
-@TypedGoRoute<FamilyInviteRoute>(path: '/family/invite/:token')
-class FamilyInviteRoute extends GoRouteData {
-  const FamilyInviteRoute(this.token);
+@TypedGoRoute<FamilyInviteDeepLinkRoute>(path: '/family/invite/:token')
+class FamilyInviteDeepLinkRoute extends GoRouteData {
+  const FamilyInviteDeepLinkRoute(this.token);
 
   final String token;
 
@@ -912,24 +909,4 @@ class MonthlyCloseRoute extends GoRouteData {
   const MonthlyCloseRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const MonthlyCloseScreen();
-}
-
-@TypedGoRoute<SubscriptionRoute>(path: '/subscription')
-class SubscriptionRoute extends GoRouteData {
-  const SubscriptionRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const SubscriptionScreen();
-}
-
-@TypedGoRoute<ExportControlRoute>(path: '/export-control')
-class ExportControlRoute extends GoRouteData {
-  const ExportControlRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const ExportControlScreen();
-}
+  Widget build(Bui                                                                                                                                                                                                                                                                                                                                         

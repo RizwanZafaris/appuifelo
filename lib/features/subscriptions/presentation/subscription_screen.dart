@@ -1,54 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 
-import 'package:felo/core/theme/felo_theme.dart';
-import 'package:felo/shared/widgets/felo_card.dart';
-import 'package:felo/shared/widgets/felo_scaffold.dart';
+import 'package:felo/core/localization/localization_extensions.dart';
 import 'package:felo/features/subscriptions/application/subscription_providers.dart';
+import 'package:felo/shared/widgets/felo_button.dart';
+import 'package:felo/shared/widgets/felo_card.dart';
+import 'package:felo/shared/widgets/felo_empty_state.dart';
+import 'package:felo/shared/widgets/felo_input.dart';
+import 'package:felo/shared/widgets/felo_scaffold.dart';
 
 class SubscriptionScreen extends ConsumerWidget {
   const SubscriptionScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final tierAsync = ref.watch(userTierProvider);
+    final paywallAsync = ref.watch(paywallConfigProvider);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('FELO Plus'),
-        centerTitle: true,
-      ),
-      body: tierAsync.when(
-        data: (tier) => _TierContent(tier: tier),
+    return FeloScaffold(
+      title: l10n.subscriptionTitle,
+      selectedTab: FeloRootTab.home,
+      child: tierAsync.when(
+        data: (tier) => _TierContent(
+          tier: tier,
+          paywallAsync: paywallAsync,
+        ),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text('Error: $e')),
+        error: (e, _) => FeloEmptyState(
+          title: l10n.errorGenericTitle,
+          body: l10n.errorGeneric(e.toString()),
+        ),
       ),
     );
   }
 }
 
-class _TierContent extends StatelessWidget {
-  final Map<String, dynamic> tier;
+class _TierContent extends ConsumerWidget {
+  const _TierContent({
+    required this.tier,
+    required this.paywallAsync,
+  });
 
-  const _TierContent({required this.tier});
+  final Map<String, dynamic> tier;
+  final AsyncValue<Map<String, dynamic>> paywallAsync;
 
   @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final currentTier = tier['tier'] as String? ?? 'free';
     final usage = tier['usage'] as Map<String, dynamic>? ?? {};
     final limits = tier['limits'] as Map<String, dynamic>? ?? {};
 
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       children: [
         // Current tier badge
         Center(
           child: Chip(
             label: Text(
               currentTier.toUpperCase(),
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
             ),
             backgroundColor: _tierColor(currentTier),
             padding: const EdgeInsets.all(12),
@@ -57,83 +72,58 @@ class _TierContent extends StatelessWidget {
         const SizedBox(height: 24),
 
         // Usage overview
-        Text('Your Usage', style: theme.textTheme.titleLarge),
+        Text(
+          l10n.subscriptionUsageTitle,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.w800,
+          ),
+        ),
         const SizedBox(height: 12),
         _UsageMeter(
-          label: 'Expenses This Month',
+          label: l10n.subscriptionUsageExpenses,
           used: usage['expensesThisMonth'] as int? ?? 0,
           limit: limits['maxExpensesPerMonth'] as int? ?? 50,
         ),
         const SizedBox(height: 8),
         _UsageMeter(
-          label: 'AI Questions',
+          label: l10n.subscriptionUsageAiQueries,
           used: usage['aiQueriesThisMonth'] as int? ?? 0,
           limit: limits['maxAiQueriesPerMonth'] as int? ?? 10,
         ),
         const SizedBox(height: 8),
         _UsageMeter(
-          label: 'Goals',
+          label: l10n.subscriptionUsageGoals,
           used: usage['goalsActive'] as int? ?? 0,
           limit: limits['maxGoals'] as int? ?? 1,
         ),
         const SizedBox(height: 8),
         _UsageMeter(
-          label: 'Groups',
+          label: l10n.subscriptionUsageGroups,
           used: usage['groupsActive'] as int? ?? 0,
           limit: limits['maxGroups'] as int? ?? 1,
         ),
         const SizedBox(height: 24),
 
-        // Upgrade options
-        Text('Upgrade', style: theme.textTheme.titleLarge),
-        const SizedBox(height: 12),
-        _PlanCard(
-          name: 'FELO Plus',
-          price: 'PKR 799 / CAD 4.99',
-          period: 'per month',
-          features: const [
-            'Unlimited expenses',
-            '5 goals',
-            '3 shared groups',
-            'Weekly AI insights',
-            'Monthly reports',
-            'Data export',
-            '20 receipt scans/month',
-          ],
-          isCurrent: currentTier == 'plus',
-          onSelect: () {},
+        // Paywall plans
+        paywallAsync.when(
+          data: (config) => _PaywallPlans(
+            plans: (config['plans'] as List?)?.cast<Map<String, dynamic>>() ?? const [],
+            currentTier: currentTier,
+          ),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (e, _) => Text(l10n.errorGeneric(e.toString())),
         ),
+
+        const SizedBox(height: 24),
+
+        // Coupon + Restore
+        _CouponSection(),
         const SizedBox(height: 12),
-        _PlanCard(
-          name: 'FELO Plus+',
-          price: 'PKR 1,499 / CAD 8.99',
-          period: 'per month',
-          features: const [
-            'Everything in Plus',
-            'Unlimited goals & groups',
-            'Advanced AI coaching',
-            'Receipt OCR (100/month)',
-            'Remittance notebook',
-            'Family roles',
-            'Priority support',
-          ],
-          isRecommended: true,
-          isCurrent: currentTier == 'plus-plus',
-          onSelect: () {},
-        ),
-        const SizedBox(height: 12),
-        _PlanCard(
-          name: 'Founding Family',
-          price: 'PKR 7,999 / CAD 49',
-          period: 'per year',
-          features: const [
-            'All Plus+ features',
-            'Annual discount (save 56%)',
-            'Early access to new features',
-            'Founding Family badge',
-          ],
-          isCurrent: currentTier == 'founding-family',
-          onSelect: () {},
+        FeloButton(
+          label: l10n.subscriptionRestorePurchases,
+          icon: Icons.restore_rounded,
+          variant: FeloButtonVariant.secondary,
+          onPressed: () => ref.read(purchaseRestoreProvider.notifier).restore(),
         ),
       ],
     );
@@ -150,6 +140,59 @@ class _TierContent extends StatelessWidget {
       default:
         return Colors.grey[200]!;
     }
+  }
+}
+
+class _PaywallPlans extends ConsumerWidget {
+  const _PaywallPlans({
+    required this.plans,
+    required this.currentTier,
+  });
+
+  final List<Map<String, dynamic>> plans;
+  final String currentTier;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.subscriptionUpgradeTitle,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        const SizedBox(height: 12),
+        for (final plan in plans) ...[
+          _PlanCard(
+            name: plan['name'] as String? ?? 'Plan',
+            price: _formatPrice(plan['monthlyPrice'] as Map<String, dynamic>?),
+            period: l10n.subscriptionPeriodMonthly,
+            features: (plan['features'] as List?)?.cast<String>() ?? const [],
+            isCurrent: currentTier == (plan['id'] as String? ?? ''),
+            isRecommended: plan['recommended'] == true,
+            onSelect: () => ref
+                .read(checkoutSessionProvider.notifier)
+                .create(
+                  planId: plan['id'] as String? ?? '',
+                  currency: (plan['monthlyPrice'] as Map<String, dynamic>?)?['currency'] as String? ?? 'CAD',
+                ),
+          ),
+          const SizedBox(height: 12),
+        ],
+      ],
+    );
+  }
+
+  String _formatPrice(Map<String, dynamic>? price) {
+    if (price == null) return '';
+    final minor = price['amountMinor'] as int? ?? 0;
+    final currency = price['currency'] as String? ?? 'CAD';
+    final major = minor / 100;
+    return '$currency ${major.toStringAsFixed(2)}';
   }
 }
 
@@ -175,7 +218,7 @@ class _UsageMeter extends StatelessWidget {
             children: [
               Text(label),
               Text(
-                isUnlimited ? '$used / Unlimited' : '$used / $limit',
+                isUnlimited ? '$used / ${context.l10n.subscriptionUnlimited}' : '$used / $limit',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: isNearLimit ? Colors.red : null,
@@ -221,6 +264,7 @@ class _PlanCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = context.l10n;
 
     return FeloCard(
       child: Column(
@@ -234,10 +278,14 @@ class _PlanCard extends StatelessWidget {
                 color: theme.colorScheme.primary,
                 borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
               ),
-              child: const Text(
-                'RECOMMENDED',
+              child: Text(
+                l10n.subscriptionRecommendedLabel,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                ),
               ),
             ),
           Padding(
@@ -251,13 +299,19 @@ class _PlanCard extends StatelessWidget {
                     Text(name, style: theme.textTheme.titleLarge),
                     if (isCurrent)
                       Chip(
-                        label: const Text('Current'),
+                        label: Text(l10n.subscriptionCurrentLabel),
                         backgroundColor: Colors.green[100],
                       ),
                   ],
                 ),
                 const SizedBox(height: 8),
-                Text(price, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Text(
+                  price,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 Text(period, style: const TextStyle(color: Colors.grey)),
                 const SizedBox(height: 12),
                 ...features.map((f) => Row(
@@ -273,16 +327,86 @@ class _PlanCard extends StatelessWidget {
                   child: isCurrent
                       ? OutlinedButton(
                           onPressed: null,
-                          child: const Text('Current Plan'),
+                          child: Text(l10n.subscriptionCurrentPlanButton),
                         )
                       : FilledButton(
                           onPressed: onSelect,
-                          child: const Text('Upgrade'),
+                          child: Text(l10n.subscriptionUpgradeButton),
                         ),
                 ),
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CouponSection extends ConsumerStatefulWidget {
+  @override
+  ConsumerState<_CouponSection> createState() => _CouponSectionState();
+}
+
+class _CouponSectionState extends ConsumerState<_CouponSection> {
+  final _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final couponState = ref.watch(couponApplierProvider);
+
+    return FeloCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.subscriptionCouponTitle,
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                child: FeloInput(
+                  label: l10n.subscriptionCouponLabel,
+                  controller: _controller,
+                ),
+              ),
+              const SizedBox(width: 8),
+              FeloButton(
+                label: l10n.subscriptionCouponApply,
+                onPressed: () {
+                  final code = _controller.text.trim();
+                  if (code.isNotEmpty) {
+                    ref.read(couponApplierProvider.notifier).apply(code);
+                  }
+                },
+              ),
+            ],
+          ),
+          if (couponState.valueOrNull != null) ...[
+            const SizedBox(height: 8),
+            Text(
+              (couponState.valueOrNull?['valid'] == true)
+                  ? l10n.subscriptionCouponSuccess(
+                      couponState.valueOrNull?['discountPercent']?.toString() ?? '')
+                  : l10n.subscriptionCouponInvalid,
+              style: TextStyle(
+                color: (couponState.valueOrNull?['valid'] == true)
+                    ? Colors.green
+                    : Theme.of(context).colorScheme.error,
+              ),
+            ),
+          ],
         ],
       ),
     );

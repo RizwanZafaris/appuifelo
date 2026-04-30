@@ -2729,7 +2729,7 @@ abstract class AppLocalizations {
   /// No description provided for @familyInviteTitle.
   ///
   /// In en, this message translates to:
-  /// **'Family invite'**
+  /// **'Invite family member'**
   String get familyInviteTitle;
 
   /// No description provided for @familyInviteFromHeading.
@@ -3373,6 +3373,390 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Test notifications are disabled in production builds.'**
   String get notificationsTestProdDisabled;
+
+  /// No description provided for @familyEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No family groups yet'**
+  String get familyEmptyTitle;
+
+  /// No description provided for @familyEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a family group to share budgets and goals with household members.'**
+  String get familyEmptyBody;
+
+  /// No description provided for @familyCreateGroup.
+  ///
+  /// In en, this message translates to:
+  /// **'Create group'**
+  String get familyCreateGroup;
+
+  /// No description provided for @familyMemberCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} members'**
+  String familyMemberCount(int count);
+
+  /// No description provided for @familyDefaultLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Default'**
+  String get familyDefaultLabel;
+
+  /// No description provided for @familyGroupDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Group details'**
+  String get familyGroupDetailTitle;
+
+  /// No description provided for @familyCreatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created {date}'**
+  String familyCreatedAt(String date);
+
+  /// No description provided for @familyMembersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Members'**
+  String get familyMembersTitle;
+
+  /// No description provided for @familyInviteMember.
+  ///
+  /// In en, this message translates to:
+  /// **'Invite member'**
+  String get familyInviteMember;
+
+  /// No description provided for @familyInviteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Send an invite to add a household member to your family group.'**
+  String get familyInviteBody;
+
+  /// No description provided for @familyInvitePhoneLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get familyInvitePhoneLabel;
+
+  /// No description provided for @familyInvitePhoneHint.
+  ///
+  /// In en, this message translates to:
+  /// **'+92 300 1234567'**
+  String get familyInvitePhoneHint;
+
+  /// No description provided for @familyInviteRoleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Select role'**
+  String get familyInviteRoleLabel;
+
+  /// No description provided for @familyInvitePermissionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Permissions'**
+  String get familyInvitePermissionsTitle;
+
+  /// No description provided for @familyPermissionViewTransactions.
+  ///
+  /// In en, this message translates to:
+  /// **'View shared transactions'**
+  String get familyPermissionViewTransactions;
+
+  /// No description provided for @familyPermissionEditBudgets.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit shared budgets'**
+  String get familyPermissionEditBudgets;
+
+  /// No description provided for @familySendInvite.
+  ///
+  /// In en, this message translates to:
+  /// **'Send invite'**
+  String get familySendInvite;
+
+  /// No description provided for @familyInviteAcceptTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Family invitation'**
+  String get familyInviteAcceptTitle;
+
+  /// No description provided for @familyInviteAcceptBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve been invited to join a family group. Accept to share selected budgets and goals.'**
+  String get familyInviteAcceptBody;
+
+  /// No description provided for @familyInviteAcceptButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept invitation'**
+  String get familyInviteAcceptButton;
+
+  /// No description provided for @kycStatusTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification status'**
+  String get kycStatusTitle;
+
+  /// No description provided for @kycStateNotStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Not started'**
+  String get kycStateNotStarted;
+
+  /// No description provided for @kycStateInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'In progress'**
+  String get kycStateInProgress;
+
+  /// No description provided for @kycStatePendingReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending review'**
+  String get kycStatePendingReview;
+
+  /// No description provided for @kycStateVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified'**
+  String get kycStateVerified;
+
+  /// No description provided for @kycStateRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get kycStateRejected;
+
+  /// No description provided for @kycIdTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'ID type'**
+  String get kycIdTypeLabel;
+
+  /// No description provided for @kycChecklistDocuments.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents uploaded'**
+  String get kycChecklistDocuments;
+
+  /// No description provided for @kycChecklistSelfie.
+  ///
+  /// In en, this message translates to:
+  /// **'Selfie uploaded'**
+  String get kycChecklistSelfie;
+
+  /// No description provided for @kycStartButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Start verification'**
+  String get kycStartButton;
+
+  /// No description provided for @kycRejectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification rejected'**
+  String get kycRejectionTitle;
+
+  /// No description provided for @kycRejectionDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Your verification was rejected. Please try again with clearer documents.'**
+  String get kycRejectionDefault;
+
+  /// No description provided for @kycRetryButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry verification'**
+  String get kycRetryButton;
+
+  /// No description provided for @kycPendingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Under review'**
+  String get kycPendingTitle;
+
+  /// No description provided for @kycPendingBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Submitted on {date}. We\'ll notify you when review is complete.'**
+  String kycPendingBody(String date);
+
+  /// No description provided for @kycPendingBodyNoDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Your verification is under review. We\'ll notify you when complete.'**
+  String get kycPendingBodyNoDate;
+
+  /// No description provided for @kycVerifiedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Identity verified'**
+  String get kycVerifiedTitle;
+
+  /// No description provided for @kycVerifiedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your identity has been verified. You now have access to all features.'**
+  String get kycVerifiedBody;
+
+  /// No description provided for @smsIngestionLogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'SMS ingestion log'**
+  String get smsIngestionLogTitle;
+
+  /// No description provided for @smsIngestionEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No SMS parsed yet'**
+  String get smsIngestionEmptyTitle;
+
+  /// No description provided for @smsIngestionEmptyBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Parsed SMS messages from your device will appear here.'**
+  String get smsIngestionEmptyBody;
+
+  /// No description provided for @smsParsedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'{date} at {time}'**
+  String smsParsedAt(String date, String time);
+
+  /// No description provided for @subscriptionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription'**
+  String get subscriptionTitle;
+
+  /// No description provided for @subscriptionUsageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your usage'**
+  String get subscriptionUsageTitle;
+
+  /// No description provided for @subscriptionUsageExpenses.
+  ///
+  /// In en, this message translates to:
+  /// **'Expenses this month'**
+  String get subscriptionUsageExpenses;
+
+  /// No description provided for @subscriptionUsageAiQueries.
+  ///
+  /// In en, this message translates to:
+  /// **'AI questions'**
+  String get subscriptionUsageAiQueries;
+
+  /// No description provided for @subscriptionUsageGoals.
+  ///
+  /// In en, this message translates to:
+  /// **'Goals'**
+  String get subscriptionUsageGoals;
+
+  /// No description provided for @subscriptionUsageGroups.
+  ///
+  /// In en, this message translates to:
+  /// **'Groups'**
+  String get subscriptionUsageGroups;
+
+  /// No description provided for @subscriptionUnlimited.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited'**
+  String get subscriptionUnlimited;
+
+  /// No description provided for @subscriptionUpgradeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade'**
+  String get subscriptionUpgradeTitle;
+
+  /// No description provided for @subscriptionRecommendedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'RECOMMENDED'**
+  String get subscriptionRecommendedLabel;
+
+  /// No description provided for @subscriptionCurrentLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Current'**
+  String get subscriptionCurrentLabel;
+
+  /// No description provided for @subscriptionPeriodMonthly.
+  ///
+  /// In en, this message translates to:
+  /// **'per month'**
+  String get subscriptionPeriodMonthly;
+
+  /// No description provided for @subscriptionCurrentPlanButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Current plan'**
+  String get subscriptionCurrentPlanButton;
+
+  /// No description provided for @subscriptionUpgradeButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade'**
+  String get subscriptionUpgradeButton;
+
+  /// No description provided for @subscriptionRestorePurchases.
+  ///
+  /// In en, this message translates to:
+  /// **'Restore purchases'**
+  String get subscriptionRestorePurchases;
+
+  /// No description provided for @subscriptionCouponTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Have a coupon?'**
+  String get subscriptionCouponTitle;
+
+  /// No description provided for @subscriptionCouponLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Coupon code'**
+  String get subscriptionCouponLabel;
+
+  /// No description provided for @subscriptionCouponApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get subscriptionCouponApply;
+
+  /// No description provided for @subscriptionCouponSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'{percent}% discount applied'**
+  String subscriptionCouponSuccess(String percent);
+
+  /// No description provided for @subscriptionCouponInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid coupon code'**
+  String get subscriptionCouponInvalid;
+
+  /// No description provided for @commonCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get commonCreate;
+
+  /// No description provided for @errorGenericTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get errorGenericTitle;
+
+  /// No description provided for @errorGeneric.
+  ///
+  /// In en, this message translates to:
+  /// **'Error: {message}'**
+  String errorGeneric(String message);
 }
 
 class _AppLocalizationsDelegate
