@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:felo/core/network/felo_api_client.dart';
+import 'package:felo/core/network/felo_api_client_provider.dart';
 import 'package:felo/features/remittance_notebook/domain/remittance_entry.dart';
 
 part 'remittance_notebook_repository.g.dart';

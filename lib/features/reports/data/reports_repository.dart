@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:felo/core/network/felo_api_client.dart';
+import 'package:felo/core/network/felo_api_client_provider.dart';
 import 'package:felo/features/reports/domain/report_models.dart';
 
 part 'reports_repository.g.dart';

@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import 'package:felo/core/theme/felo_theme.dart';
-import 'package:felo/core/widgets/felo_card.dart';
-import 'package:felo/core/widgets/felo_scaffold.dart';
-import 'package:felo/core/widgets/felo_empty_state.dart';
+import 'package:felo/shared/widgets/felo_card.dart';
+import 'package:felo/shared/widgets/felo_scaffold.dart';
+import 'package:felo/shared/widgets/felo_empty_state.dart';
 import 'package:felo/features/remittance_notebook/application/remittance_providers.dart';
 import 'package:felo/features/remittance_notebook/domain/remittance_entry.dart';
 
@@ -17,7 +17,7 @@ class RemittanceNotebookScreen extends ConsumerWidget {
     final entriesAsync = ref.watch(remittanceEntriesProvider());
     final summaryAsync = ref.watch(remittanceSummaryProvider);
 
-    return FeloScaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text('Remittance Notebook'),
         centerTitle: true,
@@ -42,18 +42,16 @@ class RemittanceNotebookScreen extends ConsumerWidget {
             child: entriesAsync.when(
               data: (entries) => entries.isEmpty
                   ? FeloEmptyState(
-                      icon: Icons.send_outlined,
                       title: 'No Transfers Logged',
-                      subtitle: 'Track your family support and remittances here.',
+                      body: 'Track your family support and remittances here.',
                       actionLabel: 'Log First Transfer',
                       onAction: () => _showAddEntrySheet(context, ref),
                     )
                   : _EntriesList(entries: entries),
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (e, _) => FeloEmptyState(
-                icon: Icons.error_outline,
                 title: 'Error',
-                subtitle: e.toString(),
+                body: e.toString(),
               ),
             ),
           ),

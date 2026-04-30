@@ -4,7 +4,7 @@ part 'remittance_entry.freezed.dart';
 part 'remittance_entry.g.dart';
 
 @freezed
-class RemittanceEntry with _$RemittanceEntry {
+abstract class RemittanceEntry with _$RemittanceEntry {
   const factory RemittanceEntry({
     required String id,
     required String recipientName,
@@ -34,7 +34,7 @@ class RemittanceEntry with _$RemittanceEntry {
 }
 
 @freezed
-class RemittanceSummary with _$RemittanceSummary {
+abstract class RemittanceSummary with _$RemittanceSummary {
   const factory RemittanceSummary({
     required int totalSentThisYear,
     required int totalPlanned,

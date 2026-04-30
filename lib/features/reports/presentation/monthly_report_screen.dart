@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import 'package:felo/core/theme/felo_theme.dart';
-import 'package:felo/core/widgets/felo_card.dart';
-import 'package:felo/core/widgets/felo_scaffold.dart';
-import 'package:felo/core/widgets/felo_empty_state.dart';
+import 'package:felo/shared/widgets/felo_card.dart';
+import 'package:felo/shared/widgets/felo_scaffold.dart';
+import 'package:felo/shared/widgets/felo_empty_state.dart';
 import 'package:felo/features/reports/application/reports_providers.dart';
 import 'package:felo/features/reports/domain/report_models.dart';
 
@@ -54,7 +54,7 @@ class _MonthlyReportScreenState extends ConsumerState<MonthlyReportScreen> {
   Widget build(BuildContext context) {
     final monthlyAsync = ref.watch(monthlyReportProvider(_year, _month));
 
-    return FeloScaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text('Monthly Close'),
         centerTitle: true,
@@ -89,9 +89,8 @@ class _MonthlyReportScreenState extends ConsumerState<MonthlyReportScreen> {
               data: (report) => _MonthlyReportContent(report: report),
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (e, _) => FeloEmptyState(
-                icon: Icons.error_outline,
                 title: 'Could not load report',
-                subtitle: e.toString(),
+                body: e.toString(),
                 actionLabel: 'Retry',
                 onAction: () => ref.invalidate(monthlyReportProvider(_year, _month)),
               ),
