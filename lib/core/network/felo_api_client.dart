@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -10,74 +8,6 @@ part 'felo_api_client.g.dart';
 @RestApi()
 abstract class FeloApiClient {
   factory FeloApiClient(Dio dio, {String? baseUrl}) = _FeloApiClient;
-
-  // -------- S1 CAPTURE: SMS ----------------------------------------
-  @POST('/sms/ingest')
-  Future<dynamic> ingestSms(@Body() Map<String, dynamic> body);
-
-  @GET('/sms/ingestion-log')
-  Future<dynamic> listSmsIngestionLog({
-    @Query('cursor') String? cursor,
-    @Query('limit') int? limit,
-  });
-
-  @GET('/sms/templates')
-  Future<dynamic> listSmsTemplates();
-
-  // -------- S1 CAPTURE: Receipts -----------------------------------
-  @POST('/receipts/upload')
-  @MultiPart()
-  Future<dynamic> uploadReceipt(@Part() File file);
-
-  @POST('/receipts/{id}/parse')
-  Future<dynamic> parseReceipt(@Path('id') String id);
-
-  @POST('/receipts/{id}/confirm')
-  Future<dynamic> confirmReceipt(
-    @Path('id') String id,
-    @Body() Map<String, dynamic> body,
-  );
-
-  @GET('/receipts')
-  Future<dynamic> listReceipts({
-    @Query('cursor') String? cursor,
-    @Query('limit') int? limit,
-  });
-
-  // -------- S1 CAPTURE: Statements ---------------------------------
-  @POST('/statements/upload')
-  @MultiPart()
-  Future<dynamic> uploadStatement(
-    @Part() File file,
-    @Query('format') String format,
-  );
-
-  @POST('/statements/{id}/parse')
-  Future<dynamic> parseStatement(@Path('id') String id);
-
-  @POST('/statements/{id}/commit')
-  Future<dynamic> commitStatement(@Path('id') String id);
-
-  // -------- S1 CAPTURE: Categories ---------------------------------
-  @GET('/categories')
-  Future<dynamic> listCategories();
-
-  @POST('/categorization/suggest')
-  Future<dynamic> suggestCategory(@Body() Map<String, dynamic> body);
-
-  // -------- S2 REMITTANCE ------------------------------------------
-  @GET('/fx/rate')
-  Future<dynamic> getFxRate(@Query('pair') String pair);
-
-  @GET('/remittance/quotes')
-  Future<dynamic> getRemittanceQuotes(
-    @Query('source') String source,
-    @Query('target') String target,
-    @Query('amountMinor') int amountMinor,
-  );
-
-  @GET('/remittance/providers')
-  Future<dynamic> listRemittanceProviders();
 
   // -------- Health -------------------------------------------------
   @GET('/health')
@@ -395,107 +325,12 @@ abstract class FeloApiClient {
     @Path('month') int month,
   );
 
-  // -------- S3 IDENTITY: Family ------------------------------------
-  @POST('/family/groups')
-  Future<dynamic> createFamilyGroup(@Body() Map<String, dynamic> body);
-
-  @GET('/family/groups')
-  Future<dynamic> listFamilyGroups();
-
-  @GET('/family/groups/{id}')
-  Future<dynamic> getFamilyGroup(@Path('id') String id);
-
-  @POST('/family/groups/{id}/invite')
-  Future<dynamic> inviteFamilyMember(
-    @Path('id') String id,
-    @Body() Map<String, dynamic> body,
-  );
-
-  @POST('/family/invitations/{code}/accept')
-  Future<dynamic> acceptFamilyInvitation(@Path('code') String code);
-
-  @GET('/family/groups/{id}/members')
-  Future<dynamic> listFamilyMembers(@Path('id') String id);
-
-  // -------- S3 IDENTITY: KYC ---------------------------------------
-  @POST('/kyc/initiate')
-  Future<dynamic> initiateKyc(@Body() Map<String, dynamic> body);
-
-  @GET('/kyc/status')
-  Future<dynamic> getKycStatus();
-
-  // -------- S4 INTELLIGENCE: Felo Scores ---------------------------
-  @GET('/felo-scores/latest')
-  Future<dynamic> getLatestFeloScore();
-
-  @GET('/felo-scores/history')
-  Future<dynamic> getFeloScoreHistory({@Query('weeks') int? weeks});
-
-  @GET('/felo-scores/breakdown')
-  Future<dynamic> getFeloScoreBreakdown();
-
-  // -------- S4 INTELLIGENCE: Coach ---------------------------------
-  @POST('/coach/chat')
-  Future<dynamic> sendCoachMessage(@Body() Map<String, dynamic> body);
-
-  @GET('/coach/history')
-  Future<dynamic> getCoachHistory();
-
-  // -------- S4 INTELLIGENCE: Investments / Market ------------------
-  @GET('/investments/market/{symbol}/quote')
-  Future<dynamic> getMarketQuote(@Path('symbol') String symbol);
-
-  @GET('/investments/portfolio')
-  Future<dynamic> getPortfolio();
-
-  // -------- S4 INTELLIGENCE: Notifications -------------------------
-  @GET('/notifications')
-  Future<dynamic> listNotifications({
-    @Query('cursor') String? cursor,
-    @Query('limit') int? limit,
-  });
-
-  @POST('/notifications/{id}/read')
-  Future<dynamic> markNotificationRead(@Path('id') String id);
-
-  @POST('/notifications/read-all')
-  Future<dynamic> markAllNotificationsRead();
-
-  @POST('/notifications/subscribe')
-  Future<dynamic> subscribeNotifications(@Body() Map<String, dynamic> body);
-
-  // -------- S5 MONETIZATION: Subscriptions -------------------------
-  @POST('/subscriptions/checkout')
-  Future<dynamic> createCheckoutSession(@Body() Map<String, dynamic> body);
-
-  @GET('/subscriptions/me')
-  Future<dynamic> getMySubscription();
-
-  @POST('/subscriptions/restore')
-  Future<dynamic> restorePurchases();
-
-  @POST('/subscriptions/apply-coupon')
-  Future<dynamic> applyCoupon(@Body() Map<String, dynamic> body);
-
-  @GET('/paywall/config')
-  Future<dynamic> getPaywallConfig();
-
-  // -------- Subscriptions / Tier (legacy) --------------------------
+  // -------- Subscriptions / Tier ------------------------------------
   @GET('/subscriptions/tier')
   Future<dynamic> subscriptionTier();
 
   @POST('/subscriptions/upgrade')
   Future<dynamic> upgradeSubscription(@Body() Map<String, dynamic> body);
-
-  // -------- S7 PLATFORM: i18n / Feature Flags ----------------------
-  @GET('/i18n/strings')
-  Future<dynamic> getI18nStrings(@Query('locale') String locale);
-
-  @GET('/flags')
-  Future<dynamic> getFeatureFlags();
-
-  @GET('/banners/active')
-  Future<dynamic> getActiveBanners();
 
   // -------- Export / Data Controls ----------------------------------
   @POST('/export')

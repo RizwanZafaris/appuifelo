@@ -236,8 +236,8 @@ String? stitchImplementationRouteFor(String id) {
   if (_containsAny(id, ['bill', 'auto_pay'])) {
     return '/bills';
   }
-  if (_containsAny(id, ['split'])) {
-    return '/splits';
+  if (_containsAny(id, ['send', 'recipient', 'transfer', 'split'])) {
+    return '/send';
   }
   if (_containsAny(id, ['account', 'link_', 'connected', 'brokerage'])) {
     return '/accounts';
