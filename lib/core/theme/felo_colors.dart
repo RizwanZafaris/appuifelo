@@ -55,11 +55,31 @@ abstract final class FeloColors {
     end: Alignment.bottomRight,
   );
 
-  /// Felo brand mark gradient — dark theme variant. Slightly deeper
-  /// stops to maintain perceived contrast against a dark background.
-  static const LinearGradient feloMarkGradientDark = LinearGradient(
-    colors: [lavenderPrimary, lavenderMascot, feloiTeal],
+  // Flo Color Modes — 5 personas across the app
+  static const Color floTrust = Color(0xFF4A90D9);        // Blue — verification, KYC, security
+  static const Color floGrowth = Color(0xFF2DB5A6);      // Teal — goals, savings, progress
+  static const Color floFinance = Color(0xFF34A853);      // Green — budgets, spending, health
+  static const Color floSplit = Color(0xFF5BC0DE);        // Light Blue — splits, shared, social
+  static const Color floInvest = Color(0xFF7B6AE5);       // Purple — investments, insights, premium
+
+  // Hero Gradient — deep purple like Wio, but FELO branded
+  static const LinearGradient heroGradient = LinearGradient(
+    colors: [Color(0xFF2D1B4E), Color(0xFF1A0F2E)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  static const LinearGradient heroGradientLight = LinearGradient(
+    colors: [Color(0xFF7B6AE5), Color(0xFF5A48C2)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+
+  // Card surfaces
+  static const Color cardSurface = Color(0xFFFFFFFF);
+  static const Color cardSurfaceElevated = Color(0xFFF8F6FF);
+
+  // Text on hero/dark backgrounds
+  static const Color heroText = Color(0xFFFFFFFF);
+  static const Color heroTextMuted = Color(0xFFB8B0D4);
 }
