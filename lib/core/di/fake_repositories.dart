@@ -109,15 +109,15 @@ class FakeSendMoneyRepository implements SendMoneyRepository {
   List<SendRecipient> savedRecipients() {
     return const [
       SendRecipient(
-        id: 'recipient_ali',
-        displayName: 'Ali Reza',
-        phoneMasked: '+92 300 *** 4412',
+        id: 'recipient_01',
+        displayName: 'Test Recipient 1',
+        phoneMasked: '+92 300 *** 0001',
         countryCode: 'PK',
       ),
       SendRecipient(
-        id: 'recipient_sara',
-        displayName: 'Sara Khan',
-        phoneMasked: '+92 321 *** 8821',
+        id: 'recipient_02',
+        displayName: 'Test Recipient 2',
+        phoneMasked: '+92 321 *** 0002',
         countryCode: 'PK',
       ),
     ];
@@ -149,10 +149,10 @@ class SmsParserRepository {
       ParsedSms(
         id: 'sms_001',
         source: 'Easypaisa',
-        body: 'Amount Rs. 2,500 sent to Ali Reza.',
+        body: 'Amount Rs. 2,500 sent to Test User.',
         amount: 2500,
         currency: 'PKR',
-        merchant: 'Ali Reza',
+        merchant: 'Test User',
         category: 'Family',
         confidence: 0.94,
         parsedAt: DateTime(2026, 4, 24, 15, 45),
@@ -160,10 +160,10 @@ class SmsParserRepository {
       ParsedSms(
         id: 'sms_002',
         source: 'JazzCash',
-        body: 'You paid Rs. 1,240 to K-Electric.',
+        body: 'You paid Rs. 1,240 to Demo Utility.',
         amount: 1240,
         currency: 'PKR',
-        merchant: 'K-Electric',
+        merchant: 'Demo Utility',
         category: 'Bills',
         confidence: 0.91,
         parsedAt: DateTime(2026, 4, 23, 19, 12),
@@ -179,17 +179,17 @@ class FamilyRepository {
   List<FamilyMember> members() {
     return const [
       FamilyMember(
-        id: 'member_rizwan',
-        displayName: 'Rizwan',
-        phoneMasked: '+1 647 *** 1189',
+        id: 'member_01',
+        displayName: 'Test Admin',
+        phoneMasked: '+1 555 *** 0001',
         role: FamilyRole.admin,
         canViewSharedTransactions: true,
         canEditSharedBudgets: true,
       ),
       FamilyMember(
-        id: 'member_amina',
-        displayName: 'Amina',
-        phoneMasked: '+92 300 *** 4412',
+        id: 'member_02',
+        displayName: 'Test Member',
+        phoneMasked: '+92 300 *** 0002',
         role: FamilyRole.member,
         canViewSharedTransactions: true,
         canEditSharedBudgets: false,

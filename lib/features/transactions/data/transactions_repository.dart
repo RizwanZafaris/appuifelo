@@ -69,18 +69,20 @@ class ApiTransactionsRepository implements TransactionsRepository {
     DateTime? bookedAt,
     String? note,
   }) async {
-    final raw = await _api.createTransaction(<String, dynamic>{
-      'accountId': ?accountId,
-      'merchant': ?merchant,
-      'category': ?category,
+    final payload = <String, dynamic>{
       'currency': currency,
       'amountMinor': amountMinor,
       'direction': direction.name,
       'source': source.name,
-      'parserConfidence': ?parserConfidence,
-      'bookedAt': ?bookedAt?.toIso8601String(),
-      'note': ?note,
-    });
+    };
+    if (accountId != null) payload['accountId'] = accountId;
+    if (merchant != null) payload['merchant'] = merchant;
+    if (category != null) payload['category'] = category;
+    if (parserConfidence != null) payload['parserConfidence'] = parserConfidence;
+    if (bookedAt != null) payload['bookedAt'] = bookedAt.toIso8601String();
+    if (note != null) payload['note'] = note;
+
+    final raw = await _api.createTransaction(payload);
     return _txnFromApi((raw as Map).cast<String, dynamic>());
   }
 
@@ -100,7 +102,7 @@ class FakeTransactionsRepository implements TransactionsRepository {
       FeloTransaction(
         id: 'txn_001',
         accountId: 'acct_td_chequing',
-        merchant: 'Imtiaz Super Market',
+        merchant: 'Demo Super Market',
         category: 'Groceries',
         currency: 'PKR',
         amountMinor: 485000,
@@ -112,7 +114,7 @@ class FakeTransactionsRepository implements TransactionsRepository {
       FeloTransaction(
         id: 'txn_002',
         accountId: 'acct_rbc_mastercard',
-        merchant: 'No Frills',
+        merchant: 'Demo Grocery',
         category: 'Groceries',
         currency: 'CAD',
         amountMinor: 8422,
@@ -124,7 +126,7 @@ class FakeTransactionsRepository implements TransactionsRepository {
       FeloTransaction(
         id: 'txn_003',
         accountId: 'acct_td_chequing',
-        merchant: 'Salary — Felo Inc.',
+        merchant: 'Salary — Demo Employer',
         category: 'Income',
         currency: 'CAD',
         amountMinor: 540000,
@@ -136,7 +138,7 @@ class FakeTransactionsRepository implements TransactionsRepository {
       FeloTransaction(
         id: 'txn_004',
         accountId: 'acct_easypaisa',
-        merchant: 'Family support — Karachi',
+        merchant: 'Family support — Demo City',
         category: 'Family support',
         currency: 'PKR',
         amountMinor: 5000000,
@@ -148,7 +150,7 @@ class FakeTransactionsRepository implements TransactionsRepository {
       FeloTransaction(
         id: 'txn_005',
         accountId: 'acct_rbc_mastercard',
-        merchant: 'TTC Presto',
+        merchant: 'Demo Transit',
         category: 'Transport',
         currency: 'CAD',
         amountMinor: 600,

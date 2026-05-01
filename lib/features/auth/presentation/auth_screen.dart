@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -9,6 +11,11 @@ import 'package:felo/shared/widgets/felo_button.dart';
 import 'package:felo/shared/widgets/felo_card.dart';
 import 'package:felo/shared/widgets/felo_input.dart';
 
+/// Sign-in / sign-up screen with email + password, Google, and Apple OAuth.
+///
+/// Password policy enforced client-side (min 8 chars, 1 uppercase, 1 lowercase,
+/// 1 digit, 1 special character). Region and language are auto-detected from
+/// device locale instead of hardcoded.
 class AuthScreen extends ConsumerStatefulWidget {
   const AuthScreen({super.key});
 
@@ -40,17 +47,53 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
         (auth) => auth.signUp(
           email: _emailController.text.trim(),
           password: _passwordController.text,
-          data: const {'corridor': 'canada', 'language_code': 'en'},
+          data: {
+            'corridor': _detectCorridor(),
+            'language_code': _detectLanguage(),
+          },
         ),
       );
+
+  String _detectCorridor() {
+    try {
+      final locale = Platform.localeName.toLowerCase();
+      if (locale.contains('ca') || locale.contains('en_ca')) return 'canada';
+      if (locale.contains('pk') || locale.contains('en_pk') || locale.contains('ur')) return 'pakistan';
+      return 'global';
+    } catch (_) {
+      return 'global';
+    }
+  }
+
+  String _detectLanguage() {
+    try {
+      final locale = Platform.localeName.toLowerCase();
+      if (locale.startsWith('ur')) return 'ur';
+      if (locale.startsWith('fr')) return 'fr';
+      return 'en';
+    } catch (_) {
+      return 'en';
+    }
+  }
+
+  bool _isPasswordValid(String password) {
+    if (password.length < 8) return false;
+    if (!RegExp(r'[A-Z]').hasMatch(password)) return false;
+    if (!RegExp(r'[a-z]').hasMatch(password)) return false;
+    if (!RegExp(r'[0-9]').hasMatch(password)) return false;
+    if (!RegExp(r'[!@#$%^&*(),.?":{}|<>_+=\-\[\]]').hasMatch(password)) return false;
+    return true;
+  }
 
   Future<void> _runAuth(
     Future<AuthResponse> Function(GoTrueClient auth) op,
   ) async {
     final email = _emailController.text.trim();
     final password = _passwordController.text;
-    if (email.isEmpty || password.length < 8) {
-      setState(() => _error = 'Enter email + a password of 8+ characters.');
+    if (email.isEmpty || !_isPasswordValid(password)) {
+      setState(
+        () => _error = 'Enter email + a password of 8+ characters with uppercase, lowercase, number, and special character.',
+      );
       return;
     }
     setState(() {
@@ -64,12 +107,34 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
         context.go('/home');
       }
     } on AuthException catch (e) {
-      if (mounted) setState(() => _error = e.message);
+      if (mounted) {
+        setState(() => _error = _sanitizeAuthError(e.message));
+      }
     } catch (e) {
-      if (mounted) setState(() => _error = 'Sign-in failed: $e');
+      if (mounted) {
+        setState(() => _error = 'Sign-in failed. Please try again.');
+      }
     } finally {
       if (mounted) setState(() => _busy = false);
     }
+  }
+
+  String _sanitizeAuthError(String raw) {
+    // Don't leak internal Supabase error details to users
+    final lower = raw.toLowerCase();
+    if (lower.contains('invalid login credentials')) {
+      return 'Invalid email or password. Please try again.';
+    }
+    if (lower.contains('user not found')) {
+      return 'No account found with this email. Please sign up.';
+    }
+    if (lower.contains('email not confirmed')) {
+      return 'Please verify your email before signing in.';
+    }
+    if (lower.contains('rate limit')) {
+      return 'Too many attempts. Please wait a moment and try again.';
+    }
+    return 'Something went wrong. Please try again.';
   }
 
   @override
@@ -111,6 +176,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                     const SizedBox(height: 8),
                     Text(
                       _error!,
+                      textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.red.shade400),
                     ),
                   ],
@@ -136,10 +202,15 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
               onPressed: _busy
                   ? null
                   : () async {
-                      // Supabase OAuth opens a browser/webview flow.
-                      await ref.read(supabaseClientProvider).auth.signInWithOAuth(
-                            OAuthProvider.google,
-                          );
+                      try {
+                        await ref.read(supabaseClientProvider).auth.signInWithOAuth(
+                              OAuthProvider.google,
+                            );
+                      } catch (e) {
+                        if (mounted) {
+                          setState(() => _error = 'Google sign-in failed. Please try again.');
+                        }
+                      }
                     },
             ),
             const SizedBox(height: 12),
@@ -150,9 +221,15 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
               onPressed: _busy
                   ? null
                   : () async {
-                      await ref.read(supabaseClientProvider).auth.signInWithOAuth(
-                            OAuthProvider.apple,
-                          );
+                      try {
+                        await ref.read(supabaseClientProvider).auth.signInWithOAuth(
+                              OAuthProvider.apple,
+                            );
+                      } catch (e) {
+                        if (mounted) {
+                          setState(() => _error = 'Apple sign-in failed. Please try again.');
+                        }
+                      }
                     },
             ),
           ],

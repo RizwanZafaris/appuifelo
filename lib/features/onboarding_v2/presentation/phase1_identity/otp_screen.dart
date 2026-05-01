@@ -14,7 +14,7 @@ import 'package:felo/shared/widgets/felo_input.dart';
 ///
 /// Flow:
 /// 1. User enters phone (Mobile path) or email (Email path)
-/// 2. Tap Send → POST /v1/sms/otp/send (Mobile) or Supabase OTP (Email)
+/// 2. Tap Send → POST /v1/sms/otp/send (Mobile) or Supabase Auth OTP (Email)
 /// 3. 6-digit auto-submit on completion
 /// 4. POST /v1/sms/otp/verify → on ok=true, navigate to Phase 2
 ///
@@ -68,10 +68,17 @@ class _OtpScreenState extends ConsumerState<OtpScreen>
       );
       return;
     }
-    if (_isMobile && !RegExp(r'^\+\d{6,20}$').hasMatch(identifier)) {
+    if (_isMobile && !RegExp(r'^\+[1-9]\d{1,14}$').hasMatch(identifier)) {
       await onValidationError('invalid_e164');
       setState(
         () => _statusLine = "Use international format, e.g. +923001234567",
+      );
+      return;
+    }
+    if (!_isMobile && !RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(identifier)) {
+      await onValidationError('invalid_email');
+      setState(
+        () => _statusLine = "Please enter a valid email address.",
       );
       return;
     }
@@ -101,15 +108,16 @@ class _OtpScreenState extends ConsumerState<OtpScreen>
               'Code sent to ${response.data?['masked_phone'] ?? identifier}.';
         });
       } else {
-        // Email path uses Supabase Auth's built-in email OTP.
-        // For E1 scaffold we surface a message; the actual integration
-        // wires in the OAuth follow-up sub-checkpoint.
-        // TODO(E1.email): call supabase.auth.signInWithOtp({email})
+        // Email path: call backend email OTP endpoint
+        final response = await dio.post<Map<String, dynamic>>(
+          '/auth/otp/email/send',
+          data: {'email': identifier},
+        );
+        _challengeId = response.data?['challenge_id']?.toString() ?? identifier;
         setState(() {
           _otpSent = true;
           _busy = false;
-          _challengeId = 'email_pending';
-          _statusLine = 'Email OTP integration ships in next sub-checkpoint.';
+          _statusLine = 'Code sent to $identifier.';
         });
       }
     } on DioException catch (err) {
@@ -151,10 +159,25 @@ class _OtpScreenState extends ConsumerState<OtpScreen>
           });
         }
       } else {
-        // Email path placeholder.
-        await onContinue({'method': widget.method});
-        if (!mounted) return;
-        context.go('/onboarding-v2/region');
+        // Email path: verify via backend
+        final response = await dio.post<Map<String, dynamic>>(
+          '/auth/otp/email/verify',
+          data: {'email': _challengeId, 'code': code},
+        );
+        final ok = response.data?['ok'] == true;
+        if (ok) {
+          await onContinue({'method': widget.method});
+          if (!mounted) return;
+          context.go('/onboarding-v2/region');
+        } else {
+          final reason = response.data?['reason']?.toString() ?? 'wrong_code';
+          await onValidationError(reason);
+          setState(() {
+            _busy = false;
+            _otpError = true;
+            _statusLine = _humanReason(reason);
+          });
+        }
       }
     } catch (err) {
       setState(() {
@@ -188,6 +211,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen>
       'expired' => 'Code expired. Tap Resend.',
       'max_attempts' => 'Too many attempts — request a new code.',
       'already_used' => 'Code already used.',
+      'rate_limited' => 'Too many attempts. Please try again later.',
       _ => 'Verification failed.',
     };
   }

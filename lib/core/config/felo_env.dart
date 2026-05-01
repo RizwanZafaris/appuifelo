@@ -1,13 +1,14 @@
 /// Build-time configuration injected via `--dart-define`.
 ///
+/// ⚠️ SECURITY: Never commit real credentials to source control.
+/// All sensitive values default to empty strings so that production
+/// builds will fail fast if CI forgets to inject them.
+///
 /// Run with overrides:
 ///   flutter run \
 ///     --dart-define=FELO_API_URL=http://10.0.2.2:3000/v1 \
-///     --dart-define=SUPABASE_URL=https://xetosbkkjowlspfxffoj.supabase.co \
+///     --dart-define=SUPABASE_URL=https://your-project.supabase.co \
 ///     --dart-define=SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
-///
-/// Defaults below point at the dev Supabase project + Android-emulator
-/// loopback. Production builds should override every value via CI.
 class FeloEnv {
   const FeloEnv._();
 
@@ -22,16 +23,23 @@ class FeloEnv {
   );
 
   /// Supabase project URL (used by supabase_flutter for Auth + Realtime).
+  ///
+  /// SECURITY: Must be overridden via --dart-define in CI/CD.
+  /// Leaving the default empty will cause the app to fail at runtime
+  /// with a clear error, preventing accidental use of dev credentials
+  /// in production builds.
   static const String supabaseUrl = String.fromEnvironment(
     'SUPABASE_URL',
-    defaultValue: 'https://xetosbkkjowlspfxffoj.supabase.co',
+    defaultValue: '',
   );
 
   /// Supabase publishable (anon) key — safe to ship in mobile binaries.
   /// Never put `sb_secret_*` here.
+  ///
+  /// SECURITY: Must be overridden via --dart-define in CI/CD.
   static const String supabasePublishableKey = String.fromEnvironment(
     'SUPABASE_PUBLISHABLE_KEY',
-    defaultValue: 'sb_publishable_Gp5pDHYMML1658kptTOMcQ_O-pUQVAt',
+    defaultValue: '',
   );
 
   /// Toggle between fake repositories and real ones.
