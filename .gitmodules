@@ -1,0 +1,6 @@
+[submodule "backend"]
+	path = backend
+	url = https://github.com/RizwanZafaris/appbackendfelo.git
+[submodule "portal"]
+	path = portal
+	url = https://github.com/RizwanZafaris/feloopsportal.git
