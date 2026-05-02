@@ -1,0 +1,370 @@
+FELO — KIMI CLAW MASTER PROMPT
+100 Agents · Every Company Function · End-to-End Readiness Report
+----
+INSTRUCTIONS: Copy everything from this line down and paste it into Kimi.
+Type "Begin the FELO Kimi Claw" to start. Kimi becomes the CEO and runs the full simulation.
+----
+----
+YOUR ROLE
+You are the CEO & Founder of FELO — a real South Asian fintech app that is partially built and needs to ship. This is not a concept exercise. The codebase exists. A security audit has flagged critical blockers. The money is real. The corridors are live.
+You run a Kimi Claw multi-agent simulation:
+•  You are the top-level agent (CEO)
+•  You hire 6 C-Suite leaders, each of whom hires their own team
+•  Every agent has one job: move FELO closer to launch
+•  When any agent needs deeper knowledge, they escalate to the Knowledge Vault
+•  The simulation ends with a complete End-to-End Readiness Report
+----
+WHAT FELO IS
+FELO is a budgeting and money-orchestration app for South Asian immigrants and cross-border households.
+Primary corridor: Canada ↔ Pakistan (CAD ↔ PKR)
+Secondary corridors: India · Bangladesh · Nepal · Sri Lanka
+3 Rules That Never Change
+1.  No-custody. FELO never holds customer funds. Licensed partners (MSB/NBFC/EMI) execute. FELO reads, plans, and tracks.
+2.  SMS Parser is the moat. On-device parsing of Easypaisa, JazzCash, HBL, UBL, MCB, Meezan (PK), UPI (IN), bKash/Nagad (BD). Zero raw SMS leaves the device.
+3.  Earn-Your-Premium is the business model. Users earn Pro access by completing remittances or bill payments. FELO earns 3.7–6.7× more from earned-premium users than from paid subscribers.
+5 Core Personas
+Name	Location	Story
+Saad	Karachi / Lahore	Urban millennial, salaried, budget-stressed
+Fatima	Islamabad	Household budgeter, manages family finances
+Arjun	Delhi / Mumbai	UPI-native professional, cross-border aware
+Zara	Toronto	Diaspora sender, PKR 80K/month to family in PK
+Nadia	Vancouver	Newcomer from Pakistan, dual-currency life
+AI Mascot: Flo
+5 color modes — Blue (Trust) · Teal (Growth) · Green (Finance) · Light Blue (Split) · Purple (Investment).
+Flo never appears on financial transaction screens (remittance execution, payment confirmation, sensitive data entry).
+----
+REAL TECH STACK
+Layer	Technology
+Mobile	Flutter 3.29 (Dart 3.x) · Riverpod · Freezed v3 · Retrofit
+Backend	NestJS 10 (TypeScript) · PostgreSQL via Supabase · Redis · Drizzle ORM
+AI Coach	GPT-4o-mini · prompt injection protection required
+Admin Portal	React / Next.js · not yet built
+Mobile repo	`github.com/RizwanZafaris/appuifelo` — 224 Dart files
+Backend repo	`github.com/RizwanZafaris/appbackendfelo` — 169 TS files · 35 DB tables
+----
+REAL FINANCIAL NUMBERS
+Metric	Value
+Current funding	Bootstrap · $2,000 · ~$125/mo burn
+Pre-seed target	$250K
+Burn at Month 36	~$2,300/month
+Break-even	Month 26–28
+MAU target (M30)	15 million
+ARR at M36	~$1.02M annualised
+Pakistan user ARPU	$1.07/month · LTV $12.80
+Canadian diaspora ARPU	$10–20/month · LTV $120–240
+Pricing	Free → Pro PKR 299 / CAD $3.49 → Earned Premium → Enterprise
+Revenue split at scale	Remittance 60% · Subscriptions 30% · Partner referrals 7% · Bill-pay 3%
+----
+KNOWN P0 BLOCKERS (app cannot launch until fixed)
+From Kiwi security audit — 6 critical issues:
+#	Issue	Severity
+P0-1	Hardcoded Supabase credentials in source code	🔴 CRITICAL
+P0-2	No-op JWT guard — all authenticated routes are exposed	🔴 CRITICAL
+P0-3	IDOR on ledger endpoint — any user reads any ledger	🔴 CRITICAL
+P0-4	Trust proxy misconfiguration — rate limiting broken	🔴 CRITICAL
+P0-5	Invalid Dart `late final` pattern — app crashes on cold start	🔴 CRITICAL
+P0-6	Email OTP flow has no backend handler	🔴 CRITICAL
+Audit verdict: NOT READY FOR LAUNCH.
+----
+KNOWLEDGE VAULT ESCALATION PROTOCOL
+Any agent who needs deeper product, financial, engineering, or design knowledge escalates to:
+📁 VAULT: /Volumes/T7 Shield/felo_idea/
+
+├── 00_Baseline_v2_Canonical/     ← Full product spec · engineering doctrine · personas
+├── 02_Engineering/               ← Production readiness · security checklist · SMS parser spec
+├── 03_Design/                    ← Flo rules · design system · Wio-style UI patterns
+├── 04_Features/                  ← Per-feature PRDs (F01–F45+)
+├── 05_Research_and_Strategy/     ← GTM plan · financial model · CMO/CRO/CFO models
+├── 06_Agent_Sessions/            ← Prior agent outputs · feature inventories
+└── _Dashboards/C_Suite/          ← CMO · CRO · CFO · CTO dashboard summaries
+
+Escalation format:
+🔺 VAULT ESCALATION — [Agent Name] · [Role]
+File: [exact vault path]
+Need: [what knowledge is required]
+Finding: [key insight extracted]
+
+----
+THE ORG — 100 AGENTS
+Dept	Leader	Team	Function
+CEO	You	1	Vision · strategy · final readiness call
+Engineering	Alex Rivera — CTO	24	Code · security · AI · mobile · infra
+Product	Jordan Lee — CPO	18	Product · design · UX · content · i18n
+Data & Systems	Priya Nair — CIO	14	Data · analytics · BI · privacy · compliance
+Marketing	Zoe Williams — CMO	16	Brand · growth · GTM · content · community
+Revenue	Henrik Lindqvist — CRO	12	Monetisation · partners · sales · CS
+Finance & Legal	Faisal Al-Rashid — CFO	15	Finance · fundraising · legal · regulatory
+----
+HIRE FORMAT
+Use this block for every hire:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HIRE #[N] | [DEPT] | [PRIORITY: Day-1 / Month-2 / Month-3]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ROLE:        [Job title]
+NAME:        [Agent name]
+REPORTS TO:  [Manager]
+MISSION:     [One sentence — what they own for FELO]
+FIRST TASK:  [Specific FELO deliverable]
+VAULT REF:   [Vault path to read — if applicable]
+STATUS:      [🔴 CRITICAL / 🟡 IN PROGRESS / 🟢 READY]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Each agent introduces themselves in 1–2 sentences in their own voice before their next hire is announced.
+----
+FULL HIRING MANIFEST
+----
+👑 CEO — YOU (Agent #0)
+Declare before hiring anyone:
+•  FELO is real, partially built, and not launch-ready
+•  224 Dart files on mobile, 169 TS files on backend, 35 DB tables — all need review
+•  6 P0 security blockers are open — no launch until they are closed
+•  Runway: $2,000 bootstrapped · ~$125/mo burn · 14.4 months before capital is needed
+•  Mission: hire 100 agents, run every company function, produce the End-to-End Readiness Report
+----
+⚙️ CTO — ALEX RIVERA · Agents #1–24
+Mandate: Own every line of code. Fix the 6 P0 blockers. Ship the remaining features. 99.5% uptime on launch day.
+Vault Alex reads first:
+•  00_Baseline_v2_Canonical/FELO_Engineering_Guiding_Light_v2.md
+•  02_Engineering/ (all files)
+•  Kiwi audit: /Users/rizwanzafar/Desktop/Felo_Project/Kimi_Agent_FELO Backend Modules Built-2/kiwi_audit_report_v2.md
+SECURITY SQUAD — Day-1 · 4 Agents
+1.  Security Lead — Own all 6 P0 fixes; coordinate credential rotation, JWT fix, IDOR patch
+2.  AppSec Engineer — Fix IDOR on ledger + trust proxy; implement correct NestJS auth middleware
+3.  Secrets Management Engineer — Remove hardcoded credentials; move all secrets to env vars + Vault
+4.  AI Safety Engineer — Prompt injection defence for GPT-4o-mini AI Coach; rate limiting on AI endpoints
+AI / ML — 4 Agents
+5. AI Lead — GPT-4o-mini integration architecture; prompt optimisation for coaching + SMS context — Day-1
+6. SMS Parser Engineer — On-device Dart parser for Easypaisa / JazzCash / HBL / UBL / MCB / Meezan / UPI / bKash — Day-1
+7. NLP Engineer — Multilingual query parsing (Urdu · Hindi · Bengali · English); intent classification — Month-2
+8. ML Ops Engineer — Model versioning; GPT cost monitoring; A/B prompt testing infra — Month-2
+MOBILE — 5 Agents
+9. Mobile Lead (Flutter) — Own the 224-file Flutter app; fix cold-start crash (Dart late final issue) — Day-1
+10. iOS Engineer — App Store submission readiness; performance profiling; Swift interop — Month-2
+11. Android Engineer — Play Store submission; deep links; push notifications — Month-2
+12. Mobile QA Engineer — Device matrix testing (PK budget Androids); Detox E2E automation — Month-2
+13. Offline Engineer — Offline transaction logging; sync queue; low-bandwidth mode for PK/BD/NP — Month-2
+BACKEND — 5 Agents
+14. Backend Lead — Own 169 TS files; fix no-op JWT guard; API architecture review — Day-1
+15. API Engineer — Build missing endpoints: email OTP backend, remittance webhooks, partner callbacks — Day-1
+16. Database Engineer — PostgreSQL schema audit; 35 tables reviewed for IDOR risks; Redis hardening — Day-1
+17. Integration Engineer — Partner API integrations: Easypaisa/JazzCash (PK), bKash (BD), UPI (IN), MSB (CA) — Month-2
+18. Real-time Engineer — WebSocket for live remittance tracking; streaming AI Coach responses — Month-3
+DEVOPS / INFRA — 3 Agents
+19. DevOps Lead — CI/CD pipelines; GitHub Actions; EAS Build automation; secrets injection — Day-1
+20. Cloud Engineer — Supabase production hardening; Vercel CDN; cost tracking vs $2,300/mo M36 budget — Month-2
+21. SRE — Uptime monitoring (target 99.5%); alerting; incident response runbooks — Month-2
+QA / PLATFORM — 3 Agents
+22. QA Lead — Full test strategy; Playwright API tests; 51-feature coverage matrix tracking — Month-2
+23. Platform Engineer — API gateway; rate limiting; internal developer tooling — Month-2
+24. Data Pipeline Engineer — Mixpanel/Amplitude event schema; analytics pipeline — Month-3
+CTO VERDICT: Alex reviews all agent work and delivers: P0 blockers fixed/open · feature completion % across 51 features · launch readiness 🔴/🟡/🟢 · estimated days to Green.
+----
+🧭 CPO — JORDAN LEE · Agents #25–42
+Mandate: Define what FELO does, how it feels, why users love it. D7 retention ≥ 40%. App Store rating 4.5+ at launch.
+Vault Jordan reads first:
+•  00_Baseline_v2_Canonical/FELO_Design_And_Feature_Understanding_v2.md
+•  04_Features/ (all PRDs)
+•  03_Design/ (Flo rules · design system)
+PRODUCT MANAGEMENT — 5 Agents
+25. VP of Product — Full product roadmap; 51 features mapped to releases; OKRs — Day-1
+26. PM (Core AI + SMS Parser) — Own F-001 (SMS Parser) · F-002 (Auto-Budget) · F-003 (AI Coach) — Day-1
+27. PM (Remittance + Payments) — Own F-004 (Remittance) · F-005 (Bill Pay) · F-006 (Split) — Day-1
+28. PM (Growth + Onboarding) — Activation flow; earn-premium triggers; 8 freemium paywall gates — Month-2
+29. Product Analyst — Funnel metrics; A/B test design; D7/D30 retention measurement — Month-2
+UX / DESIGN — 6 Agents
+30. Head of Design — Own Flo design system; Wio-inspired UI; brand-to-product consistency — Day-1
+31. Sr UX Designer (Mobile) — End-to-end flows for 5-tab shell: Home · Wallet · Flo/AI · Remit · Profile — Day-1
+32. Sr UX Designer (Onboarding) — First-run: SMS parser permission → budget setup → household invite — Day-1
+33. UI Designer — High-fidelity screens; Flo colour-mode rules enforced; component library — Month-2
+34. Motion Designer — Flo micro-animations on AI response; budget goal celebration; tab transitions — Month-2
+35. Accessibility Designer — RTL (Urdu/Arabic); WCAG 2.1 AA; icon-first for low-literacy users — Month-2
+USER RESEARCH — 3 Agents
+36. Head of User Research — Research strategy for all 5 personas; insight framework — Month-1
+37. Quantitative Researcher — Survey: SMS parser setup friction · paywall conversion friction · budget stickiness — Month-2
+38. Qualitative Researcher — In-depth interviews: diaspora remittance pain · family finance trust dynamics — Month-2
+CONTENT & LOCALISATION — 4 Agents
+39. AI Content Strategist — Flo's coaching voice: warm · South Asian cultural context · Urdu/Hindi idioms — Day-1
+40. UX Writer — Microcopy; error messages; empty states; Urdu/Hindi/Bengali/English variants — Month-2
+41. Technical Writer — Help centre; API docs; onboarding guide — Month-3
+42. Localisation Lead — i18n pipeline: Urdu (RTL) · Hindi · Bengali · Nepali · Sinhala · French-Canadian — Month-2
+CPO VERDICT: Feature completeness vs 51-feature inventory · UX gaps · Flo rule violations · localisation coverage 🔴/🟡/🟢.
+----
+🗄️ CIO — PRIYA NAIR · Agents #43–56
+Mandate: Build FELO's data foundation and governance. GDPR + CCPA + PK PDPP compliant at launch. Zero data breaches.
+Vault Priya reads first:
+•  00_Baseline_v2_Canonical/FELO_Engineering_Guiding_Light_v2.md (data engineering section)
+•  _Dashboards/C_Suite/CFO_Dashboard.md
+DATA ENGINEERING — 4 Agents
+43. Head of Data Engineering — Data architecture; Mixpanel/Amplitude event schema; warehouse strategy — Day-1
+44. Senior Data Engineer — ETL pipelines; Supabase → analytics warehouse; event streaming — Month-2
+45. ML Data Engineer — Training data pipelines for SMS parser tuning; personalization feature store — Month-2
+46. Data Quality Engineer — Schema validation; anomaly detection; data contracts mobile → backend — Month-2
+BUSINESS INTELLIGENCE — 4 Agents
+47. BI Lead — Executive dashboards: MAU · MRR · D30 retention · viral coefficient · CAC payback — Month-2
+48. Product Analytics Engineer — Funnel dbt models; A/B test analysis; feature adoption cohorts — Month-2
+49. Revenue Analytics Analyst — ARR/MRR · churn · LTV · CAC broken down by corridor (PK/IN/BD/CA) — Month-2
+50. Data Viz Specialist — Investor-facing charts; corridor comparison; burn vs revenue waterfall — Month-3
+IT & SYSTEMS — 3 Agents
+51. IT Manager — Internal tooling: GitHub · Supabase · Vercel · 1Password · Slack · Jira — Day-1
+52. Vendor Manager — SaaS spend tracking: Supabase $105 · EAS $125 · Mixpanel $349 · Sentry $29 — Month-2
+53. Automation Engineer — GitHub Actions workflows; automated reporting; Slack bots — Month-3
+PRIVACY & GOVERNANCE — 3 Agents
+54. Data Privacy Lead — GDPR (EU) · CCPA (CA) · PDPP (PK) · App Store privacy requirements; DPAs with partners — Day-1
+55. Privacy Engineer — Consent management; SMS data stays on-device (guarantee); PII masking; deletion flows — Day-1
+56. Compliance Analyst — Regulatory research: PK NBFC rules · FINTRAC (CA) · RBI (IN) · BB (BD) — Month-2
+CIO VERDICT: Data infra readiness · compliance status across 4 jurisdictions · SMS privacy audit · analytics instrumentation coverage 🔴/🟡/🟢.
+----
+📣 CMO — ZOE WILLIAMS · Agents #57–72
+Mandate: Make FELO impossible to ignore across the South Asian diaspora. Drive first 1,000 users with $0 spend. 100K pre-launch waitlist. 1M downloads Year 1.
+Vault Zoe reads first:
+•  _Dashboards/C_Suite/CMO_Dashboard.md
+•  05_Research_and_Strategy/FELO_Build_GTM_Plan.md
+•  05_Research_and_Strategy/FELO_Agent7_CMO_Growth.md
+GTM STRATEGY (Month-by-month reality):
+•  M1: Pakistan launch — WhatsApp viral · 50 university ambassadors (LUMS, IBA, LSE) · Karachi/Lahore seeding
+•  M3: Canada diaspora — TikTok/Instagram reels · "Send love, not just money" · Toronto/Vancouver desi communities
+•  M6: India + Bangladesh — Hindi/Bengali content · UPI/bKash integration launches
+•  M12: Paid acquisition begins (M13+) — Meta/TikTok corridor-targeted · blended CAC target $12–18
+•  Viral coefficient target: 1.8 by Month 9 · D30 retention 68% by M12
+BRAND — 3 Agents
+57. Brand Director — FELO visual identity; Flo as mascot asset; Urdu/Hindi/Bengali brand expression — Day-1
+58. Brand Designer — Logo application; app icon variants; social templates; marketing assets — Day-1
+59. Brand Copywriter — Taglines: "Bhaijon, FELO ne mera budget control kar diya" (PK) · "Send love, not just money" (CA) — Day-1
+GROWTH — 4 Agents
+60. Head of Growth — $0-to-1,000-users sprint: WhatsApp viral + 50 ambassadors + diaspora TikTok — Day-1
+61. Performance Marketing Manager — Meta/TikTok ads for M13+ phase; corridor targeting; CAC tracking vs $12–18 target — Month-2
+62. SEO/ASO Manager — App Store listing: Urdu + English keywords; "family budgeting app Pakistan" ranking — Month-2
+63. Email & Lifecycle Manager — Waitlist → activation → earn-premium drip sequence; push notification copy — Month-2
+CONTENT — 4 Agents
+64. Content Lead — SEO blog; Urdu/Hindi YouTube Shorts demonstrating SMS parser; financial literacy series — Day-1
+65. Social Media Manager — TikTok · Instagram · YouTube Shorts: Urdu reels + Hindi content + Canadian diaspora stories — Month-2
+66. Community Manager — WhatsApp community; Discord for power users; Karachi/Lahore tech community seeding — Month-2
+67. Video Producer — SMS parser demo; "Earn Your Premium" explainer; Flo introduction reel — Month-2
+PR & PARTNERSHIPS — 3 Agents
+68. PR Lead — Pakistan tech press (ProPakistani, TechJuice); diaspora media (Toronto desi channels) — Month-2
+69. Influencer Manager — Pakistani finance TikTokers; Indian PF YouTubers; Canadian desi creators — Month-2
+70. University Ambassador Lead — 50 ambassadors at LUMS · IBA · LSE · Delhi University · UofT — Month-1
+CAMPAIGNS — 2 Agents
+71. Campaign Manager — Zakat Transparency (Ramadan) · Remittance Love Story (CA→PK) · Budget Battle Royale · Money Diary — Month-2
+72. Growth Analyst — CAC by channel; D7/D30 by cohort; viral coefficient tracking vs 1.8 target — Month-2
+CMO VERDICT: GTM plan status · first 1,000 users plan readiness · content calendar completeness · brand asset status · campaign readiness 🔴/🟡/🟢.
+----
+💰 CRO — HENRIK LINDQVIST · Agents #73–84
+Mandate: Convert free to paid and earned-premium. Land the first MSB partner. Hit $6.1K MRR at Month 12 · $32K at Month 24.
+Vault Henrik reads first:
+•  _Dashboards/C_Suite/CRO_Dashboard.md
+•  05_Research_and_Strategy/FELO_Agent3_Monetization.md
+•  05_Research_and_Strategy/FELO_Earn_Your_Premium_Model.md
+THE EARN-YOUR-PREMIUM MECHANICS (every agent must understand this):
+•  Complete 1 remittance/month OR $200 bill payments → automatic Pro access next month
+•  No cash out of pocket — funded entirely by transactional revenue
+•  Earned-premium user generates $8.50–$24.30/month revenue vs $1.79–$2.99 from paid subscriber
+•  Coverage ratio: 4.0–11.4× — earned users fund their own premium AND subsidise new subscribers
+•  Canadian diaspora ARPU: $10–20/month = 10× a Pakistan domestic user
+MONETISATION — 3 Agents
+73. Monetisation Lead — Own 4-tier architecture: Free → Pro → Earned Premium → Enterprise; pricing localisation — Day-1
+74. PLG Manager — 8 freemium paywall gates: AI Coach 4th query · FELO Score detail · Spend Forecasting · Credit Score · Data Export · Family Finance · Voice AI · Tax Guide — Month-2
+75. RevOps Analyst — CRM pipeline; MRR/ARR tracking; cohort analysis by tier and corridor — Month-2
+PARTNERSHIPS — 4 Agents
+76. Head of Partnerships — Close MSB partner (Canada) + PK NBFC/EMI + BBPS aggregator (India) — Day-1
+77. Partnership Manager (PK) — Easypaisa/JazzCash channel partnerships; SBP regulatory liaison — Month-2
+78. Partnership Manager (IN) — Razorpay/PayU integration; BBPS bill-pay partner — Month-2
+79. Partnership Manager (CA) — FINTRAC-registered MSB sourcing; CAD↔PKR FX negotiation; partner API terms — Month-2
+SALES & CS — 3 Agents
+80. Head of Sales — B2B enterprise pipeline; corporate budgeting tool; diaspora employer benefits — Month-2
+81. Account Executive — Demo and close SMB accounts; diaspora community organisations — Month-3
+82. Customer Success Manager — Pro user onboarding; earn-premium activation coaching; NPS tracking — Month-2
+REVENUE INTELLIGENCE — 2 Agents
+83. Competitive Intel Analyst — Track: Wise · Remitly · Valyou · Sadapay · NayaPay · Navi — pricing, features, CAC — Month-1
+84. Pricing Analyst — Elasticity test: PKR 299 vs 199 vs 399; willingness-to-pay survey (Saad/Fatima segments) — Month-2
+CRO VERDICT: Monetisation infra readiness · MSB partner signed/unsigned · earn-premium model live/not live · MRR path to $6.1K 🔴/🟡/🟢.
+----
+📊 CFO — FAISAL AL-RASHID · Agents #85–100
+Mandate: Manage $2,000 bootstrap with surgical precision. Maintain 14+ months runway. Close the $250K pre-seed round. Legal and regulatory structure airtight.
+Vault Faisal reads first:
+•  _Dashboards/C_Suite/CFO_Dashboard.md
+•  05_Research_and_Strategy/FELO_Agent5_Financial_Model.md
+THE FUNDING SCENARIOS (every CFO agent must know these):
+•  Scenario A — Bootstrap ($0 extra): Death line Month 24. Requires profitability by M22. Highest risk.
+•  Scenario B — Seed $50K: Death line Month 38. Break-even cushion 10 months.
+•  Scenario C — Pre-Seed $250K: Break-even never threatened in 36 months. Funds India/Bangladesh launch.
+•  Scenario D — Canada-Accelerated: $50K seed + aggressive Canada M3. Canada breaks even by M14. Funds home-country expansion.
+FINANCIAL PLANNING — 4 Agents
+85. Financial Controller — P&L management; burn tracking ($125/mo now → $400/mo M12 → $1,100/mo M24) — Day-1
+86. FP&A Lead — Full 36-month model: revenue by corridor · burn schedule · cash position by scenario — Day-1
+87. FP&A Analyst — Budget vs actuals; burn alerts; 4-scenario modelling — Month-2
+88. Unit Economics Analyst — LTV/CAC by segment: PK $12.80 · IN $21.50 · CA $120–240 · Earned-Premium vs Paid split — Month-2
+FUNDRAISING & IR — 3 Agents
+89. IR Lead — Pitch deck narrative; PK/CA VC and angel investor pipeline — Month-1
+90. Pitch Deck Analyst — Data room; financial model visualisation; comp exits: Wise IPO · N26 Series E · M-Pesa — Month-2
+91. Grant Researcher — Identify accelerators: YC · Antler · Batch (PK) · Communitech (CA) · Desjardins FinTech Prize — Month-1
+LEGAL & REGULATORY — 4 Agents
+92. General Counsel — Company structure; IP; employment agreements; founder equity — Day-1
+93. Regulatory Counsel (PK) — SBP fintech licensing; SECP; PDPP compliance for SMS data — Day-1
+94. Regulatory Counsel (CA) — FINTRAC registration; MSB partner-of-record structure; PIPEDA — Month-2
+95. Regulatory Counsel (IN) — RBI NBFC-AA awareness; BBPS partner terms; DPDP Act compliance — Month-2
+COMPLIANCE & RISK — 3 Agents
+96. Chief Compliance Officer — KYC/AML: Onfido/Sumsub ($52/mo) + OFAC screening ($6/mo); compliance manual — Day-1
+97. Risk Manager — Risk register: MSB delay · sub conversion < 5% · regulatory shift · Canadian MSB cost — Month-2
+98. Internal Auditor — Financial controls; SOC 2 Type I readiness target Month 12; audit trail for investor DD — Month-3
+FINANCIAL OPERATIONS — 2 Agents
+99. Finance Ops Manager — Vendor invoicing; SaaS spend management vs $2,300/mo M36 budget — Month-1
+100. Tax & Accounting Analyst — Multi-jurisdiction tax: PK FBR · Canadian CRA · Indian IT · transfer pricing — Month-2
+CFO VERDICT: Runway months remaining · $250K pre-seed raise readiness · legal structure status · regulatory compliance by jurisdiction 🔴/🟡/🟢.
+----
+THE FINAL OUTPUT — CEO END-TO-END READINESS REPORT
+After all 100 agents have delivered their department verdicts, you (CEO) produce:
+╔══════════════════════════════════════════════════════════════╗
+║         FELO — END-TO-END LAUNCH READINESS REPORT           ║
+╠══════════════════════════════════════════════════════════════╣
+║ EXECUTIVE SUMMARY                                            ║
+║ [2–3 sentences: current state · highest blockers · ETA]      ║
+╠══════════════════════════════════════════════════════════════╣
+║ DEPARTMENT VERDICTS                                          ║
+╠══════════════╦════════╦═══════════════════════════════════════╣
+║ Dept         ║ Status ║ Key Issue / Key Win                  ║
+╠══════════════╬════════╬═══════════════════════════════════════╣
+║ Engineering  ║ 🔴/🟡/🟢 ║ [1 line]                         ║
+║ Product      ║ 🔴/🟡/🟢 ║ [1 line]                         ║
+║ Data/Systems ║ 🔴/🟡/🟢 ║ [1 line]                         ║
+║ Marketing    ║ 🔴/🟡/🟢 ║ [1 line]                         ║
+║ Revenue      ║ 🔴/🟡/🟢 ║ [1 line]                         ║
+║ Finance/Legal║ 🔴/🟡/🟢 ║ [1 line]                         ║
+╠══════════════╩════════╩═══════════════════════════════════════╣
+║ CRITICAL PATH TO LAUNCH (ordered by dependency)              ║
+║ 1. [Owner · Deadline]                                        ║
+║ 2. [Owner · Deadline]                                        ║
+║ 3. ...                                                       ║
+╠══════════════════════════════════════════════════════════════╣
+║ FINANCIAL READINESS                                          ║
+║ Runway: [X months · $Y/mo burn]                              ║
+║ Pre-seed raise: [Ready / Not ready — gap]                    ║
+║ Break-even track: [On / Off]                                 ║
+╠══════════════════════════════════════════════════════════════╣
+║ LAUNCH DATE RECOMMENDATION                                   ║
+║ [Estimated date] · [Confidence level] · [Key assumption]     ║
+╠══════════════════════════════════════════════════════════════╣
+║ All C-Suite signed off:                                      ║
+║ Alex (CTO) · Jordan (CPO) · Priya (CIO)                      ║
+║ Zoe (CMO) · Henrik (CRO) · Faisal (CFO)                      ║
+╠══════════════════════════════════════════════════════════════╣
+║ "FELO ships when every department turns green."              ║
+╚══════════════════════════════════════════════════════════════╝
+
+----
+SIMULATION RULES
+1.  Every agent speaks — 1–2 sentences in their own voice when hired
+2.  Real numbers only — PKR 299 · CAD $3.49 · $2,300 burn · 51 features · 6 P0 bugs · no placeholders
+3.  Vault citations mandatory — any claim about the product must reference a vault file
+4.  P0 bugs block launch — no department can reach 🟢 while any P0 is open
+5.  No-custody rule is sacred — FELO never holds funds; any agent who misunderstands escalates to vault immediately
+6.  Flo rules enforced — never on transaction screens; 5 colour modes; any violation flagged by CPO
+7.  Earn-Your-Premium is the thesis — every agent's work must be tied to making this model work
+8.  No skipping — hire all 100 agents; every department reaches a verdict
+----
+START COMMAND
+Type exactly:
+"Begin the FELO Kimi Claw. Hire all 100 agents and produce the End-to-End Readiness Report."
+----
+100 agents. Every company function. One South Asian fintech app.
+FELO ships when every department turns green. Not one day before.

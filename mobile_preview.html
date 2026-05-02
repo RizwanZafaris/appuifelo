@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FELO App Preview</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0d0d0d;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    display: flex;
+    gap: 40px;
+    padding: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .phone {
+    width: 375px;
+    height: 812px;
+    background: #fff;
+    border-radius: 48px;
+    overflow: hidden;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.6);
+    position: relative;
+  }
+  .phone-frame {
+    position: absolute;
+    inset: 0;
+    border-radius: 48px;
+    border: 12px solid #1a1a1a;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    height: 32px;
+    background: #1a1a1a;
+    border-radius: 0 0 24px 24px;
+    z-index: 11;
+  }
+  .screen {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background: #F7F4FF;
+  }
+  .label {
+    position: absolute;
+    bottom: -36px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #888;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* === HOME SCREEN V2 === */
+  .hero {
+    background: linear-gradient(135deg, #2D1B4E 0%, #1A0F2E 100%);
+    padding: 60px 20px 28px;
+    border-radius: 0 0 32px 32px;
+    color: white;
+    position: relative;
+  }
+  .hero-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  .hero-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .hero-bell {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    position: relative;
+  }
+  .hero-bell-dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    background: #FF6B35;
+    border-radius: 50%;
+  }
+  .hero-greeting {
+    font-size: 15px;
+    opacity: 0.75;
+    margin-bottom: 4px;
+  }
+  .hero-balance-label {
+    font-size: 13px;
+    opacity: 0.6;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .hero-balance {
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+  .hero-pills {
+    display: flex;
+    gap: 8px;
+  }
+  .pill {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .pill-positive { color: #4ADE80; }
+  .pill-neutral { color: #FBBF24; }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+    padding: 24px 20px 12px;
+  }
+
+  .quick-actions {
+    display: flex;
+    gap: 12px;
+    padding: 0 20px;
+    overflow-x: auto;
+  }
+  .qa-btn {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border-radius: 20px;
+    padding: 16px 20px;
+    min-width: 84px;
+    box-shadow: 0 2px 12px rgba(45,27,78,0.06);
+    border: 1px solid rgba(45,27,78,0.06);
+  }
+  .qa-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+  .qa-icon.send { background: #EDE9FE; }
+  .qa-icon.split { background: #D1FAE5; }
+  .qa-icon.remit { background: #DBEAFE; }
+  .qa-icon.budget { background: #FEF3C7; }
+  .qa-icon.goal { background: #FCE7F3; }
+  .qa-icon.family { background: #E0E7FF; }
+  .qa-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+  }
+
+  .hub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0 20px;
+  }
+  .hub-card {
+    background: white;
+    border-radius: 20px;
+    padding: 18px;
+    box-shadow: 0 2px 12px rgba(45,27,78,0.05);
+    border: 1px solid rgba(45,27,78,0.04);
+  }
+  .hub-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .hub-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+  .hub-card-icon.purple { background: #EDE9FE; }
+  .hub-card-icon.teal { background: #CCFBF1; }
+  .hub-card-icon.green { background: #D1FAE5; }
+  .hub-card-icon.blue { background: #DBEAFE; }
+  .hub-card-icon.orange { background: #FEF3C7; }
+  .hub-card-icon.pink { background: #FCE7F3; }
+  .hub-card-arrow {
+    color: #9CA3AF;
+    font-size: 14px;
+  }
+  .hub-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 4px;
+  }
+  .hub-card-subtitle {
+    font-size: 12px;
+    color: #6B7280;
+  }
+
+  .tx-list {
+    padding: 0 20px;
+  }
+  .tx-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: white;
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 8px rgba(45,27,78,0.04);
+  }
+  .tx-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .tx-icon.food { background: #FEF3C7; }
+  .tx-icon.shop { background: #FCE7F3; }
+  .tx-icon.transfer { background: #DBEAFE; }
+  .tx-info { flex: 1; }
+  .tx-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 2px;
+  }
+  .tx-meta {
+    font-size: 12px;
+    color: #9CA3AF;
+  }
+  .tx-amount {
+    font-size: 15px;
+    font-weight: 700;
+    text-align: right;
+  }
+  .tx-amount.negative { color: #EF4444; }
+  .tx-amount.positive { color: #10B981; }
+
+  .budget-card {
+    margin: 0 20px;
+    background: white;
+    border-radius: 20px;
+    padding: 18px;
+    box-shadow: 0 2px 12px rgba(45,27,78,0.05);
+  }
+  .budget-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .budget-name { font-size: 14px; font-weight: 600; color: #111827; }
+  .budget-ratio { font-size: 13px; font-weight: 600; color: #6B7280; }
+  .budget-bar-bg {
+    height: 10px;
+    background: #E5E7EB;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .budget-bar-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.3s;
+  }
+  .budget-bar-fill.green { background: #10B981; width: 45%; }
+  .budget-bar-fill.yellow { background: #FBBF24; width: 72%; }
+  .budget-bar-fill.red { background: #EF4444; width: 91%; }
+  .budget-status {
+    font-size: 12px;
+    color: #6B7280;
+  }
+
+  .goal-card {
+    margin: 0 20px 20px;
+    background: white;
+    border-radius: 20px;
+    padding: 18px;
+    box-shadow: 0 2px 12px rgba(45,27,78,0.05);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .goal-emoji {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    background: #EDE9FE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .goal-info { flex: 1; }
+  .goal-name { font-size: 15px; font-weight: 700; color: #111827; margin-bottom: 4px; }
+  .goal-target { font-size: 13px; color: #6B7280; margin-bottom: 8px; }
+  .goal-bar-bg {
+    height: 8px;
+    background: #E5E7EB;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .goal-bar-fill {
+    height: 100%;
+    background: #7C3AED;
+    border-radius: 4px;
+    width: 60%;
+  }
+  .goal-percent {
+    font-size: 13px;
+    font-weight: 700;
+    color: #7C3AED;
+  }
+
+  .bottom-pad {
+    height: 40px;
+  }
+
+  /* === SETTINGS SCREEN V2 === */
+  .settings-screen {
+    background: #F7F4FF;
+    min-height: 100%;
+  }
+  .settings-header {
+    background: linear-gradient(135deg, #2D1B4E 0%, #1A0F2E 100%);
+    padding: 60px 20px 24px;
+    border-radius: 0 0 32px 32px;
+    color: white;
+  }
+  .settings-back {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  .settings-title {
+    font-size: 28px;
+    font-weight: 700;
+  }
+  .profile-card {
+    margin: -20px 20px 20px;
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 8px 32px rgba(45,27,78,0.1);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    z-index: 2;
+  }
+  .profile-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7C3AED, #4F46E5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+    font-weight: 600;
+  }
+  .profile-info { flex: 1; }
+  .profile-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 4px;
+  }
+  .profile-email {
+    font-size: 13px;
+    color: #6B7280;
+    margin-bottom: 8px;
+  }
+  .profile-tier {
+    display: inline-block;
+    background: #EDE9FE;
+    color: #7C3AED;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 12px;
+  }
+  .settings-group {
+    margin: 0 20px 16px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(45,27,78,0.04);
+  }
+  .group-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #9CA3AF;
+    padding: 16px 20px 8px;
+  }
+  .setting-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    border-bottom: 1px solid #F3F4F6;
+  }
+  .setting-row:last-child { border-bottom: none; }
+  .setting-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .setting-icon.purple { background: #EDE9FE; }
+  .setting-icon.blue { background: #DBEAFE; }
+  .setting-icon.green { background: #D1FAE5; }
+  .setting-icon.orange { background: #FEF3C7; }
+  .setting-icon.red { background: #FEE2E2; }
+  .setting-icon.gray { background: #F3F4F6; }
+  .setting-text { flex: 1; }
+  .setting-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 2px;
+  }
+  .setting-subtitle {
+    font-size: 12px;
+    color: #9CA3AF;
+  }
+  .setting-arrow {
+    color: #D1D5DB;
+    font-size: 14px;
+  }
+  .setting-toggle {
+    width: 48px;
+    height: 28px;
+    background: #10B981;
+    border-radius: 14px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .setting-toggle::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  .setting-toggle.off {
+    background: #D1D5DB;
+  }
+  .setting-toggle.off::after {
+    right: auto;
+    left: 3px;
+  }
+  .danger-text {
+    color: #EF4444;
+  }
+</style>
+</head>
+<body>
+
+<!-- PHONE 1: HOME SCREEN V2 -->
+<div style="position:relative">
+  <div class="phone">
+    <div class="phone-frame"></div>
+    <div class="notch"></div>
+    <div class="screen">
+      <div class="hero">
+        <div class="hero-header">
+          <div class="hero-avatar">👤</div>
+          <div class="hero-bell">🔔<div class="hero-bell-dot"></div></div>
+        </div>
+        <div class="hero-greeting">Good morning, Rizwan</div>
+        <div class="hero-balance-label">Total Balance</div>
+        <div class="hero-balance">Rs 47,250</div>
+        <div class="hero-pills">
+          <div class="pill pill-positive">📈 +12.5% this month</div>
+          <div class="pill pill-neutral">⚡ 3 goals on track</div>
+        </div>
+      </div>
+
+      <div class="section-title">Quick Actions</div>
+      <div class="quick-actions">
+        <div class="qa-btn">
+          <div class="qa-icon send">💸</div>
+          <div class="qa-label">Send</div>
+        </div>
+        <div class="qa-btn">
+          <div class="qa-icon split">⚡</div>
+          <div class="qa-label">Split</div>
+        </div>
+        <div class="qa-btn">
+          <div class="qa-icon remit">🌐</div>
+          <div class="qa-label">Remit</div>
+        </div>
+        <div class="qa-btn">
+          <div class="qa-icon budget">📊</div>
+          <div class="qa-label">Budget</div>
+        </div>
+        <div class="qa-btn">
+          <div class="qa-icon goal">🎯</div>
+          <div class="qa-label">Goal</div>
+        </div>
+        <div class="qa-btn">
+          <div class="qa-icon family">👨‍👩‍👧</div>
+          <div class="qa-label">Family</div>
+        </div>
+      </div>
+
+      <div class="section-title">Your Hub</div>
+      <div class="hub-grid">
+        <div class="hub-card">
+          <div class="hub-card-header">
+            <div class="hub-card-icon purple">💳</div>
+            <div class="hub-card-arrow">›</div>
+          </div>
+          <div class="hub-card-title">Accounts</div>
+          <div class="hub-card-subtitle">3 linked</div>
+        </div>
+        <div class="hub-card">
+          <div class="hub-card-header">
+            <div class="hub-card-icon teal">📈</div>
+            <div class="hub-card-arrow">›</div>
+          </div>
+          <div class="hub-card-title">Investments</div>
+          <div class="hub-card-subtitle">2 active</div>
+        </div>
+        <div class="hub-card">
+          <div class="hub-card-header">
+            <div class="hub-card-icon green">📱</div>
+            <div class="hub-card-arrow">›</div>
+          </div>
+          <div class="hub-card-title">SMS Parser</div>
+          <div class="hub-card-subtitle">124 parsed</div>
+        </div>
+        <div class="hub-card">
+          <div class="hub-card-header">
+            <div class="hub-card-icon blue">🧠</div>
+            <div class="hub-card-arrow">›</div>
+          </div>
+          <div class="hub-card-title">Coach</div>
+          <div class="hub-card-subtitle">Ask Flo</div>
+        </div>
+        <div class="hub-card">
+          <div class="hub-card-header">
+            <div class="hub-card-icon orange">🧾</div>
+            <div class="hub-card-arrow">›</div>
+          </div>
+          <div class="hub-card-title">Bills</div>
+          <div class="hub-card-subtitle">2 due soon</div>
+        </div>
+        <div class="hub-card">
+          <div class="hub-card-header">
+            <div class="hub-card-icon pink">📄</div>
+            <div class="hub-card-arrow">›</div>
+          </div>
+          <div class="hub-card-title">Reports</div>
+          <div class="hub-card-subtitle">Weekly ready</div>
+        </div>
+      </div>
+
+      <div class="section-title">Recent Transactions</div>
+      <div class="tx-list">
+        <div class="tx-item">
+          <div class="tx-icon food">🍔</div>
+          <div class="tx-info">
+            <div class="tx-title">Foodpanda</div>
+            <div class="tx-meta">Today · Dining</div>
+          </div>
+          <div class="tx-amount negative">-Rs 850</div>
+        </div>
+        <div class="tx-item">
+          <div class="tx-icon transfer">🏦</div>
+          <div class="tx-info">
+            <div class="tx-title">Salary Credit</div>
+            <div class="tx-meta">Yesterday · Income</div>
+          </div>
+          <div class="tx-amount positive">+Rs 52,000</div>
+        </div>
+        <div class="tx-item">
+          <div class="tx-icon shop">🛒</div>
+          <div class="tx-info">
+            <div class="tx-title">Carrefour</div>
+            <div class="tx-meta">Apr 28 · Grocery</div>
+          </div>
+          <div class="tx-amount negative">-Rs 3,240</div>
+        </div>
+      </div>
+
+      <div class="section-title">Budgets</div>
+      <div class="budget-card">
+        <div class="budget-header">
+          <div class="budget-name">🍽️ Dining Out</div>
+          <div class="budget-ratio">Rs 4,500 / Rs 10,000</div>
+        </div>
+        <div class="budget-bar-bg"><div class="budget-bar-fill green"></div></div>
+        <div class="budget-status">45% used · On track</div>
+      </div>
+      <div style="height:12px"></div>
+      <div class="budget-card">
+        <div class="budget-header">
+          <div class="budget-name">🛍️ Shopping</div>
+          <div class="budget-ratio">Rs 7,200 / Rs 10,000</div>
+        </div>
+        <div class="budget-bar-bg"><div class="budget-bar-fill yellow"></div></div>
+        <div class="budget-status">72% used · Getting close</div>
+      </div>
+      <div style="height:12px"></div>
+      <div class="budget-card">
+        <div class="budget-header">
+          <div class="budget-name">🚗 Transport</div>
+          <div class="budget-ratio">Rs 9,100 / Rs 10,000</div>
+        </div>
+        <div class="budget-bar-bg"><div class="budget-bar-fill red"></div></div>
+        <div class="budget-status">91% used · Nearly exhausted</div>
+      </div>
+
+      <div class="section-title">Goals</div>
+      <div class="goal-card">
+        <div class="goal-emoji">🏍️</div>
+        <div class="goal-info">
+          <div class="goal-name">New Bike</div>
+          <div class="goal-target">Rs 45,000 / Rs 75,000</div>
+          <div class="goal-bar-bg"><div class="goal-bar-fill"></div></div>
+        </div>
+        <div class="goal-percent">60%</div>
+      </div>
+      <div class="goal-card">
+        <div class="goal-emoji">✈️</div>
+        <div class="goal-info">
+          <div class="goal-name">Umrah Trip</div>
+          <div class="goal-target">Rs 120,000 / Rs 200,000</div>
+          <div class="goal-bar-bg"><div class="goal-bar-fill" style="width:35%"></div></div>
+        </div>
+        <div class="goal-percent">35%</div>
+      </div>
+
+      <div class="bottom-pad"></div>
+    </div>
+  </div>
+  <div class="label">Home Dashboard V2 (Wio-inspired)</div>
+</div>
+
+<!-- PHONE 2: SETTINGS SCREEN V2 -->
+<div style="position:relative">
+  <div class="phone">
+    <div class="phone-frame"></div>
+    <div class="notch"></div>
+    <div class="screen settings-screen">
+      <div class="settings-header">
+        <div class="settings-back">‹</div>
+        <div class="settings-title">Settings</div>
+      </div>
+
+      <div class="profile-card">
+        <div class="profile-avatar">RZ</div>
+        <div class="profile-info">
+          <div class="profile-name">Rizwan Zafar</div>
+          <div class="profile-email">rizwan@felo.io</div>
+          <div class="profile-tier">⭐ Premium</div>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="group-label">Preferences</div>
+        <div class="setting-row">
+          <div class="setting-icon purple">🔔</div>
+          <div class="setting-text">
+            <div class="setting-title">Notifications</div>
+            <div class="setting-subtitle">Push, email, SMS</div>
+          </div>
+          <div class="setting-arrow">›</div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-icon blue">🌙</div>
+          <div class="setting-text">
+            <div class="setting-title">Dark Mode</div>
+            <div class="setting-subtitle">Automatic</div>
+          </div>
+          <div class="setting-toggle"></div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-icon green">🌍</div>
+          <div class="setting-text">
+            <div class="setting-title">Language</div>
+            <div class="setting-subtitle">English</div>
+          </div>
+          <div class="setting-arrow">›</div>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="group-label">Security</div>
+        <div class="setting-row">
+          <div class="setting-icon purple">🔐</div>
+          <div class="setting-text">
+            <div class="setting-title">Biometric Lock</div>
+            <div class="setting-subtitle">Face ID enabled</div>
+          </div>
+          <div class="setting-toggle"></div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-icon blue">🛡️</div>
+          <div class="setting-text">
+            <div class="setting-title">Change PIN</div>
+            <div class="setting-subtitle">Last changed 2 weeks ago</div>
+          </div>
+          <div class="setting-arrow">›</div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-icon green">👁️</div>
+          <div class="setting-text">
+            <div class="setting-title">Privacy Settings</div>
+            <div class="setting-subtitle">Data sharing, permissions</div>
+          </div>
+          <div class="setting-arrow">›</div>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="group-label">Support</div>
+        <div class="setting-row">
+          <div class="setting-icon orange">❓</div>
+          <div class="setting-text">
+            <div class="setting-title">Help Center</div>
+            <div class="setting-subtitle">FAQs, guides, chat</div>
+          </div>
+          <div class="setting-arrow">›</div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-icon purple">📧</div>
+          <div class="setting-text">
+            <div class="setting-title">Contact Us</div>
+            <div class="setting-subtitle">support@felo.io</div>
+          </div>
+          <div class="setting-arrow">›</div>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="group-label">About</div>
+        <div class="setting-row">
+          <div class="setting-icon gray">📋</div>
+          <div class="setting-text">
+            <div class="setting-title">Terms of Service</div>
+          </div>
+          <div class="setting-arrow">›</div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-icon gray">🔒</div>
+          <div class="setting-text">
+            <div class="setting-title">Privacy Policy</div>
+          </div>
+          <div class="setting-arrow">›</div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-icon gray">ℹ️</div>
+          <div class="setting-text">
+            <div class="setting-title">App Version</div>
+            <div class="setting-subtitle">2.1.0 (Build 2142)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <div class="setting-row">
+          <div class="setting-icon red">🚪</div>
+          <div class="setting-text">
+            <div class="setting-title danger-text">Sign Out</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-pad"></div>
+    </div>
+  </div>
+  <div class="label">Settings Screen V2</div>
+</div>
+
+</body>
+</html>
