@@ -1,0 +1,749 @@
+{
+  "@@locale": "en",
+  "appName": "Felo",
+  "navHome": "Home",
+  "navActivity": "Activity",
+  "navBudgets": "Budgets",
+  "navCoach": "Coach",
+  "navDo": "Do",
+  "navGoals": "Goals",
+  "complianceFooter": "Registration pending · MSB application in progress.",
+  "commonContinue": "Continue",
+  "commonGetStarted": "Get started",
+  "commonCreateAccount": "Create account",
+  "commonSignIn": "Sign in",
+  "commonBack": "Back",
+  "commonSkip": "Skip for now",
+  "commonComingSoon": "Coming soon",
+  "commonView": "View",
+  "commonEdit": "Edit",
+  "commonSave": "Save",
+  "commonCancel": "Cancel",
+  "commonRetry": "Retry",
+  "commonLoading": "Loading…",
+  "commonSearch": "Search",
+  "currencyCad": "CAD",
+  "splashTitle": "Money feels calmer when it is understood.",
+  "splashBody": "Budget, track expenses, plan goals, and learn from your money without Felo ever holding it.",
+  "splashTrust": "No custody. No money movement in Phase 1.",
+  "onboardingTitle": "Set up Felo",
+  "onboardingSubtitle": "A calm personal finance companion for households across Canada and Pakistan.",
+  "onboardingSlideOneTitle": "See the full picture",
+  "onboardingSlideOneBody": "Bring accounts, wallets, and manual entries into one read-only view.",
+  "onboardingSlideTwoTitle": "Plan with envelopes",
+  "onboardingSlideTwoBody": "Give every rupee or dollar a job with budgets, alerts, and shared goals.",
+  "onboardingSlideThreeTitle": "Parse payment SMS safely",
+  "onboardingSlideThreeBody": "On Android, Felo reads transaction alerts from Easypaisa, JazzCash, and banks. Personal messages and OTPs stay out.",
+  "onboardingSlideFourTitle": "Learn without advice",
+  "onboardingSlideFourBody": "Coach explains patterns and trade-offs. It does not recommend investments, insurance, or tax actions.",
+  "smsTrustTitle": "SMS stays on your phone",
+  "smsTrustBody": "We extract amount, merchant, date, and source. Full messages are not uploaded in this phase.",
+  "smsPatternOne": "Reads: Easypaisa and JazzCash payment alerts",
+  "smsPatternTwo": "Reads: bank debit and credit alerts",
+  "smsPatternThree": "Does not read: OTPs or personal conversations",
+  "smsRevoke": "You can revoke access in Android settings anytime.",
+  "authTitle": "Welcome back",
+  "authBody": "Email, Google, and Apple sign-in are scaffolded for Firebase Auth. This build uses mock sessions.",
+  "authEmail": "Email",
+  "authPassword": "Password",
+  "authForgot": "Forgot password",
+  "authGoogle": "Continue with Google",
+  "authApple": "Continue with Apple",
+  "homeTitle": "Today",
+  "homeGreeting": "Assalam-o-alaikum, Rizwan",
+  "homeNetPosition": "Across connected accounts",
+  "homeSpendThisMonth": "This month spend",
+  "homeBudgetLeft": "Budget left",
+  "homeRecent": "Recent transactions",
+  "homeTopBudgets": "Top budgets",
+  "homeFamilyMode": "Family mode",
+  "homeSmsStatus": "SMS parser",
+  "homeRemittanceStub": "Remittance waitlist",
+  "homeProfile": "Profile settings",
+  "hubTitle": "Explore Felo",
+  "doHubTitle": "Do",
+  "doHubSubtitle": "Everything you can act on, grouped into simple aisles.",
+  "doHubSendPay": "Send & Pay",
+  "doHubSendPayBody": "Remittance, bills, and split payments.",
+  "doHubSaveTrack": "Save & Track",
+  "doHubSaveTrackBody": "Goals, round-ups, and investment tracking.",
+  "doHubSpendSmart": "Spend Smart",
+  "doHubSpendSmartBody": "Budgets, subscriptions, and insights.",
+  "doHubCardsAccounts": "Cards & Accounts",
+  "doHubCardsAccountsBody": "Linked banks, cards, and account controls.",
+  "doHubMoreHelp": "More & Help",
+  "doHubMoreHelpBody": "Support, referrals, and Felo Plus.",
+  "budgetsTitle": "Budgets",
+  "budgetsBody": "Envelope-style budgets with rollover and alert controls.",
+  "budgetDetailTitle": "Budget detail",
+  "budgetFormTitle": "Create budget",
+  "budgetRollover": "Rollover",
+  "goalsTitle": "Goals",
+  "goalsBody": "Mental-accounting goals. Money stays in the user's own account.",
+  "goalDetailTitle": "Goal detail",
+  "goalStreakBadge": "{weeks}-week streak",
+  "@goalStreakBadge": {
+    "placeholders": {
+      "weeks": {
+        "type": "int"
+      }
+    }
+  },
+  "goalProgressSummary": "{saved} saved of {target}",
+  "@goalProgressSummary": {
+    "placeholders": {
+      "saved": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "goalContributorsTitle": "Contributors",
+  "goalContributeButton": "Contribute",
+  "goalContributionSheetTitle": "Add to goal",
+  "goalContributionAmountLabel": "Amount",
+  "goalContributionBefore": "Before",
+  "goalContributionAfter": "After",
+  "goalContributionSaved": "Contribution added.",
+  "goalContributionFailed": "Contribution could not be added. Try again.",
+  "goalMilestoneDialogTitle": "Milestone reached",
+  "goalMilestoneDialogBody": "{goalName} reached {percent}%.",
+  "@goalMilestoneDialogBody": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "goalCardTeaserTitle": "Card round-ups can boost this goal",
+  "goalCardTeaserBody": "When Felo Card launches, spare change from purchases can flow into {goalName}.",
+  "@goalCardTeaserBody": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      }
+    }
+  },
+  "transactionsTitle": "Transactions",
+  "transactionsBody": "Filter by date, category, account, or source.",
+  "transactionDetailTitle": "Transaction detail",
+  "transactionSplit": "Split",
+  "transactionRecategorize": "Recategorize",
+  "receiptCaptureTitle": "Receipt capture",
+  "receiptCaptureBody": "Attach a receipt image to improve transaction history. This OCR flow is stubbed with local mock data.",
+  "receiptUseCamera": "Use camera",
+  "receiptUseGallery": "Choose from gallery",
+  "receiptProcessing": "Processing receipt...",
+  "receiptOcrResultTitle": "Mock OCR result",
+  "receiptMerchantLabel": "Merchant",
+  "receiptDateLabel": "Date",
+  "receiptTotalLabel": "Total",
+  "receiptLineItemsTitle": "Line items",
+  "receiptConfirm": "Confirm receipt",
+  "receiptDiscard": "Discard receipt",
+  "receiptEditTitle": "Edit OCR result",
+  "receiptAttached": "Receipt attached",
+  "receiptConfirmedTitle": "Receipt confirmed",
+  "receiptConfirmedBody": "Attached receipt reference {referenceId} to this transaction.",
+  "@receiptConfirmedBody": {
+    "placeholders": {
+      "referenceId": {
+        "type": "String"
+      }
+    }
+  },
+  "billsTitle": "Bills",
+  "billsAddBill": "Add bill",
+  "billsEmptyTitle": "No bills yet",
+  "billsEmptyBody": "Manual and SMS-detected bills will appear here before their due dates.",
+  "billsCalendarTitle": "Due dates this month",
+  "billsNameLabel": "Bill name",
+  "billsAmountLabel": "Amount",
+  "billsDueDayLabel": "Due day",
+  "billsManualNameFallback": "Manual bill",
+  "billsDueDate": "Due {date}",
+  "@billsDueDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "billsAutoPayOn": "Auto-pay on",
+  "billsAutoPayOff": "Auto-pay off",
+  "billsStatusPaid": "Paid",
+  "billsStatusUpcoming": "Upcoming",
+  "billsSourceManual": "Manual",
+  "billsSourceSms": "SMS",
+  "billsCategoryUtility": "Utility",
+  "billsCategoryTelecom": "Telecom",
+  "billsCategoryRent": "Rent",
+  "billsCategorySubscription": "Subscription",
+  "billsPayPreview": "Pay preview",
+  "billsPayPreviewBody": "This is a bill-management preview only. No payment is initiated and no money is moved.",
+  "billsMarkPaid": "Mark paid",
+  "splitsTitle": "Splits",
+  "splitsDetailTitle": "Split detail",
+  "splitsNewSplit": "New split",
+  "splitsActiveTab": "Active",
+  "splitsSettledTab": "Settled",
+  "splitsEmptyActiveTitle": "No active splits",
+  "splitsEmptyActiveBody": "Create a split to track who has paid without chasing in chat.",
+  "splitsEmptySettledTitle": "No settled splits",
+  "splitsEmptySettledBody": "Completed splits will appear here for reference.",
+  "splitsPaidProgress": "{paid} of {total} paid",
+  "@splitsPaidProgress": {
+    "placeholders": {
+      "paid": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "splitsWizardBasics": "Name and currency",
+  "splitsWizardAmount": "Total amount",
+  "splitsWizardParticipants": "Participants",
+  "splitsWizardReview": "Review",
+  "splitsNameLabel": "Split name",
+  "splitsNameHint": "Rent, dinner, family gift",
+  "splitsCurrencyLabel": "Currency",
+  "splitsAmountLabel": "Total amount",
+  "splitsEqualShares": "Equal",
+  "splitsCustomShares": "Custom",
+  "splitsAddParticipant": "Add participant",
+  "splitsRemoveParticipant": "Remove participant",
+  "splitsParticipantNumber": "Participant {number}",
+  "@splitsParticipantNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "splitsParticipantFallback": "Participant {number}",
+  "@splitsParticipantFallback": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "splitsParticipantName": "Name",
+  "splitsParticipantContact": "Phone or email",
+  "splitsParticipantShare": "Share",
+  "splitsShareValidationOk": "Shares match the total.",
+  "splitsShareValidationError": "Shares add up to {current}, expected {expected}.",
+  "@splitsShareValidationError": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "expected": {
+        "type": "String"
+      }
+    }
+  },
+  "splitsCreateSplit": "Create split",
+  "splitsParticipantsTitle": "Participants",
+  "splitsSettleAll": "Settle all",
+  "splitsNotFoundTitle": "Split not found",
+  "splitsNotFoundBody": "This split may have been closed or removed.",
+  "splitsContactMissing": "No contact added",
+  "sendTitle": "Send money",
+  "sendPickRecipientTitle": "Pick recipient",
+  "sendAddRecipient": "Add new recipient",
+  "sendRecipientNameLabel": "Recipient name",
+  "sendRecipientPhoneLabel": "Phone",
+  "sendRecipientFallback": "New recipient",
+  "sendRecipientPhoneFallback": "+92 *** *** ****",
+  "sendAmountTitle": "Enter amount",
+  "sendNoRecipientTitle": "Choose a recipient first",
+  "sendNoRecipientBody": "The preview needs a saved or newly added recipient before amount entry.",
+  "sendAmountLabel": "Amount in CAD",
+  "sendFxPreviewEmpty": "Enter an amount to preview PKR",
+  "sendFxPreview": "Recipient gets about {amount}",
+  "@sendFxPreview": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "sendFxRate": "Mock rate: 1 {sourceCurrency} = {rate} {targetCurrency}",
+  "@sendFxRate": {
+    "placeholders": {
+      "sourceCurrency": {
+        "type": "String"
+      },
+      "rate": {
+        "type": "String"
+      },
+      "targetCurrency": {
+        "type": "String"
+      }
+    }
+  },
+  "sendReviewTitle": "Review preview",
+  "sendReviewMissingTitle": "Preview not ready",
+  "sendReviewMissingBody": "Choose a recipient and amount before reviewing.",
+  "sendRecipientLabel": "Recipient",
+  "sendRecipientGetsLabel": "Recipient gets",
+  "sendPreviewDisclaimer": "This is a preview. No money is moved. Phase 3 will require licensed partners before any transfer flow exists.",
+  "sendConfirmPreview": "Confirm preview",
+  "sendSuccessTitle": "Preview created",
+  "sendSuccessBody": "Reference {referenceId} is for this preview only. No money was moved.",
+  "@sendSuccessBody": {
+    "placeholders": {
+      "referenceId": {
+        "type": "String"
+      }
+    }
+  },
+  "smsParserTitle": "SMS parser",
+  "smsParserBody": "Android-only parser is stubbed from a local fixture for Phase 1.",
+  "smsParserAccuracy": "Parser accuracy",
+  "coachTitle": "Felo Coach",
+  "coachDisclaimer": "Education only. Felo does not provide financial, investment, tax, or legal advice.",
+  "coachPromptOne": "Where did my money go this week?",
+  "coachPromptTwo": "How are my goals pacing?",
+  "coachPromptThree": "Can I send extra this month?",
+  "coachInputHint": "Ask about spending, budgets, or goals",
+  "coachEmptyState": "Pick a prompt or ask a question to start.",
+  "coachTypingIndicator": "Felo Coach is thinking...",
+  "coachErrorMessage": "Coach is unavailable right now. Please try again.",
+  "coachSendLabel": "Send",
+  "coachRetryLabel": "Retry",
+  "familyTitle": "Family mode",
+  "familyBody": "Invite household members with consent-based permissions.",
+  "familyInvite": "Invite with link",
+  "familyAdmin": "Admin",
+  "familyMember": "Member",
+  "familyViewer": "Viewer",
+  "notificationsTitle": "Notifications",
+  "notificationsBellTooltip": "Open notifications",
+  "notificationsMarkAllRead": "Mark all read",
+  "notificationsMarkRead": "Mark read",
+  "notificationsArchive": "Archive",
+  "notificationsUnreadCount": "{count} unread",
+  "@notificationsUnreadCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsEmptyTitle": "No notifications",
+  "notificationsEmptyBody": "Budget alerts, goal milestones, SMS parser events, and family activity will appear here.",
+  "notificationsFilterAll": "All",
+  "notificationsFilterBudgets": "Budgets",
+  "notificationsFilterGoals": "Goals",
+  "notificationsFilterFamily": "Family",
+  "notificationsFilterSystem": "System",
+  "notificationsTimestamp": "{date} · {time}",
+  "@notificationsTimestamp": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationBudgetTitle": "Budget alert",
+  "notificationBudgetBody": "{category} reached {percent}% of its envelope.",
+  "@notificationBudgetBody": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationGoalTitle": "Goal milestone",
+  "notificationGoalBody": "{goalName} crossed {percent}% funded.",
+  "@notificationGoalBody": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationSmsParserTitle": "SMS parser event",
+  "notificationSmsParserBody": "{source} parsed a transaction with {confidence}% confidence.",
+  "@notificationSmsParserBody": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      },
+      "confidence": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationFamilyTitle": "Family activity",
+  "notificationFamilyBody": "{memberName} changed shared family permissions.",
+  "@notificationFamilyBody": {
+    "placeholders": {
+      "memberName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationSystemTitle": "System message",
+  "notificationSystemBody": "Phase 1 keeps payments, custody, and money movement turned off.",
+  "accountsTitle": "Accounts",
+  "accountsConnect": "Connect account",
+  "accountsConnectTitle": "Connect account",
+  "accountsEmptyTitle": "No connected accounts",
+  "accountsEmptyBody": "Connect read-only accounts or add a manual account to make the dashboard more useful.",
+  "accountsLastSynced": "Synced {date} at {time}",
+  "@accountsLastSynced": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsTypeBank": "Bank",
+  "accountsTypeCard": "Card",
+  "accountsTypeWallet": "Wallet",
+  "accountsStatusSynced": "Synced",
+  "accountsStatusSyncing": "Syncing",
+  "accountsStatusNeedsReview": "Review",
+  "accountsDisconnect": "Disconnect",
+  "accountsDisconnectTitle": "Disconnect account",
+  "accountsDisconnectBody": "Remove {accountName} from this mock read-only view?",
+  "@accountsDisconnectBody": {
+    "placeholders": {
+      "accountName": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsProviderPickerTitle": "Choose a provider",
+  "accountsProviderTd": "TD",
+  "accountsProviderRbc": "RBC",
+  "accountsProviderEasypaisa": "Easypaisa",
+  "accountsProviderJazzcash": "JazzCash",
+  "accountsProviderManual": "Manual",
+  "accountsMockOAuthTitle": "{providerName} secure preview",
+  "@accountsMockOAuthTitle": {
+    "placeholders": {
+      "providerName": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsMockOAuthBody": "This screen simulates a read-only provider connection. No credentials are collected in this build.",
+  "accountsConnectContinue": "Continue preview",
+  "accountsConnectSuccessTitle": "Account connected",
+  "accountsConnectSuccessBody": "{accountName} is now available in the mock account list.",
+  "@accountsConnectSuccessBody": {
+    "placeholders": {
+      "accountName": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsViewAccounts": "View accounts",
+  "profileTitle": "Profile",
+  "profileLanguage": "Language",
+  "profileTheme": "Theme",
+  "profileNotifications": "Notifications",
+  "profileLogout": "Log out",
+  "profileDelete": "Delete account",
+  "remittanceTitle": "Send money home",
+  "remittanceBody": "Phase 3 will orchestrate remittance through licensed partners. This build has no money movement.",
+  "remittanceCta": "Join waitlist",
+  "emptyTitle": "Nothing here yet",
+  "emptyBody": "Seeded mock data will appear as each feature becomes active.",
+  "sampleDesignLabel": "Sample design",
+  "sampleDashboardAmount": "CAD 4,280",
+  "sampleBudgetAmount": "CAD 1,840 left",
+  "sampleGoalName": "Trip to Pakistan",
+  "sampleOnTrack": "On track",
+  "commonDone": "Done",
+  "helpTitle": "Help & support",
+  "helpSearchLabel": "Search help",
+  "helpSearchHint": "Type a question or keyword",
+  "helpNoResults": "No results yet — try a different search.",
+  "helpContactSupport": "Contact support",
+  "helpReportBug": "Report a bug",
+  "helpTerms": "Terms",
+  "helpPrivacy": "Privacy",
+  "helpLicenses": "Licenses",
+  "helpFaq1Q": "Is Felo a bank?",
+  "helpFaq1A": "No. Felo is a budgeting and goal companion. We never hold or move your money.",
+  "helpFaq2Q": "How does SMS parsing work?",
+  "helpFaq2A": "On Android, Felo reads SMS from saved bank and wallet senders on your device. SMS bodies never leave your phone in Phase 1.",
+  "helpFaq3Q": "Can my family see my transactions?",
+  "helpFaq3A": "Only if you invite them and explicitly enable shared visibility. You can revoke access at any time.",
+  "helpFaq4Q": "How do I change language?",
+  "helpFaq4A": "Open Profile → Settings → Language. Felo supports English and Urdu (RTL).",
+  "helpFaq5Q": "What happens if I delete my account?",
+  "helpFaq5A": "Your data is soft-deleted for 30 days, then permanently erased. You can export everything before deletion.",
+  "kycTitle": "Verify your identity",
+  "kycChooseIdType": "Choose ID type",
+  "kycIdPassport": "Passport",
+  "kycIdCnic": "Pakistani CNIC",
+  "kycIdDriversLicense": "Driver's license",
+  "kycCaptureIdTitle": "Capture your ID",
+  "kycCaptureFront": "Capture front",
+  "kycCaptureBack": "Capture back",
+  "kycSelfieTitle": "Take a selfie",
+  "kycCaptureSelfie": "Capture selfie",
+  "kycSelfieHint": "Look straight at the camera in good light. Glasses off.",
+  "kycReviewTitle": "Review and submit",
+  "kycReviewIdType": "ID type",
+  "kycReviewIdImages": "ID images",
+  "kycReviewSelfie": "Selfie",
+  "kycReviewCaptured": "Captured",
+  "kycReviewMissing": "Missing",
+  "kycReviewDisclaimer": "Submitting sends data to a verification partner. Phase 1 builds use a stub — no data leaves the device.",
+  "kycSubmit": "Submit",
+  "kycSubmittedTitle": "Submitted for review",
+  "kycSubmittedBody": "We'll notify you when verification completes. You can keep using budgeting features in the meantime.",
+  "authEmailLabel": "Email",
+  "forgotPasswordTitle": "Reset password",
+  "forgotPasswordBody": "Enter the email tied to your Felo account. We'll send you a reset link.",
+  "forgotPasswordSendCta": "Send reset link",
+  "forgotPasswordSentTitle": "Check your inbox",
+  "forgotPasswordSentBody": "If an account exists for that email, a reset link is on its way. The link expires in 30 minutes.",
+  "emailVerifyTitle": "Verify email",
+  "emailVerifyHeading": "Confirm your email",
+  "emailVerifyBody": "Tap the link in the email we just sent to finish setting up your Felo account.",
+  "emailVerifyResend": "Resend email",
+  "emailVerifyResendIn": "Resend in {seconds}s",
+  "@emailVerifyResendIn": {"placeholders": {"seconds": {"type": "String"}}},
+  "mfaTitle": "Two-factor authentication",
+  "mfaBody": "Scan the QR code with an authenticator app, then enter the 6-digit code to confirm.",
+  "mfaCopySecret": "Copy secret key",
+  "mfaSecretCopied": "Secret copied",
+  "mfaCodeLabel": "6-digit code",
+  "mfaVerifyCta": "Verify code",
+  "mfaVerified": "Two-factor enabled",
+  "mfaEnabledStatus": "Enabled · {count} recovery codes remaining",
+  "@mfaEnabledStatus": {"placeholders": {"count": {"type": "int"}}},
+  "mfaDisabledStatus": "Not enabled",
+  "mfaRecoveryCodesTitle": "Recovery codes",
+  "mfaRecoveryCodesWarning": "Save these recovery codes somewhere safe. Felo will show them only once.",
+  "mfaCopyAllCodes": "Copy all codes",
+  "mfaScanQrPrompt": "Scan this QR code in Google Authenticator or another authenticator app.",
+  "mfaWrongCode": "That code did not work. Check your authenticator app and try again.",
+  "biometricTitle": "App lock",
+  "biometricBody": "Add a biometric lock so only you can open Felo.",
+  "biometricEnable": "Use biometric unlock",
+  "biometricAutoLock": "Auto-lock after",
+  "biometricImmediate": "Immediately",
+  "biometricAfter1Min": "1 minute of inactivity",
+  "biometricAfter5Min": "5 minutes of inactivity",
+  "biometricAfter15Min": "15 minutes of inactivity",
+  "languageTitle": "Language",
+  "languageEnglish": "English",
+  "languageUrdu": "Urdu (اردو)",
+  "languageHelper": "We localize numbers and currencies, but never translate amounts.",
+  "themeTitle": "Theme",
+  "themeSystem": "Match system",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "notifPrefsTitle": "Notification preferences",
+  "notifPrefsBudgets": "Budget alerts",
+  "notifPrefsGoals": "Goal milestones",
+  "notifPrefsFamily": "Family activity",
+  "notifPrefsCoach": "Coach nudges",
+  "notifPrefsSystem": "System & security",
+  "notifPrefsQuietHours": "Quiet hours",
+  "notifPrefsQuietHoursHelper": "Mute non-critical alerts overnight (10pm–7am).",
+  "dataExportTitle": "Export your data",
+  "dataExportBody": "We'll prepare a downloadable archive of everything tied to your account.",
+  "dataExportScopeAll": "Everything",
+  "dataExportScopeTransactions": "Transactions only",
+  "dataExportScopeBudgets": "Budgets only",
+  "dataExportScopeGoals": "Goals only",
+  "dataExportRequestCta": "Request export",
+  "dataExportRequested": "Export requested",
+  "dataExportEta": "We'll email you a link within 24 hours.",
+  "deleteAccountTitle": "Delete account",
+  "deleteAccountWarningTitle": "This is permanent after 30 days.",
+  "deleteAccountWarningBody": "Your data is soft-deleted immediately and fully erased after 30 days. You can cancel during the grace period by signing in.",
+  "deleteAccountTypePrompt": "Type DELETE in capitals to confirm.",
+  "deleteAccountConfirmLabel": "Type DELETE",
+  "deleteAccountCta": "Delete my account",
+  "deleteAccountSubmittedTitle": "Account scheduled for deletion",
+  "deleteAccountSubmittedBody": "We've signed you out. You'll receive a confirmation email shortly.",
+  "aboutTitle": "About Felo",
+  "aboutTagline": "A no-custody money companion for the Pakistani diaspora.",
+  "aboutVersion": "Version",
+  "aboutBuild": "Build",
+  "aboutCopyright": "Copyright",
+  "categoriesTitle": "Categories",
+  "categoriesAdd": "Add category",
+  "recurringTitle": "Recurring",
+  "recurringBody": "Subscriptions and bills we've spotted in your activity.",
+  "insightsTitle": "Insights",
+  "insightsThisMonth": "Spent this month",
+  "insightsSpentThisWeek": "Spent this week",
+  "insightsSpentThisMonth": "Spent this month",
+  "insightsSpentThisQuarter": "Spent this quarter",
+  "insightsByCategory": "By category",
+  "insightsTopMerchants": "Top merchants",
+  "insightsTrend": "Trend",
+  "insightsPeriodWeek": "Week",
+  "insightsPeriodMonth": "Month",
+  "insightsPeriodQuarter": "Quarter",
+  "insightsEmptyTitle": "No category spend yet",
+  "insightsEmptyBody": "Categorized SMS and transaction spend will appear here.",
+  "insightsNoMerchantsTitle": "No merchants yet",
+  "insightsNoMerchantsBody": "Top merchants will appear once spending is imported.",
+  "insightsNoTrendTitle": "No trend yet",
+  "insightsNoTrendBody": "Daily spending points will appear after activity syncs.",
+  "insightsErrorTitle": "Insights unavailable",
+  "insightsErrorBody": "We could not load spending insights. Pull to refresh or try again later.",
+  "searchTitle": "Search",
+  "searchLabel": "Search Felo",
+  "searchHint": "Merchant, category, goal…",
+  "searchPrompt": "Type at least one character to search.",
+  "searchEmptyTitle": "No matches",
+  "searchEmptyBody": "Try a different keyword.",
+  "searchTransactions": "Transactions",
+  "searchBudgets": "Budgets",
+  "searchGoals": "Goals",
+  "networkErrorTitle": "Connection issue",
+  "networkErrorHeading": "We can't reach the network",
+  "networkErrorBody": "Felo works offline for cached data — try again to sync.",
+  "networkErrorRetry": "Try again",
+  "appLockTitle": "App locked",
+  "appLockHeading": "Welcome back",
+  "appLockPinLabel": "Enter PIN",
+  "appLockUnlock": "Unlock",
+  "appLockUseBiometric": "Use biometric",
+  "appLockWrongPin": "Wrong PIN. Try again.",
+  "familyInviteTitle": "Family invite",
+  "familyInviteFromHeading": "You've been invited",
+  "familyInviteDescription": "Join a family group to share visibility on selected budgets and goals.",
+  "familyInvitePermViewTxns": "View shared transactions",
+  "familyInvitePermViewBudgets": "View shared budgets",
+  "familyInvitePermEditBudgets": "Edit shared budgets",
+  "familyInviteAcceptCta": "Accept invite",
+  "familyInviteDeclineCta": "Decline",
+  "familyInviteAccepted": "You're now part of the family group.",
+  "investmentsTitle": "Investments",
+  "investmentsTrackerOnly": "Tracker only — Felo does not give investment advice.",
+  "investmentsEmptyTitle": "No tracked assets yet",
+  "investmentsEmptyBody": "Add manual assets to see your read-only portfolio picture.",
+  "investmentsAddAsset": "Add asset",
+  "investmentsRefreshPrices": "Refresh prices",
+  "investmentsRefreshPricesBody": "Enter latest manual prices for each holding. No trade or money movement happens.",
+  "investmentsPortfolioValue": "Total market value",
+  "investmentsProfitLoss": "P&L",
+  "investmentsReturnPercent": "Return",
+  "investmentsAllocation": "Mix by asset class",
+  "investmentsNoAllocation": "No allocation yet",
+  "investmentsHoldings": "Holdings",
+  "investmentsLatestPrice": "Latest price",
+  "investmentsSymbolLabel": "Symbol",
+  "investmentsNameLabel": "Name",
+  "investmentsCurrencyLabel": "Currency",
+  "investmentsUnitsLabel": "Units",
+  "investmentsCostBasisLabel": "Cost basis",
+  "investmentsNotesLabel": "Notes",
+  "investmentsSaveAsset": "Save asset",
+  "investmentsManualSymbolFallback": "MANUAL",
+  "investmentsManualNameFallback": "Manual asset",
+  "investmentsDetailTitle": "Investment detail",
+  "investmentsMissingTitle": "Asset not found",
+  "investmentsMissingBody": "This tracked asset may have been archived.",
+  "investmentsUpdatePrice": "Update price",
+  "investmentsArchive": "Archive",
+  "investmentsMarketValue": "Market value",
+  "investmentsAssetStockEtf": "Stocks / ETFs",
+  "investmentsAssetCrypto": "Crypto",
+  "investmentsAssetRrspTfsa": "RRSP / TFSA",
+  "investmentsAssetRetirementAbroad": "Retirement abroad",
+  "investmentsAssetRealEstate": "Real estate",
+  "investmentsAssetGold": "Gold",
+  "familyInviteTokenHint": "Invite token: {token}",
+  "@familyInviteTokenHint": {"placeholders": {"token": {"type": "String"}}},
+  "referralsTitle": "Referrals",
+  "referralsHeroTitle": "Give CAD $5, get CAD $5",
+  "referralsHeroBody": "Share your code with friends. When their referral qualifies, both of you get a CAD $5 credit.",
+  "referralsShareCta": "Share invite",
+  "referralsShareMessage": "Join me on Felo and use my referral link: {url}",
+  "@referralsShareMessage": {"placeholders": {"url": {"type": "String"}}},
+  "referralsCopyCode": "Copy referral code",
+  "referralsCodeCopied": "Referral code copied",
+  "referralsRedeemCta": "Redeem a code",
+  "referralsInvited": "Invited",
+  "referralsCompleted": "Completed",
+  "referralsPending": "Pending",
+  "referralsEarned": "Earned",
+  "referralsInvitesTitle": "Your referrals",
+  "referralsNoInvitesTitle": "No referrals yet",
+  "referralsNoInvitesBody": "Share your invite to start tracking referrals here.",
+  "referralsInviteFallbackName": "Friend",
+  "referralsErrorTitle": "Could not load referrals",
+  "referralsErrorBody": "Check your connection and try again.",
+  "referralsRedeemTitle": "Redeem referral",
+  "referralsRedeemHeading": "Have an invite code?",
+  "referralsRedeemBody": "Enter the referral code exactly as your friend shared it.",
+  "referralsRedeemCodeLabel": "Referral code",
+  "referralsRedeemCodeHint": "Example: FELO5",
+  "referralsRedeemSubmit": "Redeem code",
+  "referralsRedeemRequired": "Enter a referral code.",
+  "referralsRedeemSuccess": "Referral code redeemed.",
+  "referralsRedeemNotFound": "That referral code was not found.",
+  "referralsRedeemConflict": "This referral has already been redeemed.",
+  "referralsRedeemUnknown": "We could not redeem this code. Try again.",
+  "feloPlusTitle": "FELO Plus",
+  "feloPlusStatusPlus": "Plus",
+  "feloPlusStatusFree": "Free",
+  "feloPlusActiveTitle": "FELO Plus is active",
+  "feloPlusActiveBody": "Your account is receiving Plus benefits automatically where available.",
+  "feloPlusFreeTitle": "You are on Free",
+  "feloPlusFreeBody": "FELO Plus is the premium plan for lower FX margin, priority support, a free physical card, and higher limits.",
+  "feloPlusTierLabel": "Current tier: {tier}",
+  "@feloPlusTierLabel": {"placeholders": {"tier": {"type": "String"}}},
+  "feloPlusBenefitFx": "Lower FX margin on eligible sends",
+  "feloPlusBenefitSupport": "Priority support",
+  "feloPlusBenefitCard": "Free physical card",
+  "feloPlusBenefitLimits": "Higher account limits",
+  "feloPlusErrorTitle": "Could not load FELO Plus",
+  "feloPlusErrorBody": "Check your connection and try again.",
+  "categoryGroceries": "Groceries",
+  "categoryFamilySupport": "Family support",
+  "categoryTransport": "Transport",
+  "categoryBills": "Bills",
+  "categoryEatingOut": "Eating out",
+  "categoryIncome": "Income",
+  "categoryNewLabel": "New category {n}",
+  "@categoryNewLabel": {"placeholders": {"n": {"type": "int"}}},
+  "recurringFreqWeekly": "Weekly",
+  "recurringFreqMonthly": "Monthly",
+  "recurringFreqQuarterly": "Quarterly",
+  "recurringFreqYearly": "Yearly",
+  "notificationsTestTitle": "Send test notification",
+  "notificationsTestBlurb": "Fires a test notification through the live backend. Debug builds only — production blocks the endpoint.",
+  "notificationsTestTitleLabel": "Title",
+  "notificationsTestBodyLabel": "Body",
+  "notificationsTestDefaultTitle": "Hello from Felo",
+  "notificationsTestDefaultBody": "This is a test notification fired from the debug screen.",
+  "notificationsTestSend": "Send",
+  "notificationsTestSent": "Sent — pull to refresh inbox.",
+  "notificationsTestProdDisabled": "Test notifications are disabled in production builds."
+}

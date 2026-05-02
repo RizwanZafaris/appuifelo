@@ -1,0 +1,35 @@
+[
+  {
+    "id": "sms_001",
+    "source": "Easypaisa",
+    "body": "Dear customer, Rs. 2,500 sent to Ali Reza on 24-Apr-2026 at 3:45 PM. TID EP4412.",
+    "amount": 2500,
+    "currency": "PKR",
+    "merchant": "Ali Reza",
+    "category": "Family",
+    "confidence": 0.94,
+    "parsedAt": "2026-04-24T15:45:00.000Z"
+  },
+  {
+    "id": "sms_002",
+    "source": "JazzCash",
+    "body": "JazzCash: You paid Rs. 1,240 to K-Electric on 23-Apr-2026. Ref JC8831.",
+    "amount": 1240,
+    "currency": "PKR",
+    "merchant": "K-Electric",
+    "category": "Bills",
+    "confidence": 0.91,
+    "parsedAt": "2026-04-23T19:12:00.000Z"
+  },
+  {
+    "id": "sms_003",
+    "source": "Meezan Bank",
+    "body": "Debit PKR 4,850 at Imtiaz Super Market. Available balance masked. Do not share OTP.",
+    "amount": 4850,
+    "currency": "PKR",
+    "merchant": "Imtiaz Super Market",
+    "category": "Groceries",
+    "confidence": 0.88,
+    "parsedAt": "2026-04-22T12:20:00.000Z"
+  }
+]

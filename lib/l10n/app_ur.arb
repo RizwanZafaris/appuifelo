@@ -1,0 +1,749 @@
+{
+  "@@locale": "ur",
+  "appName": "فیلو",
+  "navHome": "ہوم",
+  "navActivity": "سرگرمی",
+  "navBudgets": "بجٹ",
+  "navCoach": "کوچ",
+  "navDo": "کریں",
+  "navGoals": "اہداف",
+  "complianceFooter": "رجسٹریشن زیر التوا · MSB درخواست جاری ہے۔",
+  "commonContinue": "جاری رکھیں",
+  "commonGetStarted": "شروع کریں",
+  "commonCreateAccount": "اکاؤنٹ بنائیں",
+  "commonSignIn": "سائن اِن",
+  "commonBack": "واپس",
+  "commonSkip": "ابھی چھوڑ دیں",
+  "commonComingSoon": "جلد آرہا ہے",
+  "commonView": "دیکھیں",
+  "commonEdit": "ترمیم",
+  "commonSave": "محفوظ کریں",
+  "commonCancel": "منسوخ",
+  "commonRetry": "دوبارہ کوشش",
+  "commonLoading": "لوڈ ہو رہا ہے…",
+  "commonSearch": "تلاش",
+  "currencyCad": "CAD",
+  "splashTitle": "پیسہ سمجھ میں آئے تو دل پرسکون رہتا ہے۔",
+  "splashBody": "بجٹ بنائیں، اخراجات دیکھیں، اہداف پلان کریں، اور سیکھیں۔ فیلو کبھی آپ کا پیسہ نہیں رکھتا۔",
+  "splashTrust": "کوئی کسٹڈی نہیں۔ فیز 1 میں کوئی رقم منتقل نہیں ہوتی۔",
+  "onboardingTitle": "فیلو سیٹ اپ کریں",
+  "onboardingSubtitle": "کینیڈا اور پاکستان کے گھرانوں کے لئے پرسکون مالی ساتھی۔",
+  "onboardingSlideOneTitle": "مکمل تصویر دیکھیں",
+  "onboardingSlideOneBody": "اکاؤنٹس، والٹس، اور دستی اندراجات کو ایک ریڈ اونلی منظر میں لائیں۔",
+  "onboardingSlideTwoTitle": "لفافہ بجٹ بنائیں",
+  "onboardingSlideTwoBody": "ہر روپے یا ڈالر کو بجٹ، الرٹس، اور مشترکہ اہداف کے ساتھ ایک کام دیں۔",
+  "onboardingSlideThreeTitle": "SMS محفوظ طریقے سے پڑھیں",
+  "onboardingSlideThreeBody": "Android پر فیلو Easypaisa، JazzCash، اور بینک الرٹس سے لین دین پڑھتا ہے۔ ذاتی پیغامات اور OTP شامل نہیں۔",
+  "onboardingSlideFourTitle": "مشورہ نہیں، تعلیم",
+  "onboardingSlideFourBody": "کوچ پیٹرنز اور ٹریڈ آف سمجھاتا ہے۔ یہ سرمایہ کاری، انشورنس، یا ٹیکس ایکشن کی سفارش نہیں کرتا۔",
+  "smsTrustTitle": "SMS آپ کے فون پر رہتا ہے",
+  "smsTrustBody": "ہم رقم، مرچنٹ، تاریخ، اور سورس نکالتے ہیں۔ اس فیز میں مکمل پیغامات اپ لوڈ نہیں ہوتے۔",
+  "smsPatternOne": "پڑھتا ہے: Easypaisa اور JazzCash payment alerts",
+  "smsPatternTwo": "پڑھتا ہے: بینک debit اور credit alerts",
+  "smsPatternThree": "نہیں پڑھتا: OTPs یا ذاتی گفتگو",
+  "smsRevoke": "آپ Android settings میں access کبھی بھی بند کر سکتے ہیں۔",
+  "authTitle": "خوش آمدید",
+  "authBody": "Email، Google، اور Apple sign-in Firebase Auth کے لئے scaffold ہیں۔ یہ build mock sessions استعمال کرتی ہے۔",
+  "authEmail": "ای میل",
+  "authPassword": "پاس ورڈ",
+  "authForgot": "پاس ورڈ بھول گئے",
+  "authGoogle": "Google کے ساتھ جاری رکھیں",
+  "authApple": "Apple کے ساتھ جاری رکھیں",
+  "homeTitle": "آج",
+  "homeGreeting": "السلام علیکم، رضوان",
+  "homeNetPosition": "Connected accounts میں",
+  "homeSpendThisMonth": "اس ماہ خرچ",
+  "homeBudgetLeft": "باقی بجٹ",
+  "homeRecent": "حالیہ لین دین",
+  "homeTopBudgets": "اہم بجٹ",
+  "homeFamilyMode": "Family mode",
+  "homeSmsStatus": "SMS parser",
+  "homeRemittanceStub": "Remittance waitlist",
+  "homeProfile": "Profile settings",
+  "hubTitle": "فیلو دیکھیں",
+  "doHubTitle": "کریں",
+  "doHubSubtitle": "تمام کام آسان حصوں میں ایک جگہ۔",
+  "doHubSendPay": "Send & Pay",
+  "doHubSendPayBody": "Remittance، bills، اور split payments۔",
+  "doHubSaveTrack": "Save & Track",
+  "doHubSaveTrackBody": "Goals، round-ups، اور investment tracking۔",
+  "doHubSpendSmart": "Spend Smart",
+  "doHubSpendSmartBody": "Budgets، subscriptions، اور insights۔",
+  "doHubCardsAccounts": "Cards & Accounts",
+  "doHubCardsAccountsBody": "Linked banks، cards، اور account controls۔",
+  "doHubMoreHelp": "More & Help",
+  "doHubMoreHelpBody": "Support، referrals، اور Felo Plus۔",
+  "budgetsTitle": "بجٹ",
+  "budgetsBody": "Rollover اور alerts کے ساتھ envelope-style budgets۔",
+  "budgetDetailTitle": "Budget detail",
+  "budgetFormTitle": "Create budget",
+  "budgetRollover": "Rollover",
+  "goalsTitle": "اہداف",
+  "goalsBody": "Mental-accounting goals۔ پیسہ صارف کے اپنے account میں رہتا ہے۔",
+  "goalDetailTitle": "Goal detail",
+  "goalStreakBadge": "{weeks} ہفتوں کا streak",
+  "@goalStreakBadge": {
+    "placeholders": {
+      "weeks": {
+        "type": "int"
+      }
+    }
+  },
+  "goalProgressSummary": "{target} میں سے {saved} محفوظ",
+  "@goalProgressSummary": {
+    "placeholders": {
+      "saved": {
+        "type": "String"
+      },
+      "target": {
+        "type": "String"
+      }
+    }
+  },
+  "goalContributorsTitle": "Contributors",
+  "goalContributeButton": "Contribute",
+  "goalContributionSheetTitle": "Goal میں شامل کریں",
+  "goalContributionAmountLabel": "Amount",
+  "goalContributionBefore": "Before",
+  "goalContributionAfter": "After",
+  "goalContributionSaved": "Contribution شامل ہو گئی۔",
+  "goalContributionFailed": "Contribution شامل نہیں ہو سکی۔ دوبارہ کوشش کریں۔",
+  "goalMilestoneDialogTitle": "Milestone reached",
+  "goalMilestoneDialogBody": "{goalName} {percent}% تک پہنچ گیا۔",
+  "@goalMilestoneDialogBody": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "goalCardTeaserTitle": "Card round-ups اس goal کو تیز کر سکتے ہیں",
+  "goalCardTeaserBody": "Felo Card launch ہونے پر purchases کی spare change {goalName} میں جا سکے گی۔",
+  "@goalCardTeaserBody": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      }
+    }
+  },
+  "transactionsTitle": "Transactions",
+  "transactionsBody": "Date، category، account، یا source سے filter کریں۔",
+  "transactionDetailTitle": "Transaction detail",
+  "transactionSplit": "Split",
+  "transactionRecategorize": "Recategorize",
+  "receiptCaptureTitle": "Receipt capture",
+  "receiptCaptureBody": "Transaction history بہتر بنانے کے لئے receipt image attach کریں۔ یہ OCR flow local mock data سے stub ہے۔",
+  "receiptUseCamera": "Camera استعمال کریں",
+  "receiptUseGallery": "Gallery سے چنیں",
+  "receiptProcessing": "Receipt process ہو رہی ہے...",
+  "receiptOcrResultTitle": "Mock OCR result",
+  "receiptMerchantLabel": "Merchant",
+  "receiptDateLabel": "Date",
+  "receiptTotalLabel": "Total",
+  "receiptLineItemsTitle": "Line items",
+  "receiptConfirm": "Receipt confirm کریں",
+  "receiptDiscard": "Receipt discard کریں",
+  "receiptEditTitle": "OCR result edit کریں",
+  "receiptAttached": "Receipt attached",
+  "receiptConfirmedTitle": "Receipt confirmed",
+  "receiptConfirmedBody": "اس transaction کے ساتھ receipt reference {referenceId} attach ہو گیا۔",
+  "@receiptConfirmedBody": {
+    "placeholders": {
+      "referenceId": {
+        "type": "String"
+      }
+    }
+  },
+  "billsTitle": "Bills",
+  "billsAddBill": "Bill شامل کریں",
+  "billsEmptyTitle": "ابھی کوئی bill نہیں",
+  "billsEmptyBody": "Manual اور SMS-detected bills due dates سے پہلے یہاں نظر آئیں گے۔",
+  "billsCalendarTitle": "اس ماہ due dates",
+  "billsNameLabel": "Bill name",
+  "billsAmountLabel": "Amount",
+  "billsDueDayLabel": "Due day",
+  "billsManualNameFallback": "Manual bill",
+  "billsDueDate": "{date} کو due",
+  "@billsDueDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "billsAutoPayOn": "Auto-pay on",
+  "billsAutoPayOff": "Auto-pay off",
+  "billsStatusPaid": "Paid",
+  "billsStatusUpcoming": "Upcoming",
+  "billsSourceManual": "Manual",
+  "billsSourceSms": "SMS",
+  "billsCategoryUtility": "Utility",
+  "billsCategoryTelecom": "Telecom",
+  "billsCategoryRent": "Rent",
+  "billsCategorySubscription": "Subscription",
+  "billsPayPreview": "Pay preview",
+  "billsPayPreviewBody": "یہ صرف bill-management preview ہے۔ کوئی payment initiate نہیں ہوتی اور کوئی money move نہیں ہوتی۔",
+  "billsMarkPaid": "Paid mark کریں",
+  "splitsTitle": "Splits",
+  "splitsDetailTitle": "Split detail",
+  "splitsNewSplit": "New split",
+  "splitsActiveTab": "Active",
+  "splitsSettledTab": "Settled",
+  "splitsEmptyActiveTitle": "کوئی active split نہیں",
+  "splitsEmptyActiveBody": "Chat میں chase کئے بغیر payments track کرنے کے لئے split بنائیں۔",
+  "splitsEmptySettledTitle": "کوئی settled split نہیں",
+  "splitsEmptySettledBody": "Completed splits reference کے لئے یہاں نظر آئیں گے۔",
+  "splitsPaidProgress": "{paid} of {total} paid",
+  "@splitsPaidProgress": {
+    "placeholders": {
+      "paid": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "splitsWizardBasics": "Name اور currency",
+  "splitsWizardAmount": "Total amount",
+  "splitsWizardParticipants": "Participants",
+  "splitsWizardReview": "Review",
+  "splitsNameLabel": "Split name",
+  "splitsNameHint": "Rent، dinner، family gift",
+  "splitsCurrencyLabel": "Currency",
+  "splitsAmountLabel": "Total amount",
+  "splitsEqualShares": "Equal",
+  "splitsCustomShares": "Custom",
+  "splitsAddParticipant": "Participant شامل کریں",
+  "splitsRemoveParticipant": "Participant remove کریں",
+  "splitsParticipantNumber": "Participant {number}",
+  "@splitsParticipantNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "splitsParticipantFallback": "Participant {number}",
+  "@splitsParticipantFallback": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "splitsParticipantName": "Name",
+  "splitsParticipantContact": "Phone یا email",
+  "splitsParticipantShare": "Share",
+  "splitsShareValidationOk": "Shares total سے match کرتے ہیں۔",
+  "splitsShareValidationError": "Shares {current} بنتے ہیں، expected {expected} ہے۔",
+  "@splitsShareValidationError": {
+    "placeholders": {
+      "current": {
+        "type": "String"
+      },
+      "expected": {
+        "type": "String"
+      }
+    }
+  },
+  "splitsCreateSplit": "Split create کریں",
+  "splitsParticipantsTitle": "Participants",
+  "splitsSettleAll": "سب settle کریں",
+  "splitsNotFoundTitle": "Split نہیں ملا",
+  "splitsNotFoundBody": "یہ split close یا remove ہو چکا ہو سکتا ہے۔",
+  "splitsContactMissing": "Contact شامل نہیں",
+  "sendTitle": "Send money",
+  "sendPickRecipientTitle": "Recipient چنیں",
+  "sendAddRecipient": "نیا recipient شامل کریں",
+  "sendRecipientNameLabel": "Recipient name",
+  "sendRecipientPhoneLabel": "Phone",
+  "sendRecipientFallback": "New recipient",
+  "sendRecipientPhoneFallback": "+92 *** *** ****",
+  "sendAmountTitle": "Amount درج کریں",
+  "sendNoRecipientTitle": "پہلے recipient چنیں",
+  "sendNoRecipientBody": "Amount entry سے پہلے preview کو saved یا new recipient چاہیے۔",
+  "sendAmountLabel": "Amount in CAD",
+  "sendFxPreviewEmpty": "PKR preview کے لئے amount درج کریں",
+  "sendFxPreview": "Recipient کو تقریباً {amount} ملیں گے",
+  "@sendFxPreview": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "sendFxRate": "Mock rate: 1 {sourceCurrency} = {rate} {targetCurrency}",
+  "@sendFxRate": {
+    "placeholders": {
+      "sourceCurrency": {
+        "type": "String"
+      },
+      "rate": {
+        "type": "String"
+      },
+      "targetCurrency": {
+        "type": "String"
+      }
+    }
+  },
+  "sendReviewTitle": "Preview review کریں",
+  "sendReviewMissingTitle": "Preview ready نہیں",
+  "sendReviewMissingBody": "Review سے پہلے recipient اور amount چنیں۔",
+  "sendRecipientLabel": "Recipient",
+  "sendRecipientGetsLabel": "Recipient gets",
+  "sendPreviewDisclaimer": "یہ preview ہے۔ کوئی money move نہیں ہوتی۔ Phase 3 میں transfer flow سے پہلے licensed partners required ہوں گے۔",
+  "sendConfirmPreview": "Preview confirm کریں",
+  "sendSuccessTitle": "Preview created",
+  "sendSuccessBody": "Reference {referenceId} صرف اس preview کے لئے ہے۔ کوئی money move نہیں ہوئی۔",
+  "@sendSuccessBody": {
+    "placeholders": {
+      "referenceId": {
+        "type": "String"
+      }
+    }
+  },
+  "smsParserTitle": "SMS parser",
+  "smsParserBody": "Phase 1 میں Android-only parser local fixture سے stub ہے۔",
+  "smsParserAccuracy": "Parser accuracy",
+  "coachTitle": "Felo Coach",
+  "coachDisclaimer": "صرف تعلیم۔ Felo مالی، سرمایہ کاری، ٹیکس، یا قانونی مشورہ نہیں دیتا۔",
+  "coachPromptOne": "اس ہفتے میرا پیسہ کہاں گیا؟",
+  "coachPromptTwo": "میرے goals کس pace پر ہیں؟",
+  "coachPromptThree": "کیا میں اس ماہ extra بھیج سکتا ہوں؟",
+  "coachInputHint": "Spending، budgets، یا goals کے بارے میں پوچھیں",
+  "coachEmptyState": "شروع کرنے کے لیے prompt منتخب کریں یا سوال پوچھیں۔",
+  "coachTypingIndicator": "Felo Coach سوچ رہا ہے...",
+  "coachErrorMessage": "Coach اس وقت دستیاب نہیں۔ دوبارہ کوشش کریں۔",
+  "coachSendLabel": "بھیجیں",
+  "coachRetryLabel": "دوبارہ کوشش",
+  "familyTitle": "Family mode",
+  "familyBody": "Consent-based permissions کے ساتھ household members کو invite کریں۔",
+  "familyInvite": "Link سے invite کریں",
+  "familyAdmin": "Admin",
+  "familyMember": "Member",
+  "familyViewer": "Viewer",
+  "notificationsTitle": "اطلاعات",
+  "notificationsBellTooltip": "اطلاعات کھولیں",
+  "notificationsMarkAllRead": "سب پڑھا ہوا کریں",
+  "notificationsMarkRead": "پڑھا ہوا کریں",
+  "notificationsArchive": "آرکائیو",
+  "notificationsUnreadCount": "{count} غیر پڑھی ہوئی",
+  "@notificationsUnreadCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsEmptyTitle": "کوئی اطلاع نہیں",
+  "notificationsEmptyBody": "بجٹ alerts، goal milestones، SMS parser events، اور family activity یہاں نظر آئیں گے۔",
+  "notificationsFilterAll": "سب",
+  "notificationsFilterBudgets": "بجٹ",
+  "notificationsFilterGoals": "اہداف",
+  "notificationsFilterFamily": "فیملی",
+  "notificationsFilterSystem": "سسٹم",
+  "notificationsTimestamp": "{date}، {time}",
+  "@notificationsTimestamp": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationBudgetTitle": "بجٹ الرٹ",
+  "notificationBudgetBody": "{category} اپنے envelope کے {percent}% تک پہنچ گیا۔",
+  "@notificationBudgetBody": {
+    "placeholders": {
+      "category": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationGoalTitle": "ہدف milestone",
+  "notificationGoalBody": "{goalName} کی funding {percent}% سے آگے گئی۔",
+  "@notificationGoalBody": {
+    "placeholders": {
+      "goalName": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationSmsParserTitle": "SMS parser event",
+  "notificationSmsParserBody": "{source} نے {confidence}% confidence کے ساتھ transaction parse کیا۔",
+  "@notificationSmsParserBody": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      },
+      "confidence": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationFamilyTitle": "Family activity",
+  "notificationFamilyBody": "{memberName} نے shared family permissions تبدیل کیں۔",
+  "@notificationFamilyBody": {
+    "placeholders": {
+      "memberName": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationSystemTitle": "System message",
+  "notificationSystemBody": "Phase 1 میں payments، custody، اور money movement بند رہتے ہیں۔",
+  "accountsTitle": "Accounts",
+  "accountsConnect": "Account connect کریں",
+  "accountsConnectTitle": "Account connect کریں",
+  "accountsEmptyTitle": "کوئی connected account نہیں",
+  "accountsEmptyBody": "Dashboard کو بہتر بنانے کے لئے read-only accounts connect کریں یا manual account شامل کریں۔",
+  "accountsLastSynced": "{date} کو {time} پر synced",
+  "@accountsLastSynced": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsTypeBank": "Bank",
+  "accountsTypeCard": "Card",
+  "accountsTypeWallet": "Wallet",
+  "accountsStatusSynced": "Synced",
+  "accountsStatusSyncing": "Syncing",
+  "accountsStatusNeedsReview": "Review",
+  "accountsDisconnect": "Disconnect",
+  "accountsDisconnectTitle": "Account disconnect کریں",
+  "accountsDisconnectBody": "{accountName} کو اس mock read-only view سے remove کریں؟",
+  "@accountsDisconnectBody": {
+    "placeholders": {
+      "accountName": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsProviderPickerTitle": "Provider چنیں",
+  "accountsProviderTd": "TD",
+  "accountsProviderRbc": "RBC",
+  "accountsProviderEasypaisa": "Easypaisa",
+  "accountsProviderJazzcash": "JazzCash",
+  "accountsProviderManual": "Manual",
+  "accountsMockOAuthTitle": "{providerName} secure preview",
+  "@accountsMockOAuthTitle": {
+    "placeholders": {
+      "providerName": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsMockOAuthBody": "یہ screen read-only provider connection simulate کرتی ہے۔ اس build میں credentials collect نہیں ہوتے۔",
+  "accountsConnectContinue": "Preview جاری رکھیں",
+  "accountsConnectSuccessTitle": "Account connected",
+  "accountsConnectSuccessBody": "{accountName} اب mock account list میں available ہے۔",
+  "@accountsConnectSuccessBody": {
+    "placeholders": {
+      "accountName": {
+        "type": "String"
+      }
+    }
+  },
+  "accountsViewAccounts": "Accounts دیکھیں",
+  "profileTitle": "Profile",
+  "profileLanguage": "Language",
+  "profileTheme": "Theme",
+  "profileNotifications": "Notifications",
+  "profileLogout": "Log out",
+  "profileDelete": "Delete account",
+  "remittanceTitle": "Send money home",
+  "remittanceBody": "Phase 3 میں remittance licensed partners کے ذریعے orchestrate ہوگی۔ اس build میں کوئی money movement نہیں۔",
+  "remittanceCta": "Waitlist join کریں",
+  "emptyTitle": "ابھی کچھ نہیں",
+  "emptyBody": "ہر feature active ہونے پر seeded mock data یہاں آئے گا۔",
+  "sampleDesignLabel": "Sample design",
+  "sampleDashboardAmount": "CAD 4,280",
+  "sampleBudgetAmount": "CAD 1,840 left",
+  "sampleGoalName": "Trip to Pakistan",
+  "sampleOnTrack": "On track",
+  "commonDone": "مکمل",
+  "helpTitle": "مدد اور سپورٹ",
+  "helpSearchLabel": "مدد تلاش کریں",
+  "helpSearchHint": "سوال یا keyword لکھیں",
+  "helpNoResults": "نتائج نہیں ملے — مختلف تلاش آزمائیں۔",
+  "helpContactSupport": "سپورٹ سے رابطہ",
+  "helpReportBug": "Bug رپورٹ کریں",
+  "helpTerms": "شرائط",
+  "helpPrivacy": "پرائیویسی",
+  "helpLicenses": "Licenses",
+  "helpFaq1Q": "کیا Felo ایک بینک ہے؟",
+  "helpFaq1A": "نہیں۔ Felo ایک budgeting اور goal companion ہے۔ ہم آپ کا پیسہ نہ رکھتے ہیں اور نہ منتقل کرتے ہیں۔",
+  "helpFaq2Q": "SMS parsing کیسے کام کرتا ہے؟",
+  "helpFaq2A": "Android پر، Felo آپ کے فون پر محفوظ بینک اور wallet senders کے SMS پڑھتا ہے۔ Phase 1 میں SMS body کبھی فون سے باہر نہیں جاتا۔",
+  "helpFaq3Q": "کیا گھر والے میرے transactions دیکھ سکتے ہیں؟",
+  "helpFaq3A": "صرف تب جب آپ انہیں invite کریں اور shared visibility on کریں۔ آپ کسی بھی وقت رسائی بند کر سکتے ہیں۔",
+  "helpFaq4Q": "زبان کیسے بدلوں؟",
+  "helpFaq4A": "Profile → Settings → Language پر جائیں۔ Felo English اور Urdu (RTL) دونوں سپورٹ کرتا ہے۔",
+  "helpFaq5Q": "اکاؤنٹ ڈیلیٹ کرنے پر کیا ہوتا ہے؟",
+  "helpFaq5A": "آپ کا data 30 دن تک soft-delete رہتا ہے، پھر مستقل مٹا دیا جاتا ہے۔ ڈیلیٹ سے پہلے آپ سب کچھ export کر سکتے ہیں۔",
+  "kycTitle": "اپنی شناخت verify کریں",
+  "kycChooseIdType": "ID قسم منتخب کریں",
+  "kycIdPassport": "پاسپورٹ",
+  "kycIdCnic": "پاکستانی CNIC",
+  "kycIdDriversLicense": "ڈرائیونگ لائسنس",
+  "kycCaptureIdTitle": "اپنی ID capture کریں",
+  "kycCaptureFront": "سامنے کا حصہ capture کریں",
+  "kycCaptureBack": "پیچھے کا حصہ capture کریں",
+  "kycSelfieTitle": "Selfie لیں",
+  "kycCaptureSelfie": "Selfie capture کریں",
+  "kycSelfieHint": "اچھی روشنی میں سیدھا کیمرے کی طرف دیکھیں۔ چشمہ اتاریں۔",
+  "kycReviewTitle": "Review اور submit کریں",
+  "kycReviewIdType": "ID قسم",
+  "kycReviewIdImages": "ID images",
+  "kycReviewSelfie": "Selfie",
+  "kycReviewCaptured": "حاصل کی گئی",
+  "kycReviewMissing": "Missing",
+  "kycReviewDisclaimer": "Submit کرنے پر data verification partner کو جاتا ہے۔ Phase 1 builds stub استعمال کرتے ہیں — data device سے باہر نہیں جاتا۔",
+  "kycSubmit": "Submit",
+  "kycSubmittedTitle": "Review کے لیے submit ہو گیا",
+  "kycSubmittedBody": "Verification مکمل ہونے پر ہم آپ کو notify کریں گے۔ اس دوران آپ budgeting features استعمال کر سکتے ہیں۔",
+  "authEmailLabel": "ای میل",
+  "forgotPasswordTitle": "پاسورڈ ری سیٹ",
+  "forgotPasswordBody": "اپنے Felo اکاؤنٹ کا email لکھیں۔ ہم reset link بھیج دیں گے۔",
+  "forgotPasswordSendCta": "Reset link بھیجیں",
+  "forgotPasswordSentTitle": "اپنا inbox دیکھیں",
+  "forgotPasswordSentBody": "اگر اس email پر اکاؤنٹ موجود ہے تو reset link بھیجا جا چکا ہے۔ link 30 منٹ میں expire ہو جائے گا۔",
+  "emailVerifyTitle": "Email verify کریں",
+  "emailVerifyHeading": "اپنی email confirm کریں",
+  "emailVerifyBody": "Setup مکمل کرنے کے لیے ابھی بھیجی گئی email میں موجود link پر tap کریں۔",
+  "emailVerifyResend": "Email دوبارہ بھیجیں",
+  "emailVerifyResendIn": "{seconds} سیکنڈ بعد دوبارہ بھیجیں",
+  "@emailVerifyResendIn": {"placeholders": {"seconds": {"type": "String"}}},
+  "mfaTitle": "Two-factor authentication",
+  "mfaBody": "Authenticator app سے QR کو scan کریں، پھر confirm کے لیے 6-digit code لکھیں۔",
+  "mfaCopySecret": "Secret key کاپی کریں",
+  "mfaSecretCopied": "Secret کاپی ہو گیا",
+  "mfaCodeLabel": "6-digit code",
+  "mfaVerifyCta": "Code verify کریں",
+  "mfaVerified": "Two-factor enable ہو گیا",
+  "mfaEnabledStatus": "Enabled · {count} recovery codes باقی",
+  "@mfaEnabledStatus": {"placeholders": {"count": {"type": "int"}}},
+  "mfaDisabledStatus": "Enabled نہیں",
+  "mfaRecoveryCodesTitle": "Recovery codes",
+  "mfaRecoveryCodesWarning": "یہ recovery codes کسی محفوظ جگہ save کریں۔ Felo انہیں صرف ایک بار دکھائے گا۔",
+  "mfaCopyAllCodes": "تمام codes copy کریں",
+  "mfaScanQrPrompt": "یہ QR code Google Authenticator یا کسی authenticator app میں scan کریں۔",
+  "mfaWrongCode": "یہ code کام نہیں کر سکا۔ اپنی authenticator app چیک کریں اور دوبارہ کوشش کریں۔",
+  "biometricTitle": "App lock",
+  "biometricBody": "Felo صرف آپ کھول سکیں اس کے لیے biometric lock لگائیں۔",
+  "biometricEnable": "Biometric unlock استعمال کریں",
+  "biometricAutoLock": "Auto-lock وقت",
+  "biometricImmediate": "فوراً",
+  "biometricAfter1Min": "1 منٹ کی غیر فعالیت کے بعد",
+  "biometricAfter5Min": "5 منٹ کی غیر فعالیت کے بعد",
+  "biometricAfter15Min": "15 منٹ کی غیر فعالیت کے بعد",
+  "languageTitle": "زبان",
+  "languageEnglish": "English",
+  "languageUrdu": "اردو",
+  "languageHelper": "ہم numbers اور currencies localize کرتے ہیں مگر amounts translate نہیں کرتے۔",
+  "themeTitle": "Theme",
+  "themeSystem": "System کے مطابق",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "notifPrefsTitle": "Notification preferences",
+  "notifPrefsBudgets": "Budget alerts",
+  "notifPrefsGoals": "Goal milestones",
+  "notifPrefsFamily": "Family activity",
+  "notifPrefsCoach": "Coach nudges",
+  "notifPrefsSystem": "System اور security",
+  "notifPrefsQuietHours": "Quiet hours",
+  "notifPrefsQuietHoursHelper": "رات (10pm–7am) غیر ضروری alerts mute رکھیں۔",
+  "dataExportTitle": "Data export کریں",
+  "dataExportBody": "ہم آپ کے اکاؤنٹ سے منسلک سب کچھ کا downloadable archive تیار کریں گے۔",
+  "dataExportScopeAll": "سب کچھ",
+  "dataExportScopeTransactions": "صرف transactions",
+  "dataExportScopeBudgets": "صرف budgets",
+  "dataExportScopeGoals": "صرف goals",
+  "dataExportRequestCta": "Export request کریں",
+  "dataExportRequested": "Export request کر دیا گیا",
+  "dataExportEta": "ہم 24 گھنٹوں میں email پر link بھیج دیں گے۔",
+  "deleteAccountTitle": "اکاؤنٹ ڈیلیٹ کریں",
+  "deleteAccountWarningTitle": "30 دن بعد یہ مستقل ہو جائے گا۔",
+  "deleteAccountWarningBody": "آپ کا data فوراً soft-delete ہو جاتا ہے اور 30 دن بعد مکمل مٹا دیا جاتا ہے۔ اس grace period میں sign in کر کے آپ cancel کر سکتے ہیں۔",
+  "deleteAccountTypePrompt": "Confirm کے لیے بڑے حروف میں DELETE لکھیں۔",
+  "deleteAccountConfirmLabel": "DELETE لکھیں",
+  "deleteAccountCta": "میرا اکاؤنٹ ڈیلیٹ کریں",
+  "deleteAccountSubmittedTitle": "اکاؤنٹ ڈیلیٹ کے لیے schedule",
+  "deleteAccountSubmittedBody": "ہم نے آپ کو sign out کر دیا ہے۔ Confirmation email جلد آ جائے گی۔",
+  "aboutTitle": "Felo کے بارے میں",
+  "aboutTagline": "پاکستانی diaspora کے لیے no-custody money companion۔",
+  "aboutVersion": "Version",
+  "aboutBuild": "Build",
+  "aboutCopyright": "Copyright",
+  "categoriesTitle": "Categories",
+  "categoriesAdd": "Category شامل کریں",
+  "recurringTitle": "Recurring",
+  "recurringBody": "Subscriptions اور bills جو ہمیں آپ کی activity میں نظر آئیں۔",
+  "insightsTitle": "Insights",
+  "insightsThisMonth": "اس مہینے خرچ",
+  "insightsSpentThisWeek": "اس ہفتے خرچ",
+  "insightsSpentThisMonth": "اس مہینے خرچ",
+  "insightsSpentThisQuarter": "اس quarter کا خرچ",
+  "insightsByCategory": "Category کے حساب سے",
+  "insightsTopMerchants": "Top merchants",
+  "insightsTrend": "Trend",
+  "insightsPeriodWeek": "ہفتہ",
+  "insightsPeriodMonth": "مہینہ",
+  "insightsPeriodQuarter": "Quarter",
+  "insightsEmptyTitle": "ابھی category spend نہیں",
+  "insightsEmptyBody": "Categorized SMS اور transaction spend یہاں نظر آئے گا۔",
+  "insightsNoMerchantsTitle": "ابھی merchants نہیں",
+  "insightsNoMerchantsBody": "Spending import ہونے کے بعد top merchants یہاں آئیں گے۔",
+  "insightsNoTrendTitle": "ابھی trend نہیں",
+  "insightsNoTrendBody": "Activity sync ہونے کے بعد روزانہ spending points یہاں آئیں گے۔",
+  "insightsErrorTitle": "Insights دستیاب نہیں",
+  "insightsErrorBody": "Spending insights load نہیں ہو سکیں۔ Refresh کریں یا بعد میں دوبارہ کوشش کریں۔",
+  "searchTitle": "تلاش",
+  "searchLabel": "Felo میں تلاش کریں",
+  "searchHint": "Merchant، category، goal…",
+  "searchPrompt": "تلاش کے لیے کم از کم ایک حرف لکھیں۔",
+  "searchEmptyTitle": "کوئی match نہیں",
+  "searchEmptyBody": "مختلف keyword آزمائیں۔",
+  "searchTransactions": "Transactions",
+  "searchBudgets": "Budgets",
+  "searchGoals": "Goals",
+  "networkErrorTitle": "Connection مسئلہ",
+  "networkErrorHeading": "ہم network تک نہیں پہنچ پائے",
+  "networkErrorBody": "Felo cached data کے ساتھ offline کام کرتا ہے — sync کے لیے دوبارہ کوشش کریں۔",
+  "networkErrorRetry": "دوبارہ کوشش کریں",
+  "appLockTitle": "App lock",
+  "appLockHeading": "خوش آمدید",
+  "appLockPinLabel": "PIN لکھیں",
+  "appLockUnlock": "Unlock",
+  "appLockUseBiometric": "Biometric استعمال کریں",
+  "appLockWrongPin": "PIN غلط ہے۔ دوبارہ کوشش کریں۔",
+  "familyInviteTitle": "Family invite",
+  "familyInviteFromHeading": "آپ کو invite کیا گیا ہے",
+  "familyInviteDescription": "منتخب budgets اور goals پر visibility share کرنے کے لیے family group join کریں۔",
+  "familyInvitePermViewTxns": "Shared transactions دیکھیں",
+  "familyInvitePermViewBudgets": "Shared budgets دیکھیں",
+  "familyInvitePermEditBudgets": "Shared budgets edit کریں",
+  "familyInviteAcceptCta": "Invite قبول کریں",
+  "familyInviteDeclineCta": "Decline",
+  "familyInviteAccepted": "آپ اب family group کا حصہ ہیں۔",
+  "investmentsTitle": "سرمایہ کاری",
+  "investmentsTrackerOnly": "صرف tracker — Felo سرمایہ کاری کا مشورہ نہیں دیتا۔",
+  "investmentsEmptyTitle": "ابھی کوئی asset track نہیں",
+  "investmentsEmptyBody": "اپنی read-only portfolio تصویر کے لئے manual assets شامل کریں۔",
+  "investmentsAddAsset": "Asset شامل کریں",
+  "investmentsRefreshPrices": "Prices refresh کریں",
+  "investmentsRefreshPricesBody": "ہر holding کے لئے تازہ manual price درج کریں۔ کوئی trade یا money movement نہیں ہوتی۔",
+  "investmentsPortfolioValue": "Total market value",
+  "investmentsProfitLoss": "P&L",
+  "investmentsReturnPercent": "Return",
+  "investmentsAllocation": "Asset class کے حساب سے mix",
+  "investmentsNoAllocation": "ابھی allocation نہیں",
+  "investmentsHoldings": "Holdings",
+  "investmentsLatestPrice": "Latest price",
+  "investmentsSymbolLabel": "Symbol",
+  "investmentsNameLabel": "Name",
+  "investmentsCurrencyLabel": "Currency",
+  "investmentsUnitsLabel": "Units",
+  "investmentsCostBasisLabel": "Cost basis",
+  "investmentsNotesLabel": "Notes",
+  "investmentsSaveAsset": "Asset محفوظ کریں",
+  "investmentsManualSymbolFallback": "MANUAL",
+  "investmentsManualNameFallback": "Manual asset",
+  "investmentsDetailTitle": "Investment detail",
+  "investmentsMissingTitle": "Asset نہیں ملا",
+  "investmentsMissingBody": "یہ tracked asset archive ہو چکا ہو سکتا ہے۔",
+  "investmentsUpdatePrice": "Price update کریں",
+  "investmentsArchive": "Archive",
+  "investmentsMarketValue": "Market value",
+  "investmentsAssetStockEtf": "Stocks / ETFs",
+  "investmentsAssetCrypto": "Crypto",
+  "investmentsAssetRrspTfsa": "RRSP / TFSA",
+  "investmentsAssetRetirementAbroad": "Retirement abroad",
+  "investmentsAssetRealEstate": "Real estate",
+  "investmentsAssetGold": "Gold",
+  "familyInviteTokenHint": "Invite token: {token}",
+  "@familyInviteTokenHint": {"placeholders": {"token": {"type": "String"}}},
+  "referralsTitle": "Referrals",
+  "referralsHeroTitle": "CAD $5 دیں، CAD $5 پائیں",
+  "referralsHeroBody": "اپنا code دوستوں کے ساتھ share کریں۔ جب ان کا referral qualify کرے گا، آپ دونوں کو CAD $5 credit ملے گا۔",
+  "referralsShareCta": "Invite share کریں",
+  "referralsShareMessage": "Felo پر میرے ساتھ join کریں اور یہ referral link استعمال کریں: {url}",
+  "@referralsShareMessage": {"placeholders": {"url": {"type": "String"}}},
+  "referralsCopyCode": "Referral code copy کریں",
+  "referralsCodeCopied": "Referral code copy ہو گیا",
+  "referralsRedeemCta": "Code redeem کریں",
+  "referralsInvited": "Invited",
+  "referralsCompleted": "Completed",
+  "referralsPending": "Pending",
+  "referralsEarned": "Earned",
+  "referralsInvitesTitle": "آپ کے referrals",
+  "referralsNoInvitesTitle": "ابھی کوئی referral نہیں",
+  "referralsNoInvitesBody": "Referrals یہاں track کرنے کے لیے اپنا invite share کریں۔",
+  "referralsInviteFallbackName": "دوست",
+  "referralsErrorTitle": "Referrals load نہیں ہو سکے",
+  "referralsErrorBody": "Connection چیک کریں اور دوبارہ کوشش کریں۔",
+  "referralsRedeemTitle": "Referral redeem کریں",
+  "referralsRedeemHeading": "Invite code ہے؟",
+  "referralsRedeemBody": "Referral code بالکل ویسے enter کریں جیسے آپ کے دوست نے share کیا۔",
+  "referralsRedeemCodeLabel": "Referral code",
+  "referralsRedeemCodeHint": "مثال: FELO5",
+  "referralsRedeemSubmit": "Code redeem کریں",
+  "referralsRedeemRequired": "Referral code enter کریں۔",
+  "referralsRedeemSuccess": "Referral code redeem ہو گیا۔",
+  "referralsRedeemNotFound": "یہ referral code نہیں ملا۔",
+  "referralsRedeemConflict": "یہ referral پہلے ہی redeem ہو چکا ہے۔",
+  "referralsRedeemUnknown": "یہ code redeem نہیں ہو سکا۔ دوبارہ کوشش کریں۔",
+  "feloPlusTitle": "FELO Plus",
+  "feloPlusStatusPlus": "Plus",
+  "feloPlusStatusFree": "Free",
+  "feloPlusActiveTitle": "FELO Plus active ہے",
+  "feloPlusActiveBody": "آپ کے account پر Plus benefits خود بخود apply ہو رہے ہیں جہاں available ہوں۔",
+  "feloPlusFreeTitle": "آپ Free plan پر ہیں",
+  "feloPlusFreeBody": "FELO Plus lower FX margin، priority support، free physical card، اور higher limits کے لیے premium plan ہے۔",
+  "feloPlusTierLabel": "Current tier: {tier}",
+  "@feloPlusTierLabel": {"placeholders": {"tier": {"type": "String"}}},
+  "feloPlusBenefitFx": "Eligible sends پر lower FX margin",
+  "feloPlusBenefitSupport": "Priority support",
+  "feloPlusBenefitCard": "Free physical card",
+  "feloPlusBenefitLimits": "Higher account limits",
+  "feloPlusErrorTitle": "FELO Plus load نہیں ہو سکا",
+  "feloPlusErrorBody": "Connection چیک کریں اور دوبارہ کوشش کریں۔",
+  "categoryGroceries": "گروسری",
+  "categoryFamilySupport": "گھر والوں کی مدد",
+  "categoryTransport": "آمد و رفت",
+  "categoryBills": "بل",
+  "categoryEatingOut": "باہر کھانا",
+  "categoryIncome": "آمدنی",
+  "categoryNewLabel": "نئی category {n}",
+  "@categoryNewLabel": {"placeholders": {"n": {"type": "int"}}},
+  "recurringFreqWeekly": "ہفتہ وار",
+  "recurringFreqMonthly": "ماہانہ",
+  "recurringFreqQuarterly": "سہ ماہی",
+  "recurringFreqYearly": "سالانہ",
+  "notificationsTestTitle": "Test notification بھیجیں",
+  "notificationsTestBlurb": "Live backend سے test notification بھیجتا ہے۔ صرف debug builds — production میں endpoint block ہے۔",
+  "notificationsTestTitleLabel": "عنوان",
+  "notificationsTestBodyLabel": "متن",
+  "notificationsTestDefaultTitle": "Felo سے سلام",
+  "notificationsTestDefaultBody": "یہ ایک test notification ہے جو debug screen سے بھیجا گیا۔",
+  "notificationsTestSend": "بھیجیں",
+  "notificationsTestSent": "بھیج دیا — inbox refresh کریں۔",
+  "notificationsTestProdDisabled": "Production builds میں test notifications disabled ہیں۔"
+}
