@@ -46,6 +46,25 @@ class FeloEnv {
     defaultValue: false,
   );
 
+  /// SPKI pin set for the production API leaf certificate.
+  ///
+  /// Operators compute these offline from the prod cert (see
+  /// `lib/core/network/cert_pinning.dart` for the openssl one-liner) and
+  /// inject via `--dart-define=FELO_CERT_PIN_PRIMARY=<base64>` and
+  /// `--dart-define=FELO_CERT_PIN_BACKUP=<base64>`. Empty = pinning off
+  /// (relies on system CA + Android NSC).
+  static const String _pinPrimary =
+      String.fromEnvironment('FELO_CERT_PIN_PRIMARY', defaultValue: '');
+  static const String _pinBackup =
+      String.fromEnvironment('FELO_CERT_PIN_BACKUP', defaultValue: '');
+
+  static List<String> get certSpkiPins {
+    final pins = <String>[];
+    if (_pinPrimary.isNotEmpty) pins.add(_pinPrimary);
+    if (_pinBackup.isNotEmpty) pins.add(_pinBackup);
+    return pins;
+  }
+
   // ── Stub-feature flags (default OFF in release) ───────────────────
   // Stubs are never reachable in production until the backend is wired.
   // Debug/profile builds may opt in to preview the screens.
@@ -66,11 +85,16 @@ class FeloEnv {
     'FELO_ENABLE_LIVE_REMITTANCE',
     defaultValue: false,
   );
+  static const bool _enableFamilyRaw = bool.fromEnvironment(
+    'FELO_ENABLE_FAMILY',
+    defaultValue: false,
+  );
 
   static bool get enableKyc => _enableKycRaw;
   static bool get enableInvestments => _enableInvestmentsRaw;
   static bool get enableSmsParser => _enableSmsParserRaw;
   static bool get enableLiveRemittance => _enableLiveRemittanceRaw;
+  static bool get enableFamily => _enableFamilyRaw;
 
   /// Hard-fail boot if the release build is missing critical config or
   /// has an insecure URL. Called from [main] before any provider reads.

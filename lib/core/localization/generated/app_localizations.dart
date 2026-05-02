@@ -2216,6 +2216,12 @@ abstract class AppLocalizations {
   /// **'Use biometric unlock'**
   String get biometricEnable;
 
+  /// No description provided for @biometricUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'This device does not support biometric authentication.'**
+  String get biometricUnavailable;
+
   /// No description provided for @biometricAutoLock.
   ///
   /// In en, this message translates to:

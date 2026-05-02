@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Network security config for Felo.
+  Network security config for Felo (Android-side only).
   - Disallows cleartext traffic everywhere except localhost / emulator (dev).
-  - Pins the production API to a small set of certificate authorities.
-  - Cert-pinning at the SPKI hash level lives in lib/core/network/dio_provider.dart
-    (HttpClient.badCertificateCallback + manual SPKI compare). This file is the
-    OS-level gate.
+  - Trusts only system root CAs in production.
+  - Cleartext on localhost/10.0.2.2/127.0.0.1 is for `flutter run` against
+    a dev backend; release manifests should override via flavor configs.
+
+  SPKI pinning (cross-platform, applies to iOS too) is implemented in
+  lib/core/network/cert_pinning.dart and wired into the Dio adapter at
+  boot. The pin set is configured from Felo's prod certificate (see
+  android/app/src/main/res/xml/cert_pins.xml + ios/Runner/CertPins.plist
+  if needed in future). Until OPS provides the prod TLS cert, the pin
+  set is empty and Dio falls back to system CA chain validation.
 -->
 <network-security-config>
     <base-config cleartextTrafficPermitted="false">

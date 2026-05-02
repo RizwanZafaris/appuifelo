@@ -1168,6 +1168,10 @@ class AppLocalizationsUr extends AppLocalizations {
   String get biometricEnable => 'Biometric unlock استعمال کریں';
 
   @override
+  String get biometricUnavailable =>
+      'یہ ڈیوائس biometric authentication کی حمایت نہیں کرتی۔';
+
+  @override
   String get biometricAutoLock => 'Auto-lock وقت';
 
   @override

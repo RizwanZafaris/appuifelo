@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:felo/core/config/felo_env.dart';
@@ -29,9 +28,9 @@ void main() {
     // ship the emulator default to a real device.
     FeloEnv.assertProductionReady();
 
-    // Block screenshots / screen-recording on sensitive screens. The
-    // privacy overlay below covers iOS where FLAG_SECURE doesn't exist.
-    await SystemChannels.platform.invokeMethod('SystemChrome.setEnabledSystemUIMode');
+    // Per-screen FLAG_SECURE / iOS privacy overlay is applied by the
+    // sensitive screens themselves via ScreenSecurity.enable() in
+    // initState — see lib/core/security/screen_security.dart.
 
     // Crashlytics — initialise once, gate collection on release mode.
     try {

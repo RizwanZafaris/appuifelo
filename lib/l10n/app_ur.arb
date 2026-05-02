@@ -549,6 +549,7 @@
   "biometricTitle": "App lock",
   "biometricBody": "Felo صرف آپ کھول سکیں اس کے لیے biometric lock لگائیں۔",
   "biometricEnable": "Biometric unlock استعمال کریں",
+  "biometricUnavailable": "یہ ڈیوائس biometric authentication کی حمایت نہیں کرتی۔",
   "biometricAutoLock": "Auto-lock وقت",
   "biometricImmediate": "فوراً",
   "biometricAfter1Min": "1 منٹ کی غیر فعالیت کے بعد",

@@ -601,8 +601,11 @@ class FamilyRoute extends GoRouteData {
   const FamilyRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const FamilyScreen();
+  Widget build(BuildContext context, GoRouterState state) => StubGate(
+        enabled: FeloEnv.enableFamily,
+        featureName: 'Family groups',
+        child: const FamilyScreen(),
+      );
 }
 
 @TypedGoRoute<ProfileRoute>(path: '/profile')

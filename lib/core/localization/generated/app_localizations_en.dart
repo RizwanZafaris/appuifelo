@@ -1167,6 +1167,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get biometricEnable => 'Use biometric unlock';
 
   @override
+  String get biometricUnavailable =>
+      'This device does not support biometric authentication.';
+
+  @override
   String get biometricAutoLock => 'Auto-lock after';
 
   @override

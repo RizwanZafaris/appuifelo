@@ -36,8 +36,10 @@ import 'package:felo/features/referrals/domain/referral_models.dart';
 import 'package:felo/features/referrals/presentation/felo_plus_screen.dart';
 import 'package:felo/features/referrals/presentation/referral_redeem_screen.dart';
 import 'package:felo/features/referrals/presentation/referrals_screen.dart';
-import 'package:felo/features/remittance_stub/presentation/remittance_stub_screen.dart';
-import 'package:felo/features/send_money/presentation/send_money_screens.dart';
+// remittance_stub/ + send_money/ deleted; live remittance is gated behind
+// FeloEnv.enableLiveRemittance and routes through /remittance-notebook.
+// sms_parser screen is still tested directly because the file lives in
+// lib/features/sms_parser/ — the route is gated, but the widget renders.
 import 'package:felo/features/sms_parser/presentation/sms_parser_screen.dart';
 import 'package:felo/features/splits/presentation/splits_screens.dart';
 import 'package:felo/features/system/presentation/system_screens.dart';
@@ -108,10 +110,7 @@ void main() {
     'splits': const SplitsScreen(),
     'splits_new': const NewSplitScreen(),
     'splits_detail': const SplitDetailScreen(splitId: 'split_rent_may'),
-    'send_recipient': const SendRecipientScreen(),
-    'send_amount': const SendAmountScreen(),
-    'send_review': const SendReviewScreen(),
-    'send_success': const SendSuccessScreen(),
+    // /send/* removed in soft-launch v1 (no live money movement).
     'budgets': const BudgetsScreen(),
     'goals': const GoalsScreen(),
     'investments': const InvestmentsScreen(),
@@ -125,7 +124,7 @@ void main() {
     'referrals': const ReferralsScreen(),
     'referral_redeem': const ReferralRedeemScreen(),
     'felo_plus': const FeloPlusScreen(),
-    'remittance': const RemittanceStubScreen(),
+    // /remittance route redirects to /remittance-notebook in soft-launch v1.
     'help': const HelpScreen(),
     'kyc': const KycScreen(),
     // Phase-2 polish

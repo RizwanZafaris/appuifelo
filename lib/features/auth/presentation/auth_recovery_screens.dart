@@ -7,6 +7,8 @@ import 'package:go_router/go_router.dart';
 
 import 'package:felo/core/localization/generated/app_localizations.dart';
 import 'package:felo/core/localization/localization_extensions.dart';
+import 'package:felo/core/security/biometric_service.dart';
+import 'package:felo/core/security/screen_security.dart';
 import 'package:felo/core/theme/felo_colors.dart';
 import 'package:felo/features/auth/data/mfa_repository.dart';
 import 'package:felo/shared/widgets/felo_button.dart';
@@ -432,8 +434,21 @@ class MfaRecoveryCodesScreen extends StatelessWidget {
 }
 
 /// Biometric lock toggle screen.
+///
+/// Wires the real `BiometricService` (local_auth + flutter_secure_storage)
+/// instead of a `bool` toggle. Flow:
+///   - On open, query `isAvailable` to decide whether to render the switch.
+///   - On open, query `isEnabled` to reflect persisted state.
+///   - Toggling on → prompt biometric. On success, persist enabled=true.
+///   - Toggling off → disable + remove persisted flag.
+///   - On any sensitive screen entry, callers should call
+///     `BiometricService.authenticate(...)` and FLAG_SECURE the screen
+///     via `ScreenSecurity.enable()`.
 class BiometricLockScreen extends ConsumerStatefulWidget {
-  const BiometricLockScreen({super.key});
+  const BiometricLockScreen({super.key, BiometricService? service})
+      : _injected = service;
+
+  final BiometricService? _injected;
 
   @override
   ConsumerState<BiometricLockScreen> createState() =>
@@ -441,8 +456,58 @@ class BiometricLockScreen extends ConsumerStatefulWidget {
 }
 
 class _BiometricLockScreenState extends ConsumerState<BiometricLockScreen> {
+  late final BiometricService _service =
+      widget._injected ?? BiometricService();
+
+  bool _available = false;
   bool _enabled = false;
+  bool _busy = false;
   Duration _autoLock = const Duration(minutes: 1);
+
+  @override
+  void initState() {
+    super.initState();
+    // Lock the screen against screenshots / recording while we render
+    // controls that may eventually show recovery codes.
+    ScreenSecurity.enable();
+    _hydrate();
+  }
+
+  @override
+  void dispose() {
+    ScreenSecurity.disable();
+    super.dispose();
+  }
+
+  Future<void> _hydrate() async {
+    final available = await _service.isAvailable();
+    final enabled = await _service.isEnabled();
+    if (!mounted) return;
+    setState(() {
+      _available = available;
+      _enabled = enabled;
+    });
+  }
+
+  Future<void> _toggle(bool target) async {
+    if (_busy) return;
+    setState(() => _busy = true);
+    try {
+      if (target) {
+        final ok = await _service.enable(
+          reason: 'Allow Felo to use your biometric to unlock the app',
+        );
+        if (!mounted) return;
+        setState(() => _enabled = ok);
+      } else {
+        await _service.disable();
+        if (!mounted) return;
+        setState(() => _enabled = false);
+      }
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -455,14 +520,28 @@ class _BiometricLockScreenState extends ConsumerState<BiometricLockScreen> {
         children: [
           Text(l10n.biometricBody),
           const SizedBox(height: 16),
-          FeloCard(
-            child: SwitchListTile.adaptive(
-              value: _enabled,
-              onChanged: (v) => setState(() => _enabled = v),
-              title: Text(l10n.biometricEnable),
-              secondary: const Icon(Icons.fingerprint_rounded),
+          if (!_available)
+            FeloCard(
+              child: ListTile(
+                leading: const Icon(Icons.info_outline_rounded),
+                title: Text(l10n.biometricUnavailable),
+              ),
+            )
+          else
+            FeloCard(
+              child: SwitchListTile.adaptive(
+                value: _enabled,
+                onChanged: _busy ? null : _toggle,
+                title: Text(l10n.biometricEnable),
+                secondary: _busy
+                    ? const SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Icon(Icons.fingerprint_rounded),
+              ),
             ),
-          ),
           if (_enabled) ...[
             const SizedBox(height: 8),
             Text(

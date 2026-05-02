@@ -549,6 +549,7 @@
   "biometricTitle": "App lock",
   "biometricBody": "Add a biometric lock so only you can open Felo.",
   "biometricEnable": "Use biometric unlock",
+  "biometricUnavailable": "This device does not support biometric authentication.",
   "biometricAutoLock": "Auto-lock after",
   "biometricImmediate": "Immediately",
   "biometricAfter1Min": "1 minute of inactivity",
