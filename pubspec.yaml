@@ -59,6 +59,10 @@ dependencies:
   share_plus: ^12.0.2
   uuid: ^4.5.3
 
+  # Security / hardening (P0 launch-readiness)
+  local_auth: ^2.3.0          # real biometric for the app-lock screen
+  flutter_windowmanager: ^0.2.0 # FLAG_SECURE on Android (KYC, OTP, money screens)
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

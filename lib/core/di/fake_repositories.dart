@@ -20,9 +20,9 @@ import 'package:felo/features/notifications/domain/felo_notification.dart';
 // Profile moved to lib/features/profile/data/profile_repository.dart
 import 'package:felo/features/receipt_capture/data/receipt_capture_repository.dart';
 import 'package:felo/features/receipt_capture/domain/receipt_capture.dart';
-import 'package:felo/features/remittance_stub/domain/remittance_waitlist.dart';
-import 'package:felo/features/send_money/data/send_money_repository.dart';
-import 'package:felo/features/send_money/domain/send_money.dart';
+// remittance_stub/ and send_money/ removed in launch-readiness pass.
+// The fakes for those flows are deleted; the manual remittance notebook
+// is the only shipping flow until the live remittance UI lands.
 import 'package:felo/features/sms_parser/domain/parsed_sms.dart';
 // Splits moved to lib/features/splits/data/splits_repository.dart
 import 'package:felo/features/transactions/data/transactions_repository.dart';
@@ -102,46 +102,7 @@ class FakeReceiptCaptureRepository implements ReceiptCaptureRepository {
 }
 
 
-class FakeSendMoneyRepository implements SendMoneyRepository {
-  static const double _mockCadToPkrRate = 205.5;
-
-  @override
-  List<SendRecipient> savedRecipients() {
-    return const [
-      SendRecipient(
-        id: 'recipient_01',
-        displayName: 'Test Recipient 1',
-        phoneMasked: '+92 300 *** 0001',
-        countryCode: 'PK',
-      ),
-      SendRecipient(
-        id: 'recipient_02',
-        displayName: 'Test Recipient 2',
-        phoneMasked: '+92 321 *** 0002',
-        countryCode: 'PK',
-      ),
-    ];
-  }
-
-  @override
-  SendMoneyQuote quoteForAmountMinor(int sourceAmountMinor) {
-    final sourceMajor = sourceAmountMinor / 100;
-    return SendMoneyQuote(
-      sourceCurrency: 'CAD',
-      targetCurrency: 'PKR',
-      sourceAmountMinor: sourceAmountMinor,
-      targetAmountMinor: (sourceMajor * _mockCadToPkrRate * 100).round(),
-      rate: _mockCadToPkrRate,
-    );
-  }
-
-  @override
-  String referenceFor(SendMoneyDraft draft) {
-    final recipientId = draft.recipient?.id.hashCode.abs() ?? 0;
-    final amount = draft.quote?.sourceAmountMinor ?? 0;
-    return 'FLO-${recipientId % 10000}-${amount % 100000}';
-  }
-}
+// FakeSendMoneyRepository deleted with the send_money/ feature.
 
 class SmsParserRepository {
   List<ParsedSms> recentParses() {
@@ -200,16 +161,7 @@ class FamilyRepository {
 
 // ProfileRepository moved to lib/features/profile/data/profile_repository.dart
 
-class RemittanceRepository {
-  RemittanceWaitlist waitlist() {
-    return RemittanceWaitlist(
-      id: 'waitlist_ca_pk',
-      corridor: 'CA to PK',
-      joined: false,
-      updatedAt: DateTime(2026, 4, 24),
-    );
-  }
-}
+// RemittanceRepository (waitlist stub) deleted with the remittance_stub/ feature.
 
 class FakeNotificationsRepository implements NotificationsRepository {
   @override
@@ -311,15 +263,9 @@ List<FamilyMember> familyMembers(FamilyMembersRef ref) {
 
 // Profile moved to lib/features/profile/data/profile_repository.dart
 
-@riverpod
-RemittanceRepository remittanceRepository(RemittanceRepositoryRef ref) {
-  return RemittanceRepository();
-}
-
-@riverpod
-RemittanceWaitlist remittanceWaitlist(RemittanceWaitlistRef ref) {
-  return ref.watch(remittanceRepositoryProvider).waitlist();
-}
+// remittanceRepository / remittanceWaitlist providers removed —
+// the underlying RemittanceWaitlist domain belonged to the deleted
+// remittance_stub/ feature.
 
 @riverpod
 NotificationsRepository notificationsRepository(
@@ -552,54 +498,6 @@ class AccountConnectFlow extends _$AccountConnectFlow {
   }
 }
 
-@riverpod
-SendMoneyRepository sendMoneyRepository(SendMoneyRepositoryRef ref) {
-  return FakeSendMoneyRepository();
-}
-
-@riverpod
-List<SendRecipient> sendRecipients(SendRecipientsRef ref) {
-  return ref.watch(sendMoneyRepositoryProvider).savedRecipients();
-}
-
-@riverpod
-class SendMoneyFlow extends _$SendMoneyFlow {
-  @override
-  SendMoneyDraft build() => const SendMoneyDraft();
-
-  void selectRecipient(SendRecipient recipient) {
-    state = state.copyWith(recipient: recipient);
-  }
-
-  SendRecipient addRecipient({
-    required String displayName,
-    required String phoneMasked,
-  }) {
-    final recipient = SendRecipient(
-      id: 'recipient_manual_${displayName.hashCode.abs()}',
-      displayName: displayName,
-      phoneMasked: phoneMasked,
-      countryCode: 'PK',
-    );
-    state = state.copyWith(recipient: recipient);
-    return recipient;
-  }
-
-  void setAmountMinor(int amountMinor) {
-    final quote = ref
-        .read(sendMoneyRepositoryProvider)
-        .quoteForAmountMinor(amountMinor);
-    state = state.copyWith(quote: quote);
-  }
-
-  void completePreview() {
-    final referenceId = ref
-        .read(sendMoneyRepositoryProvider)
-        .referenceFor(state);
-    state = state.copyWith(referenceId: referenceId);
-  }
-
-  void reset() {
-    state = const SendMoneyDraft();
-  }
-}
+// sendMoneyRepository / sendRecipients / SendMoneyFlow removed with the
+// send_money/ feature. Live remittance UI will be reintroduced behind
+// FeloEnv.enableLiveRemittance once the backend integration ships.

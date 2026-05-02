@@ -22,6 +22,7 @@ import 'package:felo/features/kyc/presentation/kyc_screen.dart';
 import 'package:felo/features/notifications/presentation/notifications_screen.dart';
 import 'package:felo/features/notifications/presentation/notifications_test_screen.dart';
 import 'package:felo/core/config/felo_env.dart';
+import 'package:felo/core/feature_flags/stub_gate.dart';
 import 'package:felo/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:felo/features/onboarding/presentation/splash_screen.dart';
 import 'package:felo/features/onboarding_v2/presentation/phase1_identity/otp_screen.dart';
@@ -51,8 +52,9 @@ import 'package:felo/features/receipt_capture/presentation/receipt_capture_scree
 import 'package:felo/features/referrals/presentation/felo_plus_screen.dart';
 import 'package:felo/features/referrals/presentation/referral_redeem_screen.dart';
 import 'package:felo/features/referrals/presentation/referrals_screen.dart';
-import 'package:felo/features/remittance_stub/presentation/remittance_stub_screen.dart';
-import 'package:felo/features/send_money/presentation/send_money_screens.dart';
+// remittance_stub/ and send_money/ deleted in launch-readiness pass.
+// Live remittance routes through /remittance (gated by FeloEnv.enableLiveRemittance);
+// the manual notebook is /remittance-notebook.
 import 'package:felo/features/sms_parser/presentation/sms_parser_screen.dart';
 import 'package:felo/features/splits/presentation/splits_screens.dart';
 import 'package:felo/features/system/presentation/system_screens.dart';
@@ -431,49 +433,10 @@ class SplitDetailRoute extends GoRouteData {
   }
 }
 
-@TypedGoRoute<SendRoute>(
-  path: '/send',
-  routes: [
-    TypedGoRoute<SendAmountRoute>(path: 'amount'),
-    TypedGoRoute<SendReviewRoute>(path: 'review'),
-    TypedGoRoute<SendSuccessRoute>(path: 'success'),
-  ],
-)
-class SendRoute extends GoRouteData {
-  const SendRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const SendRecipientScreen();
-  }
-}
-
-class SendAmountRoute extends GoRouteData {
-  const SendAmountRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const SendAmountScreen();
-  }
-}
-
-class SendReviewRoute extends GoRouteData {
-  const SendReviewRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const SendReviewScreen();
-  }
-}
-
-class SendSuccessRoute extends GoRouteData {
-  const SendSuccessRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const SendSuccessScreen();
-  }
-}
+/// `/send/*` removed in launch-readiness. Backend has 7 live remittance
+/// providers wired but no shipping mobile UI; users hit the manual
+/// notebook via `/remittance-notebook`. Restoring `/send` requires the
+/// new flow to land behind FeloEnv.enableLiveRemittance.
 
 @TypedGoRoute<BudgetsRoute>(
   path: '/budgets',
@@ -544,7 +507,11 @@ class InvestmentsRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const InvestmentsScreen();
+    return StubGate(
+      enabled: FeloEnv.enableInvestments,
+      featureName: 'Investments',
+      child: const InvestmentsScreen(),
+    );
   }
 }
 
@@ -613,8 +580,11 @@ class SmsParserRoute extends GoRouteData {
   const SmsParserRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) =>
-      const SmsParserScreen();
+  Widget build(BuildContext context, GoRouterState state) => StubGate(
+        enabled: FeloEnv.enableSmsParser,
+        featureName: 'SMS parser',
+        child: const SmsParserScreen(),
+      );
 }
 
 @TypedGoRoute<CoachRoute>(path: '/coach')
@@ -673,13 +643,30 @@ class FeloPlusRoute extends GoRouteData {
       const FeloPlusScreen();
 }
 
+/// Live remittance corridor.
+///
+/// Default OFF in release — backend has 7 provider adapters wired but the
+/// UI is the deprecated stub. When enabled at build time, redirects to
+/// the manual remittance notebook so users have one consistent surface
+/// until the live UI lands. The old RemittanceStubScreen is removed.
 @TypedGoRoute<RemittanceRoute>(path: '/remittance')
 class RemittanceRoute extends GoRouteData {
   const RemittanceRoute();
 
   @override
+  String? redirect(BuildContext context, GoRouterState state) =>
+      FeloEnv.enableLiveRemittance ? null : const RemittanceNotebookRoute().location;
+
+  @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const RemittanceStubScreen();
+    return StubGate(
+      enabled: FeloEnv.enableLiveRemittance,
+      featureName: 'Live remittance',
+      // Until the live UI lands, we route here only when the flag is on
+      // (development); otherwise the redirect above lands the user on
+      // the manual notebook.
+      child: const RemittanceNotebookScreen(),
+    );
   }
 }
 
@@ -696,7 +683,11 @@ class KycRoute extends GoRouteData {
   const KycRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) => const KycScreen();
+  Widget build(BuildContext context, GoRouterState state) => StubGate(
+        enabled: FeloEnv.enableKyc,
+        featureName: 'Identity verification',
+        child: const KycScreen(),
+      );
 }
 
 // ─── Phase-2 polish routes ──────────────────────────────────────────────

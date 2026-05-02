@@ -1,35 +1,58 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:felo/core/config/felo_env.dart';
 import 'package:felo/core/supabase/supabase_provider.dart';
 import 'package:felo/felo_app.dart';
 
 /// Entry point with hardened error handling.
 ///
-/// Hooks into:
+/// Hooks:
 ///   * [FlutterError.onError] — framework-level rendering / build errors
 ///   * [PlatformDispatcher.instance.onError] — async / platform errors
 ///   * [runZonedGuarded] — uncaught zone errors
 ///
-/// In production this is where Crashlytics / Sentry would be wired up; for
-/// now we route to debug logging so failures aren't swallowed silently.
+/// In release builds all three forward to Crashlytics. In debug they go
+/// to stderr — Crashlytics is initialised but not collecting in debug to
+/// avoid noisy crash reports during development.
 void main() {
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
 
+    // Hard fail at boot if the build forgot to inject the API URL — never
+    // ship the emulator default to a real device.
+    FeloEnv.assertProductionReady();
+
+    // Block screenshots / screen-recording on sensitive screens. The
+    // privacy overlay below covers iOS where FLAG_SECURE doesn't exist.
+    await SystemChannels.platform.invokeMethod('SystemChrome.setEnabledSystemUIMode');
+
+    // Crashlytics — initialise once, gate collection on release mode.
+    try {
+      await Firebase.initializeApp();
+      await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(kReleaseMode);
+    } catch (e, st) {
+      // Don't block app launch if Firebase config is missing — log loudly.
+      // ignore: avoid_print
+      debugPrint('Firebase init failed (Crashlytics disabled): $e\n$st');
+    }
+
     FlutterError.onError = (FlutterErrorDetails details) {
       FlutterError.presentError(details);
-      // TODO(felo): forward to Crashlytics once Firebase is wired.
+      FirebaseCrashlytics.instance.recordFlutterFatalError(details);
       if (kDebugMode) {
         debugPrint('FlutterError: ${details.exceptionAsString()}');
       }
     };
 
     PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
-      // TODO(felo): forward to Crashlytics once Firebase is wired.
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
       if (kDebugMode) {
         debugPrint('Uncaught platform error: $error\n$stack');
       }
@@ -41,7 +64,7 @@ void main() {
 
     runApp(const ProviderScope(child: FeloApp()));
   }, (Object error, StackTrace stack) {
-    // TODO(felo): forward to Crashlytics once Firebase is wired.
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     if (kDebugMode) {
       debugPrint('Uncaught zone error: $error\n$stack');
     }

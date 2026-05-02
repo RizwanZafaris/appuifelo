@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - 'launch-readiness/**'
 
 jobs:
   analyze-test-build:
@@ -29,14 +30,47 @@ jobs:
       - name: Generate code
         run: dart run build_runner build --delete-conflicting-outputs
 
-      - name: Analyze
-        run: flutter analyze
+      - name: Analyze (fatal infos + warnings)
+        run: flutter analyze --fatal-infos --fatal-warnings
 
-      - name: Test
-        run: flutter test
+      - name: Test with coverage
+        run: flutter test --coverage
 
-      - name: Build APK
+      - name: Coverage floor (12% baseline; raise toward 40% in next sprint)
+        run: |
+          set -e
+          if ! command -v lcov >/dev/null 2>&1; then
+            brew install lcov
+          fi
+          PERCENT=$(lcov --summary coverage/lcov.info 2>&1 \
+            | awk '/lines/ {gsub("%",""); print $2; exit}')
+          echo "Line coverage: $PERCENT%"
+          awk -v p="$PERCENT" 'BEGIN { exit !(p+0 >= 12) }' \
+            || { echo "::error::Line coverage $PERCENT% below floor 12%."; exit 1; }
+
+      - name: Forbidden-strings linter
+        run: |
+          set -e
+          if [ -d lib/features/send_money ] || [ -d lib/features/remittance_stub ]; then
+            echo "::error::Deleted features (send_money / remittance_stub) reintroduced."
+            exit 1
+          fi
+          if grep -RIn "10\.0\.2\.2" lib/core/config/ ; then
+            echo "::error::Emulator URL hardcoded in config — must come from --dart-define."
+            exit 1
+          fi
+          if grep -RIn "JBSWY3DPEHPK3PXP" lib/ ; then
+            echo "::error::Placeholder TOTP secret reintroduced."
+            exit 1
+          fi
+          if grep -nE "FELO_REQUIRE_RELEASE_SIGNING.*\\?: \"0\"" \
+              android/app/build.gradle.kts; then
+            echo "::error::Release-signing fence default flipped to 0."
+            exit 1
+          fi
+
+      - name: Build APK (debug, no signing)
         run: flutter build apk --debug
 
-      - name: Build iOS archive artifact
+      - name: Build iOS archive artifact (release, no signing)
         run: flutter build ios --release --no-codesign

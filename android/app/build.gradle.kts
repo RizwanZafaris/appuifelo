@@ -1,8 +1,18 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+}
+
+// Load android/key.properties (gitignored) for release signing.
+val keystoreProperties = Properties()
+val keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
 android {
@@ -20,51 +30,87 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.felo.felo"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
 
+    flavorDimensions += "env"
+    productFlavors {
+        create("staging") {
+            dimension = "env"
+            applicationIdSuffix = ".staging"
+            versionNameSuffix = "-staging"
+            resValue("string", "app_name", "Felo Staging")
+        }
+        create("prod") {
+            dimension = "env"
+            resValue("string", "app_name", "Felo")
+        }
+    }
+
     // -------------------------------------------------------------------
-    // RELEASE SIGNING — PRODUCTION BLOCKER
+    // Release signing.
     //
-    // The release build below is currently signed with the Android *debug*
-    // keystore so `flutter run --release` works during development.
-    // This MUST be replaced with a real upload keystore before any APK or
-    // AAB is published to internal testing, beta, or production tracks.
+    // Default behaviour: build hard-fails for `flutter build apk --release`
+    // unless one of the following is true:
+    //   1. `android/key.properties` is present and points at a real
+    //      upload keystore (production CI).
+    //   2. `FELO_REQUIRE_RELEASE_SIGNING=0` is exported AND we're not in
+    //      CI (FELO_CI != 1) — explicit opt-in for local-only smoke tests.
     //
-    // Steps to wire production signing:
-    //   1. Generate a keystore:
-    //        keytool -genkey -v -keystore upload-keystore.jks \
-    //          -keyalg RSA -keysize 2048 -validity 10000 -alias upload
-    //   2. Store credentials outside source control in
-    //        android/key.properties (gitignored).
-    //   3. Replace the `release` block with a `signingConfigs.create("release")`
-    //        that loads from key.properties.
-    //   4. Wire CI secrets (GitHub Actions / Codemagic) — never commit the keystore.
-    //
-    // Build will hard-fail if FELO_REQUIRE_RELEASE_SIGNING=1 is set, to
-    // prevent shipping debug-signed binaries from CI by accident.
+    // The fence default is now ON. The previous default was off, which
+    // let `flutter build apk --release` produce a publishable artifact
+    // signed with the debug keystore.
     // -------------------------------------------------------------------
-    val requireReleaseSigning =
-        (System.getenv("FELO_REQUIRE_RELEASE_SIGNING") ?: "0") == "1"
-    if (requireReleaseSigning) {
-        throw GradleException(
-            "FELO_REQUIRE_RELEASE_SIGNING is set but no real release " +
-                "signingConfig is configured. Refusing to build with the " +
-                "debug keystore. See android/app/build.gradle.kts.",
-        )
+    val releaseSigningRequired =
+        (System.getenv("FELO_REQUIRE_RELEASE_SIGNING") ?: "1") == "1"
+    val keystoreConfigured = keystoreProperties.containsKey("storeFile")
+
+    signingConfigs {
+        if (keystoreConfigured) {
+            create("release") {
+                keyAlias = keystoreProperties["keyAlias"] as String
+                keyPassword = keystoreProperties["keyPassword"] as String
+                storeFile = file(keystoreProperties["storeFile"] as String)
+                storePassword = keystoreProperties["storePassword"] as String
+            }
+        }
+    }
+
+    if (releaseSigningRequired && !keystoreConfigured) {
+        gradle.projectsEvaluated {
+            tasks.matching { it.name.startsWith("assembleRelease") || it.name.startsWith("bundleRelease") }
+                .configureEach {
+                    doFirst {
+                        throw GradleException(
+                            "Release build refused: android/key.properties is missing.\n" +
+                                "Provision an upload keystore (see OPS_CONFIG.md → 'Mobile') or\n" +
+                                "set FELO_REQUIRE_RELEASE_SIGNING=0 to opt out for a local smoke test."
+                        )
+                    }
+                }
+        }
     }
 
     buildTypes {
         release {
-            // DEV ONLY — see signing block above.
-            signingConfig = signingConfigs.getByName("debug")
+            // Use the real release config when available; otherwise fall
+            // back to debug — guarded above so this only happens for
+            // explicit local opt-out.
+            signingConfig = if (keystoreConfigured) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 }
