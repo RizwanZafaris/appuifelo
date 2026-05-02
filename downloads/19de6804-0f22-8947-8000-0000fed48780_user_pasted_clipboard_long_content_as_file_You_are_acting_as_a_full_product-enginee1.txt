@@ -1,0 +1,385 @@
+You are acting as a full product-engineering war room for the Felo app.
+
+Context:
+A lot of functionality has already been built. I now want a complete end-to-end review, testing, hardening, integration assessment, product optimization, and production-readiness exercise. Do not only review the app superficially. Pull the full codebase, understand the architecture, user journeys, backend, frontend, APIs, database, security model, observability, admin/officer portal, and operational flows.
+
+Your mission:
+Make the app production-ready.
+
+Workstream 1: CTO-Level End-to-End Review
+Act as a CTO, Chief Architect, CPO, Head of QA, Head of Security, Head of Compliance, DevOps Lead, and Product Growth Lead.
+
+Review:
+- Frontend architecture
+- Backend architecture
+- Database design
+- API structure
+- User journeys
+- Error handling
+- Exception handling
+- Offline-first capability
+- Scalability
+- Security
+- Observability
+- Admin/officer portal
+- Incident management
+- Disaster recovery
+- Product analytics
+- Feature toggles
+- Product hooks
+- Operational readiness
+
+Deliver a gap report first before making changes.
+
+Workstream 2: End-to-End Functional Testing
+Test every screen, every flow, every button, every edge case.
+
+Cover:
+- Signup
+- Login
+- OTP
+- Profile
+- Country selection
+- Goals
+- Budgeting
+- Expense tracking
+- Reports
+- Downloads
+- Notifications
+- Settings
+- Admin/officer portal
+- Feature controls
+- Error states
+- Empty states
+- Offline mode
+- Slow internet mode
+- API failure mode
+- Session expiry
+- Permission issues
+- Data sync issues
+
+No raw technical errors should be visible to users. Replace them with clean human-readable messages.
+
+Workstream 3: Remittance, Payout, and API Integration Research
+Research and identify possible APIs and integration options for:
+- Remittance
+- Payout
+- Bill payment
+- Wallets
+- Bank transfer
+- Card payments
+- KYC partners
+- FX/rates
+- Compliance screening
+- Notifications
+- Receipts
+- Statements
+
+Find API documentation where possible. Create an integration recommendation matrix with:
+- Provider name
+- Country/region coverage
+- Use case
+- API availability
+- Complexity
+- Regulatory dependency
+- Cost/commercial dependency
+- Priority
+- MVP suitability
+- Future suitability
+
+Do not blindly implement risky or regulated flows. Clearly separate:
+- MVP-ready features
+- Partner-dependent features
+- Regulated features
+- Future roadmap features
+
+Workstream 4: Security Review and Hardening
+Perform a full security review.
+
+Check:
+- Authentication
+- Authorization
+- Session management
+- Token handling
+- API protection
+- Rate limiting
+- OTP abuse prevention
+- Data encryption
+- PII handling
+- Secrets management
+- Input validation
+- Logging hygiene
+- Role-based access control
+- Admin portal permissions
+- Audit trails
+- OWASP risks
+- Dependency vulnerabilities
+- Environment variables
+- CORS
+- Webhooks
+- API signatures
+- Secure error handling
+
+Fix all critical and high-risk issues. Document medium and low-risk issues with remediation plans.
+
+Workstream 5: QA, Edge Cases, and Offline-First Readiness
+Make the app stable under real-world conditions.
+
+Test:
+- No internet
+- Poor internet
+- API timeout
+- Duplicate request
+- Back button behavior
+- Refresh behavior
+- App close/reopen
+- Partial data save
+- Failed sync
+- Retry logic
+- Conflict handling
+- Local cache
+- Data recovery
+- Graceful fallback
+- User-friendly messages
+
+The app should feel reliable even when backend services fail.
+
+Workstream 6: Internal 100-Agent Staff Review
+After technical fixes, simulate an internal review using 100 virtual staff agents.
+
+Each agent should have a different persona:
+- Product manager
+- QA tester
+- Security analyst
+- Compliance officer
+- Finance user
+- Student user
+- Married couple user
+- Freelancer
+- Small business owner
+- Remittance user
+- Low-tech user
+- High-tech user
+- Admin user
+- Support agent
+- Growth marketer
+- UX researcher
+- Data analyst
+- Incident manager
+- Risk manager
+- Operations manager
+
+Each agent must review:
+- Ease of use
+- Confusing screens
+- Missing functionality
+- Trust issues
+- Security concerns
+- UX friction
+- Copywriting issues
+- Performance issues
+- Feature usefulness
+- What to add
+- What to remove
+- What to simplify
+
+Compile all feedback into:
+- Critical fixes
+- UX improvements
+- Product improvements
+- Growth opportunities
+- Admin improvements
+- Security concerns
+- Final MVP recommendations
+
+Then optimize the app based on the feedback.
+
+Workstream 7: Admin / Officer Portal
+Build or improve the officer/admin portal so the team can manage the product without code changes.
+
+The portal should include:
+- Feature toggles
+- Product hooks
+- Goal configuration
+- Report download configuration
+- Free/paid report settings
+- User engagement analytics
+- Module usage analytics
+- Funnel analytics
+- Error monitoring
+- User activity logs
+- Audit logs
+- Incident dashboard
+- Support view
+- Configuration management
+- Country/corridor controls
+- Role-based access control
+
+Example:
+If the current goal limit is 2, admin should be able to change it to 1, 3, or more based on product strategy.
+
+If report downloads should be free, paid, or limited, admin should be able to configure it.
+
+Workstream 8: Product Analytics and Observability
+Implement end-to-end observability.
+
+Track:
+- Active users
+- Signup completion
+- Login failures
+- OTP failures
+- Goal creation
+- Budget usage
+- Expense logging
+- Report downloads
+- Most-used features
+- Least-used features
+- Drop-off points
+- Error rates
+- API response times
+- Failed requests
+- Sync failures
+- Offline usage
+- Admin actions
+- Security events
+
+Create dashboards for:
+- Product team
+- Tech team
+- Support team
+- Leadership
+- Incident team
+
+Workstream 9: Incident Management Layer
+Design and implement an incident management layer.
+
+Include:
+- Incident detection
+- Alerting
+- Severity levels
+- Incident ownership
+- Escalation matrix
+- SLA/SLO tracking
+- Root cause analysis template
+- Post-incident review
+- User impact summary
+- Recovery steps
+- Audit history
+
+Define severity:
+- SEV1: App unavailable / major data risk
+- SEV2: Major feature outage
+- SEV3: Partial degradation
+- SEV4: Minor issue
+
+Workstream 10: Disaster Recovery and Business Continuity
+Create a disaster recovery plan.
+
+Cover:
+- Backup strategy
+- Database recovery
+- Failover approach
+- Region failure
+- API provider failure
+- Payment/remittance partner failure
+- Data corruption
+- Rollback plan
+- Recovery Time Objective
+- Recovery Point Objective
+- Manual fallback process
+- Communication process
+- DR testing checklist
+
+Clearly define:
+- Where the system goes in disaster
+- How traffic migrates
+- How data is restored
+- Who approves recovery
+- How users are informed
+- How admin team operates during outage
+
+Workstream 11: Team Work Allocation
+Create parallel workstreams for other team members.
+
+Marketing team:
+- MVP marketing plan
+- Launch plan
+- Digital campaign strategy
+- User acquisition plan
+- Content calendar
+- Product positioning
+- Pricing communication
+- App store messaging
+- Landing page copy
+
+Product team:
+- Product hooks
+- Feature toggle strategy
+- MVP scope
+- Roadmap
+- Pricing rules
+- Report monetization
+- Goal limits
+- User segments
+- Product analytics requirements
+
+Operations team:
+- Support process
+- Incident process
+- User complaint handling
+- Admin portal SOP
+- Escalation matrix
+- Daily monitoring checklist
+
+Compliance team:
+- Regulated feature review
+- KYC dependency
+- Data privacy review
+- Remittance/payout compliance requirements
+- Country-wise regulatory considerations
+
+Technology team:
+- Architecture hardening
+- API integrations
+- Security fixes
+- Observability
+- DR setup
+- Performance optimization
+
+Workstream 12: Final Deliverables
+Produce the following:
+
+1. CTO audit report
+2. Security audit report
+3. QA test report
+4. Edge case coverage report
+5. API integration research document
+6. Admin/officer portal requirement document
+7. Observability and analytics plan
+8. Incident management framework
+9. Disaster recovery plan
+10. 100-agent internal review report
+11. Final product improvement backlog
+12. Final MVP readiness score
+13. Go-live checklist
+14. Team-wise action plan
+15. Final revised app implementation plan
+
+Execution Rules:
+- Do not destroy existing functionality.
+- Do not remove working code without documenting why.
+- Make changes in small, reviewable commits.
+- Add tests where needed.
+- Document every assumption.
+- Flag regulated/payment/remittance features separately.
+- Do not expose raw backend errors to users.
+- Prioritize security, trust, simplicity, and reliability.
+- The app should feel premium, safe, and easy for mass consumers.
+- Final outcome should be a production-ready MVP with clear roadmap for regulated features.
+
+Start by:
+1. Reading the full repository.
+2. Mapping the current architecture.
+3. Listing all existing features.
+4. Creating a gap report.
+5. Then proceed with fixes, hardening, QA, internal agent review, and final optimization.

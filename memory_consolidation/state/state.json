@@ -1,10 +1,10 @@
 {
   "stm": {
-    "count": 2,
-    "last_ts": "2026-05-01T23:38:02.094816",
-    "last_sessions": 1,
-    "last_messages": 10,
-    "last_chars": 5962
+    "count": 5,
+    "last_ts": "2026-05-02T11:03:53.269042",
+    "last_sessions": 8,
+    "last_messages": 159,
+    "last_chars": 9486
   },
   "diary": {
     "count": 2,
