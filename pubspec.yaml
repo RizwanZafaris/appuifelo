@@ -61,7 +61,10 @@ dependencies:
 
   # Security / hardening (P0 launch-readiness)
   local_auth: ^2.3.0          # real biometric for the app-lock screen
-  flutter_windowmanager: ^0.2.0 # FLAG_SECURE on Android (KYC, OTP, money screens)
+  # flutter_windowmanager: discontinued + AGP 8 incompatible. Replace with
+  # a maintained FLAG_SECURE plugin (or a hand-rolled MethodChannel) before
+  # KYC / OTP / remittance flows ship live. ScreenSecurity is a no-op until
+  # then. Tracked in LAUNCH_READINESS.md.
 
 dev_dependencies:
   flutter_test:

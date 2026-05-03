@@ -1,37 +1,26 @@
-import 'dart:io' show Platform;
-
 import 'package:flutter/foundation.dart';
-import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 
-/// Screen-capture protection.
+/// Screen-capture protection — temporarily a no-op pending a maintained
+/// FLAG_SECURE plugin.
 ///
-/// On Android: toggles WindowManager.LayoutParams.FLAG_SECURE which
-/// blocks screenshots, screen recording, and prevents the screen from
-/// appearing in the OS task switcher thumbnails.
-/// On iOS: caller is responsible for the privacy overlay (see
-/// `lib/core/security/privacy_overlay.dart`) since iOS doesn't expose
-/// FLAG_SECURE.
+/// `flutter_windowmanager 0.2.0` is discontinued and does not set the
+/// AGP-required `namespace` property, so it fails the Android Gradle
+/// build with AGP 8+. For soft-launch v1 demo APK, we ship the helper
+/// as a no-op so callers (BiometricLockScreen, ConsentGate, future KYC
+/// / OTP / remittance / app-lock screens) keep their initState +
+/// dispose contract — when we land a maintained alternative
+/// (`flutter_secure_screen` or a hand-rolled MethodChannel) the
+/// implementation drops in here without touching call-sites.
 ///
-/// Apply on KYC, OTP, MFA setup, remittance entry, and the app-lock
-/// screen. Always pair `enable` in initState with `disable` in dispose.
+/// Tracked in LAUNCH_READINESS.md as a P1 follow-up:
+///   "Re-wire ScreenSecurity with a maintained Android FLAG_SECURE
+///    plugin + iOS privacy overlay."
 class ScreenSecurity {
   static Future<void> enable() async {
-    if (kIsWeb) return;
-    if (!Platform.isAndroid) return;
-    try {
-      await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
-    } on Exception catch (e) {
-      if (kDebugMode) debugPrint('ScreenSecurity.enable: $e');
-    }
+    if (kDebugMode) debugPrint('ScreenSecurity.enable: stubbed (P1)');
   }
 
   static Future<void> disable() async {
-    if (kIsWeb) return;
-    if (!Platform.isAndroid) return;
-    try {
-      await FlutterWindowManager.clearFlags(FlutterWindowManager.FLAG_SECURE);
-    } on Exception catch (e) {
-      if (kDebugMode) debugPrint('ScreenSecurity.disable: $e');
-    }
+    if (kDebugMode) debugPrint('ScreenSecurity.disable: stubbed (P1)');
   }
 }
